@@ -14,20 +14,20 @@ struct PhysicsApexApp: App {
     }
 }
 
-/// 首次启动展示宣传页，之后直接进主界面。
+/// 每次启动先展示广告页（对标 MathApex），点击进入主界面。
 struct RootView: View {
-    @AppStorage("physicsapex_seen_promo") private var seenPromo = false
+    @State private var passedPromo = false
 
     var body: some View {
         ZStack {
-            if seenPromo {
+            if passedPromo {
                 MainTabView().transition(.opacity)
             } else {
-                PromoView { withAnimation(.easeInOut(duration: 0.4)) { seenPromo = true } }
+                PromoView { withAnimation(.easeInOut(duration: 0.4)) { passedPromo = true } }
                     .transition(.opacity)
             }
         }
-        .animation(.easeInOut(duration: 0.4), value: seenPromo)
+        .animation(.easeInOut(duration: 0.4), value: passedPromo)
     }
 }
 
