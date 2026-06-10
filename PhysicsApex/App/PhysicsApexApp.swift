@@ -80,6 +80,9 @@ struct MoreView: View {
                     NavigationLink { DescentView() } label: {
                         Label("降维秒杀", systemImage: "bolt.fill")
                     }
+                    NavigationLink { FermiEstimationView() } label: {
+                        Label("先估后算", systemImage: "dial.medium")
+                    }
                 }
 
                 Section("物理发现") {
