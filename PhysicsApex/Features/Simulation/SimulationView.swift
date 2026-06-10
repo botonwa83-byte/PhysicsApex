@@ -7,18 +7,32 @@ struct SimulationHubView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: Spacing.lg) {
                 header
+                groupLabel("力学")
                 NavigationLink { ProjectileSimView() } label: {
-                    simCard("抛体运动", "拖动初速、角度、重力，看轨迹实时变化", "scope", .apexLava, ready: true)
-                }
-                .buttonStyle(.plain)
+                    simCard("抛体运动", "调初速、角度、重力，看轨迹与射程", "scope", .apexLava, ready: true)
+                }.buttonStyle(.plain)
+                NavigationLink { CircularMotionSimView() } label: {
+                    simCard("圆周运动", "向心力 F=mv²/r，速度翻倍力变四倍", "arrow.clockwise.circle", .apexLava, ready: true)
+                }.buttonStyle(.plain)
+                NavigationLink { InclineSimView() } label: {
+                    simCard("斜面受力", "受力分解 + 临界角 tanθ=μ，到底滑不滑", "triangle", .apexLava, ready: true)
+                }.buttonStyle(.plain)
                 NavigationLink { CollisionSimView() } label: {
-                    simCard("弹性碰撞", "调质量与速度，看碰撞前后动量如何守恒", "arrow.left.arrow.right", .apexStarBlue, ready: true)
-                }
-                .buttonStyle(.plain)
+                    simCard("弹性碰撞", "调质量与速度，看动量如何守恒", "arrow.left.arrow.right", .apexStarBlue, ready: true)
+                }.buttonStyle(.plain)
                 NavigationLink { SHMSimView() } label: {
-                    simCard("简谐振动", "改变振幅与劲度，看回复力与周期", "waveform.path", .apexEmerald, ready: true)
-                }
-                .buttonStyle(.plain)
+                    simCard("简谐振动", "弹簧滑块 + 回复力 + 实时 x-t 曲线", "waveform.path", .apexEmerald, ready: true)
+                }.buttonStyle(.plain)
+
+                groupLabel("电学")
+                NavigationLink { OhmSimView() } label: {
+                    simCard("欧姆定律", "I=U/R，电子流动可视化，电阻翻倍电流减半", "bolt.horizontal.circle", .apexStarBlue, ready: true)
+                }.buttonStyle(.plain)
+
+                groupLabel("波动")
+                NavigationLink { WaveSimView() } label: {
+                    simCard("横波传播", "v=λf，红点只上下振动不随波前进", "waveform.path.ecg", .apexEmerald, ready: true)
+                }.buttonStyle(.plain)
             }
             .padding(Spacing.lg)
         }
@@ -39,6 +53,12 @@ struct SimulationHubView: View {
         .background(LinearGradient(colors: [Color.apexEmerald, Color.apexStarBlue],
                                    startPoint: .topLeading, endPoint: .bottomTrailing))
         .cornerRadius(Radius.hero)
+    }
+
+    private func groupLabel(_ text: String) -> some View {
+        Text(text).font(AppFont.chip).foregroundColor(.secondary)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.top, Spacing.sm)
     }
 
     private func simCard(_ title: String, _ desc: String, _ icon: String, _ color: Color, ready: Bool) -> some View {
