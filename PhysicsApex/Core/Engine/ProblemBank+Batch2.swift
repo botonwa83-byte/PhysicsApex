@@ -30,7 +30,17 @@ extension ProblemBank {
             SolutionStep(order: 3, description: "求周期", formula: "ω²=g/(Lcosθ) ⟹ T=2π√(Lcosθ/g)", annotation: ""),
         ], keyInsight: "圆锥摆：竖直平衡 + 水平向心，两方程拿下。",
            commonMistakes: ["半径用 L 而非 Lsinθ"]),
-        tags: ["圆周运动", "圆锥摆"])
+        dualSolution: DualSolution(
+            standardMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "正交分解列两个方程", formula: "Tcosθ=mg；Tsinθ=mω²Lsinθ", annotation: "两式相除消 T，再换算周期"),
+            ], keyInsight: "正交分解联立求解。", commonMistakes: ["半径误用 L"]),
+            descentMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "画力的矢量三角形：重力、张力、合力（向心力）构成直角三角形", formula: "F向 = mg·tanθ", annotation: "一眼读出，免联立"),
+                SolutionStep(order: 2, description: "向心力定周期", formula: "mg·tanθ = m(2π/T)²·Lsinθ ⟹ T = 2π√(Lcosθ/g)", annotation: "一步"),
+            ], keyInsight: "三力平衡/定合力的问题，画矢量三角形比正交分解快一倍。", commonMistakes: []),
+            weaponUsed: .vectorTriangle, timeRatio: 3.0,
+            detailedExplanation: "矢量三角形通杀「一力恒定（重力）+ 一力方向已知」的合成问题：圆锥摆、斜面光滑球、绳杆夹角全适用。"),
+        tags: ["圆周运动", "圆锥摆", "降维"])
 
     static let b2_centripetalSource = PhysicsProblem(
         id: "b2_cent_source", type: .multipleChoice, stage: .senior, topic: .circular,
@@ -61,7 +71,17 @@ extension ProblemBank {
             SolutionStep(order: 2, description: "求最小速度", formula: "mg = mv²/r ⟹ v=√(gr)", annotation: ""),
         ], keyInsight: "最高点恰好通过 = 重力恰好提供向心力。",
            commonMistakes: ["以为最高点速度可以为零"]),
-        tags: ["圆周运动", "竖直圆周", "临界分析"])
+        dualSolution: DualSolution(
+            standardMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "对最高点做一般受力分析", formula: "mg + N = mv²/r，再讨论 N 的取值范围", annotation: "容易在 N 能不能为负上纠结"),
+            ], keyInsight: "一般化受力分析再讨论。", commonMistakes: ["误以为 v=0 也能通过"]),
+            descentMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "直奔临界态：「恰好通过」=绳拉力/轨道压力为零", formula: "N=0 ⟹ mg = mv²/r", annotation: "临界条件即方程"),
+                SolutionStep(order: 2, description: "解出", formula: "v_min = √(gr)", annotation: "一步"),
+            ], keyInsight: "「恰好」「最大」「至少」出现时，先翻译成临界条件，方程自动列好。", commonMistakes: []),
+            weaponUsed: .criticalAnalysis, timeRatio: 3.0,
+            detailedExplanation: "临界分析的关键是把「恰好」翻译成物理量取零或最值。注意 v_min=√(gr) 只适用绳/内轨模型，杆模型最高点 v 可为零。"),
+        tags: ["圆周运动", "竖直圆周", "临界分析", "降维"])
 
     static let b2_turntable = PhysicsProblem(
         id: "b2_turntable", type: .calculation, stage: .senior, topic: .circular,
@@ -86,12 +106,22 @@ extension ProblemBank {
             SolutionStep(order: 2, description: "周期", formula: "T=2π√(r³/GM)，r↑ → T↑", annotation: ""),
         ], keyInsight: "高轨卫星「又慢又久」——越高越慢、周期越长。",
            commonMistakes: ["以为越高越快"]),
+        dualSolution: DualSolution(
+            standardMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "逐项推导 v、T、ω 的表达式再比较", formula: "v=√(GM/r)；T=2π√(r³/GM)；ω=√(GM/r³)", annotation: "三个公式逐一推"),
+            ], keyInsight: "完整推导每个量。", commonMistakes: ["公式记混"]),
+            descentMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "引力提供向心力，只看比例", formula: "GMm/r²=mv²/r ⟹ v∝r^(−1/2)，T∝r^(3/2)", annotation: "指数定一切"),
+                SolutionStep(order: 2, description: "口诀裁决", formula: "「高轨低速大周期」", annotation: "秒选"),
+            ], keyInsight: "天体圆轨道问题只问「怎么变」时，比例法免去全部数值计算。", commonMistakes: []),
+            weaponUsed: .proportion, timeRatio: 3.0,
+            detailedExplanation: "比例法通杀卫星比较类选择题：抓住 GM 不变，v、T、ω、a 全部化成 r 的幂次，看指数正负即得结论。"),
         misconceptions: [
             Misconception(option: "线速度越大",
                 youThought: "你大概觉得轨道大、跑得快。",
                 pitfall: "v=√(GM/r)，r 越大 v 越小。高轨卫星其实更慢。",
                 fix: "记住「高轨道又慢又久」：v↓、T↑、ω↓。")
-        ], tags: ["万有引力", "卫星", "错因诊断"])
+        ], tags: ["万有引力", "卫星", "错因诊断", "降维"])
 
     static let b2_centralMass = PhysicsProblem(
         id: "b2_central_mass", type: .calculation, stage: .senior, topic: .circular,
@@ -144,7 +174,17 @@ extension ProblemBank {
             SolutionStep(order: 2, description: "等质量弹性碰", formula: "v_A=0，v_B=v₀", annotation: "交换速度"),
         ], keyInsight: "等质量弹性正碰 → 交换速度（台球现象）。",
            commonMistakes: ["以为两球一起运动"]),
-        tags: ["动量守恒", "弹性碰撞"])
+        dualSolution: DualSolution(
+            standardMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "动量守恒 + 动能守恒联立", formula: "mv₀=mv_A+mv_B；½mv₀²=½mv_A²+½mv_B²", annotation: "二元二次方程组，要解还要舍根"),
+            ], keyInsight: "两守恒联立硬解。", commonMistakes: ["漏舍「未碰」的解 v_A=v₀"]),
+            descentMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "换到质心系：弹性碰撞=两球速度各自反向", formula: "质心速度 v_c=v₀/2；质心系中 A、B 速度 ±v₀/2 反向", annotation: "弹性碰撞的对称本质"),
+                SolutionStep(order: 2, description: "变换回地面系", formula: "v_A=v_c−v₀/2=0；v_B=v_c+v₀/2=v₀", annotation: "交换速度，秒出"),
+            ], keyInsight: "质心系里弹性碰撞只是「反弹」——换个参考系，二次方程组变成加减法。", commonMistakes: []),
+            weaponUsed: .referenceFrame, timeRatio: 4.0,
+            detailedExplanation: "参考系变换通杀弹性碰撞：质心系中两球速度大小不变、方向反转，变换回去即得结果。「等质量交换速度」只在弹性正碰时成立。"),
+        tags: ["动量守恒", "弹性碰撞", "降维"])
 
     static let b2_manBoat = PhysicsProblem(
         id: "b2_man_boat", type: .calculation, stage: .senior, topic: .momentum,

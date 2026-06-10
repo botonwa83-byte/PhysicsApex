@@ -67,12 +67,22 @@ extension ProblemBank {
             SolutionStep(order: 2, description: "只算 4 s 内位移", formula: "x = v₀²/(2a) = 400/10 = 40 m", annotation: "后 2 s 静止"),
         ], keyInsight: "刹车类问题先判断是否已停，停了就别再代 6 s。",
            commonMistakes: ["直接代 t=6 s，得出错误（甚至倒车）的结果"]),
+        dualSolution: DualSolution(
+            standardMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "先算刹停时间再判断", formula: "t停=v₀/a=4 s < 6 s", annotation: "必须先排掉 t=6 s 的陷阱"),
+                SolutionStep(order: 2, description: "代位移公式", formula: "x=v₀t停−½at停²=80−40=40 m", annotation: "两项相减易错"),
+            ], keyInsight: "正向硬算，公式两项相减。", commonMistakes: ["漏判刹停时间直接代 6 s"]),
+            descentMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "时间倒放：刹车的逆过程是初速为零的匀加速", formula: "x=½at停²=½×5×4²=40 m", annotation: "一步，只有一项"),
+            ], keyInsight: "末态简单（v=0）就倒过来看——逆向思维把减速题变成自由落体式的简单题。", commonMistakes: []),
+            weaponUsed: .reverseThinking, timeRatio: 3.0,
+            detailedExplanation: "凡是末速度为零的匀减速（刹车、竖直上抛末段），倒放都是初速为零的匀加速，公式从两项变一项。"),
         misconceptions: [
             Misconception(option: "",
                 youThought: "直接把 t=6 s 代进 x=v₀t−½at² 会算出 60 m。",
                 pitfall: "车 4 s 就停了，6 s 的公式相当于让它倒车，不符合实际。",
                 fix: "先求刹停时间 4 s，只算这段：x=v₀²/2a=40 m。")
-        ], tags: ["运动学", "刹车陷阱"])
+        ], tags: ["运动学", "刹车陷阱", "降维"])
 
     // 5
     static let b1_vtGraph = PhysicsProblem(
@@ -119,7 +129,17 @@ extension ProblemBank {
             SolutionStep(order: 2, description: "解得", formula: "t = 10 s（t=0 舍去）", annotation: "追上"),
         ], keyInsight: "追及问题的核心：追上瞬间位移相等。",
            commonMistakes: ["用速度相等当追上条件（那是距离最大）"]),
-        tags: ["运动学", "追及相遇"])
+        dualSolution: DualSolution(
+            standardMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "列位移方程并解二次方程", formula: "10t=½×2×t² ⟹ t²−10t=0", annotation: "需解方程并讨论舍根"),
+            ], keyInsight: "代数硬解，注意舍去 t=0。", commonMistakes: ["误用速度相等当追上条件"]),
+            descentMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "画 v-t 图：汽车水平线、摩托过原点斜线", formula: "5 s 两线相交（速度相等，差距最大）", annotation: "图一画陷阱自动现形"),
+                SolutionStep(order: 2, description: "追上=两图线下面积相等", formula: "对称性：交点在 5 s ⟹ 面积相等在 t=10 s", annotation: "秒读"),
+            ], keyInsight: "v-t 图上面积就是位移——追及相遇问题画图比列式快，还自带「速度相等≠追上」的免疫力。", commonMistakes: []),
+            weaponUsed: .graphMethod, timeRatio: 2.5,
+            detailedExplanation: "图像法通杀追及相遇：交点定「差距最大」，面积相等定「追上」，二次方程根本不用解。"),
+        tags: ["运动学", "追及相遇", "降维"])
 
     // 8
     static let b1_balance = PhysicsProblem(
@@ -218,10 +238,20 @@ extension ProblemBank {
             SolutionStep(order: 2, description: "摩擦力反趋势", formula: "摩擦力向前 → 推人前进", annotation: ""),
         ], keyInsight: "静摩擦力方向与「相对运动趋势」相反——走路正是靠它向前推。",
            commonMistakes: ["以为摩擦力总是阻碍运动、应向后"]),
+        dualSolution: DualSolution(
+            standardMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "凭空想象「相对运动趋势」的方向", formula: "脚相对地面趋势向后 ⟹ 摩擦力向前", annotation: "趋势看不见摸不着，容易想反"),
+            ], keyInsight: "直接判断趋势方向。", commonMistakes: ["把「人向前走」当成趋势向前"]),
+            descentMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "假设地面光滑：脚会向哪打滑？", formula: "光滑 ⟹ 脚向后滑（原地蹬空）", annotation: "打滑方向=趋势方向"),
+                SolutionStep(order: 2, description: "静摩擦阻碍此趋势", formula: "摩擦力向前", annotation: "秒选"),
+            ], keyInsight: "趋势想不出来就假设接触面光滑，看物体往哪滑——滑动方向就是趋势方向。", commonMistakes: []),
+            weaponUsed: .assumption, timeRatio: 2.0,
+            detailedExplanation: "假设法把看不见的「趋势」变成看得见的「打滑」，静摩擦方向判断一律适用。"),
         misconceptions: [
             Misconception(option: "向后",
                 youThought: "你大概觉得摩擦力总是「拖后腿」，方向向后。",
                 pitfall: "脚向后蹬地，相对趋势向后，摩擦力就反过来向前。正是它推着你走。",
                 fix: "静摩擦反的是「相对趋势」，不是反「运动方向」——这里向前。")
-        ], tags: ["力", "摩擦力方向", "错因诊断"])
+        ], tags: ["力", "摩擦力方向", "错因诊断", "降维"])
 }

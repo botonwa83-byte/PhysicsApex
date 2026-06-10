@@ -51,7 +51,17 @@ extension ProblemBank {
             SolutionStep(order: 1, description: "机械能守恒", formula: "mgL = ½mv²", annotation: "只有重力做功"),
             SolutionStep(order: 2, description: "解出", formula: "v = √(2gL)", annotation: "与质量无关"),
         ], keyInsight: "只有重力做功 → 机械能守恒，质量约掉。", commonMistakes: ["下降高度算错"]),
-        tags: ["机械能守恒", "单摆"])
+        dualSolution: DualSolution(
+            standardMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "想用牛顿定律沿弧分析", formula: "圆弧上张力、重力分量都随位置变 ⟹ 变力变加速度", annotation: "高中数学解不动这个微分方程"),
+            ], keyInsight: "牛顿定律在曲线变力问题上卡壳。", commonMistakes: ["误用匀加速公式"]),
+            descentMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "张力始终垂直速度不做功，只有重力做功 ⟹ 机械能守恒", formula: "mgL = ½mv²", annotation: "无视全部过程细节"),
+                SolutionStep(order: 2, description: "解出", formula: "v = √(2gL)", annotation: "一步，质量自动约掉"),
+            ], keyInsight: "守恒量只看首末态——过程越复杂，守恒律越显威力。", commonMistakes: []),
+            weaponUsed: .mechanicalEnergy, timeRatio: 4.0,
+            detailedExplanation: "机械能守恒通杀「只有重力/弹力做功」的曲线运动：摆、轨道、滑面，过程再花哨也只算首末两态。"),
+        tags: ["机械能守恒", "单摆", "降维"])
 
     static let b3_workSign = PhysicsProblem(
         id: "b3_work_sign", type: .multipleChoice, stage: .senior, topic: .energy,
@@ -111,7 +121,18 @@ extension ProblemBank {
             SolutionStep(order: 3, description: "生热", formula: "Q = μmg·Δs相对 = 5×0.4 = 2 J", annotation: ""),
         ], keyInsight: "摩擦生热 Q=f×相对滑动距离，不是 f×某个物体的位移。",
            commonMistakes: ["用工件位移或带位移代替相对位移"]),
-        tags: ["能量守恒", "传送带", "摩擦生热"])
+        dualSolution: DualSolution(
+            standardMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "分段算运动学再相减", formula: "t=v/a=0.4 s；x件=½at²=0.4 m；x带=vt=0.8 m", annotation: "三个量逐一算"),
+                SolutionStep(order: 2, description: "代生热公式", formula: "Q=μmg(x带−x件)=5×0.4=2 J", annotation: ""),
+            ], keyInsight: "逐段运动学硬算相对位移。", commonMistakes: ["用工件位移当相对位移"]),
+            descentMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "画 v-t 图：带是水平线，工件是过原点斜线", formula: "共速前两线围成三角形", annotation: "相对位移=两图线间面积"),
+                SolutionStep(order: 2, description: "面积差秒读", formula: "Δs=½×2×0.4=0.4 m ⟹ Q=μmg·Δs=2 J", annotation: "一眼"),
+            ], keyInsight: "v-t 图上「两线之间的面积」就是相对位移——传送带生热问题的标准秒杀。", commonMistakes: []),
+            weaponUsed: .graphMethod, timeRatio: 3.0,
+            detailedExplanation: "图像法通杀传送带：共速点是交点、相对滑动是线间面积，比分段运动学少算一半的量。"),
+        tags: ["能量守恒", "传送带", "摩擦生热", "降维"])
 
     static let b3_powerType = PhysicsProblem(
         id: "b3_power_type", type: .multipleChoice, stage: .senior, topic: .energy,
@@ -139,7 +160,18 @@ extension ProblemBank {
             SolutionStep(order: 1, description: "动能定理", formula: "−(mgsinθ+μmgcosθ)s = 0 − ½mv₀²", annotation: ""),
             SolutionStep(order: 2, description: "代入", formula: "a=g(sinθ+μcosθ)=10(0.5+0.5)=10；s=v₀²/2a=64/20=3.2 m", annotation: ""),
         ], keyInsight: "上滑：重力分量与摩擦力都做负功。", commonMistakes: ["漏掉摩擦或符号错"]),
-        tags: ["动能定理", "斜面"])
+        dualSolution: DualSolution(
+            standardMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "受力分解求加速度", formula: "a = g(sinθ+μcosθ) = 10 m/s²", annotation: "先画受力图、分解重力"),
+                SolutionStep(order: 2, description: "再套运动学公式", formula: "s = v₀²/(2a) = 64/20 = 3.2 m", annotation: "两阶段"),
+            ], keyInsight: "牛顿定律 + 运动学两步走。", commonMistakes: ["分解时 sin/cos 用反"]),
+            descentMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "全程一个动能定理，不求加速度", formula: "−(mgsinθ+μmgcosθ)s = 0 − ½mv₀²", annotation: "力×位移直接对账"),
+                SolutionStep(order: 2, description: "解出", formula: "s = v₀²/[2g(sinθ+μcosθ)] = 3.2 m", annotation: "一步"),
+            ], keyInsight: "只问「位移和速度」不问「时间」的题，动能定理跳过加速度直达答案。", commonMistakes: []),
+            weaponUsed: .workEnergyTheorem, timeRatio: 2.5,
+            detailedExplanation: "动能定理通杀「不问时间」的动力学题：把牛顿定律+运动学的两步合成一步功能对账。"),
+        tags: ["动能定理", "斜面", "降维"])
 
     static let b3_mechEnergyCond = PhysicsProblem(
         id: "b3_mech_cond", type: .multipleChoice, stage: .senior, topic: .energy,
