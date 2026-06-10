@@ -20,6 +20,7 @@ struct RootView: View {
     @State private var passedPromo = ProcessInfo.processInfo.arguments.contains("-skipPromo")
     @State private var demoDuel = ProcessInfo.processInfo.arguments.contains("-demoDuel")
     @State private var demoRadar = ProcessInfo.processInfo.arguments.contains("-demoRadar")
+    @State private var demoDescent = ProcessInfo.processInfo.arguments.contains("-demoDescent")
 
     var body: some View {
         ZStack {
@@ -38,6 +39,11 @@ struct RootView: View {
         }
         .fullScreenCover(isPresented: $demoRadar) {
             NavigationStack { WeaponRadarView() }
+        }
+        .fullScreenCover(isPresented: $demoDescent) {
+            if let p = ProblemBank.descentCases.first, let dual = p.dualSolution {
+                NavigationStack { DescentDetailView(problem: p, dual: dual) }
+            }
         }
     }
 }

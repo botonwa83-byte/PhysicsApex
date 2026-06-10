@@ -222,6 +222,7 @@ struct DescentDetailView: View {
                 if showDescent {
                     weaponHeader
                     methodCard(dual.descentMethod, accent: .apexLava)
+                    plainTalkCard
                 } else {
                     methodCard(dual.standardMethod, accent: .secondary)
                 }
@@ -267,6 +268,42 @@ struct DescentDetailView: View {
         .padding(Spacing.sm)
         .background((isAnswer ? Color.apexEmerald : Color.secondary).opacity(0.08))
         .cornerRadius(Radius.inner)
+    }
+
+    /// 🗣 说人话：看不懂秒杀时的亲民层——逐题白话 + 武器生活类比 + 触发信号。
+    private var plainTalkCard: some View {
+        VStack(alignment: .leading, spacing: Spacing.md) {
+            Label("说人话 · 为什么能秒", systemImage: "bubble.left.and.text.bubble.right.fill")
+                .font(AppFont.cardTitle).foregroundColor(.apexEmerald)
+            if let talk = dual.plainTalk {
+                Text(talk).font(.subheadline).foregroundColor(.primary)
+                    .fixedSize(horizontal: false, vertical: true)
+                Divider()
+            }
+            VStack(alignment: .leading, spacing: 4) {
+                Text("这把武器像什么").font(AppFont.chip).foregroundColor(.secondary)
+                Text(dual.weaponUsed.analogy).font(.subheadline).foregroundColor(.primary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            VStack(alignment: .leading, spacing: 6) {
+                Text("下次看到这些信号，就抽它").font(AppFont.chip).foregroundColor(.secondary)
+                FlowLayout(spacing: 6) {
+                    ForEach(dual.weaponUsed.signals, id: \.self) { s in
+                        Text(s)
+                            .font(AppFont.chip)
+                            .padding(.horizontal, 8).padding(.vertical, 4)
+                            .background(Color.apexEmerald.opacity(0.12))
+                            .foregroundColor(.apexEmerald)
+                            .clipShape(Capsule())
+                    }
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(Spacing.lg)
+        .background(Color.apexEmerald.opacity(0.06))
+        .overlay(RoundedRectangle(cornerRadius: Radius.card).stroke(Color.apexEmerald.opacity(0.25), lineWidth: 1))
+        .cornerRadius(Radius.card)
     }
 
     private var weaponHeader: some View {

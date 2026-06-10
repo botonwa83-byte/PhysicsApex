@@ -193,6 +193,8 @@ struct WeaponRadarView: View {
                     .font(AppFont.caption).foregroundColor(.apexGold)
                 Text("「\(dual.weaponUsed.name)」省时 \(String(format: "%.0f", dual.timeRatio))× —— \(dual.weaponUsed.tagline)")
                     .font(AppFont.caption).foregroundColor(.secondary)
+                Text("📡 触发信号：\(dual.weaponUsed.signals.joined(separator: " · "))")
+                    .font(AppFont.caption).foregroundColor(.apexEmerald)
                 // 转化钩子：从识局直达完整战例（锁定则弹付费墙）
                 if isCaseFree(p) {
                     NavigationLink { DescentDetailView(problem: p, dual: dual) } label: {

@@ -116,6 +116,19 @@ final class ContentIntegrityTests: XCTestCase {
         XCTAssertGreaterThanOrEqual(ProblemBank.problems(for: .olympiad).count, 15, "竞赛段题目过少")
     }
 
+    // MARK: 亲民层（说人话）
+
+    /// 30 把武器都要有生活类比和触发信号；免费档战例必须配 plainTalk（学生第一眼看到的内容必须看得懂）。
+    func testPlainTalkLayer() {
+        for w in PhysicsWeapon.allCases {
+            XCTAssertFalse(w.analogy.isEmpty, "武器 \(w.rawValue) 缺生活类比")
+            XCTAssertGreaterThanOrEqual(w.signals.count, 2, "武器 \(w.rawValue) 触发信号少于 2 条")
+        }
+        for p in ProblemBank.descentCases.prefix(PurchaseManager.freeDescentCount) {
+            XCTAssertFalse((p.dualSolution?.plainTalk ?? "").isEmpty, "免费战例 \(p.id) 缺 plainTalk")
+        }
+    }
+
     // MARK: KaTeX
 
     /// 全部定律应配 latex；katex 离线资源必须打进包（FormulaView 依赖）。

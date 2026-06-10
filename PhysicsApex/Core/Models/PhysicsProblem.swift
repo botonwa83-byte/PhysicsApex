@@ -89,6 +89,8 @@ struct DualSolution: Codable {
     let weaponUsed: PhysicsWeapon      // 用了哪把武器
     let timeRatio: Double              // 耗时比（常规 / 秒杀），越大越爽
     let detailedExplanation: String?
+    /// 「说人话」：用讲给学弟听的口吻拆解这道题的秒杀为什么成立（亲民层，渐进填充）。
+    var plainTalk: String? = nil
 }
 
 struct PhysicsProblem: Identifiable, Codable {
