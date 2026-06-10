@@ -35,6 +35,11 @@ targets:
     platform: iOS
     sources:
       - path: PhysicsApex
+        excludes:
+          - "Resources/katex/**"
+      - path: PhysicsApex/Resources/katex
+        type: folder
+        buildPhase: resources
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.physicsapex.app

@@ -57,11 +57,15 @@ struct LawDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: Spacing.xl) {
-                // 表达式 + 量纲
+                // 表达式 + 量纲（有 latex 用 KaTeX 渲染，否则回退文本）
                 VStack(alignment: .leading, spacing: Spacing.sm) {
-                    Text(law.expression)
-                        .font(.system(.title3, design: .monospaced))
-                        .foregroundColor(.apexLava)
+                    if let latex = law.latex {
+                        FormulaView(latex: latex, fontSize: 20)
+                    } else {
+                        Text(law.expression)
+                            .font(.system(.title3, design: .monospaced))
+                            .foregroundColor(.apexLava)
+                    }
                     HStack(spacing: 6) {
                         Image(systemName: "ruler").foregroundColor(.secondary)
                         Text("量纲 / 单位：\(law.dimension)")

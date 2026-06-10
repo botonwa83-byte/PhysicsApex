@@ -102,4 +102,17 @@ final class ContentIntegrityTests: XCTestCase {
     func testOlympiadContentFloor() {
         XCTAssertGreaterThanOrEqual(ProblemBank.problems(for: .olympiad).count, 15, "竞赛段题目过少")
     }
+
+    // MARK: KaTeX
+
+    /// 全部定律应配 latex；katex 离线资源必须打进包（FormulaView 依赖）。
+    func testLawLatexAndKatexBundle() {
+        for law in LawLibrary.all {
+            XCTAssertFalse((law.latex ?? "").isEmpty, "定律 \(law.id) 缺 latex")
+        }
+        XCTAssertNotNil(Bundle.main.url(forResource: "katex.min", withExtension: "css", subdirectory: "katex"),
+                        "katex.min.css 未打进 App Bundle 的 katex 目录")
+        XCTAssertNotNil(Bundle.main.url(forResource: "katex.min", withExtension: "js", subdirectory: "katex"),
+                        "katex.min.js 未打进 App Bundle 的 katex 目录")
+    }
 }

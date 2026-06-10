@@ -28,4 +28,5 @@ struct PhysicsLaw: Identifiable {
     let commonMisuses: [String]     // 常见迷思 / 误用
     let applications: [String]      // 高考应用场景
     let relatedWeapons: [PhysicsWeapon]
+    var latex: String? = nil        // KaTeX 表达式（有则详情页用 FormulaView 渲染，无则回退 expression 文本）
 }

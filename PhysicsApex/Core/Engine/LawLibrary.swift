@@ -22,7 +22,8 @@ enum LawLibrary {
             conditions: ["惯性参考系", "宏观低速（远小于光速）", "质量恒定"],
             commonMisuses: ["把「有力」当成「有速度」——其实力对应的是加速度", "在非惯性系直接用（需补惯性力）"],
             applications: ["连接体问题", "斜面 / 传送带", "牛顿定律 + 圆周运动"],
-            relatedWeapons: [.forceDiagram, .workEnergyTheorem]
+            relatedWeapons: [.forceDiagram, .workEnergyTheorem],
+            latex: "\\vec{F}_{\\text{合}} = m\\vec{a}"
         ),
         PhysicsLaw(
             id: "momentum_conservation",
@@ -42,7 +43,8 @@ enum LawLibrary {
             conditions: ["系统所受合外力为零", "或：碰撞 / 爆炸瞬间内力远大于外力", "矢量式，注意方向与正负"],
             commonMisuses: ["把动量守恒误当动能守恒（非弹性碰撞动能会损失）", "只在某一方向守恒时当成整体守恒"],
             applications: ["碰撞", "反冲 / 爆炸", "人船模型"],
-            relatedWeapons: [.momentumConservation, .referenceFrame]
+            relatedWeapons: [.momentumConservation, .referenceFrame],
+            latex: "\\sum m_i \\vec{v}_i = \\text{常量}"
         ),
         PhysicsLaw(
             id: "mechanical_energy",
@@ -62,7 +64,8 @@ enum LawLibrary {
             conditions: ["只有重力和弹力做功", "其他力不做功", "系统无摩擦生热"],
             commonMisuses: ["有摩擦 / 空气阻力时仍套守恒", "势能零点选取前后不一致"],
             applications: ["竖直圆周 / 单摆", "弹簧问题", "过山车类问题"],
-            relatedWeapons: [.mechanicalEnergy, .energyIntuition]
+            relatedWeapons: [.mechanicalEnergy, .energyIntuition],
+            latex: "E_k + E_p = \\text{常量}"
         ),
         PhysicsLaw(
             id: "work_energy",
@@ -82,7 +85,8 @@ enum LawLibrary {
             conditions: ["适用于任何力（含变力、摩擦力）", "标量式，功有正负"],
             commonMisuses: ["漏掉摩擦力做的负功", "把「路程」当「位移」算功"],
             applications: ["变力做功", "曲线运动求末速度", "多过程问题一步跨越"],
-            relatedWeapons: [.workEnergyTheorem, .energyIntuition]
+            relatedWeapons: [.workEnergyTheorem, .energyIntuition],
+            latex: "W_{\\text{合}} = \\tfrac{1}{2}mv_2^2 - \\tfrac{1}{2}mv_1^2"
         ),
         PhysicsLaw(
             id: "lorentz",
@@ -102,7 +106,8 @@ enum LawLibrary {
             conditions: ["电荷在磁场中运动", "θ 为 v 与 B 的夹角"],
             commonMisuses: ["以为洛伦兹力会做功（它永远不做功）", "v 平行 B 时仍以为有力"],
             applications: ["带电粒子圆周运动", "回旋加速器", "质谱仪"],
-            relatedWeapons: [.crossProduct, .symmetry]
+            relatedWeapons: [.crossProduct, .symmetry],
+            latex: "F = qvB\\sin\\theta"
         ),
         PhysicsLaw(
             id: "gravitation",
@@ -122,7 +127,8 @@ enum LawLibrary {
             conditions: ["质点或均匀球体", "r 为两球心间距", "对任何有质量物体成立"],
             commonMisuses: ["把 r 当成表面间距（应是球心间距）", "对非球对称物体直接套用"],
             applications: ["天体运动", "卫星环绕", "黄金代换 GM=gR²"],
-            relatedWeapons: [.equivalentMethod, .symmetry]
+            relatedWeapons: [.equivalentMethod, .symmetry],
+            latex: "F = G\\dfrac{Mm}{r^2}"
         ),
         PhysicsLaw(
             id: "circular_force",
@@ -142,7 +148,8 @@ enum LawLibrary {
             conditions: ["匀速圆周时向心力 = 合力", "一般圆周取合力指向圆心的分量"],
             commonMisuses: ["在受力图里额外画一个「向心力」", "把向心力当成新产生的力"],
             applications: ["圆锥摆", "竖直圆周临界", "带电粒子圆周"],
-            relatedWeapons: [.forceDiagram, .symmetry]
+            relatedWeapons: [.forceDiagram, .symmetry],
+            latex: "F = \\dfrac{mv^2}{r} = m\\omega^2 r"
         ),
         PhysicsLaw(
             id: "impulse",
@@ -162,7 +169,8 @@ enum LawLibrary {
             conditions: ["适用于变力（用平均力或冲量）", "矢量式，注意方向"],
             commonMisuses: ["把冲量当成力", "漏掉矢量方向的正负"],
             applications: ["缓冲问题", "流体冲击", "反冲"],
-            relatedWeapons: [.momentumConservation]
+            relatedWeapons: [.momentumConservation],
+            latex: "\\vec{F}t = m\\vec{v}_2 - m\\vec{v}_1"
         ),
         PhysicsLaw(
             id: "coulomb",
@@ -182,7 +190,8 @@ enum LawLibrary {
             conditions: ["点电荷", "真空或空气中", "r 为电荷间距"],
             commonMisuses: ["对带电体（非点电荷）直接套用", "忘了力是矢量、要叠加"],
             applications: ["电荷平衡", "三电荷共线", "类比引力"],
-            relatedWeapons: [.symmetry, .equivalentMethod]
+            relatedWeapons: [.symmetry, .equivalentMethod],
+            latex: "F = k\\dfrac{q_1 q_2}{r^2}"
         ),
         PhysicsLaw(
             id: "ohm",
@@ -202,7 +211,8 @@ enum LawLibrary {
             conditions: ["纯电阻、恒温", "金属导体", "U、I、R 对应同一段电路"],
             commonMisuses: ["对非线性元件（灯丝、二极管）套用", "U、I、R 张冠李戴"],
             applications: ["电路计算", "串并联", "伏安法测电阻"],
-            relatedWeapons: [.equivalentCircuit]
+            relatedWeapons: [.equivalentCircuit],
+            latex: "I = \\dfrac{U}{R}"
         ),
         PhysicsLaw(
             id: "closed_circuit",
@@ -222,7 +232,8 @@ enum LawLibrary {
             conditions: ["闭合回路", "r 为电源内阻"],
             commonMisuses: ["忽略内阻", "把路端电压当成恒定电动势"],
             applications: ["电源 U-I 图象", "测电动势与内阻", "电路动态分析"],
-            relatedWeapons: [.graphMethod]
+            relatedWeapons: [.graphMethod],
+            latex: "E = I(R+r),\\quad U_{\\text{端}} = E - Ir"
         ),
         PhysicsLaw(
             id: "ampere",
@@ -242,7 +253,8 @@ enum LawLibrary {
             conditions: ["θ 为电流与 B 的夹角", "匀强磁场中的直导线"],
             commonMisuses: ["与洛伦兹力公式混用", "左手定则方向判错"],
             applications: ["电动机", "磁电式电表", "安培天平"],
-            relatedWeapons: [.crossProduct]
+            relatedWeapons: [.crossProduct],
+            latex: "F = BIL\\sin\\theta"
         ),
         PhysicsLaw(
             id: "faraday",
@@ -262,7 +274,8 @@ enum LawLibrary {
             conditions: ["闭合回路", "Φ 为穿过回路的磁通量"],
             commonMisuses: ["把 E 与 Φ 划等号（应是变化率）", "漏掉匝数 n"],
             applications: ["发电机", "变压器", "感应加热"],
-            relatedWeapons: [.lenzRule, .graphMethod]
+            relatedWeapons: [.lenzRule, .graphMethod],
+            latex: "E = n\\dfrac{\\Delta\\Phi}{\\Delta t}\\quad (E = BLv)"
         ),
         PhysicsLaw(
             id: "gas_law",
@@ -282,7 +295,8 @@ enum LawLibrary {
             conditions: ["一定质量、理想气体", "温度必须用开尔文 K", "三量同时只能定两个"],
             commonMisuses: ["温度误用摄氏度", "气体质量变化时套用"],
             applications: ["活塞问题", "封闭气柱", "气压计"],
-            relatedWeapons: [.controlVariable]
+            relatedWeapons: [.controlVariable],
+            latex: "\\dfrac{pV}{T} = \\text{常量}"
         ),
         PhysicsLaw(
             id: "photo_equation",
@@ -302,7 +316,8 @@ enum LawLibrary {
             conditions: ["hν > W₀ 才发生", "W₀ 由金属种类决定"],
             commonMisuses: ["以为光强影响最大初动能", "用波动观点解释（解释不了截止频率）"],
             applications: ["光电管", "验证普朗克常量", "截止电压"],
-            relatedWeapons: [.energyIntuition]
+            relatedWeapons: [.energyIntuition],
+            latex: "E_k = h\\nu - W_0"
         ),
         PhysicsLaw(
             id: "refraction",
@@ -322,7 +337,8 @@ enum LawLibrary {
             conditions: ["两种均匀介质的界面", "角度从法线量起"],
             commonMisuses: ["把全反射方向搞反（必须光密→光疏）", "角度误从界面量起"],
             applications: ["光纤", "海市蜃楼", "玻璃砖测折射率"],
-            relatedWeapons: [.symmetry]
+            relatedWeapons: [.symmetry],
+            latex: "n = \\dfrac{\\sin\\theta_1}{\\sin\\theta_2},\\quad \\sin C = \\dfrac{1}{n}"
         ),
     ]
 
