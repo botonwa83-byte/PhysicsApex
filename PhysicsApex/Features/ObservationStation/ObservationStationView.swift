@@ -20,6 +20,7 @@ struct ObservationStationView: View {
                     // ② 今日 — 行动区
                     sectionHeader("今日")
                     statsCard
+                    dailyChallengeCard
                     todayMission
 
                     // ③ 探索
@@ -168,6 +169,29 @@ struct ObservationStationView: View {
             Text(label).font(AppFont.caption).foregroundColor(.secondary)
         }
         .frame(maxWidth: .infinity)
+    }
+
+    private var dailyChallengeCard: some View {
+        let done = DailyChallenge.isDoneToday(DailyChallenge.today.id)
+        return NavigationLink { DailyChallengeView() } label: {
+            HStack(spacing: Spacing.md) {
+                Image(systemName: "calendar.badge.clock").font(.title2)
+                    .foregroundColor(done ? .apexEmerald : .apexLava)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("今日一题").font(AppFont.cardTitle).foregroundColor(.primary)
+                    Text(done ? "今日已完成 ✅，明天再来" : "今天的一道精选秒杀题，来挑战")
+                        .font(AppFont.caption).foregroundColor(.secondary)
+                }
+                Spacer()
+                if done {
+                    Image(systemName: "checkmark.seal.fill").foregroundColor(.apexEmerald)
+                } else {
+                    Image(systemName: "chevron.right").foregroundColor(.secondary)
+                }
+            }
+            .cardSurface()
+        }
+        .buttonStyle(.plain)
     }
 
     private var todayMission: some View {

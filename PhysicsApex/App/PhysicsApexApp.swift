@@ -62,6 +62,9 @@ struct MoreView: View {
                 }
 
                 Section("我的练习") {
+                    NavigationLink { DailyChallengeView() } label: {
+                        Label("每日一题", systemImage: "calendar.badge.clock")
+                    }
                     NavigationLink { ErrorBookView() } label: {
                         Label("错题本", systemImage: "exclamationmark.triangle")
                     }
