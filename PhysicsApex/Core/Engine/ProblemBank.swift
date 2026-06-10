@@ -52,6 +52,26 @@ enum ProblemBank {
             keyInsight: "下滑力随角增大、摩擦力随角减小，必有一个临界角。",
             commonMistakes: ["以为重的物体更容易下滑（mg 两边约掉了）"]
         ),
+        misconceptions: [
+            Misconception(
+                option: "倾角越大，木块越不容易下滑",
+                youThought: "你大概觉得角度越陡，木块「贴」得越紧、越稳。",
+                pitfall: "恰恰相反：角越大，沿斜面的下滑力 mg·sinθ 越大，而压紧斜面的力、摩擦力 μmg·cosθ 反而越小。",
+                fix: "角越大越容易滑。临界角满足 tanθ = μ，超过就下滑。"
+            ),
+            Misconception(
+                option: "只要有摩擦，木块永远不会下滑",
+                youThought: "你大概把摩擦力当成了「无限大的保险」。",
+                pitfall: "最大静摩擦是有上限的（≈μN）。下滑力一旦超过它，木块就动。",
+                fix: "比较下滑力与最大静摩擦：mg·sinθ 超过 μmg·cosθ 就滑。"
+            ),
+            Misconception(
+                option: "木块下滑与否只取决于木块的重量",
+                youThought: "你大概觉得越重越容易压不住、越会滑。",
+                pitfall: "下滑力和摩擦力里都含 mg，比较时两边约掉了——和质量无关。",
+                fix: "是否下滑只由倾角 θ 和摩擦因数 μ 决定（tanθ 与 μ 比大小）。"
+            ),
+        ],
         tags: ["斜面", "受力直觉"]
     )
 
@@ -192,6 +212,26 @@ enum ProblemBank {
             keyInsight: "平抛 = 水平匀速 + 竖直自由落体，两方向独立。",
             commonMistakes: ["以为水平速度影响下落快慢"]
         ),
+        misconceptions: [
+            Misconception(
+                option: "速度大的先落地",
+                youThought: "你大概觉得抛得越快、越「冲」，越早到地面。",
+                pitfall: "水平速度只管水平方向，管不到竖直下落。下落时间只由高度决定。",
+                fix: "竖直方向都是自由落体 t=√(2h/g)，两球同时落地，快的只是落得更远。"
+            ),
+            Misconception(
+                option: "速度大的后落地",
+                youThought: "你大概觉得速度大就「飘」得久、落得晚。",
+                pitfall: "同样混淆了水平与竖直：水平快慢不改变竖直下落的快慢。",
+                fix: "下落时间与水平速度无关，两球同时落地。"
+            ),
+            Misconception(
+                option: "无法判断",
+                youThought: "你大概觉得条件不够、两个方向纠缠不清。",
+                pitfall: "其实平抛的精髓正是「两方向独立」，一拆就清楚了。",
+                fix: "竖直定时间、水平定射程——同时落地，快的落得远。"
+            ),
+        ],
         tags: ["平抛", "运动独立性"]
     )
 }

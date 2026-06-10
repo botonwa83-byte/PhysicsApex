@@ -71,6 +71,14 @@ struct SolutionPath: Codable {
     let commonMistakes: [String]    // 常见错误
 }
 
+/// 迷思点破：针对某个错误选项，诊断学生的错误直觉。
+struct Misconception: Codable {
+    let option: String      // 触发的错误选项原文
+    let youThought: String  // 你大概是这么想的
+    let pitfall: String     // 为什么这是个坑
+    let fix: String         // 正确该怎么想
+}
+
 /// 双解对决：常规解 vs 降维秒杀。
 struct DualSolution: Codable {
     let standardMethod: SolutionPath   // 常规解（繁琐但稳）
@@ -93,12 +101,19 @@ struct PhysicsProblem: Identifiable, Codable {
     let hints: [String]
     let solution: SolutionPath
     let dualSolution: DualSolution?
+    let misconceptions: [Misconception]
     let tags: [String]
+
+    /// 取某个选项对应的迷思诊断（学生选错时点破）。
+    func misconception(for option: String) -> Misconception? {
+        misconceptions.first { $0.option == option }
+    }
 
     init(id: String, type: ProblemType, stage: Stage, topic: PhysicsTopic,
          content: String, options: [String]? = nil, answer: String,
          difficulty: Double, averageTime: TimeInterval, hints: [String] = [],
-         solution: SolutionPath, dualSolution: DualSolution? = nil, tags: [String] = []) {
+         solution: SolutionPath, dualSolution: DualSolution? = nil,
+         misconceptions: [Misconception] = [], tags: [String] = []) {
         self.id = id
         self.type = type
         self.stage = stage
@@ -111,6 +126,7 @@ struct PhysicsProblem: Identifiable, Codable {
         self.hints = hints
         self.solution = solution
         self.dualSolution = dualSolution
+        self.misconceptions = misconceptions
         self.tags = tags
     }
 }

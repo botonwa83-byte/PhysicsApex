@@ -146,6 +146,10 @@ struct ProblemDetailView: View {
                 }
 
                 if revealed {
+                    if let sel = selectedOption, sel != problem.answer,
+                       let mis = problem.misconception(for: sel) {
+                        diagnosisCard(mis)
+                    }
                     answerSection
                     solutionSection(title: "解析", path: problem.solution, accent: .apexEmerald)
                     if let dual = problem.dualSolution {
@@ -189,6 +193,35 @@ struct ProblemDetailView: View {
             .cornerRadius(Radius.inner)
         }
         .buttonStyle(.plain)
+    }
+
+    /// 错因诊断 · 迷思点破：精准命中学生选错的那个直觉陷阱。
+    private func diagnosisCard(_ mis: Misconception) -> some View {
+        VStack(alignment: .leading, spacing: Spacing.md) {
+            HStack(spacing: 6) {
+                Image(systemName: "brain.head.profile").foregroundColor(.apexDanger)
+                Text("错因诊断").font(AppFont.sectionTitle).foregroundColor(.apexDanger)
+                Spacer()
+            }
+            diagnosisRow("你大概是这么想的", mis.youThought, "person.fill.questionmark", .apexStarBlue)
+            diagnosisRow("为什么这是个坑", mis.pitfall, "exclamationmark.triangle.fill", .apexDanger)
+            diagnosisRow("正确该怎么想", mis.fix, "checkmark.circle.fill", .apexEmerald)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(Spacing.lg)
+        .background(Color.apexDanger.opacity(0.07))
+        .cornerRadius(Radius.card)
+        .overlay(RoundedRectangle(cornerRadius: Radius.card).stroke(Color.apexDanger.opacity(0.25), lineWidth: 1))
+    }
+
+    private func diagnosisRow(_ title: String, _ text: String, _ icon: String, _ color: Color) -> some View {
+        HStack(alignment: .top, spacing: Spacing.sm) {
+            Image(systemName: icon).font(.subheadline).foregroundColor(color).frame(width: 20)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title).font(AppFont.chip).foregroundColor(color)
+                Text(text).font(AppFont.body).foregroundColor(.primary)
+            }
+        }
     }
 
     private var answerSection: some View {
