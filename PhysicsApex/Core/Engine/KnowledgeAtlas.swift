@@ -33,12 +33,12 @@ enum KnowledgeAtlas {
             ]),
             KnowledgeChapter(id: "circular", name: "圆周运动·万有引力", icon: "globe", points: [
                 KnowledgePoint("ci_speed", "线速度·角速度·向心加速度", essence: "描述圆周运动的快慢。", formula: "v=ωr；a=v²/r=ω²r"),
-                KnowledgePoint("ci_force", "向心力", essence: "指向圆心的合力，由实际力提供，不是新的力。", formula: "F=mv²/r=mω²r", pitfall: "向心力是「效果命名」，别在受力图里额外多画一个。"),
-                KnowledgePoint("g_gravity", "万有引力·天体运动", essence: "引力提供向心力，黄金代换 GM=gR²。", formula: "GMm/r²=mv²/r；v=√(GM/r)", weapon: .equivalentMethod),
+                KnowledgePoint("ci_force", "向心力", essence: "指向圆心的合力，由实际力提供，不是新的力。", formula: "F=mv²/r=mω²r", pitfall: "向心力是「效果命名」，别在受力图里额外多画一个。", lawId: "circular_force"),
+                KnowledgePoint("g_gravity", "万有引力·天体运动", essence: "引力提供向心力，黄金代换 GM=gR²。", formula: "GMm/r²=mv²/r；v=√(GM/r)", weapon: .equivalentMethod, lawId: "gravitation"),
                 KnowledgePoint("g_satellite", "宇宙速度·同步卫星", essence: "第一宇宙速度 7.9 km/s；同步卫星周期 24 h、定高。", formula: "v₁=7.9 km/s", problemId: "near_earth_sat"),
             ]),
             KnowledgeChapter(id: "momentum", name: "动量", icon: "arrow.left.arrow.right", points: [
-                KnowledgePoint("m_impulse", "冲量·动量定理", essence: "合力的冲量等于动量的变化。", formula: "I=Ft；Ft=Δp"),
+                KnowledgePoint("m_impulse", "冲量·动量定理", essence: "合力的冲量等于动量的变化。", formula: "I=Ft；Ft=Δp", lawId: "impulse"),
                 KnowledgePoint("m_conserve", "动量守恒定律", essence: "系统不受外力，碰前碰后总动量不变——只看首末态。", formula: "Σmv = 常量", weapon: .momentumConservation, lawId: "momentum_conservation", problemId: "collision_descent"),
                 KnowledgePoint("m_collision", "碰撞", essence: "弹性碰撞动量动能都守恒；非弹性动能有损失。", weapon: .momentumConservation, pitfall: "完全非弹性碰撞别误用机械能守恒。"),
             ]),
@@ -59,24 +59,24 @@ enum KnowledgeAtlas {
         id: "em", name: "电磁学", icon: "bolt.horizontal.circle", color: .apexStarBlue,
         chapters: [
             KnowledgeChapter(id: "estatic", name: "静电场", icon: "e.circle", points: [
-                KnowledgePoint("es_coulomb", "电荷·库仑定律", essence: "同种相斥异种相吸，力与距离平方成反比。", formula: "F=kq₁q₂/r²"),
+                KnowledgePoint("es_coulomb", "电荷·库仑定律", essence: "同种相斥异种相吸，力与距离平方成反比。", formula: "F=kq₁q₂/r²", lawId: "coulomb"),
                 KnowledgePoint("es_field", "电场强度·电场线", essence: "场强是单位电荷受力，电场线疏密表强弱。", formula: "E=F/q=kQ/r²", problemId: "electric_deflection"),
                 KnowledgePoint("es_potential", "电势·电势差·电势能", essence: "沿电场线电势降低；电场力做功 W=qU。", formula: "U=W/q", pitfall: "电势是标量、有正负，别和场强方向混。"),
                 KnowledgePoint("es_cap", "电容器", essence: "储存电荷的元件；电容只由结构定。", formula: "C=Q/U", weapon: .equivalentCircuit),
             ]),
             KnowledgeChapter(id: "current", name: "恒定电流", icon: "minus.plus.batteryblock", points: [
-                KnowledgePoint("cu_ohm", "欧姆定律·电阻定律", essence: "电流正比电压、反比电阻；电阻由材料尺寸定。", formula: "I=U/R；R=ρL/S"),
+                KnowledgePoint("cu_ohm", "欧姆定律·电阻定律", essence: "电流正比电压、反比电阻；电阻由材料尺寸定。", formula: "I=U/R；R=ρL/S", lawId: "ohm"),
                 KnowledgePoint("cu_power", "电功·电功率", essence: "电流做功转化能量；纯电阻 P=I²R=U²/R。", formula: "W=UIt；P=UI"),
-                KnowledgePoint("cu_closed", "闭合电路欧姆定律", essence: "电源电动势 = 内外电压之和。", formula: "E=I(R+r)", pitfall: "路端电压随电流增大而减小。"),
+                KnowledgePoint("cu_closed", "闭合电路欧姆定律", essence: "电源电动势 = 内外电压之和。", formula: "E=I(R+r)", pitfall: "路端电压随电流增大而减小。", lawId: "closed_circuit"),
                 KnowledgePoint("cu_circuit", "串并联·电路分析", essence: "化繁为简，等效成一个电阻。", weapon: .equivalentCircuit),
             ]),
             KnowledgeChapter(id: "magnetic", name: "磁场", icon: "magnet", points: [
                 KnowledgePoint("mg_field", "磁感应强度·磁感线", essence: "B 描述磁场强弱方向；磁感线是闭合曲线。", formula: "B=F/(IL)"),
-                KnowledgePoint("mg_ampere", "安培力", essence: "磁场对电流的力，左手定则定方向。", formula: "F=BIL"),
+                KnowledgePoint("mg_ampere", "安培力", essence: "磁场对电流的力，左手定则定方向。", formula: "F=BIL", lawId: "ampere"),
                 KnowledgePoint("mg_lorentz", "洛伦兹力·粒子圆周", essence: "磁场只改变粒子方向不改变速率，做匀速圆周。", formula: "F=qvB；r=mv/qB", weapon: .symmetry, lawId: "lorentz", problemId: "magnetic_period"),
             ]),
             KnowledgeChapter(id: "induction", name: "电磁感应", icon: "wave.3.right", points: [
-                KnowledgePoint("in_faraday", "法拉第电磁感应定律", essence: "磁通量变化率决定感应电动势大小。", formula: "E=nΔΦ/Δt"),
+                KnowledgePoint("in_faraday", "法拉第电磁感应定律", essence: "磁通量变化率决定感应电动势大小。", formula: "E=nΔΦ/Δt", lawId: "faraday"),
                 KnowledgePoint("in_lenz", "楞次定律·切割", essence: "感应电流阻碍磁通量变化；切割 E=BLv。", formula: "E=BLv", weapon: .lenzRule, pitfall: "「阻碍」是阻碍变化，不是阻碍运动本身。", problemId: "rail_terminal"),
             ]),
             KnowledgeChapter(id: "ac", name: "交变电流", icon: "waveform.path.ecg", points: [
@@ -93,7 +93,7 @@ enum KnowledgeAtlas {
                 KnowledgePoint("mo_brown", "分子动理论·内能", essence: "物质由分子组成、永不停息运动；内能=分子动能+势能。", pitfall: "温度是分子平均动能标志，与分子数无关。", problemId: "internal_energy"),
             ]),
             KnowledgeChapter(id: "gas", name: "气体", icon: "wind", points: [
-                KnowledgePoint("ga_law", "气体三定律·状态方程", essence: "压强微观来自分子碰壁；一定质量理想气体 pV/T 不变。", formula: "pV/T = 常量", weapon: .controlVariable),
+                KnowledgePoint("ga_law", "气体三定律·状态方程", essence: "压强微观来自分子碰壁；一定质量理想气体 pV/T 不变。", formula: "pV/T = 常量", weapon: .controlVariable, lawId: "gas_law"),
             ]),
             KnowledgeChapter(id: "thermo", name: "热力学定律", icon: "flame", points: [
                 KnowledgePoint("th_first", "热力学第一定律", essence: "内能变化 = 外界做的功 + 吸收的热。", formula: "ΔU=W+Q"),
@@ -106,7 +106,7 @@ enum KnowledgeAtlas {
         id: "optics", name: "光学", icon: "rays", color: .apexEmerald,
         chapters: [
             KnowledgeChapter(id: "geo", name: "几何光学", icon: "light.min", points: [
-                KnowledgePoint("ge_refract", "反射·折射·全反射", essence: "光从光密到光疏、入射角超临界角即全反射。", formula: "n=sinθ₁/sinθ₂；sinC=1/n", pitfall: "全反射只发生在光密→光疏方向。", problemId: "total_reflection"),
+                KnowledgePoint("ge_refract", "反射·折射·全反射", essence: "光从光密到光疏、入射角超临界角即全反射。", formula: "n=sinθ₁/sinθ₂；sinC=1/n", pitfall: "全反射只发生在光密→光疏方向。", lawId: "refraction", problemId: "total_reflection"),
             ]),
             KnowledgeChapter(id: "wave_optics", name: "物理光学", icon: "circle.hexagongrid", points: [
                 KnowledgePoint("wo_interfere", "干涉·衍射·偏振", essence: "光是电磁波；相干光叠加出明暗条纹。", formula: "Δx=Lλ/d", weapon: .symmetry, problemId: "double_slit"),
@@ -118,7 +118,7 @@ enum KnowledgeAtlas {
         id: "modern", name: "近代物理", icon: "atom", color: .apexMystery,
         chapters: [
             KnowledgeChapter(id: "photo", name: "光电效应", icon: "sun.max", points: [
-                KnowledgePoint("ph_photon", "光子·光电效应", essence: "光以光子形式一份份传能；超过截止频率才有光电子。", formula: "Ek=hν−W₀", pitfall: "光强只影响电子数，不影响最大初动能。", problemId: "photo_effect"),
+                KnowledgePoint("ph_photon", "光子·光电效应", essence: "光以光子形式一份份传能；超过截止频率才有光电子。", formula: "Ek=hν−W₀", pitfall: "光强只影响电子数，不影响最大初动能。", lawId: "photo_equation", problemId: "photo_effect"),
             ]),
             KnowledgeChapter(id: "atom", name: "原子结构", icon: "circle.circle", points: [
                 KnowledgePoint("at_bohr", "玻尔模型·能级跃迁", essence: "电子只能在分立轨道；跃迁辐射/吸收光子。", formula: "hν=Em−En"),
