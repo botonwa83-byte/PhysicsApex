@@ -42,6 +42,26 @@ struct ProfileView: View {
                 }
             }
 
+            Section("成就 · \(streak.unlockedCount)/\(streak.achievements().count)") {
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: Spacing.sm) {
+                    ForEach(streak.achievements()) { a in
+                        HStack(spacing: 6) {
+                            Image(systemName: a.icon)
+                                .foregroundColor(a.isUnlocked ? .apexGold : .secondary)
+                            VStack(alignment: .leading, spacing: 0) {
+                                Text(a.title).font(AppFont.chip).foregroundColor(a.isUnlocked ? .primary : .secondary)
+                                Text(a.description).font(.system(size: 9)).foregroundColor(.secondary)
+                            }
+                            Spacer(minLength: 0)
+                        }
+                        .padding(6)
+                        .background((a.isUnlocked ? Color.apexGold : Color.secondary).opacity(0.10))
+                        .cornerRadius(Radius.chip)
+                    }
+                }
+                .padding(.vertical, 4)
+            }
+
             Section("外观") {
                 Picker("外观", selection: $appearance.preference) {
                     ForEach(AppearancePreference.allCases) { pref in

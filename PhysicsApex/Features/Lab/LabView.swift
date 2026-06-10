@@ -99,8 +99,10 @@ struct TopicProblemsView: View {
 struct ProblemDetailView: View {
     let problem: PhysicsProblem
     @EnvironmentObject var profile: StudentProfile
+    @ObservedObject private var practice = PracticeManager.shared
     @State private var selectedOption: String? = nil
     @State private var revealed = false
+    @State private var appearedAt = Date()
 
     var body: some View {
         ScrollView {
@@ -127,7 +129,10 @@ struct ProblemDetailView: View {
                 if !revealed {
                     Button {
                         revealed = true
-                        profile.recordAnswer(correct: selectedOption == problem.answer)
+                        let correct = selectedOption == problem.answer
+                        profile.recordAnswer(correct: correct)
+                        practice.recordAnswer(problemId: problem.id, isCorrect: correct,
+                                              timeSpent: Date().timeIntervalSince(appearedAt), usedHint: false)
                         StreakManager.shared.recordActivity()
                     } label: {
                         Text(problem.options == nil ? "查看解析" : "提交")
@@ -153,6 +158,17 @@ struct ProblemDetailView: View {
         .background(Color.apexBackground.ignoresSafeArea())
         .navigationTitle("练习")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear { appearedAt = Date() }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    practice.toggleError(problem.id)
+                } label: {
+                    Image(systemName: practice.isFlaggedError(problem.id) ? "star.fill" : "star")
+                        .foregroundColor(.apexGold)
+                }
+            }
+        }
     }
 
     private func optionRow(_ opt: String) -> some View {

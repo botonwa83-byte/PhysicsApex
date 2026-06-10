@@ -15,6 +15,7 @@ struct ObservationStationView: View {
                     // ① 核心卖点 C 位
                     descentHero
                     stageHero
+                    revisitEntry
 
                     // ② 今日 — 行动区
                     sectionHeader("今日")
@@ -98,6 +99,24 @@ struct ObservationStationView: View {
             }
         }
         .cardSurface()
+    }
+
+    /// 物理专属创新入口：三级重访
+    private var revisitEntry: some View {
+        NavigationLink { RevisitView() } label: {
+            HStack(spacing: Spacing.md) {
+                Image(systemName: "scope")
+                    .font(.title2).foregroundColor(.stageOlympiad)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("三级重访 · 同一题三个镜头").font(AppFont.cardTitle).foregroundColor(.primary)
+                    Text("初中→高中→竞赛，看解题工具如何一级级升维").font(AppFont.caption).foregroundColor(.secondary).lineLimit(2)
+                }
+                Spacer()
+                Image(systemName: "chevron.right").foregroundColor(.secondary)
+            }
+            .cardSurface()
+        }
+        .buttonStyle(.plain)
     }
 
     private func stageRow(_ stage: Stage) -> some View {
