@@ -4,9 +4,13 @@ import SwiftUI
 
 struct LabView: View {
     @EnvironmentObject var profile: StudentProfile
-    @State private var selectedTopic: PhysicsTopic? = nil
 
-    private let topics = PhysicsTopic.allCases
+    /// 当前段位下、有题的章节。
+    private var availableTopics: [PhysicsTopic] {
+        PhysicsTopic.allCases.filter { topic in
+            ProblemBank.all.contains { $0.topic == topic && $0.stage == profile.currentStage }
+        }
+    }
 
     var body: some View {
         NavigationStack {
@@ -24,27 +28,33 @@ struct LabView: View {
 
     private var stagePicker: some View {
         VStack(alignment: .leading, spacing: Spacing.sm) {
-            SectionHeader(title: "当前段位", systemImage: "figure.stairs", accent: profile.currentStage.color)
+            SectionHeader(title: "选择段位", systemImage: "figure.stairs", accent: profile.currentStage.color)
             Picker("段位", selection: $profile.currentStage) {
-                ForEach(Stage.allCases) { Text($0.shortTitle).tag($0) }
+                ForEach(Stage.allCases) { Text("\($0.emoji) \($0.shortTitle)").tag($0) }
             }
             .pickerStyle(.segmented)
+            Text(profile.currentStage.subtitle).font(AppFont.caption).foregroundColor(.secondary)
         }
         .cardSurface()
     }
 
     private var topicGrid: some View {
         VStack(alignment: .leading, spacing: Spacing.md) {
-            SectionHeader(title: "选择章节", systemImage: "square.grid.2x2", accent: .apexStarBlue)
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: Spacing.md) {
-                ForEach(topics) { topic in
-                    let count = ProblemBank.problems(for: topic).count
-                    NavigationLink { TopicProblemsView(topic: topic) } label: {
-                        topicCard(topic, count: count)
+            SectionHeader(title: "\(profile.currentStage.shortTitle) · 选择章节",
+                          systemImage: "square.grid.2x2", accent: profile.currentStage.color)
+            if availableTopics.isEmpty {
+                Text("本段位的题正在补充中，先试试其它段位吧。")
+                    .font(AppFont.caption).foregroundColor(.secondary)
+                    .frame(maxWidth: .infinity, alignment: .leading).cardSurface()
+            } else {
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: Spacing.md) {
+                    ForEach(availableTopics) { topic in
+                        let count = ProblemBank.all.filter { $0.topic == topic && $0.stage == profile.currentStage }.count
+                        NavigationLink { TopicProblemsView(topic: topic, stage: profile.currentStage) } label: {
+                            topicCard(topic, count: count)
+                        }
+                        .buttonStyle(.plain)
                     }
-                    .buttonStyle(.plain)
-                    .disabled(count == 0)
-                    .opacity(count == 0 ? 0.4 : 1)
                 }
             }
         }
@@ -52,10 +62,9 @@ struct LabView: View {
 
     private func topicCard(_ topic: PhysicsTopic, count: Int) -> some View {
         VStack(alignment: .leading, spacing: Spacing.sm) {
-            Image(systemName: topic.icon).font(.title2).foregroundColor(.apexStarBlue)
+            Image(systemName: topic.icon).font(.title2).foregroundColor(profile.currentStage.color)
             Text(topic.name).font(AppFont.cardTitle).foregroundColor(.primary)
-            Text(count > 0 ? "\(count) 题" : "即将上线")
-                .font(AppFont.caption).foregroundColor(.secondary)
+            Text("\(count) 题").font(AppFont.caption).foregroundColor(.secondary)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(Spacing.lg)
@@ -65,32 +74,47 @@ struct LabView: View {
     }
 }
 
-// MARK: - 某章节题目列表
+// MARK: - 某段位某章节的题目列表（严格按 段位 + 章节 过滤，含付费门禁）
 
 struct TopicProblemsView: View {
     let topic: PhysicsTopic
-    private var problems: [PhysicsProblem] { ProblemBank.problems(for: topic) }
+    let stage: Stage
+    @ObservedObject private var purchase = PurchaseManager.shared
+    @State private var showPaywall = false
+
+    private var problems: [PhysicsProblem] {
+        ProblemBank.all.filter { $0.topic == topic && $0.stage == stage }
+    }
 
     var body: some View {
         List(problems) { p in
-            NavigationLink { ProblemDetailView(problem: p) } label: {
-                VStack(alignment: .leading, spacing: 6) {
-                    Text(p.content).font(.subheadline).lineLimit(3)
-                    HStack(spacing: 6) {
-                        TagChip(text: p.stage.shortTitle, color: p.stage.color)
-                        if p.dualSolution != nil {
-                            TagChip(text: "可秒杀", color: .apexLava)
-                        }
-                        Spacer()
-                        Text("难度 \(Int(p.difficulty * 100))")
-                            .font(AppFont.chip).foregroundColor(.secondary)
-                    }
-                }
-                .padding(.vertical, 4)
+            let locked = !purchase.isUnlocked && !ProblemBank.isFree(p.id)
+            if locked {
+                Button { showPaywall = true } label: { row(p, locked: true) }
+            } else {
+                NavigationLink { ProblemDetailView(problem: p) } label: { row(p, locked: false) }
             }
         }
-        .navigationTitle(topic.name)
+        .navigationTitle("\(stage.shortTitle) · \(topic.name)")
         .navigationBarTitleDisplayMode(.inline)
+        .sheet(isPresented: $showPaywall) { PaywallView() }
+    }
+
+    private func row(_ p: PhysicsProblem, locked: Bool) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(spacing: 6) {
+                if locked { Image(systemName: "lock.fill").font(.caption2).foregroundColor(.apexLava) }
+                Text(p.content).font(.subheadline).lineLimit(3).foregroundColor(locked ? .secondary : .primary)
+            }
+            HStack(spacing: 6) {
+                TagChip(text: p.stage.shortTitle, color: p.stage.color)
+                if p.dualSolution != nil { TagChip(text: "可秒杀", color: .apexLava) }
+                Spacer()
+                Text(locked ? "解锁查看" : "难度 \(Int(p.difficulty * 100))")
+                    .font(AppFont.chip).foregroundColor(.secondary)
+            }
+        }
+        .padding(.vertical, 4)
     }
 }
 

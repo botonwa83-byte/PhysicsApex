@@ -3,42 +3,55 @@ import SwiftUI
 // MARK: - 互动模拟沙盘（物理最大差异化）：可拖参数、实时演化、看见物理
 
 struct SimulationHubView: View {
+    @ObservedObject private var purchase = PurchaseManager.shared
+    @State private var showPaywall = false
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: Spacing.lg) {
                 header
                 groupLabel("力学")
-                NavigationLink { ProjectileSimView() } label: {
-                    simCard("抛体运动", "调初速、角度、重力，看轨迹与射程", "scope", .apexLava, ready: true)
-                }.buttonStyle(.plain)
-                NavigationLink { CircularMotionSimView() } label: {
-                    simCard("圆周运动", "向心力 F=mv²/r，速度翻倍力变四倍", "arrow.clockwise.circle", .apexLava, ready: true)
-                }.buttonStyle(.plain)
-                NavigationLink { InclineSimView() } label: {
-                    simCard("斜面受力", "受力分解 + 临界角 tanθ=μ，到底滑不滑", "triangle", .apexLava, ready: true)
-                }.buttonStyle(.plain)
-                NavigationLink { CollisionSimView() } label: {
-                    simCard("弹性碰撞", "调质量与速度，看动量如何守恒", "arrow.left.arrow.right", .apexStarBlue, ready: true)
-                }.buttonStyle(.plain)
-                NavigationLink { SHMSimView() } label: {
-                    simCard("简谐振动", "弹簧滑块 + 回复力 + 实时 x-t 曲线", "waveform.path", .apexEmerald, ready: true)
-                }.buttonStyle(.plain)
+                simEntry(0, "抛体运动", "调初速、角度、重力，看轨迹与射程", "scope", .apexLava) { ProjectileSimView() }
+                simEntry(1, "圆周运动", "向心力 F=mv²/r，速度翻倍力变四倍", "arrow.clockwise.circle", .apexLava) { CircularMotionSimView() }
+                simEntry(2, "斜面受力", "受力分解 + 临界角 tanθ=μ，到底滑不滑", "triangle", .apexLava) { InclineSimView() }
+                simEntry(3, "弹性碰撞", "调质量与速度，看动量如何守恒", "arrow.left.arrow.right", .apexStarBlue) { CollisionSimView() }
+                simEntry(4, "简谐振动", "弹簧滑块 + 回复力 + 实时 x-t 曲线", "waveform.path", .apexEmerald) { SHMSimView() }
 
                 groupLabel("电学")
-                NavigationLink { OhmSimView() } label: {
-                    simCard("欧姆定律", "I=U/R，电子流动可视化，电阻翻倍电流减半", "bolt.horizontal.circle", .apexStarBlue, ready: true)
-                }.buttonStyle(.plain)
+                simEntry(5, "欧姆定律", "I=U/R，电子流动可视化，电阻翻倍电流减半", "bolt.horizontal.circle", .apexStarBlue) { OhmSimView() }
 
                 groupLabel("波动")
-                NavigationLink { WaveSimView() } label: {
-                    simCard("横波传播", "v=λf，红点只上下振动不随波前进", "waveform.path.ecg", .apexEmerald, ready: true)
-                }.buttonStyle(.plain)
+                simEntry(6, "横波传播", "v=λf，红点只上下振动不随波前进", "waveform.path.ecg", .apexEmerald) { WaveSimView() }
             }
             .padding(Spacing.lg)
         }
         .background(Color.apexBackground.ignoresSafeArea())
         .navigationTitle("模拟沙盘")
         .navigationBarTitleDisplayMode(.inline)
+        .sheet(isPresented: $showPaywall) { PaywallView() }
+    }
+
+    /// 前 freeSandboxCount 个免费，其余锁定 → 付费墙。
+    @ViewBuilder
+    private func simEntry<D: View>(_ index: Int, _ title: String, _ desc: String, _ icon: String, _ color: Color, @ViewBuilder destination: @escaping () -> D) -> some View {
+        if purchase.isUnlocked || index < PurchaseManager.freeSandboxCount {
+            NavigationLink { destination() } label: { simCard(title, desc, icon, color, ready: true) }
+                .buttonStyle(.plain)
+        } else {
+            Button { showPaywall = true } label: {
+                HStack(spacing: Spacing.md) {
+                    Image(systemName: "lock.fill").font(.title2).foregroundColor(.apexLava).frame(width: 36)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(title).font(AppFont.cardTitle).foregroundColor(.primary)
+                        Text("解锁查看 · \(desc)").font(AppFont.caption).foregroundColor(.secondary).lineLimit(2)
+                    }
+                    Spacer()
+                    Text("解锁").font(AppFont.chip).foregroundColor(.apexLava)
+                }
+                .cardSurface()
+            }
+            .buttonStyle(.plain)
+        }
     }
 
     private var header: some View {

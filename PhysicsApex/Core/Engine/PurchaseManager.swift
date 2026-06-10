@@ -13,9 +13,12 @@ final class PurchaseManager: ObservableObject {
 
     let productID = "com.physicsapex.app.full_unlock"
 
-    /// 免费开放的降维战例 / 三级重访数量（列表里的前 N 个）。
+    /// 免费开放的各模块数量（列表里的前 N 个）。
     static let freeDescentCount = 1
     static let freeRevisitCount = 1
+    static let freeWeaponCount = 10
+    static let freeProblemCount = 20
+    static let freeSandboxCount = 3
 
     @Published private(set) var isUnlocked: Bool = false
     @Published private(set) var product: Product?

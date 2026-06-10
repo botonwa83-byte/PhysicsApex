@@ -29,6 +29,12 @@ enum ProblemBank {
     /// 降维秒杀战例 = 带 dualSolution 的题。
     static var descentCases: [PhysicsProblem] { all.filter { $0.dualSolution != nil } }
 
+    /// 该题是否在免费档（全题库前 freeProblemCount 道）。
+    static func isFree(_ id: String) -> Bool {
+        (all.firstIndex { $0.id == id } ?? 0) < PurchaseManager.freeProblemCount
+    }
+    static var freeProblems: [PhysicsProblem] { Array(all.prefix(PurchaseManager.freeProblemCount)) }
+
     static func problems(for topic: PhysicsTopic) -> [PhysicsProblem] {
         all.filter { $0.topic == topic }
     }

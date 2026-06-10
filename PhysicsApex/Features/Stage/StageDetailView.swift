@@ -5,6 +5,8 @@ import SwiftUI
 struct StageDetailView: View {
     let stage: Stage
     @EnvironmentObject var profile: StudentProfile
+    @ObservedObject private var purchase = PurchaseManager.shared
+    @State private var showPaywall = false
 
     private var weapons: [PhysicsWeapon] { PhysicsWeapon.allCases.filter { $0.stage == stage } }
     private var problems: [PhysicsProblem] { ProblemBank.problems(for: stage) }
@@ -82,26 +84,37 @@ struct StageDetailView: View {
                 Text("本段位典型题正在补充中。").font(AppFont.caption).foregroundColor(.secondary)
             }
             ForEach(problems) { p in
-                NavigationLink { ProblemDetailView(problem: p) } label: {
-                    HStack(spacing: Spacing.sm) {
-                        Image(systemName: p.dualSolution != nil ? "bolt.fill" : "doc.text")
-                            .foregroundColor(p.dualSolution != nil ? .apexLava : .secondary)
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(p.content).font(AppFont.body).foregroundColor(.primary).lineLimit(2)
-                            HStack(spacing: 6) {
-                                TagChip(text: p.topic.name, color: .apexStarBlue)
-                                if p.dualSolution != nil { TagChip(text: "可秒杀", color: .apexLava) }
-                            }
-                        }
-                        Spacer(minLength: 0)
-                        Image(systemName: "chevron.right").font(.caption2).foregroundColor(.secondary)
+                let locked = !purchase.isUnlocked && !ProblemBank.isFree(p.id)
+                Group {
+                    if locked {
+                        Button { showPaywall = true } label: { problemRow(p, locked: true) }
+                    } else {
+                        NavigationLink { ProblemDetailView(problem: p) } label: { problemRow(p, locked: false) }
                     }
-                    .padding(.vertical, 4)
                 }
                 .buttonStyle(.plain)
             }
         }
         .cardSurface()
+        .sheet(isPresented: $showPaywall) { PaywallView() }
+    }
+
+    private func problemRow(_ p: PhysicsProblem, locked: Bool) -> some View {
+        HStack(spacing: Spacing.sm) {
+            Image(systemName: locked ? "lock.fill" : (p.dualSolution != nil ? "bolt.fill" : "doc.text"))
+                .foregroundColor(locked ? .apexLava : (p.dualSolution != nil ? .apexLava : .secondary))
+            VStack(alignment: .leading, spacing: 2) {
+                Text(p.content).font(AppFont.body).foregroundColor(locked ? .secondary : .primary).lineLimit(2)
+                HStack(spacing: 6) {
+                    TagChip(text: p.topic.name, color: .apexStarBlue)
+                    if p.dualSolution != nil { TagChip(text: "可秒杀", color: .apexLava) }
+                }
+            }
+            Spacer(minLength: 0)
+            Text(locked ? "解锁" : "").font(AppFont.chip).foregroundColor(.secondary)
+            Image(systemName: "chevron.right").font(.caption2).foregroundColor(.secondary)
+        }
+        .padding(.vertical, 4)
     }
 
     private var revisitEntry: some View {

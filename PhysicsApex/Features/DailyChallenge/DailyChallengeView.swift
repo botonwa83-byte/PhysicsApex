@@ -3,11 +3,11 @@ import SwiftUI
 // MARK: - 每日一题（习惯钩子）：每天确定性推一道题，做完即记连击
 
 enum DailyChallenge {
-    /// 当天的题（按一年中的第几天确定，全天不变）。
+    /// 当天的题（按一年中的第几天确定，全天不变）。从免费档选，保证人人能做。
     static var today: PhysicsProblem {
         let day = Calendar.current.ordinality(of: .day, in: .year, for: Date()) ?? 0
-        let all = ProblemBank.all
-        return all[day % max(all.count, 1)]
+        let pool = ProblemBank.freeProblems.isEmpty ? ProblemBank.all : ProblemBank.freeProblems
+        return pool[day % max(pool.count, 1)]
     }
 
     /// 今天是否已完成（复用练习记录，不新增持久化）。

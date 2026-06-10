@@ -116,12 +116,36 @@ struct DescentView: View {
                 Text(stage.title).font(AppFont.chip).foregroundColor(stage.color)
                 FlowLayout(spacing: 8) {
                     ForEach(weapons) { w in
-                        TagChip(text: w.name, color: stage.color)
+                        weaponChip(w, color: stage.color)
                     }
                 }
             }
+            if !purchase.isUnlocked {
+                Button { showPaywall = true } label: {
+                    Label("解锁全部 \(PhysicsWeapon.allCases.count) 把武器", systemImage: "lock.open.fill")
+                        .font(AppFont.chip).foregroundColor(.apexLava)
+                }
+                .padding(.top, Spacing.xs)
+            }
         }
         .cardSurface()
+    }
+
+    private func weaponFree(_ w: PhysicsWeapon) -> Bool {
+        purchase.isUnlocked || (PhysicsWeapon.allCases.firstIndex(of: w) ?? 0) < PurchaseManager.freeWeaponCount
+    }
+
+    private func weaponChip(_ w: PhysicsWeapon, color: Color) -> some View {
+        let free = weaponFree(w)
+        return HStack(spacing: 3) {
+            if !free { Image(systemName: "lock.fill").font(.system(size: 9)) }
+            Text(w.name)
+        }
+        .font(AppFont.chip)
+        .padding(.horizontal, 8).padding(.vertical, 4)
+        .background((free ? color : Color.secondary).opacity(0.15))
+        .foregroundColor(free ? color : .secondary)
+        .clipShape(Capsule())
     }
 }
 
