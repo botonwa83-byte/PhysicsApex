@@ -7,10 +7,27 @@ struct PhysicsApexApp: App {
 
     var body: some Scene {
         WindowGroup {
-            MainTabView()
+            RootView()
                 .environmentObject(profile)
                 .preferredColorScheme(appearance.colorScheme)
         }
+    }
+}
+
+/// 首次启动展示宣传页，之后直接进主界面。
+struct RootView: View {
+    @AppStorage("physicsapex_seen_promo") private var seenPromo = false
+
+    var body: some View {
+        ZStack {
+            if seenPromo {
+                MainTabView().transition(.opacity)
+            } else {
+                PromoView { withAnimation(.easeInOut(duration: 0.4)) { seenPromo = true } }
+                    .transition(.opacity)
+            }
+        }
+        .animation(.easeInOut(duration: 0.4), value: seenPromo)
     }
 }
 
