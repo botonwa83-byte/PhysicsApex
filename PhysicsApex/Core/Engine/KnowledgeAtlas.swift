@@ -49,8 +49,8 @@ enum KnowledgeAtlas {
                 KnowledgePoint("e_conserve", "能量守恒·功能关系", essence: "能量不生不灭，摩擦生热 Q=f·Δs相对。", weapon: .energyIntuition, problemId: "b3_conveyor"),
             ]),
             KnowledgeChapter(id: "vibration", name: "机械振动与波", icon: "waveform.path", points: [
-                KnowledgePoint("v_shm", "简谐运动·单摆", essence: "回复力正比于位移；单摆周期只与摆长重力有关。", formula: "T=2π√(L/g)", stage: .senior),
-                KnowledgePoint("v_wave", "机械波·干涉衍射", essence: "波传递振动和能量，不传递介质；同频相干叠加。", formula: "v=λf"),
+                KnowledgePoint("v_shm", "简谐运动·单摆", essence: "回复力正比于位移；单摆周期只与摆长重力有关。", formula: "T=2π√(L/g)", problemId: "b7_pendulum", stage: .senior),
+                KnowledgePoint("v_wave", "机械波·干涉衍射", essence: "波传递振动和能量，不传递介质；同频相干叠加。", formula: "v=λf", problemId: "b7_wave_medium"),
             ]),
         ])
 
@@ -124,7 +124,7 @@ enum KnowledgeAtlas {
                 KnowledgePoint("at_bohr", "玻尔模型·能级跃迁", essence: "电子只能在分立轨道；跃迁辐射/吸收光子。", formula: "hν=Em−En", problemId: "b6_bohr_jump"),
             ]),
             KnowledgeChapter(id: "nucleus", name: "原子核", icon: "burst", points: [
-                KnowledgePoint("nu_decay", "衰变·半衰期", essence: "α/β/γ 衰变；半衰期是统计规律。", pitfall: "半衰期由核本身决定，与温度压强无关。"),
+                KnowledgePoint("nu_decay", "衰变·半衰期", essence: "α/β/γ 衰变；半衰期是统计规律。", pitfall: "半衰期由核本身决定，与温度压强无关。", problemId: "b7_half_life"),
                 KnowledgePoint("nu_mass", "核反应·质能方程", essence: "质量亏损释放巨大能量；裂变聚变之源。", formula: "E=mc²", weapon: .dimensionalAnalysis, problemId: "b6_nuclear_energy"),
             ]),
         ])

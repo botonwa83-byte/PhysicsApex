@@ -14,6 +14,7 @@ enum PhysicsTopic: String, Codable, CaseIterable, Identifiable {
     case momentum        // 动量
     case energy          // 功和能
     case circular        // 圆周运动 / 万有引力
+    case wave            // 机械振动与波
     case electricField   // 电场
     case circuit         // 电路
     case magnetic        // 磁场
@@ -30,6 +31,7 @@ enum PhysicsTopic: String, Codable, CaseIterable, Identifiable {
         case .momentum:      return "动量"
         case .energy:        return "功和能"
         case .circular:      return "圆周·万有引力"
+        case .wave:          return "振动与波"
         case .electricField: return "电场"
         case .circuit:       return "电路"
         case .magnetic:      return "磁场"
@@ -46,6 +48,7 @@ enum PhysicsTopic: String, Codable, CaseIterable, Identifiable {
         case .momentum:      return "arrow.left.arrow.right"
         case .energy:        return "bolt.fill"
         case .circular:      return "globe"
+        case .wave:          return "waveform.path"
         case .electricField: return "e.circle"
         case .circuit:       return "bolt.horizontal.circle"
         case .magnetic:      return "magnet"
