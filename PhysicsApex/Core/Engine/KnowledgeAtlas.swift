@@ -106,10 +106,10 @@ enum KnowledgeAtlas {
         id: "optics", name: "光学", icon: "rays", color: .apexEmerald,
         chapters: [
             KnowledgeChapter(id: "geo", name: "几何光学", icon: "light.min", points: [
-                KnowledgePoint("ge_refract", "反射·折射·全反射", essence: "光从光密到光疏、入射角超临界角即全反射。", formula: "n=sinθ₁/sinθ₂；sinC=1/n", pitfall: "全反射只发生在光密→光疏方向。"),
+                KnowledgePoint("ge_refract", "反射·折射·全反射", essence: "光从光密到光疏、入射角超临界角即全反射。", formula: "n=sinθ₁/sinθ₂；sinC=1/n", pitfall: "全反射只发生在光密→光疏方向。", problemId: "total_reflection"),
             ]),
             KnowledgeChapter(id: "wave_optics", name: "物理光学", icon: "circle.hexagongrid", points: [
-                KnowledgePoint("wo_interfere", "干涉·衍射·偏振", essence: "光是电磁波；相干光叠加出明暗条纹。", formula: "Δx=Lλ/d", weapon: .symmetry),
+                KnowledgePoint("wo_interfere", "干涉·衍射·偏振", essence: "光是电磁波；相干光叠加出明暗条纹。", formula: "Δx=Lλ/d", weapon: .symmetry, problemId: "double_slit"),
             ]),
         ])
 

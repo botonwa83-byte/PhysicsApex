@@ -18,6 +18,8 @@ enum ProblemBank {
         electricDeflection,
         photoEffectChoice,
         internalEnergyChoice,
+        totalReflectionChoice,
+        doubleSlitDescent,
     ]
 
     /// 降维秒杀战例 = 带 dualSolution 的题。
@@ -606,5 +608,98 @@ enum ProblemBank {
             ),
         ],
         tags: ["热学", "内能", "温度", "错因诊断"]
+    )
+
+    // MARK: - 概念秒杀：全反射（错因诊断）
+
+    static let totalReflectionChoice = PhysicsProblem(
+        id: "total_reflection",
+        type: .multipleChoice,
+        stage: .senior,
+        topic: .optics,
+        content: "关于光的全反射，下列说法正确的是？",
+        options: [
+            "光从光疏介质射入光密介质时，也可能发生全反射",
+            "只要入射角足够大，任何界面都能发生全反射",
+            "光从光密介质射入光疏介质，且入射角大于临界角时，发生全反射",
+            "发生全反射时，仍有一部分光折射出去"
+        ],
+        answer: "光从光密介质射入光疏介质，且入射角大于临界角时，发生全反射",
+        difficulty: 0.5,
+        averageTime: 55,
+        hints: ["全反射需要两个条件，缺一不可", "临界角满足 sinC = 1/n"],
+        solution: SolutionPath(
+            steps: [
+                SolutionStep(order: 1, description: "条件一：方向", formula: "光密 → 光疏", annotation: "如玻璃→空气、水→空气"),
+                SolutionStep(order: 2, description: "条件二：角度", formula: "入射角 > 临界角 C，sinC = 1/n", annotation: "两条件同时满足"),
+                SolutionStep(order: 3, description: "结果", formula: "折射光消失，能量 100% 反射", annotation: "光纤、内窥镜的原理"),
+            ],
+            keyInsight: "全反射 = 光密→光疏 且 入射角>临界角，两条件缺一不可。",
+            commonMistakes: ["只记角度、忘了方向前提"]
+        ),
+        misconceptions: [
+            Misconception(
+                option: "光从光疏介质射入光密介质时，也可能发生全反射",
+                youThought: "你大概觉得全反射只跟入射角大小有关。",
+                pitfall: "光疏→光密时折射角更小，光永远能射进去，压根没有临界角。",
+                fix: "必须是光密→光疏（如玻璃→空气）才可能全反射。"
+            ),
+            Misconception(
+                option: "只要入射角足够大，任何界面都能发生全反射",
+                youThought: "你大概以为角度够大就一定全反射。",
+                pitfall: "忽略了方向前提：光疏→光密无论角多大都有折射光。",
+                fix: "两个条件缺一不可——光密→光疏 且 入射角>临界角。"
+            ),
+            Misconception(
+                option: "发生全反射时，仍有一部分光折射出去",
+                youThought: "你大概觉得反射和折射总是同时存在。",
+                pitfall: "「全」就是全部——超过临界角后折射光彻底消失。",
+                fix: "全反射时能量 100% 反射，正因如此光纤几乎无损耗传光。"
+            ),
+        ],
+        tags: ["光学", "全反射", "概念秒杀", "错因诊断"]
+    )
+
+    // MARK: - 降维战例：双缝干涉条纹间距
+
+    static let doubleSlitDescent = PhysicsProblem(
+        id: "double_slit",
+        type: .calculation,
+        stage: .senior,
+        topic: .optics,
+        content: "双缝间距为 d，缝到屏的距离为 L，用单色光照射。先后改用紫光和红光做实验，哪种光的相邻亮纹间距更大？相邻亮纹间距的表达式是什么？",
+        answer: "Δx = Lλ/d；红光波长更长，条纹间距更大",
+        difficulty: 0.5,
+        averageTime: 120,
+        hints: ["条纹间距与波长什么关系？", "红光和紫光谁波长长？"],
+        solution: SolutionPath(
+            steps: [
+                SolutionStep(order: 1, description: "相邻亮纹间距", formula: "Δx = Lλ/d", annotation: "正比于波长 λ"),
+                SolutionStep(order: 2, description: "比较", formula: "λ红 > λ紫 ⟹ Δx红 > Δx紫", annotation: "红光条纹更宽"),
+            ],
+            keyInsight: "条纹间距正比于波长，红光波长最长所以条纹最宽。",
+            commonMistakes: ["把 d 与 L 的位置写反"]
+        ),
+        dualSolution: DualSolution(
+            standardMethod: SolutionPath(
+                steps: [
+                    SolutionStep(order: 1, description: "分别代入红光、紫光波长算出两个 Δx", formula: "Δx = Lλ/d 各算一次", annotation: "两次计算再比较"),
+                ],
+                keyInsight: "把两种光的条纹间距分别算出来再比大小。",
+                commonMistakes: ["代入数值算错"]
+            ),
+            descentMethod: SolutionPath(
+                steps: [
+                    SolutionStep(order: 1, description: "抓住正比关系 Δx ∝ λ", formula: "Δx = Lλ/d，其余量都相同", annotation: "只剩 λ 在变"),
+                    SolutionStep(order: 2, description: "直接比波长", formula: "红光波长最长 ⟹ 条纹最宽", annotation: "不用算数值，一眼定胜负"),
+                ],
+                keyInsight: "正比思维：其它量都一样时，只盯着唯一变化的量比大小。",
+                commonMistakes: []
+            ),
+            weaponUsed: .graphMethod,
+            timeRatio: 2.0,
+            detailedExplanation: "「控制变量 + 正比关系」是比较类题目的通杀套路——别急着代数值，先看哪个量在变、成什么比例。"
+        ),
+        tags: ["光学", "双缝干涉", "正比思维", "降维"]
     )
 }
