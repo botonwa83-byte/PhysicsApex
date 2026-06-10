@@ -124,8 +124,8 @@ final class ContentIntegrityTests: XCTestCase {
             XCTAssertFalse(w.analogy.isEmpty, "武器 \(w.rawValue) 缺生活类比")
             XCTAssertGreaterThanOrEqual(w.signals.count, 2, "武器 \(w.rawValue) 触发信号少于 2 条")
         }
-        for p in ProblemBank.descentCases.prefix(PurchaseManager.freeDescentCount) {
-            XCTAssertFalse((p.dualSolution?.plainTalk ?? "").isEmpty, "免费战例 \(p.id) 缺 plainTalk")
+        for p in ProblemBank.descentCases {
+            XCTAssertFalse((p.dualSolution?.plainTalk ?? "").isEmpty, "战例 \(p.id) 缺 plainTalk（说人话层须全量覆盖）")
         }
     }
 

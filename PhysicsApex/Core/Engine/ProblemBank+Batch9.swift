@@ -34,7 +34,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "动能差即生热", formula: "Q = 18 − 6 = 12 J", annotation: "不必算时间和位移"),
             ], keyInsight: "板块共速=完全非弹性碰撞的慢动作版——动量定共速、能量差定热，过程细节全跳过。", commonMistakes: []),
             weaponUsed: .momentumConservation, timeRatio: 4.0,
-            detailedExplanation: "动量守恒+能量差通杀板块模型「最终态」问题（地面光滑前提）。只有问「时间/板长」时才需要牛顿定律介入。"),
+            detailedExplanation: "动量守恒+能量差通杀板块模型「最终态」问题（地面光滑前提）。只有问「时间/板长」时才需要牛顿定律介入。",
+            plainTalk: "木块滑上木板、互相磨蹭着最后一起走——这其实是把「碰撞」拉成了慢动作。地面光滑没有外人插手，总冲劲不变：mv₀=(m+M)v，共速 2 m/s。磨掉的动能 18−6=12 J 全变成摩擦热。μ 多大？只决定磨多久，决定不了结局。"),
         tags: ["板块模型", "动量守恒", "压轴", "降维"])
 
     // 2. 弹簧+动量 · 最大弹性势能
@@ -57,7 +58,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "动量守恒+能量差", formula: "v = 2 m/s；Ep = 16 − 8 = 8 J", annotation: "秒出"),
             ], keyInsight: "「最大压缩/最大势能/最近距离」统统翻译成「共速」——临界分析把变力过程压缩成一个瞬间。", commonMistakes: []),
             weaponUsed: .criticalAnalysis, timeRatio: 4.0,
-            detailedExplanation: "临界分析通杀弹簧/追碰类极值：相对速度为零 ⟺ 形变最大 ⟺ 势能最大 ⟺ 距离最近，配合动量守恒首末对账。"),
+            detailedExplanation: "临界分析通杀弹簧/追碰类极值：相对速度为零 ⟺ 形变最大 ⟺ 势能最大 ⟺ 距离最近，配合动量守恒首末对账。",
+            plainTalk: "弹簧什么时候压得最扁？只要 A 还比 B 快，弹簧就继续被压；A 刚一变得比 B 慢，弹簧就开始回弹。所以「最扁」的瞬间就是「同速」的瞬间！动量守恒求出共速 2 m/s，少掉的动能 16−8=8 J 全存进了弹簧。"),
         tags: ["弹簧模型", "动量守恒", "临界分析", "压轴", "降维"])
 
     // 3. 等效重力 · 电场中的单摆
@@ -80,7 +82,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "普通单摆公式直接套", formula: "T = 2π√(L/g')", annotation: "一步"),
             ], keyInsight: "等效重力把「电场+重力」双场世界变回单摆熟悉的单场世界——平衡位置、周期、最低点速度全部照搬。", commonMistakes: []),
             weaponUsed: .equivalentMethod, timeRatio: 4.0,
-            detailedExplanation: "等效重力通杀「恒定电场力+重力」组合：带电单摆、带电平抛（沿 g' 的类平抛）都适用。前提是电场力必须恒定（匀强电场）。"),
+            detailedExplanation: "等效重力通杀「恒定电场力+重力」组合：带电单摆、带电平抛（沿 g' 的类平抛）都适用。前提是电场力必须恒定（匀强电场）。",
+            plainTalk: "水平电场推着带电摆球，相当于整个房间被「斜着放」了——重力变成斜向下的 √2g。摆球的新「最低点」偏到 45°，单摆周期公式照常使用，只是把 g 换成 √2g。两个恒力合成一个「新重力」，世界又变回了你熟悉的样子。"),
         tags: ["电场", "单摆", "等效重力", "压轴", "降维"])
 
     // 4. 卫星变轨 · 能量观点
@@ -106,7 +109,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "同一点势能相同 ⟹ 机械能大者动能大", formula: "P 点：vⅡ > vⅠ ⟹ 加速", annotation: "秒选"),
             ], keyInsight: "变轨问题抓机械能这一根主线：同一点比动能、不同轨道比机械能，「高轨低速」的迷雾自动散开。", commonMistakes: []),
             weaponUsed: .energyIntuition, timeRatio: 3.0,
-            detailedExplanation: "能量观点通杀变轨：「高轨低速」说的是不同圆轨道的稳态速度，「加速升轨」说的是同一点的瞬间对比——能量账本让两者并行不悖。"),
+            detailedExplanation: "能量观点通杀变轨：「高轨低速」说的是不同圆轨道的稳态速度，「加速升轨」说的是同一点的瞬间对比——能量账本让两者并行不悖。",
+            plainTalk: "升轨道像爬楼梯：楼上（高轨道）的机械能更高，想上去就得点火加速给自己充能。「高轨低速」说的是住在楼上的人走路慢，不代表上楼不花力气——同一个 P 点，想甩进椭圆轨道就必须比圆轨道快。盯住能量这本账，四个选项一秒判完。"),
         tags: ["万有引力", "卫星变轨", "压轴", "降维"])
 
     // 5. 电磁感应 · 焦耳热分配
@@ -129,7 +133,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "分账：串联热量比=电阻比", formula: "Q_R = (2/3)×6 = 4 J", annotation: "比例秒出"),
             ], keyInsight: "「总量守恒定总账，比例关系分细账」——电流再怎么变，串联的热量比恒等于电阻比。", commonMistakes: []),
             weaponUsed: .proportion, timeRatio: 4.0,
-            detailedExplanation: "比例分配通杀感应电路热量题：串联 Q∝R、并联 Q∝1/R，配合能量守恒的总账，任何复杂的电流过程都不必积分。"),
+            detailedExplanation: "比例分配通杀感应电路热量题：串联 Q∝R、并联 Q∝1/R，配合能量守恒的总账，任何复杂的电流过程都不必积分。",
+            plainTalk: "棒从滑动到停下，6 J 动能全部变成电路发热——能量没有别的去处。怎么分？两个电阻串着、流同样的电流，发热就按电阻大小分：R 占 2/3，分走 4 J。电流随时间怎么变？不知道，也根本不需要知道——总账加比例就够了。"),
         tags: ["电磁感应", "焦耳热", "能量守恒", "压轴", "降维"])
 
     // 6. 电磁感应双杆 · 类比碰撞
@@ -152,7 +157,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "套碰撞结论", formula: "v = 2 m/s；Q = 4 J（动能损失=焦耳热）", annotation: "秒出"),
             ], keyInsight: "把双杆映射成完全非弹性碰撞：动量守恒、终态共速、能量损失全部照搬——只是「碰撞」被磁场拉成了慢动作。", commonMistakes: []),
             weaponUsed: .analogy, timeRatio: 4.0,
-            detailedExplanation: "类比迁移通杀双杆模型（等截面平行光滑导轨、无外力前提）：与子弹打木块共用同一套「动量+能量差」算法，焦耳热替代了摩擦热。"),
+            detailedExplanation: "类比迁移通杀双杆模型（等截面平行光滑导轨、无外力前提）：与子弹打木块共用同一套「动量+能量差」算法，焦耳热替代了摩擦热。",
+            plainTalk: "杆 a 滑过来，磁场让它「隔空踢」杆 b：a 减速、b 加速，直到同速——电流消失，踢也停了。这不就是完全非弹性碰撞吗？只是「碰」的瞬间被磁场拉成了慢动作。动量守恒给共速 2 m/s，少掉的 4 J 动能变成电阻发热而不是碰撞变形。"),
         tags: ["电磁感应", "双杆模型", "类比", "压轴", "降维"])
 
     // 7. 斜面平抛 · 位移三角形
@@ -176,7 +182,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "速度三角形附赠结论", formula: "tanβ = gt/v₀ = 2tanθ", annotation: "「速度角正切=2×位移角正切」白送"),
             ], keyInsight: "平抛的两个直角三角形（位移、速度）藏着全部几何关系——落斜面问题先画三角形再列式。", commonMistakes: []),
             weaponUsed: .vectorTriangle, timeRatio: 3.0,
-            detailedExplanation: "矢量三角形通杀「平抛+斜面/挡板」：位移三角形被几何约束锁定即得时间；tan速度角=2tan位移角 是平抛的通用恒等式。"),
+            detailedExplanation: "矢量三角形通杀「平抛+斜面/挡板」：位移三角形被几何约束锁定即得时间；tan速度角=2tan位移角 是平抛的通用恒等式。",
+            plainTalk: "落在斜面上＝位移方向被斜面「锁死」。画位移三角形：横边 v₀t、竖边 ½gt²、斜边贴着斜面，tanθ＝竖边/横边，时间立刻解出。附赠彩蛋：速度方向的正切永远是位移方向正切的 2 倍——平抛「2 倍定理」，记住受用三年。"),
         tags: ["平抛", "斜面", "压轴", "降维"])
 
     // 8. 圆环+平抛衔接 · 机械能守恒
@@ -200,7 +207,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "平抛干净收尾", formula: "x = √(gR)·2√(R/g) = 2R", annotation: "结果只含 R"),
             ], keyInsight: "光滑轨道上「只问两点」就用机械能守恒直连——中间的弯弯绕绕一律无视。", commonMistakes: []),
             weaponUsed: .mechanicalEnergy, timeRatio: 3.0,
-            detailedExplanation: "机械能守恒+临界条件是「轨道+圆环+平抛」串联压轴的标准拆法：守恒负责连接两点，临界负责提供锚定速度。"),
+            detailedExplanation: "机械能守恒+临界条件是「轨道+圆环+平抛」串联压轴的标准拆法：守恒负责连接两点，临界负责提供锚定速度。",
+            plainTalk: "压轴题＝几个小模型串糖葫芦：「恰好通过」给出顶点速度 √(gR)（轨道不出力，重力独自负责拐弯）；机械能守恒从出发点直连顶点，h=2.5R；之后就是一段普通平抛，落点 x=2R。一颗一颗串，谁都不难。"),
         tags: ["机械能守恒", "竖直圆周", "平抛", "压轴", "降维"])
 
     // 9. 弹簧分离临界
@@ -224,7 +232,8 @@ extension ProblemBank {
                 SolutionStep(order: 1, description: "直奔临界：分离 ⟺ N=0 ⟺ a=g 向下", formula: "对系统：弹簧力=0 ⟹ 原长处", annotation: "三步等价变换，秒选"),
             ], keyInsight: "「何处分离」永远从 N=0 反推加速度，再反推位置——不必跟踪过程。", commonMistakes: []),
             weaponUsed: .criticalAnalysis, timeRatio: 3.0,
-            detailedExplanation: "临界分析通杀分离问题：N=0 是唯一判据。同法可解「超重失重边界」「绳松弛瞬间」（注：若弹簧连着 B，分离点同样是 a=g 处即原长处；若弹簧只是垫着，结论相同）。"),
+            detailedExplanation: "临界分析通杀分离问题：N=0 是唯一判据。同法可解「超重失重边界」「绳松弛瞬间」（注：若弹簧连着 B，分离点同样是 a=g 处即原长处；若弹簧只是垫着，结论相同）。",
+            plainTalk: "A 和 B 什么时候「分手」？当它们之间互相不施力（N=0）的那一瞬。此刻 A 只剩重力管它，加速度是 g 向下；既然还没分开，B 和整个系统的加速度也是 g——这意味着弹簧此刻完全不出力＝恰好在原长位置。「分离」两个字，翻译出来就是 N=0。"),
         tags: ["牛顿定律", "临界分析", "弹簧", "压轴", "降维"])
 
     // 10. 圆形磁场区 · 径向对称
@@ -249,7 +258,8 @@ extension ProblemBank {
                 SolutionStep(order: 1, description: "找对称轴：场区圆心与轨迹圆心的连线", formula: "入射径向线关于对称轴翻折 ⟹ 出射线也过圆心", annotation: "一条对称轴，秒选"),
             ], keyInsight: "两圆系统天然有对称轴——沿径向的性质在翻折下保持，无须任何坐标计算。", commonMistakes: []),
             weaponUsed: .symmetry, timeRatio: 5.0,
-            detailedExplanation: "对称法通杀圆形磁场区：径向进⟹径向出；同理「平行束沿直径方向入射会聚于边界一点」等美妙结论都源自这条对称轴。"),
+            detailedExplanation: "对称法通杀圆形磁场区：径向进⟹径向出；同理「平行束沿直径方向入射会聚于边界一点」等美妙结论都源自这条对称轴。",
+            plainTalk: "粒子对着圆心射进圆形磁场区，出来时速度的反向延长线居然还过圆心——为什么？磁场区圆心和轨迹圆心的连线是一条天然的对称轴，「沿径向」这个性质被镜像保护着原样带出来。看出这条轴，所有坐标计算统统免了。"),
         tags: ["磁场", "圆形场区", "对称法", "压轴", "降维"])
 
     // 11. 图像交点的物理含义
@@ -274,7 +284,8 @@ extension ProblemBank {
                 SolutionStep(order: 1, description: "一句口诀裁决：交点=纵坐标相等", formula: "纵轴是 x ⟹ 相遇；纵轴是 v ⟹ 等速（距离极值）", annotation: "秒选"),
             ], keyInsight: "读图先读纵轴——「交点含义=纵轴量相等」一条规则通杀所有图像交点题。", commonMistakes: []),
             weaponUsed: .graphMethod, timeRatio: 2.5,
-            detailedExplanation: "图像法的元规则：交点看纵轴、斜率看变化率、面积看累积量。三句话覆盖 x-t、v-t、a-t 的一切读图题。"),
+            detailedExplanation: "图像法的元规则：交点看纵轴、斜率看变化率、面积看累积量。三句话覆盖 x-t、v-t、a-t 的一切读图题。",
+            plainTalk: "图像的交点只说明一件事：「这一刻纵坐标相等」。纵轴是位置 x，交点＝两车在同一地点＝相遇；纵轴是速度 v，交点＝两车同速＝两车的距离正处在最大或最小。先看纵轴再下结论，所有图像交点题一招毙命。"),
         tags: ["运动学", "图像", "追及相遇", "压轴", "降维"])
 
     // 12. 机车启动 · 匀加速段的终点
@@ -298,7 +309,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "时间一步", formula: "t = v₁/a = 12 s", annotation: "秒出"),
             ], keyInsight: "机车启动永远先画两阶段分界：v₁=P/F（匀加速尽头）、v_max=P/f（最终匀速）——临界先立，公式不乱。", commonMistakes: []),
             weaponUsed: .criticalAnalysis, timeRatio: 3.0,
-            detailedExplanation: "临界分析通杀机车启动：两个特征速度 v₁ 与 v_max 一旦分清，恒加速段与恒功率段各自归位，再不会张冠李戴。"),
+            detailedExplanation: "临界分析通杀机车启动：两个特征速度 v₁ 与 v_max 一旦分清，恒加速段与恒功率段各自归位，再不会张冠李戴。",
+            plainTalk: "机车匀加速时牵引力恒定（5000 N），但功率 P=Fv 随速度水涨船高——涨到 60 kW 顶格的那一刻（v=12 m/s），匀加速就到头了，之后只能恒功率慢慢加。最大的坑：v_max=30 m/s 是最终匀速时的速度，跟匀加速什么时候结束半点关系都没有。"),
         tags: ["功率", "机车启动", "临界", "压轴", "降维"])
 
     // 13. 速度选择器 · 与电荷无关
@@ -324,7 +336,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "平衡式约掉 q", formula: "v = E/B，与 q、m 无关", annotation: "秒选"),
             ], keyInsight: "两个力同正比于 q ⟹ 平衡条件必然与 q 无关——看公式结构比画图快一倍。", commonMistakes: []),
             weaponUsed: .crossProduct, timeRatio: 2.5,
-            detailedExplanation: "从 qE 与 qv×B 的结构看速度选择器：q 是公因子注定被约去。质谱仪、霍尔效应的「与电荷种类无关/有关」判断同此法。"),
+            detailedExplanation: "从 qE 与 qv×B 的结构看速度选择器：q 是公因子注定被约去。质谱仪、霍尔效应的「与电荷种类无关/有关」判断同此法。",
+            plainTalk: "电场力 qE 和磁场力 qvB 身上都挂着同一个 q——电荷换成负的，两个力同时调头，照样互相抵消！所以平衡条件 v=E/B 里压根没有 q 和 m 的位置：速度选择器是「唯速度论」，不看出身，只看跑多快。"),
         tags: ["磁场", "速度选择器", "压轴", "降维"])
 
     // 14. 理想变压器 · 因果方向
@@ -348,7 +361,8 @@ extension ProblemBank {
                 SolutionStep(order: 1, description: "逆向思维：从负载倒着推回电源", formula: "R↓ ⟹ I₂↑ ⟹ P₂↑ = P₁ ⟹ I₁↑", annotation: "「电压正着定、电流倒着定」秒出"),
             ], keyInsight: "变压器动态分析永远倒着走：负载是因、原边电流是果——逆向思维一步理顺。", commonMistakes: []),
             weaponUsed: .reverseThinking, timeRatio: 3.0,
-            detailedExplanation: "逆向思维通杀变压器动态：U 由匝数比正向锁定、I 与 P 由负载反向决定。先写 U₂ 不变，再从 R 的变化一路倒推回 I₁。"),
+            detailedExplanation: "逆向思维通杀变压器动态：U 由匝数比正向锁定、I 与 P 由负载反向决定。先写 U₂ 不变，再从 R 的变化一路倒推回 I₁。",
+            plainTalk: "变压器的因果是「反着」的：电压由电源经匝数比正向定死（U₂ 雷打不动），电流却由副边的负载说了算——电阻调小，副边电流变大、功率变大，原边必须供出同样多的功率，于是原边电流也变大。记住：从负载倒着推回电源，一路顺畅。"),
         tags: ["交变电流", "变压器", "压轴", "降维"])
 
     // 15. 斜面往返 · 全程能量
@@ -372,7 +386,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "与上滑式联立消 s", formula: "v²/v₀² = 1/3 ⟹ v = v₀√3/3", annotation: "比例直达"),
             ], keyInsight: "往返问题先看「重力净功为零」——全程账本里只剩摩擦一项，式子立刻减半。", commonMistakes: []),
             weaponUsed: .workEnergyTheorem, timeRatio: 2.5,
-            detailedExplanation: "全程动能定理通杀往返/多段问题：保守力在闭合路径上净功为零，只剩耗散力项——段数越多优势越大。"),
+            detailedExplanation: "全程动能定理通杀往返/多段问题：保守力在闭合路径上净功为零，只剩耗散力项——段数越多优势越大。",
+            plainTalk: "上去再下来，高度白爬了——重力一来一回做的功正好抵消。全程账本里只剩摩擦这一个「吸血鬼」，它咬了两口（上山一口、下山一口）。把「上滑」和「全程」两本账一除，比值里连 s 都约掉了，答案直接蹦出来。"),
         tags: ["动能定理", "斜面往返", "压轴", "降维"])
 
     // 16. 磁铁穿管 · 楞次定律
@@ -398,7 +413,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "能量印证", formula: "减少的机械能 = 管壁焦耳热", annotation: "秒选"),
             ], keyInsight: "楞次定律给「效果」不给「细节」——只问快慢/方向/能量去向的题，一句「阻碍」全部拿下。", commonMistakes: []),
             weaponUsed: .lenzRule, timeRatio: 4.0,
-            detailedExplanation: "楞次定则速判通杀涡流类现象：磁铁穿管、电磁阻尼摆、磁悬浮刹车——「阻碍相对运动+机械能变焦耳热」两句话讲完。"),
+            detailedExplanation: "楞次定则速判通杀涡流类现象：磁铁穿管、电磁阻尼摆、磁悬浮刹车——「阻碍相对运动+机械能变焦耳热」两句话讲完。",
+            plainTalk: "磁铁在铜管里下落，管壁里感应出一圈圈涡流，而涡流的唯一使命就是「反对」磁铁的运动——于是磁铁挨了一脚向上的「电磁刹车」，越落越不情愿。代价：机械能源源不断变成管壁的热。注意铜不是铁，不存在「吸住」，一切都是楞次的「来拒去留」。"),
         tags: ["电磁感应", "涡流", "楞次定律", "压轴", "降维"])
 
     // 17. 动态电路 · 极端值
@@ -423,7 +439,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "单调性收尾", formula: "R₂ 增大的尽头是 U₁=0 ⟹ 一路减小", annotation: "秒选"),
             ], keyInsight: "动态电路选择题先代「断路/短路」两个免费端点——单调结论由端点直接夹出。", commonMistakes: []),
             weaponUsed: .specialCase, timeRatio: 3.0,
-            detailedExplanation: "特殊值法是动态电路的快刀，与口诀「串反并同」互为印证；遇到非单调情形（如电源输出功率）端点法还能提示极值的存在。"),
+            detailedExplanation: "特殊值法是动态电路的快刀，与口诀「串反并同」互为印证；遇到非单调情形（如电源输出功率）端点法还能提示极值的存在。",
+            plainTalk: "动态电路别一环环推链条，直接掀底牌：把 R₂ 拧到无穷大（断路）——电流归零，R₁ 上的电压也归零。既然 R₂ 增大的终点是 0，那一路上只能越走越低。两个极端一夹，单调题毫无悬念。"),
         tags: ["电路", "动态分析", "压轴", "降维"])
 
     // 18. 近地卫星测密度
@@ -446,7 +463,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "动力学补系数", formula: "ρ = 3π/(GT²)", annotation: "秒出"),
             ], keyInsight: "Gρ 的量纲恰是 1/时间²——「近地周期只认密度」是量纲注定的，做题前就能预言答案的形状。", commonMistakes: []),
             weaponUsed: .dimensionalAnalysis, timeRatio: 3.5,
-            detailedExplanation: "量纲分析预判结果形式：ρ=3π/(GT²) 只含 G、T。这也解释了为何各行星的近地卫星周期都约 90 分钟量级——岩石密度相近。系数 3π 仍须动力学给出。"),
+            detailedExplanation: "量纲分析预判结果形式：ρ=3π/(GT²) 只含 G、T。这也解释了为何各行星的近地卫星周期都约 90 分钟量级——岩石密度相近。系数 3π 仍须动力学给出。",
+            plainTalk: "测一颗行星的密度居然只需要一块表？卫星贴地飞，轨道半径＝行星半径，而密度公式里的 R³ 跟引力公式里的 R³ 恰好同归于尽——ρ=3π/(GT²)，星球多大根本无所谓。这也解释了为什么各种岩石行星的贴地卫星周期都在 90 分钟上下：石头的密度都差不多。"),
         tags: ["万有引力", "行星密度", "压轴", "降维"])
 
     // 19. 电梯超重失重 · v-t 图
@@ -470,7 +488,8 @@ extension ProblemBank {
                 SolutionStep(order: 1, description: "在 v-t 图上读斜率", formula: "斜率正 ⟹ a 向上 ⟹ 超重；零 ⟹ 正常；负 ⟹ 失重", annotation: "图一画，三段秒判"),
             ], keyInsight: "把超失重判断绑定到 v-t 图斜率——「斜率向上超重、向下失重」一条规则扫平全部分段题。", commonMistakes: []),
             weaponUsed: .graphMethod, timeRatio: 2.5,
-            detailedExplanation: "图像法处理超失重：斜率即加速度即视重偏向。多段电梯、蹦极、火箭题都先画 v-t 图再逐段读斜率。"),
+            detailedExplanation: "图像法处理超失重：斜率即加速度即视重偏向。多段电梯、蹦极、火箭题都先画 v-t 图再逐段读斜率。",
+            plainTalk: "超重失重看的不是往上还是往下，而是加速度指向哪：加速度向上（加速上升或减速下降）→ 体重计读数变大；向下 → 变小。最稳的办法：画 v-t 图读斜率——斜率朝上＝超重、朝下＝失重、水平＝正常。三段读三下，完事。"),
         tags: ["牛顿定律", "超重失重", "压轴", "降维"])
 
     // 20. 渡河最短航程 · 矢量圆
@@ -495,6 +514,7 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "直角三角形读数", formula: "s = d/(3/5) = 5d/3；船头与上游成 53°", annotation: "3-4-5 直角三角形全给出"),
             ], keyInsight: "「一个矢量定、一个矢量大小定」的极值问题=圆与切线的几何——求导被一根切线取代。", commonMistakes: []),
             weaponUsed: .extremumPrinciple, timeRatio: 5.0,
-            detailedExplanation: "极值原理的几何化身「矢量圆+切线」通杀：小船渡河（v船<v水）、最小起跳速度、追击最短距离——凡「方向自由、大小受限」的最值都适用。"),
+            detailedExplanation: "极值原理的几何化身「矢量圆+切线」通杀：小船渡河（v船<v水）、最小起跳速度、追击最短距离——凡「方向自由、大小受限」的最值都适用。",
+            plainTalk: "船速比水速慢，永远到不了正对岸——那最少被冲走多远？把船速的「所有可选方向」画成一个圆，你的实际航向就是从原点指到圆上某点的连线。航线与河岸的夹角最大时，被冲得最少——而「夹角最大」就是那条切线！sinθ=3/5，最短航程 5d/3。极值撞上圆，切线就是答案。"),
         tags: ["运动学", "渡河模型", "极值", "压轴", "降维"])
 }

@@ -50,7 +50,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "垂直 ⟹ 瞬时功率恒为零", formula: "P = F·v = 0 ⟹ 速率、动能永不变", annotation: "秒选"),
             ], keyInsight: "叉乘的结果天生垂直于两个乘数——洛伦兹力不做功是数学结构决定的，不是巧合。", commonMistakes: []),
             weaponUsed: .crossProduct, timeRatio: 3.0,
-            detailedExplanation: "矢量叉乘视角通杀磁场力问题：F=qv×B 的结构保证磁场只能让粒子拐弯、永远无法加减速。"),
+            detailedExplanation: "矢量叉乘视角通杀磁场力问题：F=qv×B 的结构保证磁场只能让粒子拐弯、永远无法加减速。",
+            plainTalk: "洛伦兹力是叉乘出来的——数学上它生来就垂直于速度。垂直意味着什么？它只能把速度「掰弯」，不能让它变快变慢，像一个只会打方向、永远不踩油门的方向盘。所以磁场里粒子的速率和动能雷打不动。"),
         misconceptions: [
             Misconception(option: "速率增大",
                 youThought: "你大概觉得受了力就会加速。",
@@ -121,7 +122,8 @@ extension ProblemBank {
                 SolutionStep(order: 1, description: "口诀直接裁决效果", formula: "「来拒去留」：N 极来 ⟹ 线圈拒之（排斥）", annotation: "秒选"),
             ], keyInsight: "楞次定律的宏观效果可以一词记牢：来拒去留、增缩减扩——选项问「效果」时无需推电流方向。", commonMistakes: []),
             weaponUsed: .lenzRule, timeRatio: 3.0,
-            detailedExplanation: "楞次定则速判通杀「只问效果」的感应题：阻碍相对运动（来拒去留）、阻碍磁通变化（增反减同），口诀即答案。"),
+            detailedExplanation: "楞次定则速判通杀「只问效果」的感应题：阻碍相对运动（来拒去留）、阻碍磁通变化（增反减同），口诀即答案。",
+            plainTalk: "楞次定律就一个脾气：跟你对着干。磁铁来，线圈把它往外推（同名磁极相斥）；磁铁走，线圈又挽留它。「来拒去留」四个字背熟，比每次老老实实推感应电流方向快十倍。"),
         misconceptions: [
             Misconception(option: "感应电流帮助磁铁插入",
                 youThought: "你大概觉得感应电流会顺着磁铁的运动。",
@@ -214,6 +216,7 @@ extension ProblemBank {
                 SolutionStep(order: 1, description: "一条比例式看穿本质", formula: "P损 = I²R = (P/U)²R ∝ 1/U²", annotation: "电压 10 倍，损耗 1/100"),
             ], keyInsight: "把损耗写成输送电压的幂次，平方反比一目了然——这就是高压输电的全部秘密。", commonMistakes: []),
             weaponUsed: .proportion, timeRatio: 2.5,
-            detailedExplanation: "比例法把「为什么用高压」从定性叙述升级为定量结论：P损∝1/U²（输送功率与线阻一定时），既快又能算数值。"),
+            detailedExplanation: "比例法把「为什么用高压」从定性叙述升级为定量结论：P损∝1/U²（输送功率与线阻一定时），既快又能算数值。",
+            plainTalk: "送同样多的电，电压抬高 10 倍，电流就缩到 1/10——而线路发热跟电流的平方走（I²R），直接降到 1/100！这就是全国电网动辄几十万伏特的全部理由：电流越小，路上「漏」掉的越少。"),
         tags: ["交变电流", "远距离输电", "降维"])
 }

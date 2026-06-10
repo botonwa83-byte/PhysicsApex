@@ -65,7 +65,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "能量等式一步出", formula: "qU = ½mv² ⟹ v = √(2qU/m) = 200 m/s", annotation: "d 根本不需要"),
             ], keyInsight: "把陌生的电场映射到熟悉的重力场——「电压=高度差」，加速问题瞬间变成自由落体。", commonMistakes: []),
             weaponUsed: .analogy, timeRatio: 2.5,
-            detailedExplanation: "类比迁移通杀加速电场：qU 对应 mgh，与路径和板距无关（匀强非匀强都成立），只看电势差。"),
+            detailedExplanation: "类比迁移通杀加速电场：qU 对应 mgh，与路径和板距无关（匀强非匀强都成立），只看电势差。",
+            plainTalk: "电压就是电场里的「高度差」：电荷从 100 V 滑到 0 V，就像小球从 100 米高的坡上滑下来。它获得的动能＝qU，跟中间隔多远、电场均不均匀统统无关。qU=½mv²，一步到位。"),
         tags: ["电场", "加速电场", "降维"])
 
     static let b4_potential = PhysicsProblem(
@@ -116,7 +117,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "只剩一条因果链", formula: "d↑ ⟹ C↓ ⟹ Q=CU↓", annotation: "秒选"),
             ], keyInsight: "电容器动态分析先问「谁不变」——锁死不变量，剩下的链条自己推自己。", commonMistakes: []),
             weaponUsed: .controlVariable, timeRatio: 3.0,
-            detailedExplanation: "控制变量法通杀电容器动态问题：接电源 U 不变、断电源 Q 不变，先锁定再推链，永不绕晕。"),
+            detailedExplanation: "控制变量法通杀电容器动态问题：接电源 U 不变、断电源 Q 不变，先锁定再推链，永不绕晕。",
+            plainTalk: "电容器动态题先问一句：现在谁被「锁死」了？接着电源，电压 U 就被钉死不变。然后顺藤摸瓜：板距拉大 → 电容 C 变小 → Q=CU 跟着变小。口诀：接电源盯 U、断电源盯 Q——锁死一个，其余全顺。"),
         misconceptions: [
             Misconception(option: "不变",
                 youThought: "你大概以为电荷量总是守恒不变。",
@@ -184,7 +186,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "单调函数两端定全程", formula: "R 从 0 到 ∞，U 从 0 升到 E ⟹ R↑ 则 U↑", annotation: "秒选"),
             ], keyInsight: "单调变化的选择题，代两个极端值比推链条快且不会反向。", commonMistakes: []),
             weaponUsed: .specialCase, timeRatio: 3.0,
-            detailedExplanation: "特殊值法通杀单调型电路选择题：断路、短路是天然的免费端点，结论夹在中间跑不掉。"),
+            detailedExplanation: "特殊值法通杀单调型电路选择题：断路、短路是天然的免费端点，结论夹在中间跑不掉。",
+            plainTalk: "懒人测法：把电阻拧到两个极端各试一次。R 无穷大＝断路，没电流，内阻一分钱电压都不吃，路端电压＝电动势（最大）；R=0＝短路，电压全被内阻吃光＝0。从 0 单调爬到最大——所以 R 越大 U 越大，秒选。"),
         misconceptions: [
             Misconception(option: "减小",
                 youThought: "你大概觉得电阻大了，电压就被「拖」小了。",
@@ -211,7 +214,8 @@ extension ProblemBank {
                 SolutionStep(order: 1, description: "只看倍数：体积不变下 L×2 必有 S×½", formula: "R=ρL/S ⟹ R ∝ L/S ⟹ ×2/(×½)=×4", annotation: "一步"),
             ], keyInsight: "几何变形类电阻题只问倍数——比例法把字母运算压缩成倍数相乘。", commonMistakes: []),
             weaponUsed: .proportion, timeRatio: 2.5,
-            detailedExplanation: "比例法通杀「拉长/对折/合并」导线题：抓体积不变这一约束，L 和 S 的倍数互为倒数，电阻按 L/S 的倍数走。"),
+            detailedExplanation: "比例法通杀「拉长/对折/合并」导线题：抓体积不变这一约束，L 和 S 的倍数互为倒数，电阻按 L/S 的倍数走。",
+            plainTalk: "像拉面师傅拉一根橡皮泥：长度拉成 2 倍，体积没变，横截面就得瘦成一半。电阻 R=ρL/S，分子×2、分母×½，电阻一共变 4 倍。全程只动倍数、不设未知数，心算完事。"),
         tags: ["电路", "电阻定律", "降维"])
 
     static let b4_seriesRule = PhysicsProblem(

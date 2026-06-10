@@ -61,7 +61,8 @@ extension ProblemBank {
                 SolutionStep(order: 1, description: "把内能当存款记账：吸热是收入，对外做功是支出", formula: "ΔU = 收入 200 − 支出 80 = +120 J", annotation: "一步，不背任何约定"),
             ], keyInsight: "能量守恒就是记账：进多少、出多少、余额变多少——符号约定自动正确。", commonMistakes: []),
             weaponUsed: .energyIntuition, timeRatio: 2.0,
-            detailedExplanation: "能量记账法通杀热力学第一定律：吸热/外界做功=收入，放热/对外做功=支出，永远不会搞错正负号。"),
+            detailedExplanation: "能量记账法通杀热力学第一定律：吸热/外界做功=收入，放热/对外做功=支出，永远不会搞错正负号。",
+            plainTalk: "把气体内能当成银行存款：吸热 200 J 是工资入账，对外做功 80 J 是花出去的钱，余额变化＝200−80＝+120 J。这样记账永远不会搞反正负号——钱进来是正、花出去是负，天经地义。"),
         tags: ["热学", "热力学第一定律", "降维"])
 
     static let b6_secondLaw = PhysicsProblem(
@@ -150,7 +151,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "套到选项", formula: "「距离相等+虚像」正确，其余全违反对称", annotation: "秒选"),
             ], keyInsight: "平面镜的全部成像规律都是「镜面对称」一条性质的推论——记一条，推一切。", commonMistakes: []),
             weaponUsed: .symmetry, timeRatio: 2.5,
-            detailedExplanation: "对称法通杀平面镜问题：像与物严格镜面对称，等大、等距、左右互换、虚像全部由对称性一次给出。"),
+            detailedExplanation: "对称法通杀平面镜问题：像与物严格镜面对称，等大、等距、左右互换、虚像全部由对称性一次给出。",
+            plainTalk: "平面镜只有一条规矩：像和你关于镜面完全对称，像一份「立体复印件」。对称立刻推出一切——等大（离远了也不会变小）、等距（你离镜 1 米，像也在「镜子里」1 米）、虚像（光并没真跑到镜子后面）。一条对称，裁掉全部错误选项。"),
         misconceptions: [
             Misconception(option: "人离镜越远，像越小",
                 youThought: "你大概觉得离镜子远了，镜中的像就变小。",

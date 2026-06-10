@@ -60,7 +60,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "解出", formula: "v = √(2gL)", annotation: "一步，质量自动约掉"),
             ], keyInsight: "守恒量只看首末态——过程越复杂，守恒律越显威力。", commonMistakes: []),
             weaponUsed: .mechanicalEnergy, timeRatio: 4.0,
-            detailedExplanation: "机械能守恒通杀「只有重力/弹力做功」的曲线运动：摆、轨道、滑面，过程再花哨也只算首末两态。"),
+            detailedExplanation: "机械能守恒通杀「只有重力/弹力做功」的曲线运动：摆、轨道、滑面，过程再花哨也只算首末两态。",
+            plainTalk: "绳子拉着球走圆弧，但拉力永远垂直于运动方向——它一点功都不做，纯属「引路不出力」。所以从头到尾只有重力在干活：掉下来多高，就换多少动能。mgL=½mv²，弧线再弯都不用管。"),
         tags: ["机械能守恒", "单摆", "降维"])
 
     static let b3_workSign = PhysicsProblem(
@@ -131,7 +132,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "面积差秒读", formula: "Δs=½×2×0.4=0.4 m ⟹ Q=μmg·Δs=2 J", annotation: "一眼"),
             ], keyInsight: "v-t 图上「两线之间的面积」就是相对位移——传送带生热问题的标准秒杀。", commonMistakes: []),
             weaponUsed: .graphMethod, timeRatio: 3.0,
-            detailedExplanation: "图像法通杀传送带：共速点是交点、相对滑动是线间面积，比分段运动学少算一半的量。"),
+            detailedExplanation: "图像法通杀传送带：共速点是交点、相对滑动是线间面积，比分段运动学少算一半的量。",
+            plainTalk: "画 v-t 图：皮带是一条水平线，工件是从零爬升的斜线，最后汇合。两线之间夹着的那块三角形面积，就是皮带比工件多走的路——也就是俩家伙互相磨蹭的长度。摩擦生热＝摩擦力×磨蹭长度，图上直接读数。"),
         tags: ["能量守恒", "传送带", "摩擦生热", "降维"])
 
     static let b3_powerType = PhysicsProblem(
@@ -170,7 +172,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "解出", formula: "s = v₀²/[2g(sinθ+μcosθ)] = 3.2 m", annotation: "一步"),
             ], keyInsight: "只问「位移和速度」不问「时间」的题，动能定理跳过加速度直达答案。", commonMistakes: []),
             weaponUsed: .workEnergyTheorem, timeRatio: 2.5,
-            detailedExplanation: "动能定理通杀「不问时间」的动力学题：把牛顿定律+运动学的两步合成一步功能对账。"),
+            detailedExplanation: "动能定理通杀「不问时间」的动力学题：把牛顿定律+运动学的两步合成一步功能对账。",
+            plainTalk: "题目不问时间，就别碰加速度。直接记账：上滑过程动能从 ½mv₀² 烧到 0，烧掉的钱花在两处——爬坡（重力分量收走）和磨损（摩擦收走）。一行动能定理列完，距离 s 直接解出。"),
         tags: ["动能定理", "斜面", "降维"])
 
     static let b3_mechEnergyCond = PhysicsProblem(

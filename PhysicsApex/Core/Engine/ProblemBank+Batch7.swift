@@ -30,7 +30,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "形式即结论", formula: "T∝√(L/g) ⟹ L×4 则 T×2=4 s", annotation: "公式忘了也能秒答"),
             ], keyInsight: "量纲分析白送公式的形式：能凑出目标量纲的组合往往唯一——系数 2π 才需要动力学。", commonMistakes: []),
             weaponUsed: .dimensionalAnalysis, timeRatio: 3.5,
-            detailedExplanation: "量纲分析通杀「忘公式」时刻：单摆 √(L/g)、弹簧 √(m/k) 的形式都能凑出来。注意它只定形式不定系数，2π 必须由动力学推导给出。"),
+            detailedExplanation: "量纲分析通杀「忘公式」时刻：单摆 √(L/g)、弹簧 √(m/k) 的形式都能凑出来。注意它只定形式不定系数，2π 必须由动力学推导给出。",
+            plainTalk: "忘了单摆公式？现场拼一个：周期的单位是「秒」，手里只有摆长 L（米）和 g（米/秒²）——能拼出「秒」的组合只有 √(L/g) 这一种！所以周期必然正比于 √(L/g)：摆长变 4 倍，周期变 2 倍。前面的 2π 要正经推导，但考场上比例关系已经够用。"),
         tags: ["振动与波", "简谐运动", "单摆", "降维"])
 
     static let b7_waveMedium = PhysicsProblem(

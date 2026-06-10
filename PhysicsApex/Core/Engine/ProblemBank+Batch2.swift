@@ -39,7 +39,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "向心力定周期", formula: "mg·tanθ = m(2π/T)²·Lsinθ ⟹ T = 2π√(Lcosθ/g)", annotation: "一步"),
             ], keyInsight: "三力平衡/定合力的问题，画矢量三角形比正交分解快一倍。", commonMistakes: []),
             weaponUsed: .vectorTriangle, timeRatio: 3.0,
-            detailedExplanation: "矢量三角形通杀「一力恒定（重力）+ 一力方向已知」的合成问题：圆锥摆、斜面光滑球、绳杆夹角全适用。"),
+            detailedExplanation: "矢量三角形通杀「一力恒定（重力）+ 一力方向已知」的合成问题：圆锥摆、斜面光滑球、绳杆夹角全适用。",
+            plainTalk: "小球只受两个力：绳的拉力和重力，它俩合出来的力负责拉着球转圈。把三个矢量首尾相接拼成直角三角形：重力竖直、合力水平、夹角就是绳的倾角 θ——tanθ 一出，向心力 mg·tanθ 白送，方程组直接失业。"),
         tags: ["圆周运动", "圆锥摆", "降维"])
 
     static let b2_centripetalSource = PhysicsProblem(
@@ -80,7 +81,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "解出", formula: "v_min = √(gr)", annotation: "一步"),
             ], keyInsight: "「恰好」「最大」「至少」出现时，先翻译成临界条件，方程自动列好。", commonMistakes: []),
             weaponUsed: .criticalAnalysis, timeRatio: 3.0,
-            detailedExplanation: "临界分析的关键是把「恰好」翻译成物理量取零或最值。注意 v_min=√(gr) 只适用绳/内轨模型，杆模型最高点 v 可为零。"),
+            detailedExplanation: "临界分析的关键是把「恰好」翻译成物理量取零或最值。注意 v_min=√(gr) 只适用绳/内轨模型，杆模型最高点 v 可为零。",
+            plainTalk: "「恰好通过最高点」翻译成人话：绳子已经完全不出力了（一出力就不叫恰好），全靠重力一个人拉着球拐弯。所以 mg=mv²/r，最小速度 √(gr) 当场出炉。记住公式不如记住翻译：恰好＝某个力恰好变成零。"),
         tags: ["圆周运动", "竖直圆周", "临界分析", "降维"])
 
     static let b2_turntable = PhysicsProblem(
@@ -115,7 +117,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "口诀裁决", formula: "「高轨低速大周期」", annotation: "秒选"),
             ], keyInsight: "天体圆轨道问题只问「怎么变」时，比例法免去全部数值计算。", commonMistakes: []),
             weaponUsed: .proportion, timeRatio: 3.0,
-            detailedExplanation: "比例法通杀卫星比较类选择题：抓住 GM 不变，v、T、ω、a 全部化成 r 的幂次，看指数正负即得结论。"),
+            detailedExplanation: "比例法通杀卫星比较类选择题：抓住 GM 不变，v、T、ω、a 全部化成 r 的幂次，看指数正负即得结论。",
+            plainTalk: "卫星飞得越高越「懒」：那里引力弱，不需要跑那么快也掉不下来。记住口诀「高轨低速大周期」——轨道高的，速度小、周期长。一个数都不用算，结论早写在公式的指数里了。"),
         misconceptions: [
             Misconception(option: "线速度越大",
                 youThought: "你大概觉得轨道大、跑得快。",
@@ -183,7 +186,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "变换回地面系", formula: "v_A=v_c−v₀/2=0；v_B=v_c+v₀/2=v₀", annotation: "交换速度，秒出"),
             ], keyInsight: "质心系里弹性碰撞只是「反弹」——换个参考系，二次方程组变成加减法。", commonMistakes: []),
             weaponUsed: .referenceFrame, timeRatio: 4.0,
-            detailedExplanation: "参考系变换通杀弹性碰撞：质心系中两球速度大小不变、方向反转，变换回去即得结果。「等质量交换速度」只在弹性正碰时成立。"),
+            detailedExplanation: "参考系变换通杀弹性碰撞：质心系中两球速度大小不变、方向反转，变换回去即得结果。「等质量交换速度」只在弹性正碰时成立。",
+            plainTalk: "两个一样重的球弹性正碰，就是台球桌上的经典画面：白球「啪」地停住，目标球带着原速度走人——它俩把速度完整交换了。为什么？站到它们的中点（质心）看：碰撞只是各自原速反弹，换回地面视角恰好就是交换。"),
         tags: ["动量守恒", "弹性碰撞", "降维"])
 
     static let b2_manBoat = PhysicsProblem(
@@ -204,7 +208,8 @@ extension ProblemBank {
                 SolutionStep(order: 1, description: "质心不动，位移与质量成反比", formula: "d=mL/(m+M)", annotation: "一步"),
             ], keyInsight: "动量守恒 ⟹ 质心不动，秒得位移关系。", commonMistakes: []),
             weaponUsed: .momentumConservation, timeRatio: 3.0,
-            detailedExplanation: "初动量为零的系统质心永远不动——人船模型、爆炸反冲都靠这条秒杀。"),
+            detailedExplanation: "初动量为零的系统质心永远不动——人船模型、爆炸反冲都靠这条秒杀。",
+            plainTalk: "人往左走，船必须往右退——系统最初静止，总冲劲必须一直是零。更妙的是：整个系统的重心永远钉在原地。人重船轻，人挪得少、船退得多，按质量反着分配总长 L 就行。"),
         tags: ["动量守恒", "人船模型", "降维"])
 
     static let b2_momentumCond = PhysicsProblem(

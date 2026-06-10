@@ -76,7 +76,8 @@ extension ProblemBank {
                 SolutionStep(order: 1, description: "时间倒放：刹车的逆过程是初速为零的匀加速", formula: "x=½at停²=½×5×4²=40 m", annotation: "一步，只有一项"),
             ], keyInsight: "末态简单（v=0）就倒过来看——逆向思维把减速题变成自由落体式的简单题。", commonMistakes: []),
             weaponUsed: .reverseThinking, timeRatio: 3.0,
-            detailedExplanation: "凡是末速度为零的匀减速（刹车、竖直上抛末段），倒放都是初速为零的匀加速，公式从两项变一项。"),
+            detailedExplanation: "凡是末速度为零的匀减速（刹车、竖直上抛末段），倒放都是初速为零的匀加速，公式从两项变一项。",
+            plainTalk: "汽车刹车到停，倒过来放就是一辆车从静止起步加速——而初速为零的运动最好算。先确认 4 秒就停了（6 秒是出题人挖的坑），再把这段倒着看：x=½at²，一项搞定，比正着算两项相减舒服多了。"),
         misconceptions: [
             Misconception(option: "",
                 youThought: "直接把 t=6 s 代进 x=v₀t−½at² 会算出 60 m。",
@@ -138,7 +139,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "追上=两图线下面积相等", formula: "对称性：交点在 5 s ⟹ 面积相等在 t=10 s", annotation: "秒读"),
             ], keyInsight: "v-t 图上面积就是位移——追及相遇问题画图比列式快，还自带「速度相等≠追上」的免疫力。", commonMistakes: []),
             weaponUsed: .graphMethod, timeRatio: 2.5,
-            detailedExplanation: "图像法通杀追及相遇：交点定「差距最大」，面积相等定「追上」，二次方程根本不用解。"),
+            detailedExplanation: "图像法通杀追及相遇：交点定「差距最大」，面积相等定「追上」，二次方程根本不用解。",
+            plainTalk: "画 v-t 图：汽车是一条水平线，摩托是从原点爬升的斜线，线下面积就是各自跑的路。两线在 5 秒交叉——那是差距最大的时刻，不是追上！等摩托的三角形面积追平汽车的矩形面积才算追上：10 秒，图上一眼读出。"),
         tags: ["运动学", "追及相遇", "降维"])
 
     // 8
@@ -204,7 +206,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "再隔离 m₁", formula: "T=m₁a=2 N", annotation: "一步"),
             ], keyInsight: "整体求加速度、隔离求内力——连接体的固定套路。", commonMistakes: []),
             weaponUsed: .wholeIsolation, timeRatio: 2.0,
-            detailedExplanation: "整体隔离法把联立方程拆成两个一步小算：整体定 a、隔离定内力。"),
+            detailedExplanation: "整体隔离法把联立方程拆成两个一步小算：整体定 a、隔离定内力。",
+            plainTalk: "把两个木块当一个整体看——绳子是「自家人」，内力不用管，总力除以总质量就是加速度。想知道绳的拉力？再单独拎出前面那个小木块：拉它的只有绳子，m×a 就是绳的力。先全家福、后单人照，两步搞定。"),
         tags: ["牛顿定律", "连接体", "整体隔离法"])
 
     // 12
@@ -247,7 +250,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "静摩擦阻碍此趋势", formula: "摩擦力向前", annotation: "秒选"),
             ], keyInsight: "趋势想不出来就假设接触面光滑，看物体往哪滑——滑动方向就是趋势方向。", commonMistakes: []),
             weaponUsed: .assumption, timeRatio: 2.0,
-            detailedExplanation: "假设法把看不见的「趋势」变成看得见的「打滑」，静摩擦方向判断一律适用。"),
+            detailedExplanation: "假设法把看不见的「趋势」变成看得见的「打滑」，静摩擦方向判断一律适用。",
+            plainTalk: "搞不清摩擦力朝哪？做个思想实验：假设地面突然变成溜冰场——你蹬地的脚会向后打滑。摩擦力的职责就是阻止打滑，所以它向前推你。没错，是摩擦力推着你走路。"),
         misconceptions: [
             Misconception(option: "向后",
                 youThought: "你大概觉得摩擦力总是「拖后腿」，方向向后。",

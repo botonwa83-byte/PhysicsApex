@@ -32,7 +32,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "一步出比值", formula: "v₁/v₂ = r₂/r₁", annotation: "秒出"),
             ], keyInsight: "只问「近远地点速度之比」，角动量守恒一个式子封顶——能量方程根本不用列。", commonMistakes: []),
             weaponUsed: .angularMomentum, timeRatio: 4.0,
-            detailedExplanation: "角动量守恒通杀椭圆轨道两端点问题：mvr 守恒只在速度垂直矢径的近/远地点取最简形式，这正是高考天体压轴最爱考的两个点。"),
+            detailedExplanation: "角动量守恒通杀椭圆轨道两端点问题：mvr 守恒只在速度垂直矢径的近/远地点取最简形式，这正是高考天体压轴最爱考的两个点。",
+            plainTalk: "地球拉卫星的引力永远指向地心，像一根拴着链球的绳——这种「指向一点」的力没法改变卫星绕这一点的「转动冲劲」mvr。近地点 r 小，v 就得大；远地点 r 大，v 就小。mv₁r₁=mv₂r₂，比例一翻就完。"),
         tags: ["万有引力", "椭圆轨道", "角动量守恒", "降维", "竞赛"])
 
     // 2. 角动量守恒 · 转动直觉
@@ -59,7 +60,8 @@ extension ProblemBank {
                 SolutionStep(order: 1, description: "跳出细节看守恒量", formula: "无外力矩 ⟹ L=Iω 守恒；I↓ 则 ω↑", annotation: "内力再复杂也改变不了 L"),
             ], keyInsight: "守恒律的威力：不管内部过程多复杂，守恒量一锤定音。", commonMistakes: []),
             weaponUsed: .angularMomentum, timeRatio: 3.0,
-            detailedExplanation: "角动量守恒通杀「收缩/伸展改变转速」类问题：冰人收臂、跳水抱膝、星云坍缩成快转中子星，全是同一条定律。"),
+            detailedExplanation: "角动量守恒通杀「收缩/伸展改变转速」类问题：冰人收臂、跳水抱膝、星云坍缩成快转中子星，全是同一条定律。",
+            plainTalk: "转着圈把手臂收回来，质量更贴近转轴，「转动惯量」变小——可转动的总冲劲 L=Iω 没人动得了它（冰面几乎没有力矩），所以转速 ω 必须变大来补。跳水运动员空中抱膝、星云缩成飞转的中子星，全是同一招。"),
         tags: ["角动量守恒", "转动", "降维", "竞赛"])
 
     // 3. 矢量三角形（摩擦角） · 最省力方向
@@ -84,7 +86,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "F 最短=垂直于全反力", formula: "θ = φ = arctanμ；F_min = mg·sinφ = μmg/√(1+μ²)", annotation: "几何一眼定"),
             ], keyInsight: "「一力恒定、一力方向已知、求第三力最小」⟹ 第三力垂直于方向已知的力——矢量三角形的最短边定理。", commonMistakes: []),
             weaponUsed: .vectorTriangle, timeRatio: 4.0,
-            detailedExplanation: "矢量三角形+摩擦角是竞赛处理「最省力」问题的标准武器：把求导题变成几何题，画一个三角形就看到答案。"),
+            detailedExplanation: "矢量三角形+摩擦角是竞赛处理「最省力」问题的标准武器：把求导题变成几何题，画一个三角形就看到答案。",
+            plainTalk: "地面给箱子的支持力和摩擦力其实是「一伙的」，可以打包成一个方向固定的「全反力」。于是问题变成：重力定死、全反力方向定死，拉力怎么拉最短？三角形里最短的边是垂线——拉力垂直于全反力时最省力，那个角度恰好就是摩擦角。"),
         tags: ["牛顿定律", "摩擦角", "最值", "降维", "竞赛"])
 
     // 4. 等效法（质心） · 链条做功
@@ -106,7 +109,8 @@ extension ProblemBank {
                 SolutionStep(order: 1, description: "把垂下段等效成全部质量集中在质心的质点", formula: "W = (m/2)g·(L/4) = mgL/8", annotation: "一步"),
             ], keyInsight: "重力势能只认质心——把连续体「捏成」质心上的质点，积分瞬间消失。", commonMistakes: []),
             weaponUsed: .equivalentMethod, timeRatio: 4.0,
-            detailedExplanation: "质心等效通杀链条/绳/液柱类势能问题：连续分布的重力势能=总质量×质心高度，不必逐段积分。"),
+            detailedExplanation: "质心等效通杀链条/绳/液柱类势能问题：连续分布的重力势能=总质量×质心高度，不必逐段积分。",
+            plainTalk: "拉链条不用积分：垂下来那半截（质量 m/2）的「平均位置」在桌面下 L/4 处。把整截链条想象成捏在质心处的一个小球——把这个小球提回桌面要做多少功？(m/2)g×(L/4)=mgL/8，完事。"),
         tags: ["功和能", "质心", "链条模型", "降维", "竞赛"])
 
     // 5. 虚功原理 · 滑轮组
@@ -128,7 +132,8 @@ extension ProblemBank {
                 SolutionStep(order: 1, description: "虚位移对账：重物升 d、绳端拉 3d", formula: "F·3d = G·d ⟹ F = G/3", annotation: "一步，滑轮受力全程不出场"),
             ], keyInsight: "虚功原理只看「位移传动比」，机构内部的约束力一概免分析——机构越复杂越显威力。", commonMistakes: []),
             weaponUsed: .virtualWork, timeRatio: 3.0,
-            detailedExplanation: "虚功原理通杀滑轮组/杠杆/连杆平衡：给一个虚位移，令总功为零，传动比就是力之比的倒数。"),
+            detailedExplanation: "虚功原理通杀滑轮组/杠杆/连杆平衡：给一个虚位移，令总功为零，传动比就是力之比的倒数。",
+            plainTalk: "不想一个个滑轮画受力图？让系统「假装」动一小步：重物升 1 厘米，三段绳每段都要缩 1 厘米，你的手就得拉走 3 厘米。力气×距离两头相等：F×3=G×1，所以 F=G/3。机构再复杂，数绳子就行。"),
         tags: ["平衡", "滑轮组", "虚功原理", "降维", "竞赛"])
 
     // 6. 势能曲线法 · 平衡稳定性
@@ -153,7 +158,8 @@ extension ProblemBank {
                 SolutionStep(order: 1, description: "把势能曲线当真实地形，放一颗小球", formula: "谷底=碗里的球（推一下会回来）；峰顶=山尖的球（推一下就跑）", annotation: "直觉即答案，秒选"),
             ], keyInsight: "势能曲线法：曲线即地形、小球即粒子——稳定性一眼看穿，不动一笔导数。", commonMistakes: []),
             weaponUsed: .potentialCurve, timeRatio: 3.0,
-            detailedExplanation: "势能曲线法通杀平衡与运动趋势问题：地形直觉与 F=−dEp/dx 严格等价（一维保守场），分子势能、电势能曲线全适用。"),
+            detailedExplanation: "势能曲线法通杀平衡与运动趋势问题：地形直觉与 F=−dEp/dx 严格等价（一维保守场），分子势能、电势能曲线全适用。",
+            plainTalk: "把势能曲线想成滑梯的形状，粒子就是放上去的小球：放在谷底，推一下会滚回来——稳定；放在峰顶，碰一下就滚没影——不稳定。求导？不需要，看地形就够了，而且这个直觉和数学严格等价。"),
         tags: ["功和能", "势能曲线", "平衡稳定性", "降维", "竞赛"])
 
     // 7. 标度分析 · 尺寸与跳高
@@ -177,7 +183,8 @@ extension ProblemBank {
                 SolutionStep(order: 1, description: "只看幂次：F∝L²、m∝L³、蹬伸∝L", formula: "h ∝ F·L/m ∝ L²·L/L³ = 1", annotation: "指数相消，一步出「不变」"),
             ], keyInsight: "标度分析不要数值只要幂次——指数一加减，趋势自动浮出。", commonMistakes: []),
             weaponUsed: .scaling, timeRatio: 4.0,
-            detailedExplanation: "标度分析通杀「放大缩小会怎样」：面积²/体积³的错位解释了为何蚂蚁举重若轻、巨兽步履沉重，也是估算题的暗器。"),
+            detailedExplanation: "标度分析通杀「放大缩小会怎样」：面积²/体积³的错位解释了为何蚂蚁举重若轻、巨兽步履沉重，也是估算题的暗器。",
+            plainTalk: "把动物整体放大 n 倍：力气跟肌肉横截面走，长 n² 倍；体重跟体积走，长 n³ 倍——力气永远涨不过体重！好在腿也长了 n 倍、蹬地距离变长。算总账：跳高 ∝ n²·n/n³ = 1，恰好不变。跳蚤和人跳的绝对高度差不多——不是巧合，是几何定律。"),
         tags: ["标度分析", "尺寸效应", "降维", "竞赛"])
 
     // 8. 近似展开 · 高度与重力
@@ -201,7 +208,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "心算数值", formula: "2×10/6400 ≈ 0.3%", annotation: "秒出"),
             ], keyInsight: "看到「≪」就启动一阶展开：复杂表达式塌缩成线性主项，规律和数值同时到手。", commonMistakes: []),
             weaponUsed: .approximation, timeRatio: 4.0,
-            detailedExplanation: "近似展开通杀小量问题：(1+x)ⁿ≈1+nx 适用于 |x|≪1，高度修正、单摆小角、干涉光程差都是它的猎物。"),
+            detailedExplanation: "近似展开通杀小量问题：(1+x)ⁿ≈1+nx 适用于 |x|≪1，高度修正、单摆小角、干涉光程差都是它的猎物。",
+            plainTalk: "10 公里高空重力弱多少？精确算要做 (6400/6410)² 这种恶心的除法。注意 h 比 R 小太多——小量登场：(1+x)⁻²≈1−2x，所以减弱约 2h/R=2×10/6400≈0.3%。两秒心算，还顺手看清了规律：每升高 1% 的地球半径，重力少 2%。"),
         tags: ["万有引力", "近似展开", "降维", "竞赛"])
 
     // 9. 微元法 · 向心加速度的来历
@@ -226,7 +234,8 @@ extension ProblemBank {
                 SolutionStep(order: 1, description: "微元视角：速度矢量自身画圆，端点速率就是加速度", formula: "「速度圆」半径 v、角速度 ω ⟹ a = vω = v²/r", annotation: "推导即记忆"),
             ], keyInsight: "微元法把公式变成图像：速度端点画圆——一旦看见，永远不会忘也不会混。", commonMistakes: []),
             weaponUsed: .infinitesimal, timeRatio: 3.0,
-            detailedExplanation: "微元法的入门战例：用 Δθ→0 的极限思想推出 a=v²/r，同样的「端点画圆」手法可推简谐运动的加速度。"),
+            detailedExplanation: "微元法的入门战例：用 Δθ→0 的极限思想推出 a=v²/r，同样的「端点画圆」手法可推简谐运动的加速度。",
+            plainTalk: "速度大小不变怎么还有加速度？把每一刻的速度箭头都平移到同一个起点——箭头的「尖」也在画圆，半径是 v、转速跟粒子一样是 ω。箭头尖移动的速率就是加速度：a=vω=v²/r。这幅图看懂一次，公式一辈子忘不掉、也不会和 ω²r 搞混。"),
         tags: ["圆周运动", "向心加速度", "微元法", "降维", "竞赛"])
 
     // 10. 量纲分析 · 第一宇宙速度
@@ -250,7 +259,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "心算", formula: "√(9.8×6.4×10⁶) ≈ √(64×10⁶)=8×10³ 量级 ⟹ ≈7.9 km/s", annotation: "秒出"),
             ], keyInsight: "量纲分析在「只有两个相关量」时几乎白送答案——形式唯一，只剩系数要靠动力学背书。", commonMistakes: []),
             weaponUsed: .dimensionalAnalysis, timeRatio: 3.0,
-            detailedExplanation: "量纲分析的进阶战例：√(gR) 与单摆 √(L/g) 同源。注意量纲只定形式，系数 1 是动力学（mg=mv²/R）给的，不可省略验证。"),
+            detailedExplanation: "量纲分析的进阶战例：√(gR) 与单摆 √(L/g) 同源。注意量纲只定形式，系数 1 是动力学（mg=mv²/R）给的，不可省略验证。",
+            plainTalk: "不查任何天文资料，用 g 和 R 现场拼出第一宇宙速度：速度的单位是 m/s，而 g×R 的单位恰好是 m²/s²，开个根号正好！√(9.8×6.4×10⁶)≈7.9 km/s。量纲就像乐高接口——能拼上的形状只有一种。"),
         tags: ["万有引力", "第一宇宙速度", "量纲分析", "降维", "竞赛"])
 
     // 11. 参考系变换 · 雨中撑伞
@@ -272,7 +282,8 @@ extension ProblemBank {
                 SolutionStep(order: 1, description: "跳进人的参考系：自己不动，雨获得水平速度 −v", formula: "雨速 = (−v, −u) ⟹ tanθ = v/u", annotation: "一个三角形，秒出"),
             ], keyInsight: "谁在问问题就站到谁的参考系上——相对运动瞬间退化成单体运动。", commonMistakes: []),
             weaponUsed: .referenceFrame, timeRatio: 3.0,
-            detailedExplanation: "参考系变换通杀相对运动：雨中撑伞、侧风行船、空中加油，换系后全是简单的矢量三角形。"),
+            detailedExplanation: "参考系变换通杀相对运动：雨中撑伞、侧风行船、空中加油，换系后全是简单的矢量三角形。",
+            plainTalk: "坐到走路的人身上看雨：人自己「不动」了，雨却多出一个迎面扑来的水平速度 v。竖直 u、水平 v，两支箭头一拼成直角三角形，雨从 tanθ=v/u 的斜方向来——伞向前倾这个角度就刚好。换个视角，难题自动躺平。"),
         tags: ["运动学", "相对运动", "参考系", "降维", "竞赛"])
 
     // 12. 镜像法 · 点电荷与导体板
@@ -295,7 +306,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "库仑定律一步出", formula: "F = kq²/(2d)² = kq²/(4d²)", annotation: "秒出"),
             ], keyInsight: "镜像法是「换一个等价世界」：边界条件相同则场唯一——导体板从此消失，只剩两个点电荷。", commonMistakes: []),
             weaponUsed: .imageCharge, timeRatio: 6.0,
-            detailedExplanation: "镜像法通杀「点电荷+接地导体平面」：唯一性定理保证替换合法。注意镜像电荷只在导体外侧的半空间等效，且平面必须接地（或视作零电势）。"),
+            detailedExplanation: "镜像法通杀「点电荷+接地导体平面」：唯一性定理保证替换合法。注意镜像电荷只在导体外侧的半空间等效，且平面必须接地（或视作零电势）。",
+            plainTalk: "板上的感应电荷分布根本算不动？那就不算——在「镜子里」造一个假电荷：对称位置放个 −q，它在板外产生的电场跟整块板一模一样（物理定理保证独此一家）。于是问题塌缩成两个相距 2d 的点电荷，库仑定律一行搞定。"),
         tags: ["电场", "镜像法", "感应电荷", "降维", "竞赛"])
 
     // 13. 等效电路 · 无穷梯网络
@@ -318,7 +330,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "解出", formula: "R_eq = (1+√5)R/2", annotation: "黄金比，秒出精确值"),
             ], keyInsight: "对无穷重复结构，「自己等效自己」一招致命——无穷不再可怕，反而成了解题工具。", commonMistakes: []),
             weaponUsed: .equivalentCircuit, timeRatio: 5.0,
-            detailedExplanation: "等效电路的竞赛形态：自相似等效。同一招还能算无穷电容链、无穷弹簧链——凡「剥一层还是自己」的结构都适用。"),
+            detailedExplanation: "等效电路的竞赛形态：自相似等效。同一招还能算无穷电容链、无穷弹簧链——凡「剥一层还是自己」的结构都适用。",
+            plainTalk: "无穷多个电阻怎么算？抓住「无穷」的小辫子：剥掉第一节，剩下的还是同一个无穷网络，电阻还是 R_eq！于是 R_eq = R + (R 并 R_eq)，方程咬住自己的尾巴，一解——居然是黄金比例 1.618R。无穷不可怕，自相似就是它的命门。"),
         tags: ["电路", "无穷网络", "自相似", "降维", "竞赛"])
 
     // 14. 对称法 · 立方体电阻网络
@@ -342,7 +355,8 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "心算", formula: "R/3 + R/6 + R/3 = 5R/6", annotation: "秒出"),
             ], keyInsight: "看出对称，方程组消失——等电位合并是电路版的「一半计算蒸发」。", commonMistakes: []),
             weaponUsed: .symmetry, timeRatio: 6.0,
-            detailedExplanation: "对称法在电路里的极致演出：等电位点合并把 8 节点网络压成 3 段串联。面对角线、棱对角线情形同法可解（对称轴不同）。"),
+            detailedExplanation: "对称法在电路里的极致演出：等电位点合并把 8 节点网络压成 3 段串联。面对角线、棱对角线情形同法可解（对称轴不同）。",
+            plainTalk: "12 个电阻的立方体不用列方程组：从对角线看进去，离入口一步的 3 个角「地位完全相同」——电位必然相等！等电位的点之间没有电流，可以直接焊成一个点。电路瞬间塌成三段：R/3+R/6+R/3=5R/6。对称性把八元方程组干成了心算。"),
         tags: ["电路", "对称法", "立方体网络", "降维", "竞赛"])
 
     // 15. 极值原理 · 反射定律的来历
@@ -368,6 +382,7 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "几何读出等角", formula: "直线与镜面的交角关系 ⟹ 入射角=反射角", annotation: "秒出"),
             ], keyInsight: "极值原理+镜像翻折：把「找最短折线」变成「连一条直线」——这招也是平面几何最值题的通杀器。", commonMistakes: []),
             weaponUsed: .extremumPrinciple, timeRatio: 4.0,
-            detailedExplanation: "费马原理是物理学「变分原理」家族的入门款：反射对应路程最短；折射对应时间最短（光速不同），同样的镜像/折直手法贯穿光学与力学最值题。"),
+            detailedExplanation: "费马原理是物理学「变分原理」家族的入门款：反射对应路程最短；折射对应时间最短（光速不同），同样的镜像/折直手法贯穿光学与力学最值题。",
+            plainTalk: "为什么入射角等于反射角？因为光是个「赶时间的通勤族」，永远挑最快的路走。把终点 B 关于镜面翻折成 B′，「经过镜面的折线」就被拉直成 A 到 B′ 的一条直线——两点之间线段最短，而这条直线恰好对应等角反射。大自然一直在帮光做最优化。"),
         tags: ["光学", "费马原理", "反射定律", "降维", "竞赛"])
 }
