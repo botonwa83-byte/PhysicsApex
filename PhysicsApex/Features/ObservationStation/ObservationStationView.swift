@@ -1,6 +1,7 @@
 import SwiftUI
 
-// MARK: - 观测站（首页）：段位脊梁 + 今日任务 + 降维秒杀入口
+// MARK: - 观测站（首页）
+// 布局优先级对齐 MathApex：核心卖点(降维秒杀 + 三段进阶)置顶 C 位，再到今日行动、进度、探索。
 
 struct ObservationStationView: View {
     @Binding var selectedTab: Int
@@ -11,21 +12,124 @@ struct ObservationStationView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: Spacing.xl) {
-                    headerCard
-                    stageLadder
-                    descentEntry
+                    // ① 核心卖点 C 位
+                    descentHero
+                    stageHero
+
+                    // ② 今日 — 行动区
+                    sectionHeader("今日")
+                    statsCard
                     todayMission
+
+                    // ③ 探索
+                    sectionHeader("探索")
                     paradoxTeaser
+                    giantsTeaser
                 }
-                .padding(Spacing.lg)
+                .padding(.horizontal, Spacing.lg)
+                .padding(.top, Spacing.md)
+                .padding(.bottom, Spacing.xxl)
             }
             .background(Color.apexBackground.ignoresSafeArea())
-            .navigationTitle("观测站")
+            .navigationTitle("PhysicsApex")
         }
     }
 
-    // 顶部：连击 + 距高考
-    private var headerCard: some View {
+    private func sectionHeader(_ title: String) -> some View {
+        HStack {
+            Text(title).font(.title3.bold()).foregroundColor(.primary)
+            Spacer()
+        }
+        .padding(.top, Spacing.xs)
+    }
+
+    // MARK: ① 卖点 C 位
+
+    /// 灵魂卖点：降维秒杀（满色渐变 hero，对标 MathApex secondKillHero）
+    private var descentHero: some View {
+        NavigationLink { DescentView() } label: {
+            VStack(alignment: .leading, spacing: Spacing.md) {
+                HStack(spacing: Spacing.sm) {
+                    Image(systemName: "bolt.fill").font(.title3).foregroundColor(.white)
+                    Text("降维秒杀")
+                        .font(.system(size: 20, weight: .black, design: .rounded))
+                        .foregroundColor(.white)
+                    Spacer()
+                    Text("\(ProblemBank.descentCases.count) 道压轴")
+                        .font(.caption2).foregroundColor(.white.opacity(0.9))
+                    Image(systemName: "chevron.right").font(.caption).foregroundColor(.white.opacity(0.9))
+                }
+                Text("用「上帝视角」俯瞰高考压轴 · 常规法 vs 降维秒杀")
+                    .font(.subheadline).foregroundColor(.white.opacity(0.92))
+                HStack(spacing: Spacing.sm) {
+                    ForEach(["动量守恒", "等效法", "对称", "微元"], id: \.self) { w in
+                        Text(w)
+                            .font(.system(size: 10, weight: .semibold))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 8).padding(.vertical, 3)
+                            .background(Color.white.opacity(0.18))
+                            .cornerRadius(7)
+                    }
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(Spacing.xl)
+            .background(
+                LinearGradient(colors: [Color.apexLava, Color.apexMystery],
+                               startPoint: .topLeading, endPoint: .bottomTrailing)
+            )
+            .cornerRadius(Radius.hero)
+            .shadow(color: Color.apexLava.opacity(0.3), radius: 14, y: 8)
+        }
+        .buttonStyle(.plain)
+    }
+
+    /// 差异化卖点：三段递进闯关（紧随其后，仍是卖点区）
+    private var stageHero: some View {
+        VStack(alignment: .leading, spacing: Spacing.md) {
+            HStack(spacing: 6) {
+                Image(systemName: "figure.stairs").foregroundColor(.apexGold)
+                Text("三段递进闯关").font(AppFont.sectionTitle)
+                Spacer()
+                Text("同一题，三级重访").font(AppFont.chip).foregroundColor(.secondary)
+            }
+            ForEach(Stage.allCases) { stage in
+                stageRow(stage)
+            }
+        }
+        .cardSurface()
+    }
+
+    private func stageRow(_ stage: Stage) -> some View {
+        let isCurrent = stage == profile.currentStage
+        let unlocked = profile.currentStage.unlocks(stage)
+        return Button {
+            if unlocked { profile.promote(to: stage) }
+        } label: {
+            HStack(spacing: Spacing.md) {
+                Text(stage.emoji).font(.title2).opacity(unlocked ? 1 : 0.35)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(stage.title).font(AppFont.cardTitle)
+                        .foregroundColor(unlocked ? .primary : .secondary)
+                    Text(stage.subtitle).font(AppFont.caption).foregroundColor(.secondary)
+                }
+                Spacer()
+                if isCurrent {
+                    TagChip(text: "进行中", color: stage.color)
+                } else if !unlocked {
+                    Image(systemName: "lock.fill").font(.caption).foregroundColor(.secondary)
+                }
+            }
+            .padding(Spacing.md)
+            .background(isCurrent ? stage.color.opacity(0.12) : Color.clear)
+            .cornerRadius(Radius.inner)
+        }
+        .buttonStyle(.plain)
+    }
+
+    // MARK: ② 今日
+
+    private var statsCard: some View {
         HStack(spacing: Spacing.lg) {
             statBlock(value: "\(streak.currentStreak)", label: "连续天数", icon: "flame.fill", color: .apexLava)
             Divider().frame(height: 44)
@@ -46,118 +150,60 @@ struct ObservationStationView: View {
         .frame(maxWidth: .infinity)
     }
 
-    // 段位阶梯：app 的脊梁
-    private var stageLadder: some View {
-        VStack(alignment: .leading, spacing: Spacing.md) {
-            SectionHeader(title: "闯关进阶", systemImage: "figure.stairs", accent: .apexGold)
-            ForEach(Stage.allCases) { stage in
-                stageRow(stage)
-            }
-        }
-        .cardSurface()
-    }
-
-    private func stageRow(_ stage: Stage) -> some View {
-        let isCurrent = stage == profile.currentStage
-        let unlocked = profile.currentStage.unlocks(stage)
-        return Button {
-            if unlocked { profile.promote(to: stage) }
+    private var todayMission: some View {
+        Button {
+            streak.recordActivity()
+            selectedTab = 1
         } label: {
-            HStack(spacing: Spacing.md) {
-                Text(stage.emoji)
-                    .font(.title2)
-                    .opacity(unlocked ? 1 : 0.35)
+            HStack {
+                Image(systemName: "play.circle.fill").font(.title2).foregroundColor(.apexEmerald)
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(stage.title)
-                        .font(AppFont.cardTitle)
-                        .foregroundColor(unlocked ? .primary : .secondary)
-                    Text(stage.subtitle)
-                        .font(AppFont.caption).foregroundColor(.secondary)
-                }
-                Spacer()
-                if isCurrent {
-                    TagChip(text: "进行中", color: stage.color)
-                } else if !unlocked {
-                    Image(systemName: "lock.fill").font(.caption).foregroundColor(.secondary)
-                }
-            }
-            .padding(Spacing.md)
-            .background(isCurrent ? stage.color.opacity(0.12) : Color.clear)
-            .cornerRadius(Radius.inner)
-        }
-        .buttonStyle(.plain)
-    }
-
-    // 降维秒杀入口（灵魂模块）
-    private var descentEntry: some View {
-        NavigationLink { DescentView() } label: {
-            HStack(spacing: Spacing.md) {
-                Image(systemName: "bolt.fill")
-                    .font(.title)
-                    .foregroundStyle(LinearGradient(colors: [.apexGold, .apexLava], startPoint: .top, endPoint: .bottom))
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("上帝视角 · 降维秒杀").font(AppFont.cardTitle).foregroundColor(.primary)
-                    Text("一道压轴题，两种解法——看守恒/对称/几何如何几步拿下")
-                        .font(AppFont.caption).foregroundColor(.secondary).lineLimit(2)
+                    Text("练 5 道 \(profile.currentStage.shortTitle) 题").font(AppFont.body).foregroundColor(.primary)
+                    Text("巩固今天的连击").font(AppFont.caption).foregroundColor(.secondary)
                 }
                 Spacer()
                 Image(systemName: "chevron.right").foregroundColor(.secondary)
             }
-            .padding(Spacing.lg)
-            .background(
-                LinearGradient(colors: [Color.apexGold.opacity(0.15), Color.apexLava.opacity(0.10)],
-                               startPoint: .leading, endPoint: .trailing)
-            )
-            .cornerRadius(Radius.hero)
-            .overlay(RoundedRectangle(cornerRadius: Radius.hero).stroke(Color.apexLava.opacity(0.3), lineWidth: 1))
+            .cardSurface()
         }
         .buttonStyle(.plain)
     }
 
-    // 今日任务
-    private var todayMission: some View {
-        VStack(alignment: .leading, spacing: Spacing.md) {
-            SectionHeader(title: "今日任务", systemImage: "checklist", accent: .apexEmerald)
-            Button {
-                streak.recordActivity()
-                selectedTab = 1
-            } label: {
-                HStack {
-                    Image(systemName: "play.circle.fill").font(.title2).foregroundColor(.apexEmerald)
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("练 5 道 \(profile.currentStage.shortTitle) 题").font(AppFont.body).foregroundColor(.primary)
-                        Text("巩固今天的连击").font(AppFont.caption).foregroundColor(.secondary)
-                    }
-                    Spacer()
-                    Image(systemName: "chevron.right").foregroundColor(.secondary)
-                }
-                .padding(Spacing.md)
-                .background(Color.apexEmerald.opacity(0.10))
-                .cornerRadius(Radius.inner)
-            }
-            .buttonStyle(.plain)
-        }
-        .cardSurface()
-    }
+    // MARK: ③ 探索
 
-    // 佯谬预告
     private var paradoxTeaser: some View {
-        VStack(alignment: .leading, spacing: Spacing.md) {
-            SectionHeader(title: "今日佯谬", systemImage: "questionmark.diamond", accent: .apexMystery)
+        Group {
             if let p = ParadoxData.all.first {
                 NavigationLink { ParadoxDetailView(paradox: p) } label: {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(p.title).font(AppFont.cardTitle).foregroundColor(.primary)
-                        Text(p.hook).font(AppFont.caption).foregroundColor(.secondary).lineLimit(2)
+                    HStack(spacing: Spacing.md) {
+                        Image(systemName: p.category.icon).font(.title2).foregroundColor(p.category.color)
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("今日佯谬 · \(p.title)").font(AppFont.cardTitle).foregroundColor(.primary)
+                            Text(p.hook).font(AppFont.caption).foregroundColor(.secondary).lineLimit(2)
+                        }
+                        Spacer()
+                        Image(systemName: "chevron.right").foregroundColor(.secondary)
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(Spacing.md)
-                    .background(p.category.color.opacity(0.10))
-                    .cornerRadius(Radius.inner)
+                    .cardSurface()
                 }
                 .buttonStyle(.plain)
             }
         }
-        .cardSurface()
+    }
+
+    private var giantsTeaser: some View {
+        NavigationLink { GiantsView() } label: {
+            HStack(spacing: Spacing.md) {
+                Image(systemName: "person.3.fill").font(.title2).foregroundColor(.apexStarBlue)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("物理巨人").font(AppFont.cardTitle).foregroundColor(.primary)
+                    Text("牛顿 · 爱因斯坦 · 法拉第 · 费曼——越学越上头").font(AppFont.caption).foregroundColor(.secondary).lineLimit(2)
+                }
+                Spacer()
+                Image(systemName: "chevron.right").foregroundColor(.secondary)
+            }
+            .cardSurface()
+        }
+        .buttonStyle(.plain)
     }
 }
