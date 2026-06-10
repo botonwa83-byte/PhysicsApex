@@ -41,12 +41,22 @@ extension ProblemBank {
             SolutionStep(order: 2, description: "结论", formula: "速率、动能不变，只改变方向", annotation: ""),
         ], keyInsight: "洛伦兹力永不做功，只改方向不改速率。",
            commonMistakes: ["以为洛伦兹力让粒子加速"]),
+        dualSolution: DualSolution(
+            standardMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "逐时刻分析受力与速度的几何关系", formula: "每一瞬间 F⊥v ⟹ W=Fscosθ 中 cos90°=0", annotation: "要在脑中追踪整条曲线"),
+            ], keyInsight: "逐点几何分析做功。", commonMistakes: ["误以为转圈就是在加速"]),
+            descentMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "看公式结构：叉乘天生垂直", formula: "F = qv×B ⟹ F⊥v 恒成立", annotation: "数学结构保证，无需逐点验证"),
+                SolutionStep(order: 2, description: "垂直 ⟹ 瞬时功率恒为零", formula: "P = F·v = 0 ⟹ 速率、动能永不变", annotation: "秒选"),
+            ], keyInsight: "叉乘的结果天生垂直于两个乘数——洛伦兹力不做功是数学结构决定的，不是巧合。", commonMistakes: []),
+            weaponUsed: .crossProduct, timeRatio: 3.0,
+            detailedExplanation: "矢量叉乘视角通杀磁场力问题：F=qv×B 的结构保证磁场只能让粒子拐弯、永远无法加减速。"),
         misconceptions: [
             Misconception(option: "速率增大",
                 youThought: "你大概觉得受了力就会加速。",
                 pitfall: "洛伦兹力永远垂直于速度，不做功，所以速率不变。",
                 fix: "它只当「拐弯器」，改变方向、不改变速率和动能。")
-        ], tags: ["磁场", "洛伦兹力", "错因诊断"])
+        ], tags: ["磁场", "洛伦兹力", "错因诊断", "降维"])
 
     static let b5_cyclotronPeriod = PhysicsProblem(
         id: "b5_cyclotron_t", type: .calculation, stage: .senior, topic: .magnetic,
@@ -103,12 +113,21 @@ extension ProblemBank {
             SolutionStep(order: 1, description: "楞次定律", formula: "感应电流阻碍磁通量增大", annotation: "线圈近端呈 N 极相斥"),
         ], keyInsight: "楞次定律：感应电流总是阻碍磁通量的「变化」——来拒去留。",
            commonMistakes: ["把「阻碍变化」误成「阻碍运动本身」"]),
+        dualSolution: DualSolution(
+            standardMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "完整推导：判磁通变化 → 定感应磁场方向 → 右手定则定电流 → 再判相互作用", formula: "Φ↑ ⟹ B感反向 ⟹ 电流方向 ⟹ 近端 N 极", annotation: "四步链条，每步都可能绕错"),
+            ], keyInsight: "按定义逐步推感应电流方向。", commonMistakes: ["感应磁场方向定反"]),
+            descentMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "口诀直接裁决效果", formula: "「来拒去留」：N 极来 ⟹ 线圈拒之（排斥）", annotation: "秒选"),
+            ], keyInsight: "楞次定律的宏观效果可以一词记牢：来拒去留、增缩减扩——选项问「效果」时无需推电流方向。", commonMistakes: []),
+            weaponUsed: .lenzRule, timeRatio: 3.0,
+            detailedExplanation: "楞次定则速判通杀「只问效果」的感应题：阻碍相对运动（来拒去留）、阻碍磁通变化（增反减同），口诀即答案。"),
         misconceptions: [
             Misconception(option: "感应电流帮助磁铁插入",
                 youThought: "你大概觉得感应电流会顺着磁铁的运动。",
                 pitfall: "楞次定律说感应电流总要「阻碍」磁通量变化——插入时排斥、拔出时吸引。",
                 fix: "记口诀「来拒去留」：靠近就排斥、离开就挽留。")
-        ], tags: ["电磁感应", "楞次定律", "错因诊断"])
+        ], tags: ["电磁感应", "楞次定律", "错因诊断", "降维"])
 
     static let b5_inducedForce = PhysicsProblem(
         id: "b5_induced_force", type: .calculation, stage: .senior, topic: .induction,
@@ -187,5 +206,14 @@ extension ProblemBank {
             SolutionStep(order: 2, description: "线损", formula: "P损=I²R线，I↓ → 损耗↓", annotation: ""),
         ], keyInsight: "高压输电减小电流，从而大幅降低 I²R 的线路损耗。",
            commonMistakes: ["以为高压增大了输送功率"]),
-        tags: ["交变电流", "远距离输电"])
+        dualSolution: DualSolution(
+            standardMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "分步定性分析", formula: "P=UI 一定 ⟹ U↑ 则 I↓；再看 P损=I²R线 ⟹ 损耗↓", annotation: "两步定性，说不出降多少"),
+            ], keyInsight: "定性两步推导。", commonMistakes: ["误以为 P损=U²/R 用输电电压"]),
+            descentMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "一条比例式看穿本质", formula: "P损 = I²R = (P/U)²R ∝ 1/U²", annotation: "电压 10 倍，损耗 1/100"),
+            ], keyInsight: "把损耗写成输送电压的幂次，平方反比一目了然——这就是高压输电的全部秘密。", commonMistakes: []),
+            weaponUsed: .proportion, timeRatio: 2.5,
+            detailedExplanation: "比例法把「为什么用高压」从定性叙述升级为定量结论：P损∝1/U²（输送功率与线阻一定时），既快又能算数值。"),
+        tags: ["交变电流", "远距离输电", "降维"])
 }
