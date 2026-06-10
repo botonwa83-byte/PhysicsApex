@@ -11,12 +11,15 @@ struct KnowledgePoint: Identifiable {
     let weapon: PhysicsWeapon? // 该用哪把秒杀武器
     let pitfall: String?       // 最容易踩的坑
     let lawId: String?         // 链接「通透卡」
+    let problemId: String?     // 链接典型秒杀题
     let stage: Stage           // 难度段位
 
     init(_ id: String, _ name: String, essence: String, formula: String? = nil,
-         weapon: PhysicsWeapon? = nil, pitfall: String? = nil, lawId: String? = nil, stage: Stage = .senior) {
+         weapon: PhysicsWeapon? = nil, pitfall: String? = nil, lawId: String? = nil,
+         problemId: String? = nil, stage: Stage = .senior) {
         self.id = id; self.name = name; self.essence = essence; self.formula = formula
-        self.weapon = weapon; self.pitfall = pitfall; self.lawId = lawId; self.stage = stage
+        self.weapon = weapon; self.pitfall = pitfall; self.lawId = lawId
+        self.problemId = problemId; self.stage = stage
     }
 }
 

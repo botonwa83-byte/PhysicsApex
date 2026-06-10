@@ -24,27 +24,27 @@ enum KnowledgeAtlas {
             ]),
             KnowledgeChapter(id: "newton", name: "牛顿运动定律", icon: "arrow.down.to.line", points: [
                 KnowledgePoint("n_first", "惯性·牛顿第一定律", essence: "力是改变运动的原因，不是维持运动的原因。", stage: .junior),
-                KnowledgePoint("n_second", "牛顿第二定律", essence: "合外力决定加速度，方向一致。", formula: "F合 = ma", weapon: .forceDiagram, lawId: "newton2"),
+                KnowledgePoint("n_second", "牛顿第二定律", essence: "合外力决定加速度，方向一致。", formula: "F合 = ma", weapon: .forceDiagram, lawId: "newton2", problemId: "incline_senior"),
                 KnowledgePoint("n_connect", "连接体·超重失重", essence: "整体法求加速度，隔离法求内力；视重随加速度变。", pitfall: "失重不是没有重力，是支持力小于重力。"),
             ]),
             KnowledgeChapter(id: "curve", name: "曲线运动·平抛", icon: "scribble.variable", points: [
                 KnowledgePoint("c_compose", "运动的合成与分解", essence: "复杂曲线运动拆成两个简单直线运动。", weapon: .graphMethod),
-                KnowledgePoint("c_projectile", "平抛运动", essence: "水平匀速 + 竖直自由落体，两方向独立。", formula: "x=v₀t；y=½gt²", pitfall: "下落时间只由高度定，与水平速度无关。"),
+                KnowledgePoint("c_projectile", "平抛运动", essence: "水平匀速 + 竖直自由落体，两方向独立。", formula: "x=v₀t；y=½gt²", pitfall: "下落时间只由高度定，与水平速度无关。", problemId: "projectile_junior"),
             ]),
             KnowledgeChapter(id: "circular", name: "圆周运动·万有引力", icon: "globe", points: [
                 KnowledgePoint("ci_speed", "线速度·角速度·向心加速度", essence: "描述圆周运动的快慢。", formula: "v=ωr；a=v²/r=ω²r"),
                 KnowledgePoint("ci_force", "向心力", essence: "指向圆心的合力，由实际力提供，不是新的力。", formula: "F=mv²/r=mω²r", pitfall: "向心力是「效果命名」，别在受力图里额外多画一个。"),
                 KnowledgePoint("g_gravity", "万有引力·天体运动", essence: "引力提供向心力，黄金代换 GM=gR²。", formula: "GMm/r²=mv²/r；v=√(GM/r)", weapon: .equivalentMethod),
-                KnowledgePoint("g_satellite", "宇宙速度·同步卫星", essence: "第一宇宙速度 7.9 km/s；同步卫星周期 24 h、定高。", formula: "v₁=7.9 km/s"),
+                KnowledgePoint("g_satellite", "宇宙速度·同步卫星", essence: "第一宇宙速度 7.9 km/s；同步卫星周期 24 h、定高。", formula: "v₁=7.9 km/s", problemId: "near_earth_sat"),
             ]),
             KnowledgeChapter(id: "momentum", name: "动量", icon: "arrow.left.arrow.right", points: [
                 KnowledgePoint("m_impulse", "冲量·动量定理", essence: "合力的冲量等于动量的变化。", formula: "I=Ft；Ft=Δp"),
-                KnowledgePoint("m_conserve", "动量守恒定律", essence: "系统不受外力，碰前碰后总动量不变——只看首末态。", formula: "Σmv = 常量", weapon: .momentumConservation, lawId: "momentum_conservation"),
+                KnowledgePoint("m_conserve", "动量守恒定律", essence: "系统不受外力，碰前碰后总动量不变——只看首末态。", formula: "Σmv = 常量", weapon: .momentumConservation, lawId: "momentum_conservation", problemId: "collision_descent"),
                 KnowledgePoint("m_collision", "碰撞", essence: "弹性碰撞动量动能都守恒；非弹性动能有损失。", weapon: .momentumConservation, pitfall: "完全非弹性碰撞别误用机械能守恒。"),
             ]),
             KnowledgeChapter(id: "energy", name: "功和能", icon: "bolt.fill", points: [
                 KnowledgePoint("e_work", "功·功率", essence: "功是力沿位移的累积，功率是做功快慢。", formula: "W=Fscosθ；P=Fv"),
-                KnowledgePoint("e_kinetic", "动能定理", essence: "合外力做的功等于动能变化——不管路径多曲折。", formula: "W合=½mv₂²−½mv₁²", weapon: .workEnergyTheorem, lawId: "work_energy"),
+                KnowledgePoint("e_kinetic", "动能定理", essence: "合外力做的功等于动能变化——不管路径多曲折。", formula: "W合=½mv₂²−½mv₁²", weapon: .workEnergyTheorem, lawId: "work_energy", problemId: "work_energy_multi"),
                 KnowledgePoint("e_mech", "机械能守恒", essence: "只有重力/弹力做功时，动能势能互换、总量不变。", formula: "Ek+Ep=常量", weapon: .mechanicalEnergy, lawId: "mechanical_energy"),
                 KnowledgePoint("e_conserve", "能量守恒·功能关系", essence: "能量不生不灭，摩擦生热 Q=f·Δs相对。", weapon: .energyIntuition),
             ]),
@@ -73,11 +73,11 @@ enum KnowledgeAtlas {
             KnowledgeChapter(id: "magnetic", name: "磁场", icon: "magnet", points: [
                 KnowledgePoint("mg_field", "磁感应强度·磁感线", essence: "B 描述磁场强弱方向；磁感线是闭合曲线。", formula: "B=F/(IL)"),
                 KnowledgePoint("mg_ampere", "安培力", essence: "磁场对电流的力，左手定则定方向。", formula: "F=BIL"),
-                KnowledgePoint("mg_lorentz", "洛伦兹力·粒子圆周", essence: "磁场只改变粒子方向不改变速率，做匀速圆周。", formula: "F=qvB；r=mv/qB", weapon: .symmetry, lawId: "lorentz"),
+                KnowledgePoint("mg_lorentz", "洛伦兹力·粒子圆周", essence: "磁场只改变粒子方向不改变速率，做匀速圆周。", formula: "F=qvB；r=mv/qB", weapon: .symmetry, lawId: "lorentz", problemId: "magnetic_period"),
             ]),
             KnowledgeChapter(id: "induction", name: "电磁感应", icon: "wave.3.right", points: [
                 KnowledgePoint("in_faraday", "法拉第电磁感应定律", essence: "磁通量变化率决定感应电动势大小。", formula: "E=nΔΦ/Δt"),
-                KnowledgePoint("in_lenz", "楞次定律·切割", essence: "感应电流阻碍磁通量变化；切割 E=BLv。", formula: "E=BLv", weapon: .lenzRule, pitfall: "「阻碍」是阻碍变化，不是阻碍运动本身。"),
+                KnowledgePoint("in_lenz", "楞次定律·切割", essence: "感应电流阻碍磁通量变化；切割 E=BLv。", formula: "E=BLv", weapon: .lenzRule, pitfall: "「阻碍」是阻碍变化，不是阻碍运动本身。", problemId: "rail_terminal"),
             ]),
             KnowledgeChapter(id: "ac", name: "交变电流", icon: "waveform.path.ecg", points: [
                 KnowledgePoint("ac_sine", "正弦交流·峰值有效值", essence: "线圈匀速转动产生正弦交流；有效值按热效应定义。", formula: "U有效=U峰/√2"),

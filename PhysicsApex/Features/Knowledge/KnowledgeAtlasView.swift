@@ -116,6 +116,7 @@ struct KnowledgePointDetailView: View {
     let point: KnowledgePoint
 
     private var law: PhysicsLaw? { point.lawId.flatMap { id in LawLibrary.all.first { $0.id == id } } }
+    private var problem: PhysicsProblem? { point.problemId.flatMap { id in ProblemBank.all.first { $0.id == id } } }
 
     var body: some View {
         ScrollView {
@@ -159,6 +160,22 @@ struct KnowledgePointDetailView: View {
                             VStack(alignment: .leading, spacing: 2) {
                                 Text("看通透卡：\(law.name)").font(AppFont.cardTitle).foregroundColor(.primary)
                                 Text("物理图像 + 来龙去脉 + 极限检验").font(AppFont.caption).foregroundColor(.secondary)
+                            }
+                            Spacer()
+                            Image(systemName: "chevron.right").foregroundColor(.secondary)
+                        }
+                        .cardSurface()
+                    }
+                    .buttonStyle(.plain)
+                }
+
+                if let problem {
+                    NavigationLink { ProblemDetailView(problem: problem) } label: {
+                        HStack {
+                            Image(systemName: "bolt.fill").foregroundColor(.apexLava)
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("做这道典型题").font(AppFont.cardTitle).foregroundColor(.primary)
+                                Text(problem.dualSolution != nil ? "含降维秒杀双解对决" : "典型例题").font(AppFont.caption).foregroundColor(.secondary)
                             }
                             Spacer()
                             Image(systemName: "chevron.right").foregroundColor(.secondary)
