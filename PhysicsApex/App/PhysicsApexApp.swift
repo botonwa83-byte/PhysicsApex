@@ -83,6 +83,9 @@ struct MoreView: View {
                     NavigationLink { FermiEstimationView() } label: {
                         Label("先估后算", systemImage: "dial.medium")
                     }
+                    NavigationLink { DimensionTrainingView() } label: {
+                        Label("单位 / 量纲", systemImage: "ruler")
+                    }
                 }
 
                 Section("物理发现") {
