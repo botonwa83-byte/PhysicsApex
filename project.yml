@@ -11,7 +11,25 @@ settings:
     CURRENT_PROJECT_VERSION: "1"
     TARGETED_DEVICE_FAMILY: "1,2"
     DEVELOPMENT_LANGUAGE: zh-Hans
+schemes:
+  PhysicsApex:
+    build:
+      targets:
+        PhysicsApex: all
+    test:
+      targets:
+        - PhysicsApexTests
 targets:
+  PhysicsApexTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: PhysicsApexTests
+    dependencies:
+      - target: PhysicsApex
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
   PhysicsApex:
     type: application
     platform: iOS
