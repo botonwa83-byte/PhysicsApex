@@ -137,10 +137,18 @@ struct DescentDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: Spacing.xl) {
-                // 题干
+                // 题干（选择题展示选项 + 标出正确答案）
                 VStack(alignment: .leading, spacing: Spacing.sm) {
                     TagChip(text: problem.topic.name, color: .apexStarBlue)
                     Text(problem.content).font(.body)
+                    if let options = problem.options {
+                        VStack(spacing: Spacing.sm) {
+                            ForEach(options, id: \.self) { opt in
+                                optionRow(opt)
+                            }
+                        }
+                        .padding(.top, Spacing.xs)
+                    }
                 }
                 .cardSurface()
 
@@ -195,6 +203,21 @@ struct DescentDetailView: View {
                 showStrike = false
             }
         }
+    }
+
+    private func optionRow(_ opt: String) -> some View {
+        let isAnswer = opt == problem.answer
+        return HStack(spacing: Spacing.sm) {
+            Image(systemName: isAnswer ? "checkmark.circle.fill" : "circle")
+                .foregroundColor(isAnswer ? .apexEmerald : .secondary)
+            Text(opt).font(.subheadline)
+                .foregroundColor(isAnswer ? .primary : .secondary)
+                .multilineTextAlignment(.leading)
+            Spacer(minLength: 0)
+        }
+        .padding(Spacing.sm)
+        .background((isAnswer ? Color.apexEmerald : Color.secondary).opacity(0.08))
+        .cornerRadius(Radius.inner)
     }
 
     private var weaponHeader: some View {

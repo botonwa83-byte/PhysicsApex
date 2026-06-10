@@ -124,14 +124,13 @@ struct ObservationStationView: View {
     private func stageRow(_ stage: Stage) -> some View {
         let isCurrent = stage == profile.currentStage
         let unlocked = profile.currentStage.unlocks(stage)
-        return Button {
-            if unlocked { profile.promote(to: stage) }
+        return NavigationLink {
+            StageDetailView(stage: stage)
         } label: {
             HStack(spacing: Spacing.md) {
-                Text(stage.emoji).font(.title2).opacity(unlocked ? 1 : 0.35)
+                Text(stage.emoji).font(.title2).opacity(unlocked ? 1 : 0.5)
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(stage.title).font(AppFont.cardTitle)
-                        .foregroundColor(unlocked ? .primary : .secondary)
+                    Text(stage.title).font(AppFont.cardTitle).foregroundColor(.primary)
                     Text(stage.subtitle).font(AppFont.caption).foregroundColor(.secondary)
                 }
                 Spacer()
@@ -140,6 +139,7 @@ struct ObservationStationView: View {
                 } else if !unlocked {
                     Image(systemName: "lock.fill").font(.caption).foregroundColor(.secondary)
                 }
+                Image(systemName: "chevron.right").font(.caption2).foregroundColor(.secondary)
             }
             .padding(Spacing.md)
             .background(isCurrent ? stage.color.opacity(0.12) : Color.clear)
