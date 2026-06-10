@@ -77,5 +77,35 @@ enum FermiData {
             ],
             funFact: "你手掌每时每刻都顶着约 100 kg 的大气——因为上下都有压，你才没被压垮。"
         ),
+        FermiQuestion(
+            id: "classroom_air",
+            emoji: "🏫",
+            question: "一间普通教室里的空气，大约有多重？",
+            unit: "千克",
+            answerExponent: 2,
+            answerText: "约 250 千克",
+            maxExponent: 5,
+            steps: [
+                "教室约 8m × 8m × 3m ≈ 200 m³",
+                "空气密度 ρ ≈ 1.3 kg/m³",
+                "m = ρV ≈ 1.3 × 200 ≈ 260 kg",
+            ],
+            funFact: "空气看不见，却重达两三百公斤——比一头牛还沉。我们整天「泡」在重重的空气里。"
+        ),
+        FermiQuestion(
+            id: "lightning_bulb",
+            emoji: "⚡",
+            question: "一道闪电释放的能量，够一只 100W 灯泡亮多少天？",
+            unit: "天",
+            answerExponent: 2,
+            answerText: "约 100 天",
+            maxExponent: 5,
+            steps: [
+                "一道闪电能量 ≈ 10⁹ J",
+                "100W 灯泡每秒耗 100 J，一天耗 100 × 86400 ≈ 10⁷ J",
+                "10⁹ ÷ 10⁷ ≈ 100 天",
+            ],
+            funFact: "一道闪电的能量惊人，但它在百万分之一秒内放完——功率极大、总量却只够点灯几个月。"
+        ),
     ]
 }

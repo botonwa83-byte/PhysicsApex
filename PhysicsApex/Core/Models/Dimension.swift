@@ -84,5 +84,19 @@ enum DimensionData {
             realFormula: "v = √(G·M / R) ≈ 7.9 km/s",
             insight: "三个基本量纲、三个方程，刚好锁死指数。竞赛里这是「不会做也能蒙对形式」的神技。"
         ),
+        DimensionDerivation(
+            id: "spring",
+            target: "弹簧振子周期 T",
+            depends: ["质量 m → 量纲 M", "劲度系数 k → 量纲 M·T⁻²", "（试试加上振幅 A → L）"],
+            setup: "设 T = c · mᵃ · kᵇ",
+            balancing: [
+                "[T] = Mᵃ · (M·T⁻²)ᵇ = M^(a+b) · T^(−2b)",
+                "对比 T¹：−2b = 1 ⟹ b = −1/2",
+                "M 幂：a + b = 0 ⟹ a = 1/2",
+            ],
+            result: "T ∝ √(m / k)",
+            realFormula: "T = 2π√(m / k)",
+            insight: "振幅 A 又配不进去——和单摆如出一辙：振幅再大，周期也不变（等幅振动的根源）。"
+        ),
     ]
 }
