@@ -30,7 +30,7 @@ enum ProblemBank {
     /// 全部题目 = 精选 + 各批次（用闭包逐段追加，避免长 `+` 表达式拖慢编译）。
     static let all: [PhysicsProblem] = {
         var result = coreProblems
-        for batch in [batch1, batch2, batch3, batch4, batch5, batch6, batch7] {
+        for batch in [batch1, batch2, batch3, batch4, batch5, batch6, batch7, batch8] {
             result += batch
         }
         return result
