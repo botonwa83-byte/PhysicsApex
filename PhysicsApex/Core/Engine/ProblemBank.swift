@@ -24,7 +24,7 @@ enum ProblemBank {
         triangleCharge,
         relativeMotionJunior,
         buoyancyJunior,
-    ] + batch1 + batch2 + batch3 + batch4
+    ] + batch1 + batch2 + batch3 + batch4 + batch5
 
     /// 降维秒杀战例 = 带 dualSolution 的题。
     static var descentCases: [PhysicsProblem] { all.filter { $0.dualSolution != nil } }
