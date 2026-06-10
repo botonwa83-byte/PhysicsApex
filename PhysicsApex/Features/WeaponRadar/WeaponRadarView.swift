@@ -8,6 +8,8 @@ import SwiftUI
 struct WeaponRadarView: View {
     @AppStorage("radar_best_score") private var bestScore = 0
     @Environment(\.dismiss) private var dismiss
+    @ObservedObject private var purchase = PurchaseManager.shared
+    @State private var showPaywall = false
 
     @State private var round: [PhysicsProblem] = []
     @State private var options: [PhysicsWeapon] = []
@@ -40,6 +42,13 @@ struct WeaponRadarView: View {
         .navigationBarTitleDisplayMode(.inline)
         .onAppear { if round.isEmpty { startRound() } }
         .onReceive(timer) { _ in tickClock() }
+        .sheet(isPresented: $showPaywall) { PaywallView() }
+    }
+
+    /// 该战例是否在免费档（与降维秒杀列表同一规则）。
+    private func isCaseFree(_ p: PhysicsProblem) -> Bool {
+        purchase.isUnlocked ||
+        (ProblemBank.descentCases.firstIndex { $0.id == p.id } ?? .max) < PurchaseManager.freeDescentCount
     }
 
     // MARK: 回合控制
@@ -184,6 +193,18 @@ struct WeaponRadarView: View {
                     .font(AppFont.caption).foregroundColor(.apexGold)
                 Text("「\(dual.weaponUsed.name)」省时 \(String(format: "%.0f", dual.timeRatio))× —— \(dual.weaponUsed.tagline)")
                     .font(AppFont.caption).foregroundColor(.secondary)
+                // 转化钩子：从识局直达完整战例（锁定则弹付费墙）
+                if isCaseFree(p) {
+                    NavigationLink { DescentDetailView(problem: p, dual: dual) } label: {
+                        Label("看完整战例（双解对决）", systemImage: "bolt.fill")
+                            .font(AppFont.chip).foregroundColor(.apexLava)
+                    }
+                } else {
+                    Button { showPaywall = true } label: {
+                        Label("解锁查看完整战例", systemImage: "lock.fill")
+                            .font(AppFont.chip).foregroundColor(.apexLava)
+                    }
+                }
             }
             Button(action: advance) {
                 Text(idx + 1 >= round.count ? "看战报" : "下一局")

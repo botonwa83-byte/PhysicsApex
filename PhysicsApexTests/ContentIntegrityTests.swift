@@ -88,6 +88,19 @@ final class ContentIntegrityTests: XCTestCase {
         XCTAssertEqual(ProblemBank.freeProblems.count, PurchaseManager.freeProblemCount)
     }
 
+    /// 付费策略钉死：¥22 买断对应的免费档配置（改价格策略时有意识地更新此测试）。
+    func testFreeTierPolicy() {
+        XCTAssertEqual(PurchaseManager.freeProblemCount, 10, "题库免费档应为前 10 题")
+        XCTAssertEqual(PurchaseManager.freeDescentCount, 10, "降维战例免费档应为前 10 道")
+        XCTAssertEqual(PurchaseManager.freeRevisitCount, 1)
+        XCTAssertEqual(PurchaseManager.freeSandboxCount, 3)
+        XCTAssertEqual(PurchaseManager.freeWeaponCount, 10)
+        // 免费战例应覆盖多把不同武器（试吃的多样性）
+        let freeWeapons = Set(ProblemBank.descentCases.prefix(PurchaseManager.freeDescentCount)
+            .compactMap { $0.dualSolution?.weaponUsed })
+        XCTAssertGreaterThanOrEqual(freeWeapons.count, 5, "前 10 道免费战例应至少覆盖 5 把武器")
+    }
+
     // MARK: 武器库
 
     /// 武器战例覆盖底线：30 把武器至少 29 把有战例（forceDiagram 为有意留白）。
