@@ -76,5 +76,53 @@ enum GiantsData {
             relatedParadoxes: ["schrodinger_cat"],
             portraitEmoji: "🥁"
         ),
+        PhysicsGiant(
+            id: "bohr",
+            name: "玻尔",
+            nameEN: "Niels Bohr",
+            era: "1885–1962",
+            attributes: GiantAttributes(insight: 10, creativity: 9, perseverance: 9, influence: 10),
+            weaponSkills: ["玻尔原子模型", "互补原理", "对应原理"],
+            legendStory: "把量子引入原子，解释了氢光谱。与爱因斯坦进行了物理学史上最著名的世纪辩论——爱因斯坦说「上帝不掷骰子」，玻尔回敬「别教上帝该怎么做」。",
+            famousQuote: "如果谁不为量子论感到困惑，那他就是没真懂它。",
+            relatedParadoxes: ["schrodinger_cat", "epr"],
+            portraitEmoji: "⚛️"
+        ),
+        PhysicsGiant(
+            id: "curie",
+            name: "居里夫人",
+            nameEN: "Marie Curie",
+            era: "1867–1934",
+            attributes: GiantAttributes(insight: 9, creativity: 9, perseverance: 10, influence: 9),
+            weaponSkills: ["放射性研究", "发现钋与镭", "提纯技术"],
+            legendStory: "从数吨沥青铀矿中提炼出 0.1 克镭。史上唯一在两个不同学科（物理、化学）都拿到诺奖的人，最终因长期接触辐射献出生命。",
+            famousQuote: "生活中没有什么可怕的东西，只有需要理解的东西。",
+            relatedParadoxes: [],
+            portraitEmoji: "☢️"
+        ),
+        PhysicsGiant(
+            id: "kepler",
+            name: "开普勒",
+            nameEN: "Johannes Kepler",
+            era: "1571–1630",
+            attributes: GiantAttributes(insight: 10, creativity: 9, perseverance: 10, influence: 9),
+            weaponSkills: ["开普勒三定律", "椭圆轨道", "行星运动"],
+            legendStory: "用第谷·布拉赫留下的海量观测数据，固执地算了无数遍，终于发现行星走的是椭圆而非完美的圆，为牛顿的万有引力铺平了道路。",
+            famousQuote: "我只是在思考上帝的思想。",
+            relatedParadoxes: [],
+            portraitEmoji: "🪐"
+        ),
+        PhysicsGiant(
+            id: "ampere",
+            name: "安培",
+            nameEN: "André-Marie Ampère",
+            era: "1775–1836",
+            attributes: GiantAttributes(insight: 9, creativity: 9, perseverance: 8, influence: 9),
+            weaponSkills: ["安培定律", "电动力学", "电流相互作用"],
+            legendStory: "被称为「电学中的牛顿」。在奥斯特发现电流的磁效应后仅一周，他就揭示了两根通电导线之间的相互作用力。电流的单位「安培」就是为纪念他。",
+            famousQuote: "把现象上升为定律，才是科学的目标。",
+            relatedParadoxes: [],
+            portraitEmoji: "🔌"
+        ),
     ]
 }
