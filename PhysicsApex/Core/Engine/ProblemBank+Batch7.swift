@@ -20,7 +20,18 @@ extension ProblemBank {
             SolutionStep(order: 3, description: "摆长变 4 倍", formula: "T ∝ √L ⇒ T₂ = 2T₁ = 4 s", annotation: ""),
         ], keyInsight: "单摆周期只由摆长和 g 决定，与质量、振幅（小角度内）无关。",
            commonMistakes: ["以为摆球越重周期越短", "以为振幅越大周期越长"]),
-        tags: ["振动与波", "简谐运动", "单摆"])
+        dualSolution: DualSolution(
+            standardMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "背公式代入计算", formula: "T=2π√(L/g)=2π√(1/π²)=2 s", annotation: "忘了公式就束手无策"),
+                SolutionStep(order: 2, description: "重新代一遍 L=4", formula: "T=2π√(4/π²)=4 s", annotation: ""),
+            ], keyInsight: "记公式、代数值。", commonMistakes: ["根号里 L/g 记成 g/L"]),
+            descentMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "量纲分析：周期只能由 L、g 凑出时间", formula: "[L]=m，[g]=m/s² ⟹ √(L/g) 是唯一的时间组合", annotation: "质量 m 根本凑不进去"),
+                SolutionStep(order: 2, description: "形式即结论", formula: "T∝√(L/g) ⟹ L×4 则 T×2=4 s", annotation: "公式忘了也能秒答"),
+            ], keyInsight: "量纲分析白送公式的形式：能凑出目标量纲的组合往往唯一——系数 2π 才需要动力学。", commonMistakes: []),
+            weaponUsed: .dimensionalAnalysis, timeRatio: 3.5,
+            detailedExplanation: "量纲分析通杀「忘公式」时刻：单摆 √(L/g)、弹簧 √(m/k) 的形式都能凑出来。注意它只定形式不定系数，2π 必须由动力学推导给出。"),
+        tags: ["振动与波", "简谐运动", "单摆", "降维"])
 
     static let b7_waveMedium = PhysicsProblem(
         id: "b7_wave_medium", type: .multipleChoice, stage: .senior, topic: .wave,

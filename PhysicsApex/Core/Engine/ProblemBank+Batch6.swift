@@ -53,7 +53,16 @@ extension ProblemBank {
             SolutionStep(order: 1, description: "热力学第一定律", formula: "ΔU = W + Q = (−80) + 200 = 120 J", annotation: "对外做功 W 取负"),
         ], keyInsight: "ΔU=W+Q：吸热为正，对外做功为负。",
            commonMistakes: ["对外做功符号取正"]),
-        tags: ["热学", "热力学第一定律"])
+        dualSolution: DualSolution(
+            standardMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "背符号约定再代公式", formula: "ΔU=W+Q，吸热 Q>0，对外做功 W<0", annotation: "正负号约定最易记反"),
+            ], keyInsight: "靠符号约定代公式。", commonMistakes: ["W 的正负取反"]),
+            descentMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "把内能当存款记账：吸热是收入，对外做功是支出", formula: "ΔU = 收入 200 − 支出 80 = +120 J", annotation: "一步，不背任何约定"),
+            ], keyInsight: "能量守恒就是记账：进多少、出多少、余额变多少——符号约定自动正确。", commonMistakes: []),
+            weaponUsed: .energyIntuition, timeRatio: 2.0,
+            detailedExplanation: "能量记账法通杀热力学第一定律：吸热/外界做功=收入，放热/对外做功=支出，永远不会搞错正负号。"),
+        tags: ["热学", "热力学第一定律", "降维"])
 
     static let b6_secondLaw = PhysicsProblem(
         id: "b6_second_law", type: .multipleChoice, stage: .senior, topic: .thermal,
@@ -132,12 +141,22 @@ extension ProblemBank {
             SolutionStep(order: 1, description: "成像特点", formula: "等大、正立、虚像，物像对称", annotation: ""),
         ], keyInsight: "平面镜：等大正立虚像，物像关于镜面对称，距离相等。",
            commonMistakes: ["以为离远像变小"]),
+        dualSolution: DualSolution(
+            standardMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "逐选项回忆成像规律", formula: "实像还是虚像？等大还是放大？距离关系？", annotation: "四个选项四次回忆，易被「看起来变小」带偏"),
+            ], keyInsight: "逐项背规律排除。", commonMistakes: ["被生活直觉「远了变小」误导"]),
+            descentMethod: SolutionPath(steps: [
+                SolutionStep(order: 1, description: "一条对称性裁决一切", formula: "像=物关于镜面的镜像对称", annotation: "对称 ⟹ 等大、等距、正立、虚像"),
+                SolutionStep(order: 2, description: "套到选项", formula: "「距离相等+虚像」正确，其余全违反对称", annotation: "秒选"),
+            ], keyInsight: "平面镜的全部成像规律都是「镜面对称」一条性质的推论——记一条，推一切。", commonMistakes: []),
+            weaponUsed: .symmetry, timeRatio: 2.5,
+            detailedExplanation: "对称法通杀平面镜问题：像与物严格镜面对称，等大、等距、左右互换、虚像全部由对称性一次给出。"),
         misconceptions: [
             Misconception(option: "人离镜越远，像越小",
                 youThought: "你大概觉得离镜子远了，镜中的像就变小。",
                 pitfall: "平面镜成的像永远和物体等大；远了只是看起来视角小，像本身不变。",
                 fix: "平面镜像始终等大，物像到镜面距离相等。")
-        ], tags: ["光学", "平面镜", "错因诊断"])
+        ], tags: ["光学", "平面镜", "错因诊断", "降维"])
 
     static let b6_photoEk = PhysicsProblem(
         id: "b6_photo_ek", type: .calculation, stage: .senior, topic: .modern,
