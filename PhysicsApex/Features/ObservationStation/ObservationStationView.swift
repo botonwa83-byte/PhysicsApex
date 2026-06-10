@@ -24,6 +24,7 @@ struct ObservationStationView: View {
 
                     // ③ 探索
                     sectionHeader("探索")
+                    simulationTeaser
                     paradoxTeaser
                     giantsTeaser
                 }
@@ -189,6 +190,22 @@ struct ObservationStationView: View {
     }
 
     // MARK: ③ 探索
+
+    private var simulationTeaser: some View {
+        NavigationLink { SimulationHubView() } label: {
+            HStack(spacing: Spacing.md) {
+                Image(systemName: "scope").font(.title2).foregroundColor(.apexEmerald)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("互动模拟沙盘").font(AppFont.cardTitle).foregroundColor(.primary)
+                    Text("拖一拖参数，看抛体/碰撞/振动实时演化——看见物理").font(AppFont.caption).foregroundColor(.secondary).lineLimit(2)
+                }
+                Spacer()
+                Image(systemName: "chevron.right").foregroundColor(.secondary)
+            }
+            .cardSurface()
+        }
+        .buttonStyle(.plain)
+    }
 
     private var paradoxTeaser: some View {
         Group {
