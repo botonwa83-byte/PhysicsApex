@@ -57,12 +57,41 @@ struct LawDetailView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .cardSurface()
 
+                // 🖼 物理图像（C 位，让你"看见"它）
+                VStack(alignment: .leading, spacing: Spacing.sm) {
+                    SectionHeader(title: "物理图像", systemImage: "eye.fill", accent: .apexLava)
+                    Text(law.physicalImage).font(.body).foregroundColor(.primary)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(Spacing.lg)
+                .background(LinearGradient(colors: [Color.apexLava.opacity(0.12), Color.apexGold.opacity(0.08)],
+                                          startPoint: .leading, endPoint: .trailing))
+                .cornerRadius(Radius.card)
+
+                block(title: "来龙去脉", icon: "arrow.triangle.branch", accent: .apexEmerald) {
+                    Text(law.derivation).font(.body).foregroundColor(.primary)
+                }
+
                 block(title: "物理意义", icon: "brain.head.profile", accent: .apexStarBlue) {
                     Text(law.meaning).font(.body).foregroundColor(.primary)
                 }
 
+                // 🎚 极限检验器（交互：点开看"啊哈"）
+                if !law.limitChecks.isEmpty {
+                    VStack(alignment: .leading, spacing: Spacing.sm) {
+                        SectionHeader(title: "极限检验器", systemImage: "slider.horizontal.below.square.filled.and.square", accent: .apexMystery)
+                        Text("把变量推到极端，看公式是否符合直觉——物理学家的验真绝技")
+                            .font(AppFont.caption).foregroundColor(.secondary)
+                        ForEach(law.limitChecks) { check in
+                            LimitCheckCard(check: check)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .cardSurface()
+                }
+
                 listBlock(title: "适用条件", icon: "checkmark.seal.fill", accent: .apexEmerald, items: law.conditions)
-                listBlock(title: "常见误用", icon: "xmark.octagon.fill", accent: .apexDanger, items: law.commonMisuses)
+                listBlock(title: "常见迷思", icon: "xmark.octagon.fill", accent: .apexDanger, items: law.commonMisuses)
                 listBlock(title: "高考应用", icon: "graduationcap.fill", accent: .apexGold, items: law.applications)
 
                 if !law.relatedWeapons.isEmpty {
@@ -102,5 +131,43 @@ struct LawDetailView: View {
                 }
             }
         }
+    }
+}
+
+// MARK: - 极限检验卡（点开揭示「啊哈」）
+
+private struct LimitCheckCard: View {
+    let check: LimitCheck
+    @State private var revealed = false
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: Spacing.sm) {
+            // 极端情形 → 结果
+            HStack(spacing: Spacing.sm) {
+                Text(check.scenario)
+                    .font(.system(.subheadline, design: .monospaced))
+                    .foregroundColor(.apexMystery)
+                Image(systemName: "arrow.right").font(.caption).foregroundColor(.secondary)
+                Text(check.result).font(AppFont.body).foregroundColor(.primary)
+                Spacer(minLength: 0)
+            }
+
+            if revealed {
+                Label(check.intuition, systemImage: "lightbulb.fill")
+                    .font(AppFont.caption).foregroundColor(.apexGold)
+                    .transition(.opacity.combined(with: .move(edge: .top)))
+            } else {
+                Button {
+                    withAnimation(.easeInOut(duration: 0.25)) { revealed = true }
+                } label: {
+                    Label("这符合直觉吗？点开看", systemImage: "hand.tap.fill")
+                        .font(AppFont.caption).foregroundColor(.apexMystery)
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(Spacing.md)
+        .background(Color.apexMystery.opacity(0.07))
+        .cornerRadius(Radius.inner)
     }
 }
