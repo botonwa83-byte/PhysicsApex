@@ -1,0 +1,9 @@
+# Xcode / build
+build/
+DerivedData/
+*.xcodeproj
+xcuserdata/
+*.xcuserstate
+.DS_Store
+
+# XcodeGen 生成的工程不入库（用 project.yml 重建）
