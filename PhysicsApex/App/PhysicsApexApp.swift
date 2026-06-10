@@ -19,6 +19,7 @@ struct PhysicsApexApp: App {
 struct RootView: View {
     @State private var passedPromo = ProcessInfo.processInfo.arguments.contains("-skipPromo")
     @State private var demoDuel = ProcessInfo.processInfo.arguments.contains("-demoDuel")
+    @State private var demoRadar = ProcessInfo.processInfo.arguments.contains("-demoRadar")
 
     var body: some View {
         ZStack {
@@ -34,6 +35,9 @@ struct RootView: View {
             if let p = ProblemBank.descentCases.first, let dual = p.dualSolution {
                 DescentDuelView(problem: p, dual: dual) { demoDuel = false }
             }
+        }
+        .fullScreenCover(isPresented: $demoRadar) {
+            NavigationStack { WeaponRadarView() }
         }
     }
 }

@@ -21,6 +21,7 @@ struct ObservationStationView: View {
                     sectionHeader("今日")
                     statsCard
                     dailyChallengeCard
+                    weaponRadarCard
                     todayMission
 
                     // ③ 探索
@@ -172,6 +173,25 @@ struct ObservationStationView: View {
             Text(label).font(AppFont.caption).foregroundColor(.secondary)
         }
         .frame(maxWidth: .infinity)
+    }
+
+    /// 武器雷达：30 秒识局训练（考场元技能——判断这题用哪把武器）
+    private var weaponRadarCard: some View {
+        NavigationLink { WeaponRadarView() } label: {
+            HStack(spacing: Spacing.md) {
+                Image(systemName: "scope").font(.title2).foregroundColor(.apexMystery)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("武器雷达 · 30 秒识局").font(AppFont.cardTitle).foregroundColor(.primary)
+                    Text("只看题干选武器，练出考场第一反应").font(AppFont.caption).foregroundColor(.secondary)
+                }
+                Spacer()
+                Image(systemName: "chevron.right").foregroundColor(.secondary)
+            }
+            .padding(Spacing.lg)
+            .background(Color.apexMystery.opacity(0.08))
+            .cornerRadius(Radius.card)
+        }
+        .buttonStyle(.plain)
     }
 
     private var dailyChallengeCard: some View {
