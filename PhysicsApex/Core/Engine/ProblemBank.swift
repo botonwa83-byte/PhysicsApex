@@ -5,7 +5,8 @@ import Foundation
 
 enum ProblemBank {
 
-    static let all: [PhysicsProblem] = [
+    /// 精选重磅题（早期手工编排，含降维战例；前 20 道免费档由此开头）。
+    static let coreProblems: [PhysicsProblem] = [
         inclineRevisitJunior,
         inclineRevisitSenior,
         collisionDescent,
@@ -24,7 +25,16 @@ enum ProblemBank {
         triangleCharge,
         relativeMotionJunior,
         buoyancyJunior,
-    ] + batch1 + batch2 + batch3 + batch4 + batch5
+    ]
+
+    /// 全部题目 = 精选 + 各批次（用闭包逐段追加，避免长 `+` 表达式拖慢编译）。
+    static let all: [PhysicsProblem] = {
+        var result = coreProblems
+        for batch in [batch1, batch2, batch3, batch4, batch5, batch6] {
+            result += batch
+        }
+        return result
+    }()
 
     /// 降维秒杀战例 = 带 dualSolution 的题。
     static var descentCases: [PhysicsProblem] { all.filter { $0.dualSolution != nil } }
