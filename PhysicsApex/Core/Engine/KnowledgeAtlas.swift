@@ -60,7 +60,7 @@ enum KnowledgeAtlas {
         chapters: [
             KnowledgeChapter(id: "estatic", name: "静电场", icon: "e.circle", points: [
                 KnowledgePoint("es_coulomb", "电荷·库仑定律", essence: "同种相斥异种相吸，力与距离平方成反比。", formula: "F=kq₁q₂/r²"),
-                KnowledgePoint("es_field", "电场强度·电场线", essence: "场强是单位电荷受力，电场线疏密表强弱。", formula: "E=F/q=kQ/r²"),
+                KnowledgePoint("es_field", "电场强度·电场线", essence: "场强是单位电荷受力，电场线疏密表强弱。", formula: "E=F/q=kQ/r²", problemId: "electric_deflection"),
                 KnowledgePoint("es_potential", "电势·电势差·电势能", essence: "沿电场线电势降低；电场力做功 W=qU。", formula: "U=W/q", pitfall: "电势是标量、有正负，别和场强方向混。"),
                 KnowledgePoint("es_cap", "电容器", essence: "储存电荷的元件；电容只由结构定。", formula: "C=Q/U", weapon: .equivalentCircuit),
             ]),
@@ -90,7 +90,7 @@ enum KnowledgeAtlas {
         id: "thermal", name: "热学", icon: "thermometer.medium", color: .apexGold,
         chapters: [
             KnowledgeChapter(id: "molecule", name: "分子动理论", icon: "circle.grid.3x3", points: [
-                KnowledgePoint("mo_brown", "分子动理论·内能", essence: "物质由分子组成、永不停息运动；内能=分子动能+势能。", pitfall: "温度是分子平均动能标志，与分子数无关。"),
+                KnowledgePoint("mo_brown", "分子动理论·内能", essence: "物质由分子组成、永不停息运动；内能=分子动能+势能。", pitfall: "温度是分子平均动能标志，与分子数无关。", problemId: "internal_energy"),
             ]),
             KnowledgeChapter(id: "gas", name: "气体", icon: "wind", points: [
                 KnowledgePoint("ga_law", "气体三定律·状态方程", essence: "压强微观来自分子碰壁；一定质量理想气体 pV/T 不变。", formula: "pV/T = 常量", weapon: .controlVariable),
@@ -118,7 +118,7 @@ enum KnowledgeAtlas {
         id: "modern", name: "近代物理", icon: "atom", color: .apexMystery,
         chapters: [
             KnowledgeChapter(id: "photo", name: "光电效应", icon: "sun.max", points: [
-                KnowledgePoint("ph_photon", "光子·光电效应", essence: "光以光子形式一份份传能；超过截止频率才有光电子。", formula: "Ek=hν−W₀", pitfall: "光强只影响电子数，不影响最大初动能。"),
+                KnowledgePoint("ph_photon", "光子·光电效应", essence: "光以光子形式一份份传能；超过截止频率才有光电子。", formula: "Ek=hν−W₀", pitfall: "光强只影响电子数，不影响最大初动能。", problemId: "photo_effect"),
             ]),
             KnowledgeChapter(id: "atom", name: "原子结构", icon: "circle.circle", points: [
                 KnowledgePoint("at_bohr", "玻尔模型·能级跃迁", essence: "电子只能在分立轨道；跃迁辐射/吸收光子。", formula: "hν=Em−En"),

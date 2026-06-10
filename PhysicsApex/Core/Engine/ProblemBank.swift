@@ -15,6 +15,9 @@ enum ProblemBank {
         railTerminalVelocity,
         workEnergyMultiStage,
         nearEarthSatellite,
+        electricDeflection,
+        photoEffectChoice,
+        internalEnergyChoice,
     ]
 
     /// 降维秒杀战例 = 带 dualSolution 的题。
@@ -440,5 +443,168 @@ enum ProblemBank {
             detailedExplanation: "天体问题神器——黄金代换 GM=gR²。凡是给了 g 和 R 的题，都能绕开万有引力常量直接算。"
         ),
         tags: ["万有引力", "黄金代换", "第一宇宙速度", "降维"]
+    )
+
+    // MARK: - 降维战例：偏转电场中的类平抛
+
+    static let electricDeflection = PhysicsProblem(
+        id: "electric_deflection",
+        type: .calculation,
+        stage: .senior,
+        topic: .electricField,
+        content: "质量 m、电荷量 q 的带电粒子以水平速度 v₀ 射入两平行板间的匀强电场，板长 L、板间电压 U、板间距 d。求粒子射出电场时的竖直偏转距离 y。",
+        answer: "y = qUL² / (2mdv₀²)",
+        difficulty: 0.6,
+        averageTime: 180,
+        hints: ["水平方向匀速，竖直方向匀加速", "和平抛是同一个模型"],
+        solution: SolutionPath(
+            steps: [
+                SolutionStep(order: 1, description: "竖直方向加速度", formula: "a = qE/m = qU/(md)", annotation: "E = U/d"),
+                SolutionStep(order: 2, description: "在场中飞行时间", formula: "t = L/v₀", annotation: "水平匀速"),
+                SolutionStep(order: 3, description: "竖直偏转", formula: "y = ½at² = qUL²/(2mdv₀²)", annotation: "匀加速"),
+            ],
+            keyInsight: "偏转电场里的运动 = 平抛的孪生兄弟。",
+            commonMistakes: ["把 E 写成 U（漏掉除以 d）"]
+        ),
+        dualSolution: DualSolution(
+            standardMethod: SolutionPath(
+                steps: [
+                    SolutionStep(order: 1, description: "重新分析受力、建系、列水平与竖直运动方程", formula: "x = v₀t；y = ½at²", annotation: "从零推导整套运动学"),
+                    SolutionStep(order: 2, description: "联立消去时间求 y", formula: "代入 t=L/v₀", annotation: "步骤多"),
+                ],
+                keyInsight: "当成全新问题，从受力到运动学一步步推。",
+                commonMistakes: ["建系混乱"]
+            ),
+            descentMethod: SolutionPath(
+                steps: [
+                    SolutionStep(order: 1, description: "认出它就是「平抛」：水平匀速 + 竖直匀加速", formula: "把 g 换成 a=qU/(md)", annotation: "模型同构，直接套"),
+                    SolutionStep(order: 2, description: "套平抛结论", formula: "y = qUL²/(2mdv₀²)", annotation: "一步到位"),
+                ],
+                keyInsight: "等效迁移：偏转电场 ↔ 平抛，把熟悉模型搬过来，秒解。",
+                commonMistakes: []
+            ),
+            weaponUsed: .equivalentMethod,
+            timeRatio: 2.5,
+            detailedExplanation: "重力场里的平抛、电场里的偏转、磁场里的某些运动，本质都是「一个方向匀速 + 垂直方向匀变速」。认出同构，一类题全解。"
+        ),
+        tags: ["电场", "类平抛", "等效迁移", "降维"]
+    )
+
+    // MARK: - 概念秒杀：光电效应（错因诊断）
+
+    static let photoEffectChoice = PhysicsProblem(
+        id: "photo_effect",
+        type: .multipleChoice,
+        stage: .senior,
+        topic: .modern,
+        content: "用某频率的光照射某金属，没有发生光电效应。下列措施中，可能使它发生光电效应的是？",
+        options: [
+            "增大光照强度",
+            "延长照射时间",
+            "增大入射光的频率",
+            "增大照射面积"
+        ],
+        answer: "增大入射光的频率",
+        difficulty: 0.45,
+        averageTime: 50,
+        hints: ["单个光子的能量由谁决定？", "光强、时间、面积改变的是什么？"],
+        solution: SolutionPath(
+            steps: [
+                SolutionStep(order: 1, description: "单个光子能量", formula: "E = hν", annotation: "只由频率决定"),
+                SolutionStep(order: 2, description: "发生条件", formula: "hν > W₀（逸出功）", annotation: "和光强、时间、面积都无关"),
+            ],
+            keyInsight: "能否打出电子只看「单个光子」的能量，即频率。",
+            commonMistakes: ["以为光越强、照越久就能打出电子"]
+        ),
+        dualSolution: DualSolution(
+            standardMethod: SolutionPath(
+                steps: [
+                    SolutionStep(order: 1, description: "逐条回忆光电效应方程与四条规律去判断", formula: "Ek = hν − W₀", annotation: "一个个选项验证"),
+                ],
+                keyInsight: "把四个选项逐一对照规律。",
+                commonMistakes: ["规律记混"]
+            ),
+            descentMethod: SolutionPath(
+                steps: [
+                    SolutionStep(order: 1, description: "一刀切：光强/时间/面积只改变「光子数量」，频率才改变「单光子能量」", formula: "光子数 ↑ ≠ 单光子能量 ↑", annotation: "只有第三项动了能量"),
+                    SolutionStep(order: 2, description: "秒排除其余三项", formula: "选 增大频率", annotation: "一句话定胜负"),
+                ],
+                keyInsight: "抓住「数量 vs 能量」这把刀，一刀切开所有迷惑选项。",
+                commonMistakes: []
+            ),
+            weaponUsed: .energyIntuition,
+            timeRatio: 3.0,
+            detailedExplanation: "光电效应是单光子单电子的「一对一」过程，不累积。爱因斯坦凭光量子假说解释它，拿了诺贝尔奖。"
+        ),
+        misconceptions: [
+            Misconception(
+                option: "增大光照强度",
+                youThought: "你大概觉得光更强、能量更大，就能把电子打出来。",
+                pitfall: "光强大只是光子「数量」多，每个光子的能量 hν 一点没变。",
+                fix: "频率不够，再多光子也是一群「打不动」的小锤子——必须提高频率。"
+            ),
+            Misconception(
+                option: "延长照射时间",
+                youThought: "你大概觉得照得久，能量慢慢累积就够了。",
+                pitfall: "光电效应是瞬时的、单光子单电子，能量不会在金属里「攒着」。",
+                fix: "频率不到，照一万年也打不出电子。"
+            ),
+            Misconception(
+                option: "增大照射面积",
+                youThought: "你大概觉得面积大、接收的光多，总能量就大。",
+                pitfall: "同样只是增加了光子总数，单个光子能量不变。",
+                fix: "决定成败的永远是单光子能量 = 频率。"
+            ),
+        ],
+        tags: ["光电效应", "光子", "概念秒杀", "错因诊断"]
+    )
+
+    // MARK: - 概念秒杀：温度与内能（错因诊断）
+
+    static let internalEnergyChoice = PhysicsProblem(
+        id: "internal_energy",
+        type: .multipleChoice,
+        stage: .senior,
+        topic: .thermal,
+        content: "关于温度和内能，下列说法正确的是？",
+        options: [
+            "温度高的物体，内能一定大",
+            "温度是分子平均动能的标志，温度升高分子平均动能一定增大",
+            "0°C 的物体没有内能",
+            "物体吸收热量，温度一定升高"
+        ],
+        answer: "温度是分子平均动能的标志，温度升高分子平均动能一定增大",
+        difficulty: 0.5,
+        averageTime: 60,
+        hints: ["内能 = 所有分子动能 + 分子势能之和", "吸热不等于升温（想想冰熔化）"],
+        solution: SolutionPath(
+            steps: [
+                SolutionStep(order: 1, description: "温度的微观意义", formula: "T ∝ 分子平均动能", annotation: "温度是平均动能的标志"),
+                SolutionStep(order: 2, description: "内能的构成", formula: "U = 分子动能之和 + 分子势能之和", annotation: "还和质量、种类、状态有关"),
+            ],
+            keyInsight: "温度只标志「平均动能」，不等于总内能。",
+            commonMistakes: ["把温度和内能划等号"]
+        ),
+        misconceptions: [
+            Misconception(
+                option: "温度高的物体，内能一定大",
+                youThought: "你大概觉得温度高 = 内能大，两者一回事。",
+                pitfall: "内能是「所有」分子的动能加势能之和，还看质量、种类、状态。一滴 100°C 的开水，内能远小于一桶 50°C 的温水。",
+                fix: "温度只标志分子「平均」动能，决定不了总内能。"
+            ),
+            Misconception(
+                option: "0°C 的物体没有内能",
+                youThought: "你大概把 0°C 当成了「没有热量、分子不动」。",
+                pitfall: "0°C ≈ 273 K，分子照样在剧烈运动，内能远大于零。",
+                fix: "只有绝对零度（−273°C）分子动能才趋于零，而且内能里还有分子势能。"
+            ),
+            Misconception(
+                option: "物体吸收热量，温度一定升高",
+                youThought: "你大概觉得吸了热，温度必然往上走。",
+                pitfall: "吸的热可能拿去对外做功（气体膨胀），或用于相变（冰熔化时温度不变）。",
+                fix: "ΔU = W + Q：吸热只是 Q>0，温度升不升要看内能怎么变。"
+            ),
+        ],
+        tags: ["热学", "内能", "温度", "错因诊断"]
     )
 }
