@@ -10,6 +10,20 @@ struct LawUniverseView: View {
     var body: some View {
         NavigationStack {
             List {
+                Section {
+                    NavigationLink { KnowledgeAtlasView() } label: {
+                        HStack(spacing: Spacing.md) {
+                            Image(systemName: "map.fill").font(.title3)
+                                .foregroundStyle(LinearGradient(colors: [.apexStarBlue, .apexMystery], startPoint: .top, endPoint: .bottom))
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("知识全景图").font(AppFont.cardTitle).foregroundColor(.primary)
+                                Text("一图纵览整个高考物理 · \(KnowledgeAtlas.totalPoints) 个知识点").font(AppFont.caption).foregroundColor(.secondary)
+                            }
+                        }
+                        .padding(.vertical, 2)
+                    }
+                }
+
                 ForEach(topics) { topic in
                     Section(topic.name) {
                         ForEach(LawLibrary.laws(for: topic)) { law in
