@@ -20,6 +20,10 @@ enum ProblemBank {
         internalEnergyChoice,
         totalReflectionChoice,
         doubleSlitDescent,
+        waterJetForce,
+        triangleCharge,
+        relativeMotionJunior,
+        buoyancyJunior,
     ]
 
     /// 降维秒杀战例 = 带 dualSolution 的题。
@@ -701,5 +705,192 @@ enum ProblemBank {
             detailedExplanation: "「控制变量 + 正比关系」是比较类题目的通杀套路——别急着代数值，先看哪个量在变、成什么比例。"
         ),
         tags: ["光学", "双缝干涉", "正比思维", "降维"]
+    )
+
+    // MARK: - 竞赛降维：水柱冲力（微元法）
+
+    static let waterJetForce = PhysicsProblem(
+        id: "water_jet",
+        type: .calculation,
+        stage: .olympiad,
+        topic: .momentum,
+        content: "水平水管以速度 v 喷出水柱冲击竖直墙壁，水柱横截面积为 S，水的密度为 ρ，水打到墙后不反弹（沿墙面流下）。求水对墙的平均冲力。",
+        answer: "F = ρSv²",
+        difficulty: 0.75,
+        averageTime: 200,
+        hints: ["取一小段时间 Δt 内打到墙的水", "对这段水用动量定理"],
+        solution: SolutionPath(
+            steps: [
+                SolutionStep(order: 1, description: "微元：Δt 内打到墙的水", formula: "Δm = ρ·S·v·Δt", annotation: "这段水长 vΔt"),
+                SolutionStep(order: 2, description: "对这段水用动量定理", formula: "F·Δt = Δm·v", annotation: "速度由 v 变 0"),
+                SolutionStep(order: 3, description: "解出", formula: "F = ρSv²", annotation: "Δt 约掉"),
+            ],
+            keyInsight: "连续的水流，用「微元」切成一小段，就能套动量定理。",
+            commonMistakes: ["把流量和质量搞混", "误以为水反弹（动量变化要翻倍）"]
+        ),
+        dualSolution: DualSolution(
+            standardMethod: SolutionPath(
+                steps: [
+                    SolutionStep(order: 1, description: "试图对「整根连续水柱」直接分析受力", formula: "连续介质，受力随时间分布", annotation: "无从下手"),
+                    SolutionStep(order: 2, description: "纠结于水流是连续的、没有明确的「一个物体」", formula: "——", annotation: "卡住"),
+                ],
+                keyInsight: "把连续水流当整体，找不到下手点。",
+                commonMistakes: ["无从建立方程"]
+            ),
+            descentMethod: SolutionPath(
+                steps: [
+                    SolutionStep(order: 1, description: "微元法：只盯 Δt 内的那一小段水", formula: "Δm = ρSv·Δt，Δp = Δm·v", annotation: "化连续为离散"),
+                    SolutionStep(order: 2, description: "动量定理一步出", formula: "F = Δp/Δt = ρSv²", annotation: "干净利落"),
+                ],
+                keyInsight: "微元法是处理连续 / 变化问题的万能钥匙——切一小片，化无限为有限。",
+                commonMistakes: []
+            ),
+            weaponUsed: .infinitesimal,
+            timeRatio: 5.0,
+            detailedExplanation: "凡是「连续水流 / 链条 / 变质量」的冲力问题，都用微元法：取 Δt 微元 → 算 Δm 与 Δp → F=Δp/Δt。这是竞赛与大学物理的通用思路。"
+        ),
+        tags: ["微元法", "动量", "流体冲力", "竞赛"]
+    )
+
+    // MARK: - 竞赛降维：等边三角形三电荷（对称法）
+
+    static let triangleCharge = PhysicsProblem(
+        id: "tri_charge",
+        type: .calculation,
+        stage: .olympiad,
+        topic: .electricField,
+        content: "边长为 a 的等边三角形，三个顶点各放一个电荷量为 +q 的点电荷。求其中任意一个电荷所受的合力大小。",
+        answer: "F = √3·kq²/a²",
+        difficulty: 0.7,
+        averageTime: 180,
+        hints: ["该电荷受另两个电荷的斥力，大小都是 kq²/a²", "两力夹角 60°，用对称性找合力方向"],
+        solution: SolutionPath(
+            steps: [
+                SolutionStep(order: 1, description: "两个分力", formula: "F₀ = kq²/a²，夹角 60°", annotation: "大小相等"),
+                SolutionStep(order: 2, description: "对称 → 合力沿中线", formula: "F = 2F₀·cos30° = √3·kq²/a²", annotation: "对称性定方向、平行四边形定大小"),
+            ],
+            keyInsight: "两个等大的力，合力沿它们夹角的平分线。",
+            commonMistakes: ["把夹角当成 120°", "忘了矢量合成"]
+        ),
+        dualSolution: DualSolution(
+            standardMethod: SolutionPath(
+                steps: [
+                    SolutionStep(order: 1, description: "建坐标系，把两个力都分解到 x、y", formula: "Fx、Fy 分别求和", annotation: "三角函数一堆"),
+                    SolutionStep(order: 2, description: "再合成", formula: "F = √(Fx²+Fy²)", annotation: "计算量大、易错"),
+                ],
+                keyInsight: "正交分解硬算，步骤多。",
+                commonMistakes: ["分量正负搞错"]
+            ),
+            descentMethod: SolutionPath(
+                steps: [
+                    SolutionStep(order: 1, description: "看出对称：合力必沿中线方向", formula: "无需分解，方向已知", annotation: "对称性送的"),
+                    SolutionStep(order: 2, description: "两等大力夹角 60°", formula: "F = 2F₀cos30° = √3·kq²/a²", annotation: "一步合成"),
+                ],
+                keyInsight: "对称性先把方向白送给你，剩下只需算大小。",
+                commonMistakes: []
+            ),
+            weaponUsed: .symmetry,
+            timeRatio: 3.0,
+            detailedExplanation: "对称性是物理里最省力的武器：先用对称看出合力方向，再只算大小，绕开繁琐的正交分解。"
+        ),
+        tags: ["对称法", "库仑力", "矢量合成", "竞赛"]
+    )
+
+    // MARK: - 初中：相对运动（错因诊断）
+
+    static let relativeMotionJunior = PhysicsProblem(
+        id: "relative_motion",
+        type: .multipleChoice,
+        stage: .junior,
+        topic: .kinematics,
+        content: "坐在行驶的列车里，看到窗外的树木「向后退」。关于这个现象，下列说法正确的是？",
+        options: [
+            "树木真的在向后运动",
+            "以列车为参照物，树木在向后运动",
+            "以地面为参照物，树木在向后运动",
+            "树木既在运动又静止，自相矛盾"
+        ],
+        answer: "以列车为参照物，树木在向后运动",
+        difficulty: 0.25,
+        averageTime: 40,
+        hints: ["运动和静止都是相对于「参照物」说的", "换个参照物，结论可能就变了"],
+        solution: SolutionPath(
+            steps: [
+                SolutionStep(order: 1, description: "选参照物", formula: "以列车为参照物", annotation: "树相对列车向后"),
+                SolutionStep(order: 2, description: "换参照物", formula: "以地面为参照物，树静止", annotation: "同一棵树，结论不同"),
+            ],
+            keyInsight: "运动是相对的——说运动前必须先说清「相对谁」。",
+            commonMistakes: ["以为运动是绝对的"]
+        ),
+        misconceptions: [
+            Misconception(
+                option: "树木真的在向后运动",
+                youThought: "你大概觉得「看到它动」就是它真的在动。",
+                pitfall: "动不动取决于参照物。相对地面，树是静止的。",
+                fix: "说运动前先问「相对谁」——相对列车向后，相对地面静止。"
+            ),
+            Misconception(
+                option: "以地面为参照物，树木在向后运动",
+                youThought: "你大概把车里看到的现象直接安到了地面参照系上。",
+                pitfall: "相对地面树是不动的，是你（和列车）在前进。",
+                fix: "换参照物结论就变：地面看树静止，列车看树后退。"
+            ),
+            Misconception(
+                option: "树木既在运动又静止，自相矛盾",
+                youThought: "你大概觉得同一棵树不能既动又不动。",
+                pitfall: "这不矛盾——只是参照物不同。运动的相对性正是如此。",
+                fix: "相对列车在动、相对地面静止，两者都对，不冲突。"
+            ),
+        ],
+        tags: ["相对运动", "参照物", "受力直觉", "错因诊断"]
+    )
+
+    // MARK: - 初中：浮力沉浮（错因诊断）
+
+    static let buoyancyJunior = PhysicsProblem(
+        id: "buoyancy_float",
+        type: .multipleChoice,
+        stage: .junior,
+        topic: .newton,
+        content: "一块木头漂浮在水面上，静止不动。关于它受到的浮力，下列说法正确的是？",
+        options: [
+            "浮力大于重力，所以它浮着",
+            "浮力等于重力",
+            "浸入越深，浮力一定越大",
+            "木头越大，浮力一定越大"
+        ],
+        answer: "浮力等于重力",
+        difficulty: 0.3,
+        averageTime: 45,
+        hints: ["静止 → 受力平衡", "漂浮时浮力和重力什么关系？"],
+        solution: SolutionPath(
+            steps: [
+                SolutionStep(order: 1, description: "静止 → 二力平衡", formula: "F浮 = G", annotation: "上下两个力相等"),
+                SolutionStep(order: 2, description: "若浮力更大", formula: "会加速上浮，不会静止", annotation: "所以必相等"),
+            ],
+            keyInsight: "漂浮静止 = 浮力恰好等于重力（二力平衡）。",
+            commonMistakes: ["以为浮着就是浮力更大"]
+        ),
+        misconceptions: [
+            Misconception(
+                option: "浮力大于重力，所以它浮着",
+                youThought: "你大概觉得「浮着」就说明浮力赢了重力。",
+                pitfall: "浮力若真的更大，木头会加速往上冲出水面，不会静止。",
+                fix: "静止 = 受力平衡，浮力恰好等于重力。"
+            ),
+            Misconception(
+                option: "浸入越深，浮力一定越大",
+                youThought: "你大概觉得越深水压越大、浮力越大。",
+                pitfall: "完全浸没后再往深处，排开水的体积不变，浮力就不变了。",
+                fix: "浮力 = ρ水·g·V排，只看排开水的体积，与深度无关（未全没时才随深度变）。"
+            ),
+            Misconception(
+                option: "木头越大，浮力一定越大",
+                youThought: "你大概觉得物体越大浮力越大。",
+                pitfall: "漂浮时浮力只等于自身重力；大木头重力大、浮力才大，但「漂浮」这一条下浮力=重力恒成立。",
+                fix: "漂浮物体的浮力由它的重力决定，不是由体积直接决定。"
+            ),
+        ],
+        tags: ["浮力", "二力平衡", "受力直觉", "错因诊断"]
     )
 }
