@@ -15,8 +15,10 @@ struct PhysicsApexApp: App {
 }
 
 /// 每次启动先展示广告页（对标 MathApex），点击进入主界面。
+/// 启动参数（截图/UI 自动化用）：-skipPromo 跳过广告页；-demoDuel 直接展示双解对决剧场。
 struct RootView: View {
-    @State private var passedPromo = false
+    @State private var passedPromo = ProcessInfo.processInfo.arguments.contains("-skipPromo")
+    @State private var demoDuel = ProcessInfo.processInfo.arguments.contains("-demoDuel")
 
     var body: some View {
         ZStack {
@@ -28,6 +30,11 @@ struct RootView: View {
             }
         }
         .animation(.easeInOut(duration: 0.4), value: passedPromo)
+        .fullScreenCover(isPresented: $demoDuel) {
+            if let p = ProblemBank.descentCases.first, let dual = p.dualSolution {
+                DescentDuelView(problem: p, dual: dual) { demoDuel = false }
+            }
+        }
     }
 }
 

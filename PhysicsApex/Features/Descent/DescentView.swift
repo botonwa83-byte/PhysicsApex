@@ -156,6 +156,7 @@ struct DescentDetailView: View {
     let dual: DualSolution
     @State private var showDescent = true
     @State private var showStrike = false
+    @State private var showDuel = false
     @State private var struck = false
 
     var body: some View {
@@ -193,6 +194,24 @@ struct DescentDetailView: View {
                 }
                 .buttonStyle(.plain)
 
+                // 双解对决剧场（两条解法实时赛跑）
+                Button { showDuel = true } label: {
+                    HStack(spacing: Spacing.sm) {
+                        Image(systemName: "flag.checkered.2.crossed")
+                        Text("双解对决 · 实时赛跑").fontWeight(.bold)
+                        Spacer()
+                        Text("快 \(String(format: "%.0f", dual.timeRatio))×")
+                            .font(AppFont.chip).foregroundColor(.apexGold)
+                    }
+                    .font(.headline).foregroundColor(.white)
+                    .padding(.vertical, 14).padding(.horizontal, Spacing.lg)
+                    .frame(maxWidth: .infinity)
+                    .background(LinearGradient(colors: [.apexStarBlue, .apexMystery], startPoint: .leading, endPoint: .trailing))
+                    .cornerRadius(Radius.card)
+                    .shadow(color: Color.apexStarBlue.opacity(0.35), radius: 12, y: 6)
+                }
+                .buttonStyle(.plain)
+
                 // 切换
                 Picker("解法", selection: $showDescent) {
                     Text("常规解").tag(false)
@@ -225,6 +244,12 @@ struct DescentDetailView: View {
                 struck = true
                 showDescent = true
                 showStrike = false
+            }
+        }
+        .fullScreenCover(isPresented: $showDuel) {
+            DescentDuelView(problem: problem, dual: dual) {
+                showDescent = true
+                showDuel = false
             }
         }
     }

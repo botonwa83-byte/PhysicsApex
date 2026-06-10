@@ -78,8 +78,11 @@ struct ObservationStationView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(Spacing.xl)
             .background(
-                LinearGradient(colors: [Color.apexLava, Color.apexMystery],
-                               startPoint: .topLeading, endPoint: .bottomTrailing)
+                ZStack {
+                    LinearGradient(colors: [Color.apexLava, Color.apexMystery],
+                                   startPoint: .topLeading, endPoint: .bottomTrailing)
+                    CosmicStarfield(starCount: 36, meteors: true, intensity: 0.8)
+                }
             )
             .cornerRadius(Radius.hero)
             .shadow(color: Color.apexLava.opacity(0.3), radius: 14, y: 8)
