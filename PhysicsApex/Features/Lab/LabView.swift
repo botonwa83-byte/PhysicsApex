@@ -109,6 +109,7 @@ struct TopicProblemsView: View {
             HStack(spacing: 6) {
                 TagChip(text: p.stage.shortTitle, color: p.stage.color)
                 if p.dualSolution != nil { TagChip(text: "可秒杀", color: .apexLava) }
+                if SimLibrary.link(for: p) != nil { TagChip(text: "沙盘", color: .apexEmerald) }
                 Spacer()
                 Text(locked ? "解锁查看" : "难度 \(Int(p.difficulty * 100))")
                     .font(AppFont.chip).foregroundColor(.secondary)

@@ -18,6 +18,8 @@ enum SimRef: CaseIterable {
     case coulomb, eFieldDeflect, capacitor, rc, closedCircuit, ohm, cyclotron, velocitySelector
     case lenz, railGen, transformer, lc, gasIsotherm, molecular, refraction, lens
     case doubleSlit, singleSlit, standingWave, doppler, photoelectric, bohr, decay, wave
+    // Pack 6
+    case equipotential, ampereForce, brownian, nuclear, escapeVelocity, slingshot, maxwell, thinFilm
 
     var link: SimLink {
         switch self {
@@ -61,6 +63,15 @@ enum SimRef: CaseIterable {
         case .bohr:            return SimLink(title: "玻尔能级跃迁", blurb: "电子只能整级跳，光谱是一根根线。", index: 30) { AnyView(BohrSimView()) }
         case .decay:           return SimLink(title: "半衰期", blurb: "每过 T½ 剩一半，单核衰变完全随机。", index: 31) { AnyView(DecaySimView()) }
         case .wave:            return SimLink(title: "横波传播", blurb: "v=λf，质点只上下振动不随波前进。", index: 32) { AnyView(WaveSimView()) }
+        // Pack 6
+        case .equipotential:   return SimLink(title: "等势线与电场线", blurb: "电场线⊥等势线，沿等势线移动做功为零。", index: 43) { AnyView(EquipotentialSimView()) }
+        case .ampereForce:     return SimLink(title: "安培力", blurb: "F=BIL sinθ，左手定则，θ=90° 力最大。", index: 44) { AnyView(AmpereForceSimView()) }
+        case .brownian:        return SimLink(title: "布朗运动", blurb: "花粉被分子撞击无规运动，温度越高越乱。", index: 45) { AnyView(BrownianSimView()) }
+        case .nuclear:         return SimLink(title: "核反应质量亏损", blurb: "E=Δmc²，裂变/聚变/α衰变能量对比。", index: 46) { AnyView(NuclearSimView()) }
+        case .escapeVelocity:  return SimLink(title: "逃逸速度", blurb: "v₁=7.9km/s 圆轨，v₂=11.2km/s 逃离地球。", index: 48) { AnyView(EscapeVelocitySimView()) }
+        case .slingshot:       return SimLink(title: "弹弓效应", blurb: "引力辅助借行星动量，探测器加速飞出。", index: 47) { AnyView(SlingshotSimView()) }
+        case .maxwell:         return SimLink(title: "麦克斯韦速率分布", blurb: "温度升高曲线右移，vₚ 和 v̄ 都增大。", index: 50) { AnyView(MaxwellSimView()) }
+        case .thinFilm:        return SimLink(title: "薄膜干涉", blurb: "膜厚不均匀→光程差不同→彩色条纹。", index: 49) { AnyView(ThinFilmSimView()) }
         }
     }
 }
@@ -108,13 +119,22 @@ enum SimLibrary {
         (["能级", "玻尔", "跃迁", "氢原子", "光谱线"], .bohr),
         (["半衰期", "衰变", "放射性", "α衰变", "β衰变"], .decay),
         (["横波", "波速", "波长", "波形图"], .wave),
+        // Pack 6
+        (["等势线", "等势面", "电场线分布"], .equipotential),
+        (["安培力", "通电导线", "BIL", "左手定则"], .ampereForce),
+        (["布朗运动", "花粉", "无规则运动"], .brownian),
+        (["质量亏损", "质能方程", "核反应", "裂变", "聚变", "α衰变", "β衰变", "结合能"], .nuclear),
+        (["逃逸速度", "第一宇宙速度", "第二宇宙速度", "环绕速度"], .escapeVelocity),
+        (["引力辅助", "弹弓效应", "旅行者"], .slingshot),
+        (["速率分布", "麦克斯韦", "最概然速率"], .maxwell),
+        (["薄膜干涉", "肥皂膜", "光程差", "光程"], .thinFilm),
     ]
 
     private static let topicFallback: [PhysicsTopic: SimRef] = [
         .kinematics: .projectile, .newton: .incline, .momentum: .collision,
-        .energy: .shm, .circular: .circular, .wave: .wave,
-        .electricField: .eFieldDeflect, .circuit: .closedCircuit, .magnetic: .cyclotron,
-        .induction: .railGen, .thermal: .gasIsotherm, .optics: .refraction, .modern: .photoelectric,
+        .energy: .shm, .circular: .escapeVelocity, .wave: .wave,
+        .electricField: .equipotential, .circuit: .closedCircuit, .magnetic: .ampereForce,
+        .induction: .railGen, .thermal: .maxwell, .optics: .thinFilm, .modern: .nuclear,
     ]
 
     static func link(for problem: PhysicsProblem) -> SimLink? {

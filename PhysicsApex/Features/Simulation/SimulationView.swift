@@ -69,6 +69,28 @@ struct SimulationHubView: View {
                 simEntry(29, "光电效应", "频率不够光强再大也没用，hν 决定逸出", "sun.max", .apexGold) { PhotoelectricSimView() }
                 simEntry(30, "玻尔能级跃迁", "电子只能整级跳，光谱是一根根线", "circle.hexagongrid", .apexMystery) { BohrSimView() }
                 simEntry(31, "半衰期", "每过 T½ 剩一半，单核衰变完全随机", "hourglass", .apexLava) { DecaySimView() }
+                simEntry(46, "核反应质量亏损", "E=Δmc²，裂变/聚变/α衰变能量对比", "atom", .apexMystery) { NuclearSimView() }
+
+                groupLabel("热学")
+                simEntry(25, "等温压缩", "玻意耳定律 p×V 不变，体积减半压强翻倍", "thermometer", .apexEmerald) { GasIsothermSimView() }
+                simEntry(26, "分子间作用力", "近斥远引，平衡距离 r₀ 处合力为零", "atom", .apexEmerald) { MolecularForceSimView() }
+                simEntry(45, "布朗运动", "花粉被水分子撞，温度越高轨迹越乱", "move.3d", .apexEmerald) { BrownianSimView() }
+                simEntry(50, "麦克斯韦速率分布", "温度升高曲线右移，vₚ 和 v̄ 都增大", "chart.line.uptrend.xyaxis", .apexEmerald) { MaxwellSimView() }
+
+                groupLabel("光学")
+                simEntry(27, "折射与全反射", "超过临界角光被关在介质里，光纤原理", "light.beacon.max", .apexGold) { RefractionSimView() }
+                simEntry(39, "凸透镜成像", "物距越过焦点，像在实/虚之间翻转", "camera.aperture", .apexGold) { ConvexLensSimView() }
+                simEntry(28, "双缝干涉", "Δy=Lλ/d，拖三个旋钮看条纹变宽变窄", "ruler", .apexMystery) { DoubleSlitSimView() }
+                simEntry(40, "单缝衍射", "缝越窄中央亮纹越宽 sinθ=λ/a", "circle.righthalf.filled", .apexMystery) { SingleSlitSimView() }
+                simEntry(49, "薄膜干涉", "肥皂泡五彩光——膜厚不同，光程差不同", "bubbles.and.sparkles", .apexMystery) { ThinFilmSimView() }
+
+                groupLabel("电磁 · 安培力")
+                simEntry(44, "安培力", "F=BIL sinθ，左手定则，θ=90°力最大", "bolt.horizontal", .apexStarBlue) { AmpereForceSimView() }
+                simEntry(43, "等势线与电场线", "电场线⊥等势线，沿等势线移动做功为零", "dot.radiowaves.right", .apexStarBlue) { EquipotentialSimView() }
+
+                groupLabel("天体")
+                simEntry(48, "逃逸速度", "v₁=7.9→圆轨，v₂=11.2→逃离地球", "airplane.departure", .apexStarBlue) { EscapeVelocitySimView() }
+                simEntry(47, "弹弓效应", "引力辅助——借行星动量，探测器加速", "arrow.triangle.branch", .apexStarBlue) { SlingshotSimView() }
 
                 groupLabel("波动")
                 simEntry(32, "横波传播", "v=λf，红点只上下振动不随波前进", "waveform.path.ecg", .apexEmerald) { WaveSimView() }
