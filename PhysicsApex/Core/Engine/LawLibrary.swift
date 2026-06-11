@@ -140,7 +140,7 @@ enum LawLibrary {
             dimension: "N",
             physicalImage: "让物体拐弯的力，永远指向圆心——绳拉小球转圈，绳的拉力就是它。",
             derivation: "匀速圆周里速度方向时刻在变，即有指向圆心的加速度 a=v²/r，乘上质量就是向心力。",
-            meaning: "向心力是「效果命名」，由真实的力（张力 / 重力 / 摩擦 / 洛伦兹力）提供，不是额外的力。",
+            meaning: "向心力是「效果命名」，由真实的力（张力 / 重力 / 摩擦 / 洛伦兹力）提供，不是额外的力。「为什么两边可以划等号」：mv²/r 是圆周运动所「需要」的向心力，真实力（如绳的张力）「提供」这个力——需要=提供，所以划等号。",
             limitChecks: [
                 LimitCheck(scenario: "速度 v → 2 倍（半径不变）", result: "向心力 → 4 倍", intuition: "高速过弯特别危险，因为力随 v² 暴涨。"),
                 LimitCheck(scenario: "半径 r → ∞", result: "向心力 → 0", intuition: "走直线不需要向心力——圆周与直线在此平滑统一。"),
@@ -244,8 +244,8 @@ enum LawLibrary {
             expression: "F = BIL·sinθ",
             dimension: "N",
             physicalImage: "磁场推「电流」的力——电动机转起来，就是无数根通电导线被磁场推动。",
-            derivation: "安培力是导线中所有运动电荷所受洛伦兹力的宏观合力。",
-            meaning: "磁场对通电导线的作用力，方向用左手定则。",
+            derivation: "导线中 n 个运动电荷，每个受洛伦兹力 qvB，合力 = nqvB = (nq/t)·(vt)·B = ILB（当 θ=90°）。本质：安培力就是宏观电流受的洛伦兹力合力。",
+            meaning: "磁场对通电导线的作用力，方向用左手定则：伸开左手，四指指电流方向，手心迎磁场方向（B穿入掌心），大拇指所指即安培力方向。θ=90°时最大，θ=0°时为零。",
             limitChecks: [
                 LimitCheck(scenario: "电流方向平行磁场（θ=0）", result: "F = 0", intuition: "顺着磁场的电流不受力。"),
                 LimitCheck(scenario: "电流垂直磁场（θ=90°）", result: "F = BIL（最大）", intuition: "电动机里导线都尽量垂直磁场摆放，力最大。"),
@@ -265,8 +265,8 @@ enum LawLibrary {
             expression: "E = n·ΔΦ/Δt（切割式 E = BLv）",
             dimension: "V",
             physicalImage: "磁场「变化」才生电——磁铁插进线圈的那一下来电，停着不动就没电。",
-            derivation: "法拉第的实验定律，本质是变化的磁场会激发涡旋电场。",
-            meaning: "感应电动势正比于磁通量的变化率，而不是磁通量本身。",
+            derivation: "法拉第做了大量实验：磁铁插进线圈→有电；拔出→有电；停着不动→没电。总结：是「变化率」而非「大小」决定电动势。切割导体版（E=BLv）：导体切割磁感线，等价于磁通量每秒变化 BLv，所以 E=BLv。",
+            meaning: "感应电动势正比于磁通量的变化率，而不是磁通量本身。「为什么两边可以划等号」：E=BLv 中，E 是电动势（能量来源），后面接上电路 I=E/R，就可以算出安培力 F=BIL——这两个等号是「能量守恒」的体现。",
             limitChecks: [
                 LimitCheck(scenario: "磁通量不变（ΔΦ=0）", result: "E = 0", intuition: "磁铁停在线圈里，再强也不来电——「变化」才是关键。"),
                 LimitCheck(scenario: "变化越快（Δt → 小）", result: "E 越大", intuition: "发电机转得越快、磁铁抽插越急，电压越高。"),
@@ -339,6 +339,180 @@ enum LawLibrary {
             applications: ["光纤", "海市蜃楼", "玻璃砖测折射率"],
             relatedWeapons: [.symmetry],
             latex: "n = \\dfrac{\\sin\\theta_1}{\\sin\\theta_2},\\quad \\sin C = \\dfrac{1}{n}"
+        ),
+
+        // ── 补充：牛顿第一/三定律（基础但常被跳过）──
+
+        PhysicsLaw(
+            id: "newton1_3",
+            name: "牛顿第一/三定律",
+            nameEN: "Newton's 1st & 3rd Laws",
+            topic: .newton,
+            stage: .senior,
+            expression: "第一：合力=0→匀速/静止；第三：F₁₂ = −F₂₁",
+            dimension: "N",
+            physicalImage: "第一定律：物体「懒」，不愿改变自己的运动状态，除非有人逼它（施力）。第三定律：你推墙，墙也在推你——力总是成对的，大小相等、方向相反、作用在不同物体上。",
+            derivation: "第一定律是伽利略理想斜面实验的推论：摩擦力越小，物体滑得越远；摩擦力为零就永远滑。第三定律是力的本质——力是物体间的「相互作用」，单方向的力不存在。",
+            meaning: "第一定律揭示了「惯性」的存在，定义了惯性参考系。第三定律说明内力不能改变系统总动量——这是动量守恒的根源。",
+            limitChecks: [
+                LimitCheck(scenario: "第三定律：大象推小老鼠", result: "力等大！但加速度不同（a=F/m）", intuition: "两者力相等，但质量不同，所以加速度不同。学生最常混淆「等力」和「等加速度」。"),
+                LimitCheck(scenario: "第一定律：太空飞船关闭发动机", result: "继续匀速飞行（无摩擦）", intuition: "宇宙飞船关机不停——这是第一定律的最纯粹体现。"),
+            ],
+            conditions: ["第一定律在惯性参考系成立", "第三定律在任何参考系成立，且是瞬时的"],
+            commonMisuses: [
+                "「物体静止就是没有力」错！静止可以有多个力平衡",
+                "作用力与反作用力不能抵消，因为作用在两个不同物体上",
+                "「推车车动，车也推我」这对力不平衡——它们作用在不同物体上",
+            ],
+            applications: ["受力平衡分析", "动量守恒的推导基础", "碰撞中等时冲量"],
+            relatedWeapons: [.forceDiagram, .wholeIsolation],
+            latex: "\\vec{F}_{12} = -\\vec{F}_{21},\\quad \\sum \\vec{F} = 0 \\Rightarrow \\vec{v} = \\text{常量}"
+        ),
+
+        PhysicsLaw(
+            id: "friction_hooke",
+            name: "摩擦力与胡克定律",
+            nameEN: "Friction & Hooke's Law",
+            topic: .newton,
+            stage: .senior,
+            expression: "滑动摩擦：f=μN；弹力：F=kx",
+            dimension: "N",
+            physicalImage: "摩擦力是「粗糙」带来的阻力，大小和压力成正比。弹力是「形变」带来的恢复力，形变越大弹力越大——弹簧就是最直观的例子。",
+            derivation: "f=μN 是实验定律，μ 是摩擦因数由材料决定，N 是接触面法向压力。胡克定律 F=kx 在弹性限度内成立，k 是弹簧的「硬度」（劲度系数）。",
+            meaning: "摩擦力方向总是阻碍「相对运动（趋势）」；弹力方向总是指向「恢复原状」的方向。两者都是被动力，由其他条件决定大小。",
+            limitChecks: [
+                LimitCheck(scenario: "静摩擦力：物体静止、施力越来越大", result: "静摩擦力跟着增大，直到最大静摩擦 ≈ μN", intuition: "静摩擦力是「调节力」——能跟着变，但有上限。超过了才开始滑动。"),
+                LimitCheck(scenario: "弹簧 k 很大（硬弹簧）", result: "同样的力形变很小", intuition: "钢板弹簧很硬（k大），压下去一点点；床垫弹簧很软（k小），一压就凹很多。"),
+            ],
+            conditions: [
+                "f=μN：N 是法向力（不是重力！），斜面上 N=mg·cosθ",
+                "胡克定律只在弹性限度内成立，超过就永久变形",
+                "静摩擦最大值 ≈ 滑动摩擦力（略大），一般题目当相等处理",
+            ],
+            commonMisuses: [
+                "把 N 当成重力 mg：斜面上 N=mgcosθ，不是 mg",
+                "以为动摩擦力总阻碍运动——传送带上物体加速时摩擦力是动力",
+                "胡克定律 F=kx 中 x 是「形变量」不是「总长度」",
+            ],
+            applications: ["斜面临界分析（tanθ=μ 时恰好滑）", "弹簧受力平衡", "传送带问题"],
+            relatedWeapons: [.forceDiagram, .criticalAnalysis],
+            latex: "f = \\mu N,\\quad F = kx"
+        ),
+
+        PhysicsLaw(
+            id: "work_power",
+            name: "功与功率",
+            nameEN: "Work & Power",
+            topic: .energy,
+            stage: .senior,
+            expression: "W = Fs·cosθ；P = W/t = Fv",
+            dimension: "W: J = N·m；P: W = J/s",
+            physicalImage: "功是「有效的推力×移动距离」——用力推墙推不动，做功为零（位移为零）；垂直方向的力拎着重物水平走，做功也为零（力与位移垂直，cosθ=0）。功率是「做功的速度」，爬楼梯做同样的功，跑得快的功率大。",
+            derivation: "W = F·s·cosθ 是力、位移、夹角三者的组合。只有力在位移方向上的分量才「有效」。功率 P = W/t，而 W=Ft·s/t = Fv（匀速时）。",
+            meaning: "功是「能量转移」的量度，有正有负。正功给系统加能量，负功取走能量。合外力做的功 = 动能变化（动能定理）。",
+            limitChecks: [
+                LimitCheck(scenario: "θ = 90°（力⊥位移）", result: "W = 0，力不做功", intuition: "向心力永远垂直速度，所以匀速圆周里向心力不做功——速率永远不变。"),
+                LimitCheck(scenario: "P = Fv：速度增大", result: "若功率恒定，F 必须减小", intuition: "汽车加速过程：发动机功率恒定，速度越大，驱动力越小，最终 F=阻力时达到最大速度。"),
+            ],
+            conditions: [
+                "W = Fscosθ 要求力和位移同一过程，不能混淆",
+                "P = Fv 中 v 是力的作用点的速度（不是物体质心速度）",
+                "变力做功只能用动能定理或图像面积",
+            ],
+            commonMisuses: [
+                "用路程代替位移算功（功用位移，不用路程）",
+                "合力做功才能用动能定理，不能对单个力用",
+                "功率 P=UI（电功率）和机械功率 P=Fv 的单位都是 W",
+            ],
+            applications: ["求末速度（动能定理跨越变力）", "汽车最大速度（P=Fv，F=阻力）", "效率计算"],
+            relatedWeapons: [.workEnergyTheorem, .energyIntuition],
+            latex: "W = Fs\\cos\\theta,\\quad P = \\dfrac{W}{t} = Fv"
+        ),
+
+        PhysicsLaw(
+            id: "magnetic_flux",
+            name: "磁通量与楞次定律",
+            nameEN: "Magnetic Flux & Lenz's Law",
+            topic: .induction,
+            stage: .senior,
+            expression: "Φ = BS·cosα；楞次：感应电流的磁场阻碍Φ变化",
+            dimension: "Wb（韦伯）= T·m²",
+            physicalImage: "磁通量 Φ 就是「穿过回路的磁力线条数」——面积越大、磁场越强、越正对磁场，穿过的线越多。楞次定律说：你想让磁通量增加，感应电流就「对抗」，产生反向磁场阻止它增加；你想减少，它就「守护」，产生同向磁场维持它。",
+            derivation: "Φ = B·S·cosα（α 是磁场与线圈平面法线的夹角）。楞次定律由能量守恒导出：感应电流的磁效应必须阻碍变化，否则会自发增强而违反能量守恒。",
+            meaning: "磁通量是电磁感应的「触发器」——Φ 变化才有感应电动势（法拉第定律 E=ΔΦ/Δt）。楞次定律给出感应电流方向，是判断方向的首选工具。",
+            limitChecks: [
+                LimitCheck(scenario: "线圈平面平行磁场（α=90°）", result: "Φ = 0，但转动时 ΔΦ/Δt 最大", intuition: "发电机这个位置电动势最大——磁通量为零但变化最快。"),
+                LimitCheck(scenario: "磁铁靠近闭合线圈", result: "楞次：感应电流让线圈「推开」磁铁（阻碍靠近）", intuition: "感应电流像一个「守旧者」：永远阻止外界改变现状。"),
+            ],
+            conditions: [
+                "α 是 B 与线圈平面「法线」的夹角（不是与平面的夹角）",
+                "楞次定律判方向，法拉第定律算大小——二者配合使用",
+                "只有闭合回路才能形成感应电流（开路只有电动势）",
+            ],
+            commonMisuses: [
+                "把 α 理解为 B 与线圈平面的夹角（应是与法线的夹角，相差 90°）",
+                "楞次定律不是「感应电流方向与磁通量相反」，而是阻碍变化",
+                "导体棒切割磁感线用右手定则（不是楞次），两者不能混用",
+            ],
+            applications: ["判断感应电流方向", "电磁刹车", "涡流加热", "霍尔效应"],
+            relatedWeapons: [.lenzRule, .graphMethod],
+            latex: "\\Phi = BS\\cos\\alpha,\\quad \\text{楞次：}I_{感}\\text{ 阻碍 }\\Delta\\Phi"
+        ),
+
+        PhysicsLaw(
+            id: "cyclotron",
+            name: "带电粒子在匀强磁场中的圆周运动",
+            nameEN: "Charged Particle in Magnetic Field",
+            topic: .magnetic,
+            stage: .senior,
+            expression: "r = mv/(qB)；T = 2πm/(qB)",
+            dimension: "r: m；T: s",
+            physicalImage: "带电粒子进入磁场，洛伦兹力当向心力——它把粒子「掰弯」成圆。速度越快弯得越大（圆越大）；但周期 T 与速度完全无关，只由质量和磁场决定——这是回旋加速器能工作的秘密。",
+            derivation: "洛伦兹力 = 向心力：qvB = mv²/r，解得 r = mv/(qB)。周期 T = 2πr/v = 2π(mv/qB)/v = 2πm/(qB)——v 在分子分母约掉，所以 T 与速度无关。",
+            meaning: "半径正比于速度（动量）；周期只由 m/q 和 B 决定，与速度无关。「为什么两边可以划等号」：因为洛伦兹力恰好垂直速度、大小等于向心力所需值，两个表达式描述同一个力。",
+            limitChecks: [
+                LimitCheck(scenario: "磁场 B → 2 倍（v 不变）", result: "r → ½，T → ½", intuition: "磁场越强，粒子弯得越厉害，圆越小；同时转得越快。"),
+                LimitCheck(scenario: "粒子速度 v → 2 倍", result: "r → 2 倍，T 不变", intuition: "速度快圆大，但圆的周长也大了，走得也快，时间刚好一样——这是等时性，回旋加速器就靠它。"),
+            ],
+            conditions: ["匀强磁场", "粒子速度远小于光速（否则相对论修正）", "v⊥B（若有平行分量则走螺旋线）"],
+            commonMisuses: [
+                "以为 v 大了 T 也大——T=2πm/qB 不含 v，周期恒定",
+                "画受力图时把洛伦兹力画成「额外力」——洛伦兹力就是这里的向心力",
+                "r=mv/qB 中 m 是粒子质量，q 是电荷量（不是电荷数）",
+            ],
+            applications: ["质谱仪（r∝mv，分离同位素）", "回旋加速器", "带电粒子偏转测速"],
+            relatedWeapons: [.symmetry, .equivalentMethod],
+            latex: "r = \\dfrac{mv}{qB},\\quad T = \\dfrac{2\\pi m}{qB}"
+        ),
+
+        PhysicsLaw(
+            id: "electric_power",
+            name: "电功率",
+            nameEN: "Electric Power",
+            topic: .circuit,
+            stage: .senior,
+            expression: "P = UI = I²R = U²/R；电热：Q = I²Rt",
+            dimension: "W = J/s",
+            physicalImage: "电功率是「用电的速度」——同样一度电，电热丝几分钟用完，LED 灯泡能用好几个小时。P=UI 是普适公式；P=I²R 只用于纯电阻；Q=I²Rt 是焦耳定律（产热）。",
+            derivation: "P = W/t = qU/t = It·U/t = UI。对纯电阻，代入 I=U/R 得 P=U²/R，代入 U=IR 得 P=I²R。三个公式其实是同一个公式在不同条件下的变形。",
+            meaning: "P=UI 对所有电器通用（含非线性元件）；P=I²R 和 P=U²/R 只适用于纯电阻。选哪个取决于「已知什么量」。",
+            limitChecks: [
+                LimitCheck(scenario: "电阻不变，电压 → 2 倍", result: "功率 → 4 倍（P=U²/R）", intuition: "220V 用电器接到 380V 上，功率变成 3 倍，分分钟烧掉。"),
+                LimitCheck(scenario: "远距离输电：相同功率，提高电压", result: "电流减小，线路损耗 P热=I²R 大幅降低", intuition: "高压输电省电——这是变压器最重要的应用场景。"),
+            ],
+            conditions: [
+                "P=I²R 要求纯电阻——灯泡是纯电阻，电动机不是",
+                "电动机：输入 P=UI，机械输出 P机=UI-I²r，热损耗 Q=I²r",
+                "Q=I²Rt 是产热（焦耳热），适合任何有电阻的器件",
+            ],
+            commonMisuses: [
+                "电动机套用 P=U²/R 计算功率（电动机有反电动势，不是纯电阻）",
+                "混淆「电功率」和「热功率」——只有纯电阻两者才相等",
+                "串联和并联中求各元件功率，要先求通过的 U 或 I",
+            ],
+            applications: ["用电器额定功率计算", "远距离输电损耗", "电热器计算", "灯泡亮度比较"],
+            relatedWeapons: [.equivalentCircuit, .graphMethod],
+            latex: "P = UI = I^2R = \\dfrac{U^2}{R},\\quad Q = I^2Rt"
         ),
 
         // ── 以下为补充条目，覆盖降维秒杀与沙盘高频公式 ──
