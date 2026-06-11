@@ -178,6 +178,10 @@ struct DescentDuelView: View {
                 .foregroundStyle(LinearGradient(colors: [.apexGold, .apexLava], startPoint: .leading, endPoint: .trailing))
             Text("常规约 \(clockString(problem.averageTime)) ｜ 「\(dual.weaponUsed.name)」约 \(clockString(problem.averageTime / dual.timeRatio))")
                 .font(AppFont.caption).foregroundColor(.white.opacity(0.8))
+            if let simLink = SimLibrary.link(for: problem) {
+                ProblemSimLinkCard(link: simLink, dark: true)
+                    .padding(.horizontal, Spacing.sm)
+            }
             Button(action: onFinish) {
                 Text("看懂这把武器")
                     .font(.headline).foregroundColor(.white)

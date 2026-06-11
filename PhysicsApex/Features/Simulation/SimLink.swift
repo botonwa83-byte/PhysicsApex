@@ -130,6 +130,7 @@ enum SimLibrary {
 
 struct ProblemSimLinkCard: View {
     let link: SimLink
+    var dark: Bool = false
     @ObservedObject private var purchase = PurchaseManager.shared
     @State private var showPaywall = false
 
@@ -153,16 +154,24 @@ struct ProblemSimLinkCard: View {
             Image(systemName: locked ? "lock.fill" : "slider.horizontal.below.rectangle")
                 .font(.title2).foregroundColor(.apexEmerald).frame(width: 34)
             VStack(alignment: .leading, spacing: 2) {
-                Text("动手验证 · \(link.title)").font(AppFont.cardTitle).foregroundColor(.primary)
+                Text("动手验证 · \(link.title)")
+                    .font(AppFont.cardTitle)
+                    .foregroundColor(dark ? .white : .primary)
                 Text(locked ? "解锁后拖动参数，看见这道题背后的物理。" : link.blurb)
-                    .font(AppFont.caption).foregroundColor(.secondary).lineLimit(2)
+                    .font(AppFont.caption)
+                    .foregroundColor(dark ? .white.opacity(0.7) : .secondary)
+                    .lineLimit(2)
             }
             Spacer()
             Text(locked ? "解锁" : "")
                 .font(AppFont.chip).foregroundColor(.apexLava)
-            Image(systemName: "chevron.right").foregroundColor(.secondary)
+            Image(systemName: "chevron.right")
+                .foregroundColor(dark ? .white.opacity(0.4) : .secondary)
         }
-        .cardSurface()
-        .overlay(RoundedRectangle(cornerRadius: Radius.card).stroke(Color.apexEmerald.opacity(0.25), lineWidth: 1))
+        .padding(Spacing.md)
+        .background(dark ? Color.white.opacity(0.08) : Color.apexCardSurface)
+        .cornerRadius(Radius.card)
+        .overlay(RoundedRectangle(cornerRadius: Radius.card)
+            .stroke(Color.apexEmerald.opacity(dark ? 0.5 : 0.25), lineWidth: 1))
     }
 }

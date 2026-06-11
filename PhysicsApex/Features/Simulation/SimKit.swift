@@ -78,7 +78,8 @@ struct SimCanvasStyle: ViewModifier {
 
 extension View {
     func simCanvas(height: CGFloat = 220, tint: Color = .apexStarBlue) -> some View {
-        modifier(SimCanvasStyle(height: height, tint: tint))
+        let h = UIDevice.current.userInterfaceIdiom == .pad ? height * 1.45 : height
+        return modifier(SimCanvasStyle(height: h, tint: tint))
     }
 }
 
