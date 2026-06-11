@@ -16,7 +16,12 @@ schemes:
     build:
       targets:
         PhysicsApex: all
+    run:
+      config: Debug
+      storeKitConfiguration: PhysicsApex.storekit
     test:
+      config: Debug
+      storeKitConfiguration: PhysicsApex.storekit
       targets:
         - PhysicsApexTests
 targets:

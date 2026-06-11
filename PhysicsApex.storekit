@@ -1,0 +1,49 @@
+{
+  "identifier" : "2D9CFD5A-B6CA-49A7-8FAA-B5E8C5EFE2D6",
+  "nonConsumableProducts" : [
+    {
+      "displayPrice" : "22.00",
+      "familySharable" : false,
+      "internalID" : "430B2D6E-7390-4EE2-8FD4-60270BC41365",
+      "localizations" : [
+        {
+          "description" : "解锁 PhysicsApex 完整功能：全题库（138题）、全降维战例（68道）、全沙盘（43个）、全武器（30把）。一次买断，永久有效。",
+          "displayName" : "解锁完整功能",
+          "locale" : "zh_CN"
+        },
+        {
+          "description" : "Unlock all features: full question bank, all Descent cases, all sandboxes, all weapons. One-time purchase.",
+          "displayName" : "Full Unlock",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.physicsapex.app.full_unlock",
+      "referenceName" : "Full Unlock",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_storeKitErrors" : [
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Store Sync"
+      }
+    ]
+  },
+  "version" : {
+    "major" : 3,
+    "minor" : 0,
+    "patch" : 0
+  }
+}
