@@ -340,6 +340,272 @@ enum LawLibrary {
             relatedWeapons: [.symmetry],
             latex: "n = \\dfrac{\\sin\\theta_1}{\\sin\\theta_2},\\quad \\sin C = \\dfrac{1}{n}"
         ),
+
+        // ── 以下为补充条目，覆盖降维秒杀与沙盘高频公式 ──
+
+        PhysicsLaw(
+            id: "kinematics",
+            name: "匀变速运动三公式",
+            nameEN: "Uniformly Accelerated Motion",
+            topic: .kinematics,
+            stage: .senior,
+            expression: "v=v₀+at；s=v₀t+½at²；v²=v₀²+2as",
+            dimension: "m/s, m, m/s²",
+            physicalImage: "油门踩下去匀加速，速度表匀速往上走，走过的路程越来越多——三个公式是同一段运动从三个角度（速度/位移/无时）描述。",
+            derivation: "第一式是加速度的定义：Δv/Δt=a 直接得出。第二式是 v-t 图面积（梯形）。第三式由前两式消去 t 得到，无时公式，解题高频。",
+            meaning: "只要 a 不变，这三条关系就成立。已知三个量求第四个——先挑不含无关量的那条公式。",
+            limitChecks: [
+                LimitCheck(scenario: "a = 0（匀速）", result: "s = v₀t，公式退化为匀速", intuition: "匀速是匀变速的特例，加速度为零时三条公式自动变成中学最基本的关系。"),
+                LimitCheck(scenario: "v₀ = 0（从静止开始）", result: "s = ½at²", intuition: "自由落体就是这种情况：s∝t²，每秒走过的路程比是1:3:5:7……"),
+            ],
+            conditions: ["加速度 a 恒定不变", "取正方向要一致，方向与正方向相反的量取负值"],
+            commonMisuses: [
+                "v₀ 和 v 搞反（尤其是竖直上抛）",
+                "忘记 a 有方向：减速时 a 与 v 反向，a 要取负",
+                "三公式只适用于匀变速，变加速不能套",
+            ],
+            applications: ["自由落体/竖直上抛", "刹车距离", "传送带追及", "斜面运动"],
+            relatedWeapons: [.forceDiagram, .graphMethod],
+            latex: "v = v_0 + at,\\quad s = v_0t + \\tfrac{1}{2}at^2,\\quad v^2 = v_0^2 + 2as"
+        ),
+
+        PhysicsLaw(
+            id: "projectile",
+            name: "平抛运动分解",
+            nameEN: "Projectile Motion",
+            topic: .kinematics,
+            stage: .senior,
+            expression: "x=v₀t；y=½gt²；v=√(vₓ²+vᵧ²)",
+            dimension: "m, m/s",
+            physicalImage: "从悬崖水平抛出一颗石子——水平方向它匀速飞，竖直方向它自由落，两个独立的运动叠加在一起就是抛物线。",
+            derivation: "把运动分成两个独立方向：水平无力→匀速；竖直只有重力→自由落体（初速为零）。两式参数只有 t 是共享的，这就是解题的钥匙。",
+            meaning: "合运动 = 分运动的叠加。水平竖直互不干扰，用时间 t 联系两个方向。",
+            limitChecks: [
+                LimitCheck(scenario: "v₀ = 0（竖直下落）", result: "退化为自由落体 y=½gt²", intuition: "平抛是自由落体的推广——水平速度不影响竖直方向的下落时间。"),
+                LimitCheck(scenario: "t 很小（刚离开手时）", result: "轨迹近似直线", intuition: "刚抛出的瞬间，重力还没来得及把它「拽弯」。"),
+            ],
+            conditions: ["只有重力做功（无空气阻力）", "初速水平", "斜抛时 vₓ=v₀cosθ, vᵧ₀=v₀sinθ"],
+            commonMisuses: [
+                "混淆水平和竖直公式（水平匀速，竖直才自由落体）",
+                "飞行时间由竖直方向决定，与水平速度无关",
+                "落地速度要用矢量合成，不能直接相加",
+            ],
+            applications: ["抛体运动基础题", "平抛射程与角度关系", "运动场跳远测速"],
+            relatedWeapons: [.forceDiagram, .referenceFrame],
+            latex: "x = v_0 t,\\quad y = \\tfrac{1}{2}gt^2,\\quad v = \\sqrt{v_x^2 + v_y^2}"
+        ),
+
+        PhysicsLaw(
+            id: "shm_period",
+            name: "简谐运动周期公式",
+            nameEN: "Period of SHM",
+            topic: .wave,
+            stage: .senior,
+            expression: "弹簧：T=2π√(m/k)；单摆：T=2π√(L/g)",
+            dimension: "s",
+            physicalImage: "弹簧系统里，质量像「顽固」，弹簧劲度像「急性子」——越重越懒，越硬弹得越快；单摆则是摆长和重力之间的博弈。",
+            derivation: "对弹簧：回复力 F=-kx，代入 F=ma 得 ẍ=-(k/m)x，这是角频率 ω=√(k/m) 的简谐运动，T=2π/ω=2π√(m/k)。单摆类比推导。",
+            meaning: "周期与振幅无关（等时性），只由系统的「惯性」和「回复力强度」决定。这是简谐运动最反直觉也最重要的结论。",
+            limitChecks: [
+                LimitCheck(scenario: "弹簧劲度 k → 很大", result: "T → 0（振得很快）", intuition: "超硬弹簧（如钢轨道）振动频率极高。"),
+                LimitCheck(scenario: "摆长 L → 4 倍", result: "T → 2 倍", intuition: "T∝√L，摆长变四倍，周期才变两倍。"),
+            ],
+            conditions: ["小振幅（单摆 θ<5°）", "弹簧轻质、弹性限度内", "忽略阻尼"],
+            commonMisuses: [
+                "以为振幅大周期就大（等时性：振幅不影响周期）",
+                "单摆在月球上周期变长（g 小，T=2π√(L/g) 变大）",
+                "弹簧劲度 k 与弹簧长短有关：弹簧越短越硬",
+            ],
+            applications: ["计时摆钟", "弹簧测力计标定", "共振频率匹配"],
+            relatedWeapons: [.energyIntuition, .symmetry],
+            latex: "T = 2\\pi\\sqrt{\\dfrac{m}{k}},\\quad T = 2\\pi\\sqrt{\\dfrac{L}{g}}"
+        ),
+
+        PhysicsLaw(
+            id: "electric_field",
+            name: "电场强度公式",
+            nameEN: "Electric Field Strength",
+            topic: .electricField,
+            stage: .senior,
+            expression: "E = F/q（定义式）；E = kQ/r²（点电荷）；E = U/d（匀强）",
+            dimension: "N/C = V/m",
+            physicalImage: "放一个正「探针电荷」q 进来，它受到多大力，那个力除以 q 就是电场强度——E 描述的是这块空间有多「电」，跟 q 无关。",
+            derivation: "E=F/q 是定义，用探测电荷的受力来量化空间中的电场。点电荷的 E 由库仑定律直接得到（F=kQq/r²，除以 q）。",
+            meaning: "E 是场的性质，不依赖于探测电荷 q 的大小；E 的方向就是正电荷受力方向。",
+            limitChecks: [
+                LimitCheck(scenario: "平行板电容器 d→0（极板靠近）", result: "E=U/d → 无穷大", intuition: "同样电压，极板越近电场越强——击穿空气就靠这个原理。"),
+                LimitCheck(scenario: "距点电荷 r→很远", result: "E→0", intuition: "电场随距离平方衰减，离得足够远就感受不到了。"),
+            ],
+            conditions: [
+                "E=F/q 要用小探测电荷（不能影响源场）",
+                "E=U/d 只在匀强电场（平行板间）成立",
+                "E = kQ/r² 只适用于点电荷",
+            ],
+            commonMisuses: [
+                "把 E=U/d 用在非匀强电场",
+                "认为 q 越大 E 越大——E 与 q 无关",
+                "方向：负电荷受力与 E 相反",
+            ],
+            applications: ["平行板电容器", "带电粒子在电场中偏转（类平抛）", "电场线密度反映 E 大小"],
+            relatedWeapons: [.equivalentMethod, .workEnergyTheorem],
+            latex: "E = \\dfrac{F}{q} = \\dfrac{kQ}{r^2} = \\dfrac{U}{d}"
+        ),
+
+        PhysicsLaw(
+            id: "capacitor",
+            name: "电容公式",
+            nameEN: "Capacitance",
+            topic: .electricField,
+            stage: .senior,
+            expression: "C = Q/U；平行板 C = ε₀S/d",
+            dimension: "F（法拉）= C/V",
+            physicalImage: "电容就是「储电量/电压」——同样的电压，塞进去的电荷越多，电容越大；平行板像两块充电的煎饼，越大越近越能「存电」。",
+            derivation: "C=Q/U 是定义式。对平行板，E=U/d，又 E=σ/ε₀=Q/(ε₀S)，联立得 C=ε₀S/d。",
+            meaning: "电容是「容量」，描述在单位电压下能存多少电荷，由几何结构决定，与 Q、U 无关。",
+            limitChecks: [
+                LimitCheck(scenario: "极板间距 d → 2 倍", result: "C → ½；若 Q 不变，U → 2 倍", intuition: "两极板离开，储电能力下降，电压升高。"),
+                LimitCheck(scenario: "充电后断电（Q 不变），再增大 d", result: "C 减小，U=Q/C 升高，E=U/d 不变", intuition: "断电后 Q 被锁住，电场不变，但电压随间距增大——重要考点！"),
+            ],
+            conditions: ["C=ε₀S/d 只适用于平行板、真空/空气", "实际有介质时 C=εS/d"],
+            commonMisuses: [
+                "C=Q/U 中 C 不随 Q、U 变化（Q/U 的比值才是 C）",
+                "「断电后」与「接电源」两种情境下动态分析结论完全不同",
+                "C 越大不代表电场越强（E 由 U/d 决定）",
+            ],
+            applications: ["电容器充放电动态分析", "RC 电路时间常数 τ=RC", "触摸屏原理"],
+            relatedWeapons: [.controlVariable, .equivalentMethod],
+            latex: "C = \\dfrac{Q}{U} = \\dfrac{\\varepsilon_0 S}{d}"
+        ),
+
+        PhysicsLaw(
+            id: "transformer",
+            name: "理想变压器公式",
+            nameEN: "Ideal Transformer",
+            topic: .induction,
+            stage: .senior,
+            expression: "U₁/U₂ = n₁/n₂；I₁/I₂ = n₂/n₁；P₁ = P₂",
+            dimension: "U: V；I: A；P: W",
+            physicalImage: "变压器是「力矩放大器」的电学版——匝数多的一侧电压高、电流小；匝数少的一侧电压低、电流大；功率不增不减，能量守恒。",
+            derivation: "基于法拉第定律：两线圈切割的是同一磁场，每匝感应电压相同，总电压之比就是匝数之比。能量守恒给出电流比是匝数比的倒数。",
+            meaning: "变压器改变的是电压和电流，不改变功率（理想条件下）。升压→降流，降压→升流。",
+            limitChecks: [
+                LimitCheck(scenario: "n₁=n₂（匝数相同）", result: "U₁=U₂，I₁=I₂，像导线直连", intuition: "1:1 变压器本质上不变，但可以起电气隔离作用。"),
+                LimitCheck(scenario: "副线圈开路（I₂=0）", result: "I₁≈0，功率≈0", intuition: "空载变压器几乎不耗电——这是理想情况，实际有磁化损耗。"),
+            ],
+            conditions: ["理想变压器：无漏磁、线圈电阻为零、无铁损", "公式中 I₁/I₂=n₂/n₁ 仅在有负载时成立（开路时 I₁≠0 不适用）"],
+            commonMisuses: [
+                "开路时也套 I 的比值公式",
+                "多副线圈时混用电流比（应分别对每个副线圈用 P 守恒）",
+                "忘记升压变压器的初级匝数少、次级匝数多",
+            ],
+            applications: ["远距离输电（升压减少线路损耗）", "手机充电器降压", "焊机大电流低压"],
+            relatedWeapons: [.lenzRule, .energyIntuition],
+            latex: "\\dfrac{U_1}{U_2} = \\dfrac{n_1}{n_2},\\quad \\dfrac{I_1}{I_2} = \\dfrac{n_2}{n_1},\\quad P_1 = P_2"
+        ),
+
+        PhysicsLaw(
+            id: "wave_speed",
+            name: "波速公式",
+            nameEN: "Wave Speed",
+            topic: .wave,
+            stage: .senior,
+            expression: "v = λf = λ/T",
+            dimension: "m/s",
+            physicalImage: "波是「形状」在空间里跑，不是介质在跑——浮在水面的软木塞只是上下抖，水波的「图案」却在向外传播。",
+            derivation: "每个周期 T，波向前传播一个波长 λ；速度 = 路程/时间 = λ/T = λf。",
+            meaning: "波速由介质决定（不由频率决定！）；频率由声源决定；波长是两者共同决定的结果。",
+            limitChecks: [
+                LimitCheck(scenario: "频率 f 升高（同一介质）", result: "v 不变，λ = v/f 减小", intuition: "同一根绳子，振得更快，波长变短，但波速不变——这是波动最反直觉的地方。"),
+                LimitCheck(scenario: "声音从空气进入水", result: "v 增大，f 不变，λ 增大", intuition: "频率是声源决定的，不会因为介质变了而变——所以水里声音波长更长。"),
+            ],
+            conditions: ["机械波：v 由介质的弹性和密度决定", "电磁波：真空中 v=c=3×10⁸ m/s", "同一介质同一频率，v 与振幅无关"],
+            commonMisuses: [
+                "以为频率高波速就快（波速与频率无关）",
+                "多普勒效应时频率变了，介质中波速没变",
+                "v=λf 中的 v 和 λ 要在同一介质中取值",
+            ],
+            applications: ["声纳测距", "多普勒测速", "驻波条件 L=nλ/2"],
+            relatedWeapons: [.graphMethod, .symmetry],
+            latex: "v = \\lambda f = \\dfrac{\\lambda}{T}"
+        ),
+
+        PhysicsLaw(
+            id: "mass_energy",
+            name: "质能方程",
+            nameEN: "Mass–Energy Equivalence",
+            topic: .modern,
+            stage: .senior,
+            expression: "E = mc²；ΔE = Δmc²",
+            dimension: "J；1 u = 931.5 MeV/c²",
+            physicalImage: "质量就是「浓缩的能量」——一丁点质量亏损（原子核层面），乘以光速的平方（9×10¹⁶），就是巨大的能量。铀弹、氢弹的破坏力都来源于这个 c²。",
+            derivation: "狭义相对论的核心结论：物体静止时也有能量 E₀=mc²。核反应中质量减少（质量亏损），这部分质量完全转化为能量释放出来。",
+            meaning: "质量和能量是同一事物的两种度量，可以相互转化。核反应的能量来源就是反应前后的质量差。",
+            limitChecks: [
+                LimitCheck(scenario: "Δm = 1 u ≈ 1.66×10⁻²⁷ kg", result: "ΔE = Δmc² ≈ 931.5 MeV", intuition: "高考必记换算：1 u 的质量亏损对应 931.5 MeV 的能量。"),
+                LimitCheck(scenario: "化学反应（原子层面）", result: "质量变化极小（10⁻¹²量级）", intuition: "化学反应也有质量亏损，但太小测不出来——只有核反应的亏损才显著。"),
+            ],
+            conditions: ["Δm 用原子质量单位 u 时，ΔE（MeV）= Δm(u) × 931.5", "核反应中质子数和中子数守恒，但不是质量守恒"],
+            commonMisuses: [
+                "把「质量数守恒」误以为「质量守恒」——核反应中真实质量（不是质量数）不守恒",
+                "裂变/聚变都有质量亏损，但聚变亏损比例更大",
+                "ΔE = Δmc² 中 c=3×10⁸ m/s，算出来单位是 J",
+            ],
+            applications: ["核电站裂变能量计算", "聚变反应堆", "医用正电子湮灭扫描（PET）"],
+            relatedWeapons: [.energyIntuition, .dimensionalAnalysis],
+            latex: "E = mc^2,\\quad \\Delta E = \\Delta m \\cdot c^2"
+        ),
+
+        PhysicsLaw(
+            id: "lens_formula",
+            name: "薄透镜公式",
+            nameEN: "Thin Lens Equation",
+            topic: .optics,
+            stage: .senior,
+            expression: "1/u + 1/v = 1/f；放大率 m = v/u",
+            dimension: "cm 或 m",
+            physicalImage: "透镜让来自物点的发散光重新汇聚成像——物距（物到镜）和像距（像到镜）之间有严格的倒数关系，焦距是连接它们的桥梁。",
+            derivation: "由光路的折射定律和相似三角形推出，是几何光学的核心公式。",
+            meaning: "已知焦距和物距，就能算出成像位置。u=2f 时 v=2f（等大实像）；u<f 时 v 为负（虚像，正立放大）。",
+            limitChecks: [
+                LimitCheck(scenario: "u = f（物在焦点上）", result: "1/v = 0，v → ∞，平行光出射", intuition: "手电筒聚光——灯在焦点处，出射平行光束。"),
+                LimitCheck(scenario: "u < f（物在焦点内）", result: "v 为负，虚像正立放大", intuition: "放大镜的原理：物比焦距近，像在同侧，正立放大。"),
+            ],
+            conditions: ["薄透镜近轴光线", "实物实像时 u>0, v>0；虚像 v<0", "凸透镜 f>0；凹透镜 f<0"],
+            commonMisuses: [
+                "搞混实像与虚像的符号规则",
+                "凹透镜只成缩小正立虚像，不成实像",
+                "放大率 m=v/u，m>1 放大，m<1 缩小，m 为负时倒立",
+            ],
+            applications: ["照相机（u>2f）", "投影仪（f<u<2f）", "放大镜（u<f）", "眼镜矫正"],
+            relatedWeapons: [.symmetry, .graphMethod],
+            latex: "\\dfrac{1}{u} + \\dfrac{1}{v} = \\dfrac{1}{f},\\quad m = \\dfrac{v}{u}"
+        ),
+
+        PhysicsLaw(
+            id: "bohr_energy",
+            name: "玻尔能级公式",
+            nameEN: "Bohr Energy Levels",
+            topic: .modern,
+            stage: .senior,
+            expression: "Eₙ = E₁/n²（氢原子 E₁ = −13.6 eV）",
+            dimension: "eV（电子伏）",
+            physicalImage: "原子里的电子不能在任意轨道上待，只能在特定的「台阶」上——越往外台阶能量越高，跳下来就放出光子，跳上去就吸收光子，不多不少。",
+            derivation: "玻尔假设：轨道角动量量子化 L=nħ；库仑力提供向心力。联立得出轨道半径 rₙ=n²r₁，能量 Eₙ=E₁/n²。",
+            meaning: "氢原子能级是分立的，光谱线来自能级之间的跃迁，每根谱线对应一个固定的 ΔE=hν。",
+            limitChecks: [
+                LimitCheck(scenario: "n → ∞", result: "Eₙ → 0，电子逃出原子（电离）", intuition: "第 n 能级能量是 −13.6/n² eV，n 越大能量越趋近 0，直到脱离束缚。"),
+                LimitCheck(scenario: "n=1 到 n=2（最低跃迁）", result: "ΔE=10.2 eV，紫外线", intuition: "氢原子最低能级跳到第二级需要 10.2eV，在紫外区——肉眼看不见。"),
+            ],
+            conditions: ["只对氢原子（单电子）精确适用", "多电子原子的能级更复杂", "辐射公式 hν=E高-E低"],
+            commonMisuses: [
+                "从高能级跳到低能级是辐射（放出光子），反之是吸收",
+                "跃迁对应的光子能量 hν=|ΔE|，不是 E 本身",
+                "第 n 能级的能量是负值（束缚态），越负越稳定",
+            ],
+            applications: ["氢原子光谱线分系（莱曼、巴尔末系）", "激光原理", "X 射线特征谱"],
+            relatedWeapons: [.energyIntuition, .dimensionalAnalysis],
+            latex: "E_n = \\dfrac{E_1}{n^2},\\quad E_1 = -13.6\\,\\text{eV},\\quad h\\nu = E_m - E_n"
+        ),
     ]
 
     static func laws(for topic: PhysicsTopic) -> [PhysicsLaw] {
