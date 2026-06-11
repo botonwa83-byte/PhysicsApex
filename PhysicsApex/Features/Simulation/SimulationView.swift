@@ -10,18 +10,62 @@ struct SimulationHubView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: Spacing.lg) {
                 header
-                groupLabel("力学")
-                simEntry(0, "抛体运动", "调初速、角度、重力，看轨迹与射程", "scope", .apexLava) { ProjectileSimView() }
-                simEntry(1, "圆周运动", "向心力 F=mv²/r，速度翻倍力变四倍", "arrow.clockwise.circle", .apexLava) { CircularMotionSimView() }
-                simEntry(2, "斜面受力", "受力分解 + 临界角 tanθ=μ，到底滑不滑", "triangle", .apexLava) { InclineSimView() }
-                simEntry(3, "弹性碰撞", "调质量与速度，看动量如何守恒", "arrow.left.arrow.right", .apexStarBlue) { CollisionSimView() }
-                simEntry(4, "简谐振动", "弹簧滑块 + 回复力 + 实时 x-t 曲线", "waveform.path", .apexEmerald) { SHMSimView() }
 
-                groupLabel("电学")
-                simEntry(5, "欧姆定律", "I=U/R，电子流动可视化，电阻翻倍电流减半", "bolt.horizontal.circle", .apexStarBlue) { OhmSimView() }
+                groupLabel("力学 · 运动学")
+                simEntry(0, "抛体运动", "调初速、角度、重力，看轨迹与射程", "scope", .apexLava) { ProjectileSimView() }
+                simEntry(3, "自由落体与上抛", "g 一视同仁，上抛下落对称，全程加速度不变", "arrow.down.to.line", .apexLava) { FreeFallSimView() }
+                simEntry(4, "追及相遇", "v-t 图面积之差就是距离，看谁先追上谁", "arrow.triangle.merge", .apexLava) { ChaseSimView() }
+                simEntry(5, "传送带", "相对滑动定摩擦方向，共速后一起走", "arrow.right.to.line", .apexLava) { ConveyorSimView() }
+
+                groupLabel("力学 · 牛顿与受力")
+                simEntry(2, "斜面受力", "受力分解 + 临界角 tanθ=μ，到底滑不滑", "triangle", .apexLava) { InclineSimView() }
+                simEntry(6, "最省力的角度", "拉力存在最优倾角，摩擦角藏在其中", "angle", .apexLava) { FrictionPullSimView() }
+                simEntry(7, "连接体", "整体法求加速度，隔离法求绳张力", "link", .apexLava) { ConnectedSimView() }
+                simEntry(8, "电梯超重失重", "加速向上超重、向下失重，看体重计读数", "arrow.up.arrow.down", .apexLava) { ElevatorSimView() }
+
+                groupLabel("力学 · 圆周与天体")
+                simEntry(1, "圆周运动", "向心力 F=mv²/r，速度翻倍力变四倍", "arrow.clockwise.circle", .apexLava) { CircularMotionSimView() }
+                simEntry(9, "开普勒椭圆轨道", "近日点快、远日点慢，面积速度守恒", "circle.dashed", .apexStarBlue) { KeplerSimView() }
+                simEntry(10, "人船模型", "动量守恒，人走船退，质心纹丝不动", "ferry", .apexEmerald) { BoatSimView() }
+
+                groupLabel("力学 · 振动与碰撞")
+                simEntry(11, "简谐振动", "弹簧滑块 + 回复力 + 实时 x-t 曲线", "waveform.path", .apexEmerald) { SHMSimView() }
+                simEntry(12, "单摆", "T=2π√(L/g)，振幅不改周期", "metronome", .apexEmerald) { PendulumSimView() }
+                simEntry(13, "参考圆与简谐", "匀速圆周的投影就是简谐运动", "circle.circle", .apexEmerald) { ReferenceCircleSimView() }
+                simEntry(14, "弹性碰撞", "调质量与速度，看动量如何守恒", "arrow.left.arrow.right", .apexStarBlue) { CollisionSimView() }
+
+                groupLabel("电磁 · 电场与电路")
+                simEntry(15, "欧姆定律", "I=U/R，电子流动可视化，电阻翻倍电流减半", "bolt.horizontal.circle", .apexStarBlue) { OhmSimView() }
+                simEntry(16, "库仑力", "F=kq₁q₂/r²，距离翻倍力变四分之一", "plusminus.circle", .apexStarBlue) { CoulombSimView() }
+                simEntry(17, "电场偏转", "类平抛，横向匀速 + 纵向匀加速", "arrow.up.right", .apexStarBlue) { EFieldDeflectSimView() }
+                simEntry(18, "闭合电路", "路端电压随电流下降 U=ε−Ir", "powerplug", .apexStarBlue) { ClosedCircuitSimView() }
+                simEntry(19, "电容器动态", "改 U/d/S 看电荷与电场如何变", "capsule.portrait", .apexStarBlue) { CapacitorSimView() }
+
+                groupLabel("电磁 · 磁场")
+                simEntry(20, "磁场中的圆周", "洛伦兹力当向心力，r=mv/qB", "tornado", .apexStarBlue) { CyclotronSimView() }
+                simEntry(21, "速度选择器", "电场力与磁场力平衡，只放行 v=E/B", "slider.horizontal.3", .apexStarBlue) { VelocitySelectorSimView() }
+
+                groupLabel("电磁 · 电磁感应")
+                simEntry(22, "楞次定律", "感应电流总是反抗磁通量的变化", "arrow.triangle.2.circlepath", .apexStarBlue) { LenzSimView() }
+                simEntry(23, "单杆切割发电", "E=BLv，安培力阻碍运动趋于匀速", "bolt.fill", .apexStarBlue) { RailGenSimView() }
+                simEntry(24, "理想变压器", "电压比 = 匝数比，功率守恒", "wand.and.rays", .apexStarBlue) { TransformerSimView() }
+
+                groupLabel("热学")
+                simEntry(25, "等温压缩", "玻意耳定律 p×V 不变，体积减半压强翻倍", "thermometer", .apexEmerald) { GasIsothermSimView() }
+                simEntry(26, "分子间作用力", "近斥远引，平衡距离 r₀ 处合力为零", "atom", .apexEmerald) { MolecularForceSimView() }
+
+                groupLabel("光学")
+                simEntry(27, "折射与全反射", "超过临界角光被关在介质里，光纤原理", "light.beacon.max", .apexGold) { RefractionSimView() }
+                simEntry(28, "双缝干涉", "Δy=Lλ/d，拖三个旋钮看条纹变宽变窄", "ruler", .apexMystery) { DoubleSlitSimView() }
+
+                groupLabel("近代物理")
+                simEntry(29, "光电效应", "频率不够光强再大也没用，hν 决定逸出", "sun.max", .apexGold) { PhotoelectricSimView() }
+                simEntry(30, "玻尔能级跃迁", "电子只能整级跳，光谱是一根根线", "circle.hexagongrid", .apexMystery) { BohrSimView() }
+                simEntry(31, "半衰期", "每过 T½ 剩一半，单核衰变完全随机", "hourglass", .apexLava) { DecaySimView() }
 
                 groupLabel("波动")
-                simEntry(6, "横波传播", "v=λf，红点只上下振动不随波前进", "waveform.path.ecg", .apexEmerald) { WaveSimView() }
+                simEntry(32, "横波传播", "v=λf，红点只上下振动不随波前进", "waveform.path.ecg", .apexEmerald) { WaveSimView() }
+                simEntry(33, "波的叠加", "相长还是相消，全看相位差", "waveform.badge.plus", .apexEmerald) { SuperpositionSimView() }
             }
             .padding(Spacing.lg)
         }
