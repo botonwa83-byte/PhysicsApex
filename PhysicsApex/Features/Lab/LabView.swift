@@ -179,6 +179,9 @@ struct ProblemDetailView: View {
                     if let dual = problem.dualSolution {
                         descentBanner(dual)
                     }
+                    if let simLink = SimLibrary.link(for: problem) {
+                        ProblemSimLinkCard(link: simLink)
+                    }
                 }
             }
             .padding(Spacing.lg)

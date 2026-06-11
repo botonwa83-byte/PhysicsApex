@@ -22,9 +22,11 @@ struct SimulationHubView: View {
                 simEntry(6, "最省力的角度", "拉力存在最优倾角，摩擦角藏在其中", "angle", .apexLava) { FrictionPullSimView() }
                 simEntry(7, "连接体", "整体法求加速度，隔离法求绳张力", "link", .apexLava) { ConnectedSimView() }
                 simEntry(8, "电梯超重失重", "加速向上超重、向下失重，看体重计读数", "arrow.up.arrow.down", .apexLava) { ElevatorSimView() }
+                simEntry(35, "滑块木板", "双摩擦面，整体一起走还是相对滑动", "rectangle.stack", .apexLava) { BoardBlockSimView() }
 
                 groupLabel("力学 · 圆周与天体")
                 simEntry(1, "圆周运动", "向心力 F=mv²/r，速度翻倍力变四倍", "arrow.clockwise.circle", .apexLava) { CircularMotionSimView() }
+                simEntry(34, "竖直圆周临界", "最高点 v=√(gr)，太慢就脱轨抛落", "circle.dotted", .apexLava) { VerticalCircleSimView() }
                 simEntry(9, "开普勒椭圆轨道", "近日点快、远日点慢，面积速度守恒", "circle.dashed", .apexStarBlue) { KeplerSimView() }
                 simEntry(10, "人船模型", "动量守恒，人走船退，质心纹丝不动", "ferry", .apexEmerald) { BoatSimView() }
 
@@ -32,6 +34,7 @@ struct SimulationHubView: View {
                 simEntry(11, "简谐振动", "弹簧滑块 + 回复力 + 实时 x-t 曲线", "waveform.path", .apexEmerald) { SHMSimView() }
                 simEntry(12, "单摆", "T=2π√(L/g)，振幅不改周期", "metronome", .apexEmerald) { PendulumSimView() }
                 simEntry(13, "参考圆与简谐", "匀速圆周的投影就是简谐运动", "circle.circle", .apexEmerald) { ReferenceCircleSimView() }
+                simEntry(36, "受迫振动与共振", "驱动频率逼近固有频率，振幅猛窜", "waveform.path.badge.plus", .apexEmerald) { ResonanceSimView() }
                 simEntry(14, "弹性碰撞", "调质量与速度，看动量如何守恒", "arrow.left.arrow.right", .apexStarBlue) { CollisionSimView() }
 
                 groupLabel("电磁 · 电场与电路")
@@ -40,6 +43,7 @@ struct SimulationHubView: View {
                 simEntry(17, "电场偏转", "类平抛，横向匀速 + 纵向匀加速", "arrow.up.right", .apexStarBlue) { EFieldDeflectSimView() }
                 simEntry(18, "闭合电路", "路端电压随电流下降 U=ε−Ir", "powerplug", .apexStarBlue) { ClosedCircuitSimView() }
                 simEntry(19, "电容器动态", "改 U/d/S 看电荷与电场如何变", "capsule.portrait", .apexStarBlue) { CapacitorSimView() }
+                simEntry(37, "RC 充放电", "τ=RC 定快慢，一个 τ 充到 63%", "powerplug.portrait", .apexStarBlue) { RCCircuitSimView() }
 
                 groupLabel("电磁 · 磁场")
                 simEntry(20, "磁场中的圆周", "洛伦兹力当向心力，r=mv/qB", "tornado", .apexStarBlue) { CyclotronSimView() }
@@ -49,6 +53,7 @@ struct SimulationHubView: View {
                 simEntry(22, "楞次定律", "感应电流总是反抗磁通量的变化", "arrow.triangle.2.circlepath", .apexStarBlue) { LenzSimView() }
                 simEntry(23, "单杆切割发电", "E=BLv，安培力阻碍运动趋于匀速", "bolt.fill", .apexStarBlue) { RailGenSimView() }
                 simEntry(24, "理想变压器", "电压比 = 匝数比，功率守恒", "wand.and.rays", .apexStarBlue) { TransformerSimView() }
+                simEntry(38, "LC 电磁振荡", "能量在电场磁场间来回，f=1/2π√(LC)", "wave.3.forward", .apexStarBlue) { LCOscillationSimView() }
 
                 groupLabel("热学")
                 simEntry(25, "等温压缩", "玻意耳定律 p×V 不变，体积减半压强翻倍", "thermometer", .apexEmerald) { GasIsothermSimView() }
@@ -56,7 +61,9 @@ struct SimulationHubView: View {
 
                 groupLabel("光学")
                 simEntry(27, "折射与全反射", "超过临界角光被关在介质里，光纤原理", "light.beacon.max", .apexGold) { RefractionSimView() }
+                simEntry(39, "凸透镜成像", "物距越过焦点，像在实/虚之间翻转", "camera.aperture", .apexGold) { ConvexLensSimView() }
                 simEntry(28, "双缝干涉", "Δy=Lλ/d，拖三个旋钮看条纹变宽变窄", "ruler", .apexMystery) { DoubleSlitSimView() }
+                simEntry(40, "单缝衍射", "缝越窄中央亮纹越宽 sinθ=λ/a", "circle.righthalf.filled", .apexMystery) { SingleSlitSimView() }
 
                 groupLabel("近代物理")
                 simEntry(29, "光电效应", "频率不够光强再大也没用，hν 决定逸出", "sun.max", .apexGold) { PhotoelectricSimView() }
@@ -66,6 +73,8 @@ struct SimulationHubView: View {
                 groupLabel("波动")
                 simEntry(32, "横波传播", "v=λf，红点只上下振动不随波前进", "waveform.path.ecg", .apexEmerald) { WaveSimView() }
                 simEntry(33, "波的叠加", "相长还是相消，全看相位差", "waveform.badge.plus", .apexEmerald) { SuperpositionSimView() }
+                simEntry(41, "驻波", "两端固定的弦，节点不动波腹猛摇", "waveform", .apexLava) { StandingWaveSimView() }
+                simEntry(42, "多普勒效应", "声源迎面音调高、驶离音调低", "wave.3.right", .apexStarBlue) { DopplerSimView() }
             }
             .padding(Spacing.lg)
         }
