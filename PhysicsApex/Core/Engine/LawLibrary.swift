@@ -780,6 +780,249 @@ enum LawLibrary {
             relatedWeapons: [.energyIntuition, .dimensionalAnalysis],
             latex: "E_n = \\dfrac{E_1}{n^2},\\quad E_1 = -13.6\\,\\text{eV},\\quad h\\nu = E_m - E_n"
         ),
+
+        // ── 查缺补漏第三批（8条）──
+
+        PhysicsLaw(
+            id: "electric_potential",
+            name: "电势与电势能",
+            nameEN: "Electric Potential & Potential Energy",
+            topic: .electricField,
+            stage: .senior,
+            expression: "φ = W/q；EP = qφ；W_AB = q(φA−φB) = qEd",
+            dimension: "φ: V = J/C；EP: J",
+            physicalImage: "电势就像电场里的「海拔」——电荷从高电势流向低电势，就像水从高处流向低处。电势能是电荷「存」在那个位置的能量，移动时电场做功把它释放或储存。",
+            derivation: "φ = W/q 是定义：把单位正电荷从该点移到无穷远处，电场做的功。匀强电场中 W_AB = qEd（d 是沿场方向的位移）。电势能 EP = qφ，正电荷在高电势处势能大；负电荷反之。",
+            meaning: "电场力做功只与起末位置有关（路径无关）——W_AB = EP_A − EP_B = q(φA−φB)。等势面上移动不做功；电场线从高电势指向低电势。",
+            limitChecks: [
+                LimitCheck(scenario: "正电荷从高电势移向低电势", result: "电场力做正功，EP 减小，动能增大", intuition: "就像石头从高处落下：势能转化为动能。正电荷「顺水流下」电场力做正功。"),
+                LimitCheck(scenario: "负电荷从高电势移向低电势", result: "电场力做负功，EP 增大", intuition: "负电荷「逆水而行」——方向与电场力相反，做负功，势能反而增大。"),
+            ],
+            conditions: [
+                "W=qEd 只在匀强电场中、d 为沿电场方向的分位移",
+                "电势零点可任意选取（通常选无穷远或大地为零）",
+                "正/负电荷势能符号不同，务必代入 q 的正负号",
+            ],
+            commonMisuses: [
+                "把「电势高」和「电势能大」画等号——负电荷在高电势处势能反而小",
+                "W=qEd 的 d 是沿 E 方向分位移，不是总路程或总位移",
+                "等势面⊥电场线：沿等势面移动 W=0，不是 EP=0",
+            ],
+            applications: ["带电粒子加速 qU=½mv²", "平行板电容器分析", "电场做功与动能定理联用"],
+            relatedWeapons: [.workEnergyTheorem, .energyIntuition],
+            latex: "\\varphi = \\dfrac{W}{q},\\quad W_{AB} = q(\\varphi_A - \\varphi_B) = qEd"
+        ),
+
+        PhysicsLaw(
+            id: "kepler_satellite",
+            name: "开普勒第三定律与卫星运动",
+            nameEN: "Kepler's Third Law & Satellite",
+            topic: .circular,
+            stage: .senior,
+            expression: "T²/R³ = k；v = √(GM/r)；GM = gR²（黄金代换）",
+            dimension: "T: s；R: m；v: m/s",
+            physicalImage: "所有绕同一天体运行的卫星，轨道半径的立方与周期的平方之比是个常数——离得越远，转得越慢，但慢的程度有精确规律。黄金代换 GM=gR² 把「万有引力常数 G」和「天体质量 M」打包成地表重力 g，一次性消掉两个难测量。",
+            derivation: "圆轨道：万有引力=向心力 GMm/r²=mv²/r，解得 v=√(GM/r)，T=2πr/v=2π√(r³/GM)，则 T²/r³=4π²/GM=常数（k）。地表：mg=GMm/R²，故 GM=gR²。",
+            meaning: "T²/R³=k 的 k 只取决于中心天体（太阳/地球），与卫星质量无关。k 越大说明中心天体越重。",
+            limitChecks: [
+                LimitCheck(scenario: "r → 2 倍", result: "T → 2√2 倍（≈2.83倍）", intuition: "T∝r^(3/2)：轨道半径翻倍，周期变成 2.83 倍，不是 2 倍。"),
+                LimitCheck(scenario: "近地卫星 r≈R（地球半径）", result: "v₁=√(gR)≈7.9km/s（第一宇宙速度）", intuition: "黄金代换：v=√(GM/R)=√(gR²/R)=√(gR)——用 g 和 R 就能算出第一宇宙速度。"),
+            ],
+            conditions: [
+                "k=4π²/GM，同一中心天体的所有卫星共用同一个 k",
+                "GM=gR² 中 g 是天体表面重力加速度，R 是天体半径",
+                "椭圆轨道 T²/a³=k 中 a 是半长轴",
+            ],
+            commonMisuses: [
+                "比较不同天体系统的卫星时套用同一个 k（不同中心天体 k 不同）",
+                "r 越大 v 越小（v∝1/√r），轨道越高速度越慢",
+                "T²/R³=k 中 R 是轨道半径（圆心到卫星），不是离地面高度",
+            ],
+            applications: ["测中心天体质量 M=4π²r³/(GT²)", "同步卫星高度计算", "地月距离估算"],
+            relatedWeapons: [.equivalentMethod, .dimensionalAnalysis],
+            latex: "\\dfrac{T^2}{R^3} = \\dfrac{4\\pi^2}{GM},\\quad v = \\sqrt{\\dfrac{GM}{r}},\\quad GM = gR^2"
+        ),
+
+        PhysicsLaw(
+            id: "circular_kinematics",
+            name: "圆周运动运动学量",
+            nameEN: "Circular Motion Kinematics",
+            topic: .circular,
+            stage: .senior,
+            expression: "v = ωr；ω = 2π/T = 2πf；a向 = v²/r = ω²r",
+            dimension: "ω: rad/s；v: m/s；a: m/s²",
+            physicalImage: "圆周运动里有三种「快慢」：线速度 v（弧长快慢）、角速度 ω（转角快慢）、周期 T（转一圈的时间）。它们之间有严格换算——就像同一个圆盘上，外圈线速度大但角速度和内圈一样。",
+            derivation: "角速度定义 ω=Δθ/Δt。每转一圈 Δθ=2π，时间 T，故 ω=2π/T。线速度 v = 弧长/时间 = rΔθ/Δt = rω。向心加速度 a=v²/r（匀速圆周方向时刻改变，大小不变，指向圆心）。",
+            meaning: "同一个物体：ω 和 T 描述转的快慢；v 还和半径有关。同轴转动时 ω 相同；皮带轮传动时 v 相同。向心加速度永远指向圆心，是速度「方向改变」的度量。",
+            limitChecks: [
+                LimitCheck(scenario: "同一圆盘：内圈 r₁ < 外圈 r₂", result: "ω 相同；v₁ < v₂（外圈线速度大）", intuition: "光盘边缘比中心「跑得快」，但它们「转得一样快」——v=ωr 一眼看清。"),
+                LimitCheck(scenario: "皮带连接半径不同的两轮", result: "v 相同；ω 小轮大（r 小则 ω=v/r 大）", intuition: "皮带传动：大轮带小轮，小轮转得快（角速度大）。"),
+            ],
+            conditions: [
+                "a向 = v²/r 只是向心加速度（改变方向）；若速率也变，还有切向加速度",
+                "ω = 2πf = 2π/T 适用于匀速圆周",
+                "v = ωr 中 r 是转动半径（到转轴的距离）",
+            ],
+            commonMisuses: [
+                "向心加速度不是「合加速度」——变速圆周还有切向加速度",
+                "皮带轮套 ω 相同（应套 v 相同）；同轴套 v 相同（应套 ω 相同）",
+                "转速 n（转/秒）与角速度 ω：ω = 2πn",
+            ],
+            applications: ["同轴/皮带轮速度换算", "卫星轨道周期与线速度", "离心机设计"],
+            relatedWeapons: [.forceDiagram, .equivalentMethod],
+            latex: "v = \\omega r,\\quad \\omega = \\dfrac{2\\pi}{T},\\quad a = \\dfrac{v^2}{r} = \\omega^2 r"
+        ),
+
+        PhysicsLaw(
+            id: "series_parallel",
+            name: "串并联电路规律",
+            nameEN: "Series & Parallel Circuits",
+            topic: .circuit,
+            stage: .senior,
+            expression: "串：R=ΣRᵢ，I同，U=ΣUᵢ；并：1/R=Σ(1/Rᵢ)，U同，I=ΣIᵢ",
+            dimension: "Ω, A, V",
+            physicalImage: "串联像水管首尾相连：同一股水（电流）依次经过，每段各分一份电压，总电阻叠加。并联像多条并排水管：两端电压相同，总电流分流，总电阻反而比任何单支都小。",
+            derivation: "串联：电流无分叉→I相同；欧姆定律每段 U=IR，叠加→U总=ΣIRᵢ=IR总，R总=ΣRᵢ。并联：两端接同一节点→U相同；节点电流守恒→I总=ΣUᵢ/Rᵢ，1/R总=Σ(1/Rᵢ)。",
+            meaning: "串联分压（U之比=R之比）；并联分流（I之比=1/R之比=G之比）。两个电阻并联：R并=R₁R₂/(R₁+R₂)，永远小于较小的那个。",
+            limitChecks: [
+                LimitCheck(scenario: "两个相等电阻 R 串联", result: "R总=2R，每个分一半电压", intuition: "两节相同电池串联：电压翻倍，容量不变——串联增压。"),
+                LimitCheck(scenario: "两个相等电阻 R 并联", result: "R总=R/2，每支流一半电流", intuition: "并联增流——两路分流，总电阻反而减半。"),
+            ],
+            conditions: [
+                "理想导线（电阻=0），理想电源（内阻=0）",
+                "混联电路先化简：找「首尾相连无分叉」的串联段，找「同节点」的并联段",
+                "串联时功率之比 = 电阻之比（P=I²R，I相同）",
+                "并联时功率之比 = 1/电阻之比（P=U²/R，U相同）",
+            ],
+            commonMisuses: [
+                "两电阻并联用 R₁+R₂ 当总电阻（串联才对，并联要用倒数）",
+                "串联分压比=电阻比（不是电流比或功率比）",
+                "并联中各支路电流之比=各电阻倒数之比（电导之比）",
+            ],
+            applications: ["家用电路（并联）", "分压器（串联）", "复杂电路等效化简"],
+            relatedWeapons: [.equivalentCircuit, .wholeIsolation],
+            latex: "R_{串} = \\sum R_i,\\quad \\dfrac{1}{R_{并}} = \\sum \\dfrac{1}{R_i}"
+        ),
+
+        PhysicsLaw(
+            id: "thermodynamics_first",
+            name: "热力学第一定律",
+            nameEN: "First Law of Thermodynamics",
+            topic: .thermal,
+            stage: .senior,
+            expression: "ΔU = W + Q（W为外界对系统做的功，Q为吸收的热量）",
+            dimension: "J",
+            physicalImage: "内能的变化只有两种来源：「做功」（压缩/膨胀）和「传热」（加热/散热）——就像银行账户，收入来自工资（Q）和兼职（W），支出也是。做功是「有序」的能量转移；传热是「无序」的能量转移。",
+            derivation: "能量守恒在热学中的表达：系统内能的增量 = 外界传入的热量 + 外界对系统做的功。注意符号约定：Q>0 吸热，Q<0 放热；W>0 外界做功（压缩），W<0 系统做功（膨胀）。",
+            meaning: "三种特殊过程：①等温 ΔU=0，W+Q=0（气体膨胀必须吸热）；②绝热 Q=0，ΔU=W；③等容 W=0，ΔU=Q。内能变化=做功+传热，两者可以互换，但总量守恒。",
+            limitChecks: [
+                LimitCheck(scenario: "绝热压缩（Q=0）", result: "ΔU=W>0，内能增大，温度升高", intuition: "打气筒用力压，气体变热——没有传热，全靠做功升温。柴油发动机就用绝热压缩点火。"),
+                LimitCheck(scenario: "等温膨胀（ΔU=0，理想气体）", result: "Q=-W，系统吸热全部用于对外做功", intuition: "理想气体等温膨胀：内能不变，但对外推活塞做了功，这些能量来自吸收的热量。"),
+            ],
+            conditions: [
+                "ΔU=W+Q 中各量符号：ΔU>0 升温，W>0 外界压缩，Q>0 吸热",
+                "理想气体内能只与温度有关，温度不变则 ΔU=0",
+                "高考常考题型：已知两个量求第三个",
+            ],
+            commonMisuses: [
+                "把「做功」和「传热」搞反符号（外界对系统做功 W>0，系统对外做功 W<0）",
+                "以为「绝热」就是温度不变——绝热是不传热，温度完全可以变化",
+                "混淆内能变化 ΔU（状态量）和热量 Q（过程量）",
+            ],
+            applications: ["气缸热机效率", "绝热膨胀制冷", "封闭气体三过程分析"],
+            relatedWeapons: [.energyIntuition, .controlVariable],
+            latex: "\\Delta U = W + Q"
+        ),
+
+        PhysicsLaw(
+            id: "half_life",
+            name: "放射性衰变与半衰期",
+            nameEN: "Radioactive Decay & Half-Life",
+            topic: .modern,
+            stage: .senior,
+            expression: "N = N₀·(½)^(t/T½)；剩余比例 = (½)ⁿ（n 为半衰期个数）",
+            dimension: "T½: s（或年）",
+            physicalImage: "放射性原子核「不知疲倦地」按固定概率衰变——每过一个半衰期，剩下的一半；再过一个，再剩一半……就像人口每 30 年减半，规律严格，但到底谁先走完全随机。",
+            derivation: "单个核的衰变完全随机，但大量核的统计行为极规律：每个 T½ 内每个核有 1/2 概率衰变，故 t 时刻剩 N₀×(1/2)^(t/T½)。这是指数衰减，数学上等价于 N=N₀e^(-λt)，其中 λ=ln2/T½。",
+            meaning: "经过 n 个半衰期，剩余 N₀/2ⁿ，衰变了 N₀(1-1/2ⁿ)。T½ 由核种决定，不受温度、压强、化学状态影响——「物理」性质，不是「化学」性质。",
+            limitChecks: [
+                LimitCheck(scenario: "经过 1 个 T½", result: "剩 50%", intuition: "经过 2 个剩 25%，3 个剩 12.5%，10 个剩约 0.1%。"),
+                LimitCheck(scenario: "t << T½（刚开始）", result: "N ≈ N₀（几乎没衰变）", intuition: "铀-238 半衰期 45 亿年，一天之内衰变量极少——放射源活度极低且稳定。"),
+            ],
+            conditions: [
+                "T½ 是统计规律，对单个核无意义",
+                "N 可指粒子数、质量、放射性活度（三者都按同比例衰减）",
+                "高考通常取整数个半衰期，直接用 (½)ⁿ 即可",
+            ],
+            commonMisuses: [
+                "经过 2 个半衰期剩 (1-2×50%)=0——错！剩 (1/2)²=25%，不是线性减少",
+                "半衰期受外界影响（错，半衰期是核本身的性质）",
+                "1 个 T½ 衰变「恰好一半」——是概率上的一半，单个核不适用",
+            ],
+            applications: ["核废料安全储存年限", "碳-14 年代测定", "医用放射性同位素剂量设计"],
+            relatedWeapons: [.graphMethod, .specialCase],
+            latex: "N = N_0 \\left(\\dfrac{1}{2}\\right)^{t/T_{1/2}}"
+        ),
+
+        PhysicsLaw(
+            id: "particle_acceleration",
+            name: "带电粒子加速与偏转",
+            nameEN: "Charged Particle Acceleration & Deflection",
+            topic: .electricField,
+            stage: .senior,
+            expression: "加速：qU = ½mv²；偏转（类平抛）：y = qEL²/(2mv₀²)",
+            dimension: "J, m",
+            physicalImage: "电场对带电粒子是「发射台」（加速段）和「方向盘」（偏转段）的组合——示波管、电子枪、质谱仪都是这套组合的产品。加速段把电压全部转化为动能；偏转段像水平板间的平抛，电场力充当「重力」。",
+            derivation: "加速：从静止开始，电场做功 W=qU 全转化为动能，qU=½mv²，解得 v=√(2qU/m)。偏转：进入偏转场后水平匀速（v₀），竖直匀加速（a=qE/m=qU₀/md）——与平抛完全类比。",
+            meaning: "加速电压 U 决定粒子速度；偏转场长度 L 和场强 E 决定偏转量 y。两段公式联立是阴极射线管、质谱仪题的标准解法。",
+            limitChecks: [
+                LimitCheck(scenario: "加速电压 U → 4 倍", result: "末速度 v → 2 倍（v∝√U）", intuition: "平方根关系：电压翻四倍速度翻两倍——不是线性的！"),
+                LimitCheck(scenario: "偏转场场强 E → 2 倍（L 不变）", result: "偏转量 y → 2 倍", intuition: "电场越强「推」得越狠，偏转越大——线性关系。"),
+            ],
+            conditions: [
+                "qU=½mv² 假设粒子从静止加速；若有初速则改为动能定理",
+                "偏转公式 y = qEL²/(2mv₀²) 需代入加速后的 v₀",
+                "忽略重力（带电粒子质量小，电场力远大于重力）",
+            ],
+            commonMisuses: [
+                "加速后进入磁场时把 v 再算一遍（直接代入 qU=½mv² 算的 v 即可）",
+                "偏转中竖直方向用 qE/m 加速，不是 g",
+                "出偏转场后粒子做匀速直线运动（不再受力），不要继续算加速度",
+            ],
+            applications: ["阴极射线管（CRT 显示器）", "质谱仪分离同位素", "速度选择器 qvB=qE"],
+            relatedWeapons: [.workEnergyTheorem, .referenceFrame],
+            latex: "qU = \\dfrac{1}{2}mv^2,\\quad y = \\dfrac{qEL^2}{2mv_0^2}"
+        ),
+
+        PhysicsLaw(
+            id: "friction_heat",
+            name: "摩擦生热与能量守恒",
+            nameEN: "Friction Heat & Energy Conservation",
+            topic: .energy,
+            stage: .senior,
+            expression: "Q摩 = f·Δs相对；ΔE机械 = −Q摩",
+            dimension: "J",
+            physicalImage: "摩擦生热的「原材料」是两个接触面的「相对滑动距离」——不是任何一个物体走了多远，而是它们互相「蹭」了多少。就算物体在运动，只要它们之间没有相对滑动，就不生热。",
+            derivation: "系统能量守恒：初动能+初势能 = 末动能+末势能+热量。热量 Q = f × Δs相对，Δs相对 = |s₁ − s₂|（两物体各自位移之差）。机械能的减少量恰好等于摩擦热。",
+            meaning: "「摩擦热」的关键是「相对位移」，不是「绝对位移」——这是滑块木板题、传送带题的核心公式，学生最容易搞错。",
+            limitChecks: [
+                LimitCheck(scenario: "人在传送带上静止（随带移动）", result: "Δs相对=0，Q=0，没有热量产生", intuition: "人和带步调一致，没有相互摩擦，当然不生热。"),
+                LimitCheck(scenario: "滑块在木板上滑行后共速", result: "Q = f × (s滑块 − s木板)", intuition: "两者走的路程不一样，差值才是「蹭」的距离——用来算热量。"),
+            ],
+            conditions: [
+                "f 是滑动摩擦力大小（不是静摩擦力）",
+                "Δs相对 = 两物体「相对于彼此」滑动的距离，永远≥0",
+                "能量守恒：损失的机械能 = Q = f·Δs相对，可以互相验算",
+            ],
+            commonMisuses: [
+                "用「某一物体的位移」代替「相对位移」计算热量",
+                "忘记考虑两个物体都在运动：Δs=|s₁−s₂|",
+                "传送带问题中地面静止，传送带（s带）和物体（s物）的相对位移要分段算",
+            ],
+            applications: ["滑块-木板系统能量分配", "传送带热量计算", "刹车距离与摩擦热"],
+            relatedWeapons: [.workEnergyTheorem, .energyIntuition],
+            latex: "Q_{摩} = f \\cdot \\Delta s_{相对},\\quad \\Delta E_{机械} = -Q_{摩}"
+        ),
     ]
 
     static func laws(for topic: PhysicsTopic) -> [PhysicsLaw] {
