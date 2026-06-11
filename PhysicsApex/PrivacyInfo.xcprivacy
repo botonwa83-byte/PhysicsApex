@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- 是否追踪用户：否 -->
+    <key>NSPrivacyTracking</key>
+    <false/>
+
+    <!-- 追踪域名：空（不追踪） -->
+    <key>NSPrivacyTrackingDomains</key>
+    <array/>
+
+    <!-- 收集的数据类型：无 -->
+    <key>NSPrivacyCollectedDataTypes</key>
+    <array/>
+
+    <!-- 访问的受限 API：UserDefaults（用于保存进度/解锁状态/连击记录） -->
+    <key>NSPrivacyAccessedAPITypes</key>
+    <array>
+        <dict>
+            <key>NSPrivacyAccessedAPIType</key>
+            <string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+            <key>NSPrivacyAccessedAPITypeReasons</key>
+            <array>
+                <!-- CA92.1：在用户设备上储存少量数据（学习进度、解锁状态、连击天数） -->
+                <string>CA92.1</string>
+            </array>
+        </dict>
+    </array>
+</dict>
+</plist>
