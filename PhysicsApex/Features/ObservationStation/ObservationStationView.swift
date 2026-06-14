@@ -35,7 +35,7 @@ struct ObservationStationView: View {
                 .padding(.bottom, Spacing.xxl)
             }
             .background(Color.apexBackground.ignoresSafeArea())
-            .navigationTitle("PhysicsApex")
+            .navigationTitle("PhysApex")
         }
     }
 
