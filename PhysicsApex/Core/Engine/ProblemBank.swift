@@ -1,6 +1,6 @@
 import Foundation
 
-// MARK: - 示例题库（一期：力学为主，含降维双解战例）
+// MARK: - 示例练习集（一期：力学为主，含降维双解战例）
 // ⚠️ 诚信原则：题型源自高考高频题型（部分改编），不臆造「某年某卷某题」精确出处。
 
 enum ProblemBank {
@@ -39,7 +39,7 @@ enum ProblemBank {
     /// 降维秒杀战例 = 带 dualSolution 的题。
     static var descentCases: [PhysicsProblem] { all.filter { $0.dualSolution != nil } }
 
-    /// 该题是否在免费档（全题库前 freeProblemCount 道）。
+    /// 该题是否在免费档（全部练习前 freeProblemCount 道）。
     static func isFree(_ id: String) -> Bool {
         (all.firstIndex { $0.id == id } ?? 0) < PurchaseManager.freeProblemCount
     }

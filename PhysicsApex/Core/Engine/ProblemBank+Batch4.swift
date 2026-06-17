@@ -1,6 +1,6 @@
 import Foundation
 
-// MARK: - 题库 Batch 4：电场 & 电路（15 题）
+// MARK: - 练习 Batch 4：电场 & 电路（15 题）
 
 extension ProblemBank {
 

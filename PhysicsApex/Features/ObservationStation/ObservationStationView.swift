@@ -7,11 +7,15 @@ struct ObservationStationView: View {
     @Binding var selectedTab: Int
     @EnvironmentObject var profile: StudentProfile
     @ObservedObject private var streak = StreakManager.shared
+    @ObservedObject private var purchase = PurchaseManager.shared
+    @State private var showPaywall = false
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: Spacing.xl) {
+                    premiumBanner
+
                     // ① 核心卖点 C 位
                     descentHero
                     stageHero
@@ -36,6 +40,7 @@ struct ObservationStationView: View {
             }
             .background(Color.apexBackground.ignoresSafeArea())
             .navigationTitle("PhysicsApex")
+            .sheet(isPresented: $showPaywall) { PaywallView() }
         }
     }
 
@@ -45,6 +50,42 @@ struct ObservationStationView: View {
             Spacer()
         }
         .padding(.top, Spacing.xs)
+    }
+
+    // MARK: 内购入口（首页置顶）
+
+    @ViewBuilder
+    private var premiumBanner: some View {
+        if !purchase.isUnlocked {
+            Button { showPaywall = true } label: {
+                HStack(spacing: Spacing.md) {
+                    Image(systemName: "crown.fill")
+                        .font(.title3).foregroundColor(.white)
+                        .frame(width: 44, height: 44)
+                        .background(Color.white.opacity(0.18))
+                        .clipShape(RoundedRectangle(cornerRadius: Radius.inner))
+
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("解锁完整功能").font(AppFont.cardTitle).foregroundColor(.white)
+                        Text("全部 \(ProblemBank.all.count) 道分层练习 · \(ProblemBank.descentCases.count) 道战例 · 全部沙盘，一次买断")
+                            .font(.caption2).foregroundColor(.white.opacity(0.9)).lineLimit(2)
+                    }
+
+                    Spacer(minLength: 0)
+
+                    Text(purchase.product?.displayPrice ?? "¥22")
+                        .font(AppFont.cardTitle).foregroundColor(.white)
+                        .padding(.horizontal, 12).padding(.vertical, 6)
+                        .background(Color.white.opacity(0.22))
+                        .clipShape(Capsule())
+                }
+                .padding(Spacing.lg)
+                .background(LinearGradient(colors: [.apexGold, .apexLava], startPoint: .leading, endPoint: .trailing))
+                .cornerRadius(Radius.card)
+                .shadow(color: Color.apexLava.opacity(0.3), radius: 8, y: 4)
+            }
+            .buttonStyle(.plain)
+        }
     }
 
     // MARK: ① 卖点 C 位
@@ -279,7 +320,7 @@ struct ObservationStationView: View {
             HStack(spacing: Spacing.md) {
                 Image(systemName: "person.3.fill").font(.title2).foregroundColor(.apexStarBlue)
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("物理巨人").font(AppFont.cardTitle).foregroundColor(.primary)
+                    Text("大师思维").font(AppFont.cardTitle).foregroundColor(.primary)
                     Text("牛顿 · 爱因斯坦 · 法拉第 · 费曼——越学越上头").font(AppFont.caption).foregroundColor(.secondary).lineLimit(2)
                 }
                 Spacer()

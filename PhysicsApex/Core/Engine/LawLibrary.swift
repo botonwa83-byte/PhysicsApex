@@ -1,6 +1,6 @@
 import Foundation
 
-// MARK: - 定律宇宙 数据（少而精，每条都是「通透卡」）
+// MARK: - 公式训练数据（少而精，每条都是「通透卡」）
 
 enum LawLibrary {
     static let all: [PhysicsLaw] = [

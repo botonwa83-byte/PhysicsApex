@@ -1,6 +1,6 @@
 import Foundation
 
-// MARK: - 题库 Batch 1：运动学 & 力（13 题）
+// MARK: - 练习 Batch 1：运动学 & 力（13 题）
 // 放在 extension 里分文件管理；ProblemBank.all 引用这些 static let（非内联，避免编译器超时）。
 
 extension ProblemBank {
@@ -146,20 +146,20 @@ extension ProblemBank {
     // 8
     static let b1_balance = PhysicsProblem(
         id: "b1_balance", type: .multipleChoice, stage: .junior, topic: .newton,
-        content: "一本书静止放在水平桌面上。关于二力平衡，下列说法正确的是？",
-        options: ["书受的重力和桌面的支持力是一对平衡力", "书受的重力和书对桌面的压力是平衡力",
-                  "桌面支持力大于书的重力", "书不受力"],
-        answer: "书受的重力和桌面的支持力是一对平衡力",
-        difficulty: 0.3, averageTime: 45, hints: ["平衡力作用在同一物体上", "压力作用在桌面上，不在书上"],
+        content: "一个木块静止放在水平桌面上。关于二力平衡，下列说法正确的是？",
+        options: ["木块受的重力和桌面的支持力是一对平衡力", "木块受的重力和木块对桌面的压力是平衡力",
+                  "桌面支持力大于木块的重力", "木块不受力"],
+        answer: "木块受的重力和桌面的支持力是一对平衡力",
+        difficulty: 0.3, averageTime: 45, hints: ["平衡力作用在同一物体上", "压力作用在桌面上，不在木块上"],
         solution: SolutionPath(steps: [
-            SolutionStep(order: 1, description: "二力平衡", formula: "G = N（作用在书上）", annotation: "等大反向共线同体"),
-        ], keyInsight: "平衡力作用在同一物体上；压力作用在桌面，不能和书的重力平衡。",
+            SolutionStep(order: 1, description: "二力平衡", formula: "G = N（作用在木块上）", annotation: "等大反向共线同体"),
+        ], keyInsight: "平衡力作用在同一物体上；压力作用在桌面，不能和木块的重力平衡。",
            commonMistakes: ["把作用力反作用力当成平衡力"]),
         misconceptions: [
-            Misconception(option: "书受的重力和书对桌面的压力是平衡力",
+            Misconception(option: "木块受的重力和木块对桌面的压力是平衡力",
                 youThought: "你大概觉得重力和压力等大反向就是平衡力。",
-                pitfall: "压力作用在桌面上，不作用在书上——平衡力必须作用在同一物体。",
-                fix: "和重力平衡的是桌面对书的支持力（都作用在书上）。")
+                pitfall: "压力作用在桌面上，不作用在木块上——平衡力必须作用在同一物体。",
+                fix: "和重力平衡的是桌面对木块的支持力（都作用在木块上）。")
         ], tags: ["力", "二力平衡", "错因诊断"])
 
     // 9
@@ -251,7 +251,7 @@ extension ProblemBank {
             ], keyInsight: "趋势想不出来就假设接触面光滑，看物体往哪滑——滑动方向就是趋势方向。", commonMistakes: []),
             weaponUsed: .assumption, timeRatio: 2.0,
             detailedExplanation: "假设法把看不见的「趋势」变成看得见的「打滑」，静摩擦方向判断一律适用。",
-            plainTalk: "搞不清摩擦力朝哪？做个思想实验：假设地面突然变成溜冰场——你蹬地的脚会向后打滑。摩擦力的职责就是阻止打滑，所以它向前推你。没错，是摩擦力推着你走路。"),
+            plainTalk: "搞不清摩擦力朝哪？做个假想推演：假设地面突然变成溜冰场——你蹬地的脚会向后打滑。摩擦力的职责就是阻止打滑，所以它向前推你。没错，是摩擦力推着你走路。"),
         misconceptions: [
             Misconception(option: "向后",
                 youThought: "你大概觉得摩擦力总是「拖后腿」，方向向后。",

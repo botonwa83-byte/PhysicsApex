@@ -1,6 +1,6 @@
 import Foundation
 
-// MARK: - 物理佯谬 / 思想实验 数据
+// MARK: - 物理佯谬 / 思维挑战数据
 
 enum ParadoxData {
     static let all: [Paradox] = [
@@ -12,7 +12,7 @@ enum ParadoxData {
             setup: "亚里士多德说：物体越重，下落越快。伽利略问：那把一个重球和一个轻球绑在一起呢？",
             theParadox: "按「重的快」，轻球会拖慢重球，整体应介于两者之间、比重球慢；但绑在一起总重更大，又该比重球更快。同一个系统得出两个相反结论——矛盾！",
             resolution: "唯一自洽的答案是：下落快慢与质量无关。忽略空气阻力，所有物体加速度都是 g。",
-            takeaway: "好的思想实验不需要做实验，逻辑矛盾本身就是证据。",
+            takeaway: "好的思维推演不需要真实实验，逻辑矛盾本身就是证据。",
             relatedGiants: ["galileo", "newton"]
         ),
         Paradox(

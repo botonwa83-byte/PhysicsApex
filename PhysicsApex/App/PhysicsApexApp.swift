@@ -21,6 +21,7 @@ struct RootView: View {
     @State private var demoDuel = ProcessInfo.processInfo.arguments.contains("-demoDuel")
     @State private var demoRadar = ProcessInfo.processInfo.arguments.contains("-demoRadar")
     @State private var demoDescent = ProcessInfo.processInfo.arguments.contains("-demoDescent")
+    @State private var demoPaywall = ProcessInfo.processInfo.arguments.contains("-demoPaywall")
 
     var body: some View {
         ZStack {
@@ -45,11 +46,21 @@ struct RootView: View {
                 NavigationStack { DescentDetailView(problem: p, dual: dual) }
             }
         }
+        .fullScreenCover(isPresented: $demoPaywall) {
+            PaywallView()
+        }
     }
 }
 
 struct MainTabView: View {
-    @State private var selectedTab = 0
+    @State private var selectedTab = MainTabView.initialTab
+
+    /// 启动参数 `-tab N`（截图/自动化用）：直接落在第 N 个 Tab。
+    static var initialTab: Int {
+        let args = ProcessInfo.processInfo.arguments
+        if let i = args.firstIndex(of: "-tab"), i + 1 < args.count, let n = Int(args[i + 1]) { return n }
+        return 0
+    }
 
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -62,7 +73,7 @@ struct MainTabView: View {
                 .tag(1)
 
             LawUniverseView()
-                .tabItem { Label("定律宇宙", systemImage: "function") }
+                .tabItem { Label("公式训练", systemImage: "function") }
                 .tag(2)
 
             MoreView()
@@ -77,10 +88,31 @@ struct MainTabView: View {
 
 struct MoreView: View {
     @EnvironmentObject var profile: StudentProfile
+    @ObservedObject private var purchase = PurchaseManager.shared
+    @State private var showPaywall = false
 
     var body: some View {
         NavigationStack {
             List {
+                if !purchase.isUnlocked {
+                    Section {
+                        Button { showPaywall = true } label: {
+                            HStack(spacing: 12) {
+                                Image(systemName: "crown.fill")
+                                    .font(.title3).foregroundColor(.apexGold)
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text("解锁完整功能").font(.headline).foregroundColor(.primary)
+                                    Text("分层练习 · 降维战例 · 三级重访 · 沙盘，一次买断")
+                                        .font(.caption).foregroundColor(.secondary)
+                                }
+                                Spacer()
+                                Image(systemName: "chevron.right").font(.caption).foregroundColor(.secondary)
+                            }
+                            .padding(.vertical, 4)
+                        }
+                    }
+                }
+
                 Section {
                     NavigationLink { ProfileView() } label: {
                         HStack(spacing: 12) {
@@ -100,7 +132,7 @@ struct MoreView: View {
                         Label("每日一题", systemImage: "calendar.badge.clock")
                     }
                     NavigationLink { ErrorBookView() } label: {
-                        Label("错题本", systemImage: "exclamationmark.triangle")
+                        Label("错题训练", systemImage: "exclamationmark.triangle")
                     }
                     NavigationLink { ReviewView() } label: {
                         HStack {
@@ -122,21 +154,22 @@ struct MoreView: View {
                     }
                 }
 
-                Section("物理发现") {
+                Section("物理探索") {
                     NavigationLink { GiantsView() } label: {
-                        Label("物理巨人", systemImage: "person.3.fill")
+                        Label("大师思维", systemImage: "person.3.fill")
                     }
                     NavigationLink { ParadoxView() } label: {
-                        Label("佯谬室", systemImage: "questionmark.diamond")
+                        Label("思维挑战", systemImage: "questionmark.diamond")
                     }
                 }
             }
             .navigationTitle("更多")
+            .sheet(isPresented: $showPaywall) { PaywallView() }
         }
     }
 }
 
-// MARK: - 错题本（自动识别答错 ∪ 手动标记 ⭐）
+// MARK: - 错题训练（自动识别答错 ∪ 手动标记 ⭐）
 
 struct ErrorBookView: View {
     @ObservedObject private var practice = PracticeManager.shared
@@ -159,12 +192,12 @@ struct ErrorBookView: View {
                             }
                         }
                     } footer: {
-                        Text("答对 3 次自动移出错题本，并安排间隔复习。")
+                        Text("答对 3 次自动移出错题训练，并安排间隔复习。")
                     }
                 }
             }
         }
-        .navigationTitle("错题本")
+        .navigationTitle("错题训练")
         .navigationBarTitleDisplayMode(.inline)
     }
 

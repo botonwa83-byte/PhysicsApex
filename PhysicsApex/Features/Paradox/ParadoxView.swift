@@ -1,6 +1,6 @@
 import SwiftUI
 
-// MARK: - 佯谬室
+// MARK: - 思维挑战
 
 struct ParadoxView: View {
     private let paradoxes = ParadoxData.all
@@ -18,7 +18,7 @@ struct ParadoxView: View {
             .padding(Spacing.lg)
         }
         .background(Color.mysteryBackground.ignoresSafeArea())
-        .navigationTitle("佯谬室")
+        .navigationTitle("思维挑战")
         .navigationBarTitleDisplayMode(.inline)
     }
 

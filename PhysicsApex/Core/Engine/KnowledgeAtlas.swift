@@ -1,6 +1,6 @@
 import SwiftUI
 
-// MARK: - 知识全景图数据：覆盖整个高考物理（完整骨架 + 精炼节点）
+// MARK: - 训练地图数据：覆盖整个高考物理（完整骨架 + 精炼节点）
 
 enum KnowledgeAtlas {
     static let modules: [KnowledgeModule] = [mechanics, electromagnetism, thermal, optics, modern]

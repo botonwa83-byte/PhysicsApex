@@ -3,7 +3,7 @@ import SwiftUI
 // MARK: - 武器雷达 · 30 秒识局训练
 // 高考生最缺的元技能：拿到压轴题的前 30 秒判断「这题该用哪把武器」。
 // 玩法：只看题干（不看解法），倒计时 30 s 内从 4 把武器中选出正确的秒杀武器。
-// 数据全部来自 ProblemBank.descentCases——零新增内容成本，68 道战例即题库。
+// 数据全部来自 ProblemBank.descentCases——零新增内容成本，68 道战例即练习集。
 
 struct WeaponRadarView: View {
     @AppStorage("radar_best_score") private var bestScore = 0

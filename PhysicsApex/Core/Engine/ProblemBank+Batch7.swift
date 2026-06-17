@@ -1,6 +1,6 @@
 import Foundation
 
-// MARK: - 题库 Batch 7：机械振动与波 & 衰变（3 题，补齐知识全景最后 3 个节点）
+// MARK: - 练习 Batch 7：机械振动与波 & 衰变（3 题，补齐训练地图最后 3 个节点）
 
 extension ProblemBank {
 

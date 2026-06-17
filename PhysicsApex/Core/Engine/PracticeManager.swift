@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-// MARK: - 练习记录引擎（移植自 MathApex）：答题记录 + 错题本(手动标记+自动识别) + 章节统计
+// MARK: - 练习记录引擎（移植自 MathApex）：答题记录 + 错题训练(手动标记+自动识别) + 专题统计
 
 struct AnswerRecord: Codable, Identifiable {
     let id: UUID
@@ -89,7 +89,7 @@ final class PracticeManager: ObservableObject {
         return wrongLatest.union(lowAcc)
     }
 
-    /// 错题本 = 自动识别的错题 ∪ 手动标记，按正确率升序。
+    /// 错题训练 = 自动识别的错题 ∪ 手动标记，按正确率升序。
     func errorProblems(from problems: [PhysicsProblem]) -> [PhysicsProblem] {
         let ids = wrongProblemIds().union(flaggedErrorIds)
         return problems.filter { ids.contains($0.id) }

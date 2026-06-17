@@ -1,6 +1,6 @@
 import Foundation
 
-// MARK: - 物理巨人（移植自 MathApex Hero）：RPG 属性 + 金句
+// MARK: - 大师思维（移植自 MathApex Hero）：RPG 属性 + 金句
 
 struct GiantAttributes: Codable {
     let insight: Int      // 洞察力 1-10

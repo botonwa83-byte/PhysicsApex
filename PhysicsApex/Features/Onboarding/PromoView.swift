@@ -12,9 +12,9 @@ struct PromoView: View {
     private let features: [(icon: String, color: Color, title: String, desc: String)] = [
         ("bolt.fill", .apexLava, "降维秒杀", "每道压轴题给你一招「上帝视角」秒杀解，常规与降维双解对照"),
         ("scope", .apexEmerald, "互动模拟沙盘", "抛体 / 碰撞 / 电路…拖一拖参数，亲眼看见物理"),
-        ("map.fill", .apexStarBlue, "知识全景图", "整个高考物理一图纵览，每个知识点都能点开深入"),
+        ("map.fill", .apexStarBlue, "考点训练地图", "高考物理考点按模块呈现，每个训练点直达练习"),
         ("brain.head.profile", .apexMystery, "错因诊断", "答错时点破你的直觉陷阱，似是而非一击点醒"),
-        ("books.vertical.fill", .apexGold, "错题本 + 智能复习", "艾宾浩斯间隔重复，自动安排复盘"),
+        ("checklist", .apexGold, "错题训练 + 智能复习", "艾宾浩斯间隔重复，自动安排复盘"),
     ]
 
     var body: some View {
@@ -73,7 +73,7 @@ struct PromoView: View {
 
                     // 数据统计
                     HStack(spacing: 0) {
-                        stat("\(KnowledgeAtlas.totalPoints)", "核心知识点")
+                        stat("\(KnowledgeAtlas.totalPoints)", "考点训练")
                         statDivider
                         stat("7", "互动沙盘")
                         statDivider

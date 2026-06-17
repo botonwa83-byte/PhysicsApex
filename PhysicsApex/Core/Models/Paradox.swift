@@ -1,19 +1,19 @@
 import SwiftUI
 
-// MARK: - 物理佯谬 / 思想实验（移植自 MathApex Mystery）
+// MARK: - 物理佯谬 / 思维挑战（移植自 MathApex Mystery）
 
 enum ParadoxCategory: String, Codable, CaseIterable {
     case relativity   // 相对论佯谬
     case quantum      // 量子诡异
     case thermo       // 热力学幽灵
-    case classic      // 经典思想实验
+    case classic      // 经典思维推演
 
     var displayName: String {
         switch self {
         case .relativity: return "相对论佯谬"
         case .quantum:    return "量子诡异"
         case .thermo:     return "热力学幽灵"
-        case .classic:    return "经典思想实验"
+        case .classic:    return "经典推演"
         }
     }
     var icon: String {

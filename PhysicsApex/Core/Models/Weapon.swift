@@ -1,6 +1,6 @@
 import SwiftUI
 
-// MARK: - 降维武器：按「工具」组织（而非按章节），按段位解锁
+// MARK: - 降维武器：按「工具」组织（而非按专题），按段位解锁
 // 产品灵魂：用「上帝视角」工具几步秒杀，跳过繁琐受力分析 / 硬算。
 
 enum PhysicsWeapon: String, Codable, CaseIterable, Identifiable {

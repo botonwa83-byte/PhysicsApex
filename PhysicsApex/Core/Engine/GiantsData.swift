@@ -1,6 +1,6 @@
 import Foundation
 
-// MARK: - 物理巨人 数据
+// MARK: - 大师思维数据
 
 enum GiantsData {
     static let all: [PhysicsGiant] = [
@@ -23,7 +23,7 @@ enum GiantsData {
             era: "1879–1955",
             attributes: GiantAttributes(insight: 10, creativity: 10, perseverance: 9, influence: 10),
             weaponSkills: ["相对论", "光电效应", "质能方程"],
-            legendStory: "26 岁的「奇迹年」一口气发表狭义相对论、光电效应、布朗运动。一个思想实验——追着光跑会看到什么——掀翻了牛顿的绝对时空。",
+            legendStory: "26 岁的「奇迹年」一口气发表狭义相对论、光电效应、布朗运动。一个思维推演——追着光跑会看到什么——掀翻了牛顿的绝对时空。",
             famousQuote: "想象力比知识更重要。",
             relatedParadoxes: ["twin_paradox"],
             portraitEmoji: "🧠"
@@ -47,7 +47,7 @@ enum GiantsData {
             era: "1831–1879",
             attributes: GiantAttributes(insight: 10, creativity: 10, perseverance: 8, influence: 10),
             weaponSkills: ["麦克斯韦方程组", "电磁波", "统计力学"],
-            legendStory: "用四个方程统一了电、磁、光，预言了电磁波的存在。还提出了著名的「麦克斯韦妖」思想实验挑战热力学第二定律。",
+            legendStory: "用四个方程统一了电、磁、光，预言了电磁波的存在。还提出了著名的「麦克斯韦妖」思维推演挑战热力学第二定律。",
             famousQuote: "光是电磁场中的扰动。",
             relatedParadoxes: ["maxwell_demon"],
             portraitEmoji: "📐"
@@ -59,8 +59,8 @@ enum GiantsData {
             era: "1564–1642",
             attributes: GiantAttributes(insight: 10, creativity: 9, perseverance: 9, influence: 10),
             weaponSkills: ["惯性思想", "自由落体", "相对性原理"],
-            legendStory: "用一个纯粹的思想实验就推翻了「重物先落地」：把轻重两球绑一起会更快还是更慢？矛盾本身证明了亚里士多德错了。",
-            famousQuote: "自然之书是用数学语言写成的。",
+            legendStory: "用一个纯粹的思维推演就推翻了「重物先落地」：把轻重两球绑一起会更快还是更慢？矛盾本身证明了亚里士多德错了。",
+            famousQuote: "自然是用数学语言写成的。",
             relatedParadoxes: ["galileo_tower"],
             portraitEmoji: "🔭"
         ),

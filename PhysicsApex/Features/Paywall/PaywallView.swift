@@ -17,9 +17,9 @@ struct PaywallView: View {
                     benefitRow(icon: "bolt.fill", color: .apexLava,
                                title: "解锁全部 \(ProblemBank.descentCases.count) 道降维秒杀战例",
                                desc: "常规法 vs 降维法，对决剧场 + 电影级降维打击")
-                    benefitRow(icon: "books.vertical.fill", color: .apexLava,
-                               title: "解锁全部 \(ProblemBank.all.count) 道分层题库",
-                               desc: "初中直觉 → 高考硬功 → 竞赛降维，全主干章节覆盖")
+                    benefitRow(icon: "checklist", color: .apexLava,
+                               title: "解锁全部 \(ProblemBank.all.count) 道分层练习",
+                               desc: "初中直觉 → 高考硬功 → 竞赛降维，覆盖主干考点专题")
                     benefitRow(icon: "scope", color: .apexMystery,
                                title: "解锁全部三级重访",
                                desc: "同一题初中/高中/竞赛三镜头，看工具逐级升维")
@@ -38,7 +38,7 @@ struct PaywallView: View {
                 Divider().padding(.horizontal, 24)
 
                 VStack(spacing: 6) {
-                    Text("免费已开放：题库前 \(PurchaseManager.freeProblemCount) 题 + 前 \(PurchaseManager.freeDescentCount) 道战例 + \(PurchaseManager.freeRevisitCount) 个重访")
+                    Text("免费已开放：练习前 \(PurchaseManager.freeProblemCount) 题 + 前 \(PurchaseManager.freeDescentCount) 道战例 + \(PurchaseManager.freeRevisitCount) 个重访")
                         .font(.footnote).foregroundColor(.secondary)
                     Text("解锁后立即获得剩余全部内容 →")
                         .font(.footnote).fontWeight(.medium).foregroundColor(.apexLava)

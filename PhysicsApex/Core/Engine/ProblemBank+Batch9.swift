@@ -1,6 +1,6 @@
 import Foundation
 
-// MARK: - 题库 Batch 9：高考压轴秒杀战例（20 题，全部 .senior + dualSolution）
+// MARK: - 练习 Batch 9：高考压轴秒杀战例（20 题，全部 .senior + dualSolution）
 // 定位：高考压轴高频题型（板块/弹簧/变轨/感应双杆/临界/极值…），每题「常规硬解 vs 武器秒杀」双解对决。
 // 诚信：题型源自高考高频压轴（改编），不臆造精确出处；每条结论带适用条件。
 

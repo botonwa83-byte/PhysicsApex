@@ -77,7 +77,7 @@ enum SimRef: CaseIterable {
 }
 
 enum SimLibrary {
-    /// 关键词优先（精准命中），命中不到再按章节兜底——保证每道题都有一个可动手的沙盘。
+    /// 关键词优先（精准命中），命中不到再按专题兜底——保证每道题都有一个可动手的沙盘。
     private static let keywordTable: [(words: [String], ref: SimRef)] = [
         (["平抛", "斜抛", "抛体", "抛出", "抛射"], .projectile),
         (["传送带"], .conveyor),

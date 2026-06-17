@@ -1,6 +1,6 @@
 import Foundation
 
-// MARK: - 题库 Batch 3：功和能（13 题）
+// MARK: - 练习 Batch 3：功和能（13 题）
 
 extension ProblemBank {
 

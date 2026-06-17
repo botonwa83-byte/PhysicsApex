@@ -1,6 +1,6 @@
 import Foundation
 
-// MARK: - 题库 Batch 8：竞赛段（15 题，全部 .olympiad）
+// MARK: - 练习 Batch 8：竞赛段（15 题，全部 .olympiad）
 // 定位：高考压轴题的「竞赛视角」——守恒·对称·微元·量纲·极值，难度封顶在"够用应付高考"。
 // 每题配降维双解；本批为 approximation/angularMomentum/virtualWork/imageCharge/potentialCurve/scaling/equivalentCircuit 七把武器建立首战例。
 
@@ -257,7 +257,7 @@ extension ProblemBank {
             descentMethod: SolutionPath(steps: [
                 SolutionStep(order: 1, description: "量纲直接拼出形式", formula: "√(gR) 是 g、R 唯一的速度组合", annotation: "公式忘光也能重建"),
                 SolutionStep(order: 2, description: "心算", formula: "√(9.8×6.4×10⁶) ≈ √(64×10⁶)=8×10³ 量级 ⟹ ≈7.9 km/s", annotation: "秒出"),
-            ], keyInsight: "量纲分析在「只有两个相关量」时几乎白送答案——形式唯一，只剩系数要靠动力学背书。", commonMistakes: []),
+            ], keyInsight: "量纲分析在「只有两个相关量」时几乎白送答案——形式唯一，只剩系数要靠动力学确认。", commonMistakes: []),
             weaponUsed: .dimensionalAnalysis, timeRatio: 3.0,
             detailedExplanation: "量纲分析的进阶战例：√(gR) 与单摆 √(L/g) 同源。注意量纲只定形式，系数 1 是动力学（mg=mv²/R）给的，不可省略验证。",
             plainTalk: "不查任何天文资料，用 g 和 R 现场拼出第一宇宙速度：速度的单位是 m/s，而 g×R 的单位恰好是 m²/s²，开个根号正好！√(9.8×6.4×10⁶)≈7.9 km/s。量纲就像乐高接口——能拼上的形状只有一种。"),

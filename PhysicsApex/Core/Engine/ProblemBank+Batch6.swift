@@ -1,6 +1,6 @@
 import Foundation
 
-// MARK: - 题库 Batch 6：热 & 光 & 近代（14 题）
+// MARK: - 练习 Batch 6：热 & 光 & 近代（14 题）
 
 extension ProblemBank {
 

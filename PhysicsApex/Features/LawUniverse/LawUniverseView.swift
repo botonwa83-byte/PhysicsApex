@@ -1,6 +1,6 @@
 import SwiftUI
 
-// MARK: - 定律宇宙：定律含 物理意义 + 适用条件 + 量纲 + 常见误用
+// MARK: - 公式训练：定律含 物理意义 + 适用条件 + 量纲 + 常见误用
 
 struct LawUniverseView: View {
     private var topics: [PhysicsTopic] {
@@ -16,8 +16,8 @@ struct LawUniverseView: View {
                             Image(systemName: "map.fill").font(.title3)
                                 .foregroundStyle(LinearGradient(colors: [.apexStarBlue, .apexMystery], startPoint: .top, endPoint: .bottom))
                             VStack(alignment: .leading, spacing: 2) {
-                                Text("知识全景图").font(AppFont.cardTitle).foregroundColor(.primary)
-                                Text("一图纵览整个高考物理 · \(KnowledgeAtlas.totalPoints) 个知识点").font(AppFont.caption).foregroundColor(.secondary)
+                                Text("考点训练地图").font(AppFont.cardTitle).foregroundColor(.primary)
+                                Text("按模块定位高考物理训练点 · \(KnowledgeAtlas.totalPoints) 个训练点").font(AppFont.caption).foregroundColor(.secondary)
                             }
                         }
                         .padding(.vertical, 2)
@@ -34,7 +34,7 @@ struct LawUniverseView: View {
                     }
                 }
             }
-            .navigationTitle("定律宇宙")
+            .navigationTitle("公式训练")
         }
     }
 

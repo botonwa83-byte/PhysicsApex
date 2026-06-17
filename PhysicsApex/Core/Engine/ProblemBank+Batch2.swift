@@ -1,6 +1,6 @@
 import Foundation
 
-// MARK: - 题库 Batch 2：圆周运动 & 万有引力 & 动量（13 题）
+// MARK: - 练习 Batch 2：圆周运动 & 万有引力 & 动量（13 题）
 
 extension ProblemBank {
 
@@ -151,7 +151,7 @@ extension ProblemBank {
            commonMistakes: ["以为 g 处处是 9.8"]),
         misconceptions: [
             Misconception(option: "g 是常数，处处相同",
-                youThought: "你大概把课本常用的 g=9.8 当成了宇宙通用常数。",
+                youThought: "你大概把地表常用的 g=9.8 当成了宇宙通用常数。",
                 pitfall: "g=GM/r²，离地心越远越小；月球、高空、其它星球都不同。",
                 fix: "9.8 只是地球表面附近的值，g 随位置变。")
         ], tags: ["万有引力", "重力加速度", "错因诊断"])
