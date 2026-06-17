@@ -44,7 +44,7 @@ struct PromoView: View {
 
                     // 超能力 Hero
                     VStack(spacing: 10) {
-                        Text("装上 PhysicsApex，解锁「降维秒杀」超能力")
+                        Text("装上 PhysApex，解锁「降维秒杀」超能力")
                             .font(.system(size: 18, weight: .bold)).multilineTextAlignment(.center).foregroundColor(.white)
                         Text("用守恒、对称、等效俯瞰高考压轴\n看到压轴题，一招降维就能秒")
                             .font(.system(size: 13)).multilineTextAlignment(.center).foregroundColor(.white.opacity(0.6)).lineSpacing(4)
@@ -96,7 +96,7 @@ struct PromoView: View {
                             }
                             Spacer()
                         }
-                        Text("专注教育类 App，用科技让学习更高效。PhysicsApex 把物理学家的「上帝视角」带进高考——守恒、对称、等效、量纲，让每道压轴题都有一招可秒杀，也让物理重新变得好玩。")
+                        Text("专注教育类 App，用科技让学习更高效。PhysApex 把物理学家的「上帝视角」带进高考——守恒、对称、等效、量纲，让每道压轴题都有一招可秒杀，也让物理重新变得好玩。")
                             .font(.system(size: 13)).foregroundColor(.white.opacity(0.65)).lineSpacing(3)
                     }
                     .padding(16)
@@ -105,7 +105,7 @@ struct PromoView: View {
 
                     // 版权
                     VStack(spacing: 4) {
-                        Text("PhysicsApex · 物理制高点  v1.0.0").font(.system(size: 12)).foregroundColor(.white.opacity(0.5))
+                        Text("PhysApex · 物理制高点  v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.1.0")").font(.system(size: 12)).foregroundColor(.white.opacity(0.5))
                         Text("© 2026 Top King. All rights reserved.").font(.system(size: 11)).foregroundColor(.white.opacity(0.35))
                     }
                     .padding(.top, 22).padding(.bottom, 120)
