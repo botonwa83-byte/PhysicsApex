@@ -1,101 +1,111 @@
-// 程序化生成 PhysApex AppIcon (1024x1024)
-// 三色极简设计：淡蓝渐变底（主） + 白色电子轨道/文字 + 橙色原子核（画龙点睛）。
-// 只保留「原子 + 名字」两个元素，橙色仅用于核心点睛。
-// 运行：swift scripts/make_appicon.swift [输出路径]
+// 程序化生成 PhysicsApex AppIcon (1024x1024)
+// 设计：深空渐变 + 登顶山峰(lava) + 原子轨道环(starBlue) + 顶点星(gold)
+// 运行：swift scripts/make_appicon.swift <输出路径>
 
 import AppKit
 import CoreGraphics
 
-let S: CGFloat = 1024
+let size: CGFloat = 1024
 let outPath = CommandLine.arguments.count > 1 ? CommandLine.arguments[1]
     : "PhysicsApex/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon-1024.png"
 
-let cs = CGColorSpace(name: CGColorSpace.sRGB)!
-let ctx = CGContext(data: nil, width: Int(S), height: Int(S), bitsPerComponent: 8,
-                    bytesPerRow: 0, space: cs,
-                    bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)!
-
-func color(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ a: CGFloat = 1) -> CGColor {
-    CGColor(colorSpace: cs, components: [r, g, b, a])!
+func rgb(_ hex: UInt32, _ a: CGFloat = 1) -> CGColor {
+    CGColor(red: CGFloat((hex >> 16) & 0xFF)/255, green: CGFloat((hex >> 8) & 0xFF)/255,
+            blue: CGFloat(hex & 0xFF)/255, alpha: a)
 }
 
-let cen = CGPoint(x: 512, y: 530)   // 原子中心（主角）
+let cs = CGColorSpace(name: CGColorSpace.sRGB)!
+let ctx = CGContext(data: nil, width: Int(size), height: Int(size), bitsPerComponent: 8,
+                    bytesPerRow: 0, space: cs, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)!
 
-// MARK: 1. 淡蓝渐变底（上浅天蓝 → 下稍深蓝，主色）
+// 1. 深空渐变背景（上深紫蓝 → 下夜蓝）
+let bgGrad = CGGradient(colorsSpace: cs, colors: [rgb(0x141A3C), rgb(0x0A0F26)] as CFArray, locations: [0, 1])!
+ctx.drawLinearGradient(bgGrad, start: CGPoint(x: size/2, y: size), end: CGPoint(x: size/2, y: 0), options: [])
 
-let sky = CGGradient(colorsSpace: cs,
-                     colors: [color(0.58, 0.80, 0.97), color(0.27, 0.53, 0.85)] as CFArray,
-                     locations: [0, 1])!
-ctx.drawLinearGradient(sky, start: CGPoint(x: 512, y: 1024), end: CGPoint(x: 512, y: 0), options: [])
+// 2. 顶部辉光（顶点星的氛围）
+let glow = CGGradient(colorsSpace: cs,
+                      colors: [rgb(0xFFA726, 0.32), rgb(0xFFA726, 0.0)] as CFArray, locations: [0, 1])!
+ctx.drawRadialGradient(glow, startCenter: CGPoint(x: size/2, y: 700), startRadius: 0,
+                       endCenter: CGPoint(x: size/2, y: 700), endRadius: 360, options: [])
 
-// 主角背后的白色柔光
-let halo = CGGradient(colorsSpace: cs,
-                      colors: [color(1.0, 1.0, 1.0, 0.45), color(0.85, 0.93, 1.0, 0.0)] as CFArray,
-                      locations: [0, 1])!
-ctx.drawRadialGradient(halo, startCenter: cen, startRadius: 0, endCenter: cen, endRadius: 400, options: [])
+// 3. 星空（伪随机小星点）
+var seed: UInt64 = 42
+func rand01() -> CGFloat { seed = seed &* 6364136223846793005 &+ 1442695040888963407
+    return CGFloat((seed >> 33) % 10000) / 10000 }
+for _ in 0..<70 {
+    let x = rand01() * size, y = 380 + rand01() * (size - 420)
+    let r = 1.5 + rand01() * 3.5
+    ctx.setFillColor(rgb(0xFFFFFF, 0.25 + rand01() * 0.5))
+    ctx.fillEllipse(in: CGRect(x: x - r, y: y - r, width: 2*r, height: 2*r))
+}
 
-// MARK: 2. 大原子（主角）
+// 4. 远山（mystery 紫，层次感）
+ctx.setFillColor(rgb(0x2A2F5C))
+ctx.beginPath()
+ctx.move(to: CGPoint(x: 0, y: 0)); ctx.addLine(to: CGPoint(x: 0, y: 300))
+ctx.addLine(to: CGPoint(x: 300, y: 470)); ctx.addLine(to: CGPoint(x: 560, y: 300))
+ctx.addLine(to: CGPoint(x: 1024, y: 430)); ctx.addLine(to: CGPoint(x: 1024, y: 0))
+ctx.closePath(); ctx.fillPath()
 
-// 三条电子轨道（白色发光）
-ctx.setShadow(offset: .zero, blur: 18, color: color(1.0, 1.0, 1.0, 0.9))
-ctx.setStrokeColor(color(1.0, 1.0, 1.0, 0.98))
-ctx.setLineWidth(12)
-let rx: CGFloat = 230, ry: CGFloat = 88
-for angle in [0.0, 60.0, 120.0] {
+// 5. 主峰（lava 渐变三角，顶点在辉光中心下方）
+let peakTop = CGPoint(x: size/2, y: 690)
+ctx.saveGState()
+ctx.beginPath()
+ctx.move(to: peakTop)
+ctx.addLine(to: CGPoint(x: 130, y: 0)); ctx.addLine(to: CGPoint(x: 894, y: 0))
+ctx.closePath(); ctx.clip()
+let peakGrad = CGGradient(colorsSpace: cs, colors: [rgb(0xFF8A65), rgb(0xD84315)] as CFArray, locations: [0, 1])!
+ctx.drawLinearGradient(peakGrad, start: CGPoint(x: size/2, y: 690), end: CGPoint(x: size/2, y: 0), options: [])
+ctx.restoreGState()
+
+// 5b. 主峰雪顶高光
+ctx.setFillColor(rgb(0xFFE0B2, 0.9))
+ctx.beginPath()
+ctx.move(to: peakTop)
+ctx.addLine(to: CGPoint(x: 462, y: 600)); ctx.addLine(to: CGPoint(x: 512, y: 620))
+ctx.addLine(to: CGPoint(x: 562, y: 600))
+ctx.closePath(); ctx.fillPath()
+
+// 6. 原子轨道环（starBlue 椭圆，倾斜，环绕峰腰）
+func drawOrbit(tilt: CGFloat, ry: CGFloat, lineW: CGFloat, alpha: CGFloat) {
     ctx.saveGState()
-    ctx.translateBy(x: cen.x, y: cen.y)
-    ctx.rotate(by: CGFloat(angle) * .pi / 180)
-    ctx.strokeEllipse(in: CGRect(x: -rx, y: -ry, width: rx * 2, height: ry * 2))
+    ctx.translateBy(x: size/2, y: 480)
+    ctx.rotate(by: tilt)
+    ctx.setStrokeColor(rgb(0x42A5F5, alpha))
+    ctx.setLineWidth(lineW)
+    ctx.strokeEllipse(in: CGRect(x: -430, y: -ry, width: 860, height: 2*ry))
     ctx.restoreGState()
 }
-ctx.setShadow(offset: .zero, blur: 0, color: nil)
+drawOrbit(tilt: -0.20, ry: 150, lineW: 16, alpha: 0.95)
+drawOrbit(tilt: 0.32, ry: 120, lineW: 10, alpha: 0.45)
 
-// 电子（轨道上的白色亮点）
-let electrons: [(Double, Double)] = [(0, 35), (60, 200), (120, 320)]
-for (orbitAngle, posAngle) in electrons {
-    let oa = orbitAngle * .pi / 180, pa = posAngle * .pi / 180
-    let lx = rx * cos(pa), ly = ry * sin(pa)
-    let ex = cen.x + lx * cos(oa) - ly * sin(oa)
-    let ey = cen.y + lx * sin(oa) + ly * cos(oa)
-    ctx.setShadow(offset: .zero, blur: 12, color: color(1.0, 1.0, 1.0, 1.0))
-    ctx.setFillColor(color(1.0, 1.0, 1.0))
-    ctx.fillEllipse(in: CGRect(x: ex - 18, y: ey - 18, width: 36, height: 36))
+// 6b. 轨道上的电子（starBlue 亮点 + 光晕）
+let electron = CGPoint(x: size/2 + 430 * cos(2.4) , y: 480 + 150 * sin(2.4) - 80)
+let eGlow = CGGradient(colorsSpace: cs, colors: [rgb(0x90CAF9, 0.9), rgb(0x42A5F5, 0.0)] as CFArray, locations: [0, 1])!
+ctx.drawRadialGradient(eGlow, startCenter: electron, startRadius: 0, endCenter: electron, endRadius: 60, options: [])
+ctx.setFillColor(rgb(0xE3F2FD))
+ctx.fillEllipse(in: CGRect(x: electron.x - 22, y: electron.y - 22, width: 44, height: 44))
+
+// 7. 顶点星（gold 四角星）
+func drawStar(center c: CGPoint, rOuter: CGFloat, rInner: CGFloat, color: CGColor) {
+    ctx.setFillColor(color)
+    ctx.beginPath()
+    for i in 0..<8 {
+        let r = i % 2 == 0 ? rOuter : rInner
+        let ang = CGFloat(i) * .pi / 4 + .pi / 2
+        let p = CGPoint(x: c.x + r * cos(ang), y: c.y + r * sin(ang))
+        i == 0 ? ctx.move(to: p) : ctx.addLine(to: p)
+    }
+    ctx.closePath(); ctx.fillPath()
 }
-ctx.setShadow(offset: .zero, blur: 0, color: nil)
+let starC = CGPoint(x: size/2, y: 760)
+let starGlow = CGGradient(colorsSpace: cs, colors: [rgb(0xFFD54F, 0.85), rgb(0xFFA726, 0.0)] as CFArray, locations: [0, 1])!
+ctx.drawRadialGradient(starGlow, startCenter: starC, startRadius: 0, endCenter: starC, endRadius: 130, options: [])
+drawStar(center: starC, rOuter: 86, rInner: 26, color: rgb(0xFFE082))
 
-// 原子核（橙色 · 画龙点睛）
-let core = CGGradient(colorsSpace: cs,
-                      colors: [color(1.0, 0.85, 0.55, 1.0), color(1.0, 0.58, 0.18, 0.95), color(1.0, 0.5, 0.15, 0.0)] as CFArray,
-                      locations: [0, 0.55, 1])!
-ctx.drawRadialGradient(core, startCenter: cen, startRadius: 0, endCenter: cen, endRadius: 110, options: [])
-ctx.setShadow(offset: .zero, blur: 24, color: color(1.0, 0.6, 0.2, 0.95))
-ctx.setFillColor(color(1.0, 0.66, 0.26))
-ctx.fillEllipse(in: CGRect(x: cen.x - 46, y: cen.y - 46, width: 92, height: 92))
-ctx.setShadow(offset: .zero, blur: 0, color: nil)
-
-// MARK: 3. App 名（白字）
-
-NSGraphicsContext.saveGraphicsState()
-NSGraphicsContext.current = NSGraphicsContext(cgContext: ctx, flipped: false)
-let shadow = NSShadow()
-shadow.shadowColor = NSColor(srgbRed: 0.15, green: 0.30, blue: 0.55, alpha: 0.45)
-shadow.shadowBlurRadius = 8
-shadow.shadowOffset = NSSize(width: 0, height: -2)
-let attrs: [NSAttributedString.Key: Any] = [
-    .font: NSFont.systemFont(ofSize: 56, weight: .semibold),
-    .foregroundColor: NSColor.white,
-    .kern: 3.0,
-    .shadow: shadow,
-]
-let astr = NSAttributedString(string: "PhysApex", attributes: attrs)
-let tsz = astr.size()
-astr.draw(at: NSPoint(x: (1024 - tsz.width) / 2, y: 110))
-NSGraphicsContext.restoreGraphicsState()
-
-// MARK: 输出
-
+// 输出 PNG
 let img = ctx.makeImage()!
 let rep = NSBitmapImageRep(cgImage: img)
-let png = rep.representation(using: .png, properties: [:])!
-try! png.write(to: URL(fileURLWithPath: outPath))
-print("✅ 已生成 \(outPath) (\(Int(S))x\(Int(S)))")
+let data = rep.representation(using: .png, properties: [:])!
+try! data.write(to: URL(fileURLWithPath: outPath))
+print("✅ 已生成 \(outPath) (\(Int(size))x\(Int(size)))")

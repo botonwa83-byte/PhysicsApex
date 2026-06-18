@@ -1,6 +1,6 @@
 import SwiftUI
 
-// MARK: - 考点训练地图：按模块定位训练点并直达练习
+// MARK: - 知识路线图：一屏纵览整个高考物理，逐点训练
 
 struct KnowledgeAtlasView: View {
     private let modules = KnowledgeAtlas.modules
@@ -16,15 +16,15 @@ struct KnowledgeAtlasView: View {
             .padding(Spacing.lg)
         }
         .background(Color.apexBackground.ignoresSafeArea())
-        .navigationTitle("训练地图")
+        .navigationTitle("知识全景")
         .navigationBarTitleDisplayMode(.inline)
     }
 
     private var header: some View {
         VStack(alignment: .leading, spacing: Spacing.sm) {
-            Text("高考物理 · 考点训练")
+            Text("高考物理 · 一图纵览")
                 .font(.system(size: 18, weight: .black, design: .rounded)).foregroundColor(.white)
-            Text("\(modules.count) 大模块 · \(KnowledgeAtlas.totalPoints) 个训练点，每点直达公式、技巧和典型练习")
+            Text("\(modules.count) 大模块 · \(KnowledgeAtlas.totalPoints) 个核心知识点，每点一句话本质 + 公式 + 秒杀武器")
                 .font(AppFont.caption).foregroundColor(.white.opacity(0.9))
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -47,7 +47,7 @@ private struct ModuleCard: View {
                         .frame(width: 32)
                     VStack(alignment: .leading, spacing: 2) {
                         Text(module.name).font(AppFont.cardTitle).foregroundColor(.primary)
-                        Text("\(module.chapters.count) 个专题 · \(module.pointCount) 个训练点").font(AppFont.caption).foregroundColor(.secondary)
+                        Text("\(module.chapters.count) 组 · \(module.pointCount) 知识点").font(AppFont.caption).foregroundColor(.secondary)
                     }
                     Spacer()
                     Image(systemName: expanded ? "chevron.down" : "chevron.right").foregroundColor(.secondary)
@@ -110,7 +110,7 @@ private struct ChapterSection: View {
     }
 }
 
-// MARK: - 训练点详情卡（精炼节点 + 练习互链）
+// MARK: - 知识点全息卡（精炼节点 + 全网互链）
 
 struct KnowledgePointDetailView: View {
     let point: KnowledgePoint

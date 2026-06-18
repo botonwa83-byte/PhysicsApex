@@ -51,7 +51,7 @@ struct ProfileView: View {
                 statRow("距高考", "\(streak.daysToGaokao) 天", "calendar")
             }
 
-            Section("专题掌握度") {
+            Section("考点掌握度") {
                 ForEach(PhysicsTopic.allCases.filter { profile.topicMastery[$0.rawValue] != nil }) { topic in
                     let m = profile.topicMastery[topic.rawValue] ?? 0
                     VStack(alignment: .leading, spacing: 4) {

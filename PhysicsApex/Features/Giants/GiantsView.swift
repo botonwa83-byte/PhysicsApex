@@ -1,6 +1,6 @@
 import SwiftUI
 
-// MARK: - 大师思维
+// MARK: - 物理学家
 
 struct GiantsView: View {
     private let giants = GiantsData.all
@@ -18,7 +18,7 @@ struct GiantsView: View {
             .padding(Spacing.lg)
         }
         .background(Color.apexBackground.ignoresSafeArea())
-        .navigationTitle("大师思维")
+        .navigationTitle("物理学家")
         .navigationBarTitleDisplayMode(.inline)
     }
 
@@ -67,9 +67,9 @@ struct GiantDetailView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .cardSurface()
 
-                // 传奇
+                // 生平
                 VStack(alignment: .leading, spacing: Spacing.sm) {
-                    SectionHeader(title: "思路", systemImage: "sparkles", accent: .apexGold)
+                    SectionHeader(title: "生平", systemImage: "sparkles", accent: .apexGold)
                     Text(giant.legendStory).font(.body).foregroundColor(.primary)
                 }
                 .cardSurface()

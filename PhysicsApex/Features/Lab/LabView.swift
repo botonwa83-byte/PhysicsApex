@@ -1,11 +1,11 @@
 import SwiftUI
 
-// MARK: - 实验场（练习）：按专题进入，做题 + 解析
+// MARK: - 实验场（练习）：按章节进入，做题 + 解析
 
 struct LabView: View {
     @EnvironmentObject var profile: StudentProfile
 
-    /// 当前段位下、有题的专题。
+    /// 当前段位下、有题的章节。
     private var availableTopics: [PhysicsTopic] {
         PhysicsTopic.allCases.filter { topic in
             ProblemBank.all.contains { $0.topic == topic && $0.stage == profile.currentStage }
@@ -40,7 +40,7 @@ struct LabView: View {
 
     private var topicGrid: some View {
         VStack(alignment: .leading, spacing: Spacing.md) {
-            SectionHeader(title: "\(profile.currentStage.shortTitle) · 选择专题",
+            SectionHeader(title: "\(profile.currentStage.shortTitle) · 选择考点",
                           systemImage: "square.grid.2x2", accent: profile.currentStage.color)
             if availableTopics.isEmpty {
                 Text("本段位的题正在补充中，先试试其它段位吧。")
@@ -74,7 +74,7 @@ struct LabView: View {
     }
 }
 
-// MARK: - 某段位某专题的题目列表（严格按 段位 + 专题 过滤，含付费门禁）
+// MARK: - 某段位某章节的题目列表（严格按 段位 + 章节 过滤，含付费门禁）
 
 struct TopicProblemsView: View {
     let topic: PhysicsTopic
