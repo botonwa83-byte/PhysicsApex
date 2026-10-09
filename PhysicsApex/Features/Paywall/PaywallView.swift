@@ -52,6 +52,10 @@ struct PaywallView: View {
                 }
                 .padding(.top, 12).disabled(purchase.isPurchasing)
 
+                if let err = purchase.productLoadError {
+                    Text(err).font(.caption).foregroundColor(.apexDanger)
+                        .multilineTextAlignment(.center).padding(.horizontal, 24).padding(.top, 8)
+                }
                 if let err = purchase.errorMessage {
                     Text(err).font(.caption).foregroundColor(.apexDanger)
                         .multilineTextAlignment(.center).padding(.horizontal, 24).padding(.top, 8)
@@ -69,6 +73,12 @@ struct PaywallView: View {
             }
         }
         .background(Color.apexBackground.ignoresSafeArea())
+        .onAppear {
+            // 商品未加载成功时自动重试，弱网用户无需杀 App 重开
+            if purchase.product == nil {
+                Task { await purchase.loadProduct() }
+            }
+        }
         .onChange(of: purchase.isUnlocked) { unlocked in
             if unlocked { dismiss() }
         }

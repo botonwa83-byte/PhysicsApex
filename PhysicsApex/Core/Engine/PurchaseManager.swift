@@ -1,3 +1,4 @@
+import os
 import StoreKit
 import SwiftUI
 
@@ -23,16 +24,37 @@ final class PurchaseManager: ObservableObject {
 
     @Published private(set) var isUnlocked: Bool = false
     @Published private(set) var product: Product?
+    /// 商品加载失败原因：nil = 加载成功或尚未尝试。用于与购买动作的 errorMessage 区分展示。
+    @Published private(set) var productLoadError: String?
     @Published private(set) var isPurchasing: Bool = false
     @Published private(set) var errorMessage: String?
 
     private let storageKey = "physicsapex_full_unlocked"
+    private static let log = Logger(subsystem: "com.physicsapex.app", category: "purchase")
+    private var updatesTask: Task<Void, Never>?
 
     private init() {
         isUnlocked = UserDefaults.standard.bool(forKey: storageKey)
+        // 交易监听必须在 App 启动时挂载并保持整个生命周期：
+        // 处理 Ask to Buy 事后批准、中断购买续接等非当场完成的交易，否则这些购买将永远无法解锁。
+        updatesTask = listenForTransactions()
         Task {
             await loadProduct()
             await refreshEntitlements()
+        }
+    }
+
+    private func listenForTransactions() -> Task<Void, Never> {
+        Task {
+            for await result in Transaction.updates {
+                switch result {
+                case .verified(let transaction):
+                    await transaction.finish()
+                    await refreshEntitlements()
+                case .unverified(_, let error):
+                    Self.log.error("收到未通过校验的交易更新: \(error.localizedDescription, privacy: .public)")
+                }
+            }
         }
     }
 
@@ -40,16 +62,25 @@ final class PurchaseManager: ObservableObject {
     func loadProduct() async {
         do {
             let products = try await Product.products(for: [productID])
-            product = products.first
+            if let found = products.first {
+                product = found
+                productLoadError = nil
+            } else {
+                // 返回空数组不抛错：几乎必然是 App Store Connect 配置问题
+                // （付费协议未生效 / 商品未上架或未随版本提审 / 商品 ID 不匹配），与网络无关。
+                Self.log.error("商品查询返回空数组，productID=\(self.productID, privacy: .public)，疑似 ASC 配置问题")
+                productLoadError = "商品暂不可用，可能是商店配置或网络问题，请稍后重试"
+            }
         } catch {
-            // 沙盒未配置时静默失败，价格降级显示
+            Self.log.error("商品加载失败: \(error.localizedDescription, privacy: .public)")
+            productLoadError = "无法连接 App Store，请检查网络后重试（\(error.localizedDescription)）"
         }
     }
 
     @MainActor
     func purchase() async {
         guard let product else {
-            errorMessage = "获取产品信息失败，请检查网络后重试"
+            errorMessage = productLoadError ?? "获取产品信息失败，请稍后重试"
             return
         }
         isPurchasing = true
