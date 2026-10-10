@@ -27,8 +27,6 @@ struct ObservationStationView: View {
                     // ③ 探索
                     sectionHeader("探索")
                     simulationTeaser
-                    paradoxTeaser
-                    giantsTeaser
                 }
                 .padding(.horizontal, Spacing.lg)
                 .padding(.top, Spacing.md)
@@ -245,42 +243,6 @@ struct ObservationStationView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("互动模拟沙盘").font(AppFont.cardTitle).foregroundColor(.primary)
                     Text("拖一拖参数，看抛体/碰撞/振动实时演化——看见物理").font(AppFont.caption).foregroundColor(.secondary).lineLimit(2)
-                }
-                Spacer()
-                Image(systemName: "chevron.right").foregroundColor(.secondary)
-            }
-            .cardSurface()
-        }
-        .buttonStyle(.plain)
-    }
-
-    private var paradoxTeaser: some View {
-        Group {
-            if let p = ParadoxData.all.first {
-                NavigationLink { ParadoxDetailView(paradox: p) } label: {
-                    HStack(spacing: Spacing.md) {
-                        Image(systemName: p.category.icon).font(.title2).foregroundColor(p.category.color)
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("今日佯谬 · \(p.title)").font(AppFont.cardTitle).foregroundColor(.primary)
-                            Text(p.hook).font(AppFont.caption).foregroundColor(.secondary).lineLimit(2)
-                        }
-                        Spacer()
-                        Image(systemName: "chevron.right").foregroundColor(.secondary)
-                    }
-                    .cardSurface()
-                }
-                .buttonStyle(.plain)
-            }
-        }
-    }
-
-    private var giantsTeaser: some View {
-        NavigationLink { GiantsView() } label: {
-            HStack(spacing: Spacing.md) {
-                Image(systemName: "person.3.fill").font(.title2).foregroundColor(.apexStarBlue)
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("物理学家").font(AppFont.cardTitle).foregroundColor(.primary)
-                    Text("牛顿 · 爱因斯坦 · 法拉第 · 费曼——越学越上头").font(AppFont.caption).foregroundColor(.secondary).lineLimit(2)
                 }
                 Spacer()
                 Image(systemName: "chevron.right").foregroundColor(.secondary)

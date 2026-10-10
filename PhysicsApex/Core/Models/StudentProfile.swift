@@ -20,7 +20,6 @@ final class StudentProfile: ObservableObject, Codable {
     @Published var totalProblems: Int
     @Published var correctProblems: Int
     @Published var unlockedWeapons: [String]
-    @Published var completedParadoxes: [String]
     @Published var topicMastery: [String: Double]  // topic.rawValue -> 0...1
 
     var accuracy: Double {
@@ -29,7 +28,7 @@ final class StudentProfile: ObservableObject, Codable {
 
     enum CodingKeys: String, CodingKey {
         case displayName, currentStage, streak, totalProblems, correctProblems
-        case unlockedWeapons, completedParadoxes, topicMastery
+        case unlockedWeapons, topicMastery
     }
 
     init() {
@@ -39,7 +38,6 @@ final class StudentProfile: ObservableObject, Codable {
         self.totalProblems = 42
         self.correctProblems = 31
         self.unlockedWeapons = ["momentumConservation", "mechanicalEnergy"]
-        self.completedParadoxes = ["galileo_tower"]
         self.topicMastery = [
             PhysicsTopic.kinematics.rawValue: 0.8,
             PhysicsTopic.newton.rawValue: 0.65,
@@ -55,7 +53,6 @@ final class StudentProfile: ObservableObject, Codable {
         totalProblems = try c.decode(Int.self, forKey: .totalProblems)
         correctProblems = try c.decode(Int.self, forKey: .correctProblems)
         unlockedWeapons = try c.decode([String].self, forKey: .unlockedWeapons)
-        completedParadoxes = try c.decode([String].self, forKey: .completedParadoxes)
         topicMastery = try c.decode([String: Double].self, forKey: .topicMastery)
     }
 
@@ -67,7 +64,6 @@ final class StudentProfile: ObservableObject, Codable {
         try c.encode(totalProblems, forKey: .totalProblems)
         try c.encode(correctProblems, forKey: .correctProblems)
         try c.encode(unlockedWeapons, forKey: .unlockedWeapons)
-        try c.encode(completedParadoxes, forKey: .completedParadoxes)
         try c.encode(topicMastery, forKey: .topicMastery)
     }
 

@@ -121,15 +121,6 @@ struct MoreView: View {
                         Label("单位 / 量纲", systemImage: "ruler")
                     }
                 }
-
-                Section("物理发现") {
-                    NavigationLink { GiantsView() } label: {
-                        Label("物理学家", systemImage: "person.3.fill")
-                    }
-                    NavigationLink { ParadoxView() } label: {
-                        Label("佯谬室", systemImage: "questionmark.diamond")
-                    }
-                }
             }
             .navigationTitle("更多")
         }
