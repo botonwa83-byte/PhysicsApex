@@ -1,10 +1,10 @@
-# PhysApex 2.0.0 上架文案
+# PhysApex 3.0.0 上架文案
 
 ## 版本信息
 
 App 名称：PhysApex
-Bundle ID：com.physicsapex.app（沿用现有 App 记录，作为 2.0.0 升级提交）
-版本号：2.0.0
+Bundle ID：com.physicsapex.app（沿用现有 App 记录，作为 3.0.0 升级提交）
+版本号：3.0.0
 构建号：1
 
 ## 本次改进点

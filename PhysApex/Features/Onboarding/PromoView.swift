@@ -99,7 +99,7 @@ struct PromoView: View {
 
                     // 版权
                     VStack(spacing: 4) {
-                        Text("PhysApex · 物理制高点  v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "2.0.0")").font(.system(size: 12)).foregroundColor(.white.opacity(0.5))
+                        Text("PhysApex · 物理制高点  v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "3.0.0")").font(.system(size: 12)).foregroundColor(.white.opacity(0.5))
                         Text("© 2026 Top King. All rights reserved.").font(.system(size: 11)).foregroundColor(.white.opacity(0.35))
                     }
                     .padding(.top, 22).padding(.bottom, 120)
