@@ -15,7 +15,7 @@ enum KnowledgeAtlas {
                 KnowledgePoint("k_basic", "质点·参考系·位移", essence: "研究运动先选参考系；位移是矢量、路程是标量。", formula: "Δx = x₂ − x₁", problemId: "relative_motion", stage: .junior),
                 KnowledgePoint("k_va", "速度·加速度", essence: "速度是位置变化率，加速度是速度变化率——和速度方向无必然关系。", formula: "v = Δx/Δt，a = Δv/Δt", problemId: "b1_accel_dir"),
                 KnowledgePoint("k_uniform", "匀变速直线运动", essence: "三大公式串起 v、x、t、a；缺谁选谁。", formula: "v=v₀+at；x=v₀t+½at²；v²=v₀²+2ax", pitfall: "矢量正负方向先统一，再代数运算。", problemId: "b1_uniform_accel"),
-                KnowledgePoint("k_graph", "v-t / x-t 图象", essence: "斜率是变化率，面积是累积量——图象法秒杀运动学。", weapon: .graphMethod, pitfall: "别把 x-t 图的斜率当加速度。", problemId: "b1_vt_graph"),
+                KnowledgePoint("k_graph", "v-t / x-t 图象", essence: "斜率是变化率，面积是累积量——图象法快解运动学。", weapon: .graphMethod, pitfall: "别把 x-t 图的斜率当加速度。", problemId: "b1_vt_graph"),
             ]),
             KnowledgeChapter(id: "force", name: "相互作用·力", icon: "arrow.up.and.down.and.arrow.left.and.right", points: [
                 KnowledgePoint("f_gravity", "重力·弹力·摩擦力", essence: "三种常见力的来源与方向；弹力垂直接触面，摩擦力沿接触面。", formula: "G=mg；F弹=kx；f=μN", problemId: "b1_friction_dir", stage: .junior),

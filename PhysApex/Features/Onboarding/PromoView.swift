@@ -10,7 +10,7 @@ struct PromoView: View {
     @State private var glow = false
 
     private let features: [(icon: String, color: Color, title: String, desc: String)] = [
-        ("bolt.fill", .apexLava, "降维秒杀", "每道压轴题给你一招「上帝视角」秒杀解，常规与降维双解对照"),
+        ("bolt.fill", .apexLava, "降维快解", "每道压轴题给你一招「上帝视角」快解法，常规与降维双解对照"),
         ("scope", .apexEmerald, "互动模拟沙盘", "抛体 / 碰撞 / 电路…拖一拖参数，亲眼看见物理"),
         ("map.fill", .apexStarBlue, "知识路线图", "整个高考物理一图纵览，每个考点都能点开训练"),
         ("brain.head.profile", .apexMystery, "错因诊断", "答错时点破你的直觉陷阱，似是而非一眼点醒"),
@@ -37,14 +37,14 @@ struct PromoView: View {
                         Text("PHYSAPEX")
                             .font(.system(size: 30, weight: .heavy, design: .rounded)).tracking(2)
                             .foregroundStyle(LinearGradient(colors: [.apexGold, .apexLava], startPoint: .leading, endPoint: .trailing))
-                        Text("看 见 物 理 · 降 维 秒 杀")
+                        Text("看 见 物 理 · 降 维 快 解")
                             .font(.system(size: 14, weight: .medium)).tracking(2).foregroundColor(.white.opacity(0.6))
                     }
                     .padding(.top, 48)
 
                     // 超能力 Hero
                     VStack(spacing: 10) {
-                        Text("装上 PhysApex，解锁「降维秒杀」超能力")
+                        Text("装上 PhysApex，解锁「降维快解」超能力")
                             .font(.system(size: 18, weight: .bold)).multilineTextAlignment(.center).foregroundColor(.white)
                         Text("用守恒、对称、等效俯瞰高考压轴\n看到压轴题，一招降维就能秒")
                             .font(.system(size: 13)).multilineTextAlignment(.center).foregroundColor(.white.opacity(0.6)).lineSpacing(4)

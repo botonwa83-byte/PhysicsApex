@@ -1,7 +1,7 @@
 import SwiftUI
 
 // MARK: - 降维打击 · 电影级动画（震撼人心的卖点时刻）
-// 流程：题目浮现 → 升维俯瞰(题目缩小飞向星空) → 武器自天而降劈下(闪光+冲击) → 「秒杀」定格。
+// 流程：题目浮现 → 升维俯瞰(题目缩小飞向星空) → 武器自天而降劈下(闪光+冲击) → 「快解」定格。
 
 struct DescentStrikeView: View {
     let weaponName: String
@@ -67,7 +67,7 @@ struct DescentStrikeView: View {
             // 判定定格
             if showVerdict {
                 VStack(spacing: 14) {
-                    Text("秒 杀")
+                    Text("快 解")
                         .font(.system(size: 52, weight: .black, design: .rounded))
                         .foregroundStyle(LinearGradient(colors: [.apexGold, .apexLava], startPoint: .leading, endPoint: .trailing))
                         .shadow(color: .apexLava.opacity(0.6), radius: 16)

@@ -208,7 +208,7 @@ extension ProblemBank {
                 SolutionStep(order: 1, description: "质心不动，位移与质量成反比", formula: "d=mL/(m+M)", annotation: "一步"),
             ], keyInsight: "动量守恒 ⟹ 质心不动，秒得位移关系。", commonMistakes: []),
             weaponUsed: .momentumConservation, timeRatio: 3.0,
-            detailedExplanation: "初动量为零的系统质心永远不动——人船模型、爆炸反冲都靠这条秒杀。",
+            detailedExplanation: "初动量为零的系统质心永远不动——人船模型、爆炸反冲都靠这条快解。",
             plainTalk: "人往左走，船必须往右退——系统最初静止，总冲劲必须一直是零。更妙的是：整个系统的重心永远钉在原地。人重船轻，人挪得少、船退得多，按质量反着分配总长 L 就行。"),
         tags: ["动量守恒", "人船模型", "降维"])
 

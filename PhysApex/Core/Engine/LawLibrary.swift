@@ -515,7 +515,7 @@ enum LawLibrary {
             latex: "P = UI = I^2R = \\dfrac{U^2}{R},\\quad Q = I^2Rt"
         ),
 
-        // ── 以下为补充条目，覆盖降维秒杀与沙盘高频公式 ──
+        // ── 以下为补充条目，覆盖降维快解与沙盘高频公式 ──
 
         PhysicsLaw(
             id: "kinematics",

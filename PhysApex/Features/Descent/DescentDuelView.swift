@@ -1,8 +1,8 @@
 import SwiftUI
 
-// MARK: - 双解对决剧场：常规解 vs 降维秒杀 实时赛跑
+// MARK: - 双解对决剧场：常规解 vs 降维快解 实时赛跑
 // 把 timeRatio 从一个数字变成「看得见的碾压」：两条赛道同屏开跑，
-// 秒杀道几秒冲线盖章，常规道还在苦磨——计时器用题目真实 averageTime 压缩播放。
+// 快解道几秒冲线盖章，常规道还在苦磨——计时器用题目真实 averageTime 压缩播放。
 
 struct DescentDuelView: View {
     let problem: PhysicsProblem
@@ -155,11 +155,11 @@ struct DescentDuelView: View {
         .cornerRadius(Radius.card)
     }
 
-    /// 「已秒杀」盖章
+    /// 「已快解」盖章
     private var seal: some View {
         VStack(spacing: 2) {
             Image(systemName: dual.weaponUsed.icon).font(.system(size: 22, weight: .black))
-            Text("已秒杀").font(.system(size: 15, weight: .black, design: .rounded))
+            Text("已快解").font(.system(size: 15, weight: .black, design: .rounded))
         }
         .foregroundColor(.apexGold)
         .padding(.horizontal, 14).padding(.vertical, 8)

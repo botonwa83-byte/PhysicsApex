@@ -10,7 +10,7 @@ struct PracticeRecord: Codable, Identifiable {
     let isCorrect: Bool
     let responseTime: Double
     let hintsUsed: Int
-    let usedDescentMethod: Bool   // 是否用了降维秒杀
+    let usedDescentMethod: Bool   // 是否用了降维快解
 }
 
 final class StudentProfile: ObservableObject, Codable {

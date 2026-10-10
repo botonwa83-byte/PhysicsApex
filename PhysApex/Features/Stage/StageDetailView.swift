@@ -107,7 +107,7 @@ struct StageDetailView: View {
                 Text(p.content).font(AppFont.body).foregroundColor(locked ? .secondary : .primary).lineLimit(2)
                 HStack(spacing: 6) {
                     TagChip(text: p.topic.name, color: .apexStarBlue)
-                    if p.dualSolution != nil { TagChip(text: "可秒杀", color: .apexLava) }
+                    if p.dualSolution != nil { TagChip(text: "可快解", color: .apexLava) }
                 }
             }
             Spacer(minLength: 0)

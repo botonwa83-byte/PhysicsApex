@@ -108,7 +108,7 @@ struct TopicProblemsView: View {
             }
             HStack(spacing: 6) {
                 TagChip(text: p.stage.shortTitle, color: p.stage.color)
-                if p.dualSolution != nil { TagChip(text: "可秒杀", color: .apexLava) }
+                if p.dualSolution != nil { TagChip(text: "可快解", color: .apexLava) }
                 if SimLibrary.link(for: p) != nil { TagChip(text: "沙盘", color: .apexEmerald) }
                 Spacer()
                 Text(locked ? "解锁查看" : "难度 \(Int(p.difficulty * 100))")
@@ -301,7 +301,7 @@ struct ProblemDetailView: View {
             HStack {
                 Image(systemName: "bolt.fill").foregroundColor(.apexLava)
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("这题能被「\(dual.weaponUsed.name)」秒杀").font(AppFont.cardTitle).foregroundColor(.primary)
+                    Text("这题能被「\(dual.weaponUsed.name)」快解").font(AppFont.cardTitle).foregroundColor(.primary)
                     Text("看降维解法，省时约 \(String(format: "%.0f", dual.timeRatio))×").font(AppFont.caption).foregroundColor(.secondary)
                 }
                 Spacer()

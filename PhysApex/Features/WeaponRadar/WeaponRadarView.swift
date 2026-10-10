@@ -2,7 +2,7 @@ import SwiftUI
 
 // MARK: - 武器雷达 · 30 秒识局训练
 // 高考生最缺的元技能：拿到压轴题的前 30 秒判断「这题该用哪把武器」。
-// 玩法：只看题干（不看解法），倒计时 30 s 内从 4 把武器中选出正确的秒杀武器。
+// 玩法：只看题干（不看解法），倒计时 30 s 内从 4 把武器中选出正确的快解武器。
 // 数据全部来自 ProblemBank.descentCases——零新增内容成本，68 道战例即练习集。
 
 struct WeaponRadarView: View {
@@ -45,7 +45,7 @@ struct WeaponRadarView: View {
         .sheet(isPresented: $showPaywall) { PaywallView() }
     }
 
-    /// 该战例是否在免费档（与降维秒杀列表同一规则）。
+    /// 该战例是否在免费档（与降维快解列表同一规则）。
     private func isCaseFree(_ p: PhysicsProblem) -> Bool {
         purchase.isUnlocked ||
         (ProblemBank.descentCases.firstIndex { $0.id == p.id } ?? .max) < PurchaseManager.freeDescentCount
@@ -198,12 +198,12 @@ struct WeaponRadarView: View {
                 // 转化钩子：从识局直达完整战例（锁定则弹付费墙）
                 if isCaseFree(p) {
                     NavigationLink { DescentDetailView(problem: p, dual: dual) } label: {
-                        Label("看完整秒杀训练（双解对决）", systemImage: "bolt.fill")
+                        Label("看完整快解训练（双解对决）", systemImage: "bolt.fill")
                             .font(AppFont.chip).foregroundColor(.apexLava)
                     }
                 } else {
                     Button { showPaywall = true } label: {
-                        Label("解锁完整秒杀训练", systemImage: "lock.fill")
+                        Label("解锁完整快解训练", systemImage: "lock.fill")
                             .font(AppFont.chip).foregroundColor(.apexLava)
                     }
                 }

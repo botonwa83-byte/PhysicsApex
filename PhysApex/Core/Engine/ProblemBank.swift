@@ -36,7 +36,7 @@ enum ProblemBank {
         return result
     }()
 
-    /// 降维秒杀战例 = 带 dualSolution 的题。
+    /// 降维快解战例 = 带 dualSolution 的题。
     static var descentCases: [PhysicsProblem] { all.filter { $0.dualSolution != nil } }
 
     /// 该题是否在免费档（全部练习前 freeProblemCount 道）。
@@ -211,7 +211,7 @@ enum ProblemBank {
             ),
             weaponUsed: .extremumPrinciple,
             timeRatio: 3.0,
-            detailedExplanation: "数形结合：把极值问题翻译成'圆的切线'，几何直觉直接秒杀，免去求导。",
+            detailedExplanation: "数形结合：把极值问题翻译成'圆的切线'，几何直觉直接快解，免去求导。",
             plainTalk: "把船速想成一根能随意转方向的「指针」：水速是固定的一支箭，船速指针绕着箭头尖画一个圆。你真正的前进方向，就是从起点连到圆上某一点。想怎么走最划算？在圆上挑那个最合适的点就行——图一画答案就在眼前，根本不用求导。"
         ),
         tags: ["运动合成", "最值", "数形结合", "降维"]
@@ -311,7 +311,7 @@ enum ProblemBank {
             ),
             weaponUsed: .symmetry,
             timeRatio: 3.0,
-            detailedExplanation: "速率大→半径大→路程长，但快慢恰好抵消，转一圈时间不变。记住 T=2πm/(qB) 就能秒杀一切「周期是否变」的选择题。",
+            detailedExplanation: "速率大→半径大→路程长，但快慢恰好抵消，转一圈时间不变。记住 T=2πm/(qB) 就能快解一切「周期是否变」的选择题。",
             plainTalk: "转一圈的时间＝一圈的路程÷速度。粒子跑得快一倍，它画的圆也恰好大一倍——跑得快但路也变远了，两件事正好抵消。所以转一圈的时间跟快慢根本没关系，只看粒子本身（m、q）和磁场（B）。下次再问「速度变了周期变不变」，闭着眼选不变。"
         ),
         misconceptions: [
@@ -519,7 +519,7 @@ enum ProblemBank {
         tags: ["电场", "类平抛", "等效迁移", "降维"]
     )
 
-    // MARK: - 概念秒杀：光电效应（错因诊断）
+    // MARK: - 概念快解：光电效应（错因诊断）
 
     static let photoEffectChoice = PhysicsProblem(
         id: "photo_effect",
@@ -586,10 +586,10 @@ enum ProblemBank {
                 fix: "决定成败的永远是单光子能量 = 频率。"
             ),
         ],
-        tags: ["光电效应", "光子", "概念秒杀", "错因诊断"]
+        tags: ["光电效应", "光子", "概念快解", "错因诊断"]
     )
 
-    // MARK: - 概念秒杀：温度与内能（错因诊断）
+    // MARK: - 概念快解：温度与内能（错因诊断）
 
     static let internalEnergyChoice = PhysicsProblem(
         id: "internal_energy",
@@ -638,7 +638,7 @@ enum ProblemBank {
         tags: ["热学", "内能", "温度", "错因诊断"]
     )
 
-    // MARK: - 概念秒杀：全反射（错因诊断）
+    // MARK: - 概念快解：全反射（错因诊断）
 
     static let totalReflectionChoice = PhysicsProblem(
         id: "total_reflection",
@@ -685,7 +685,7 @@ enum ProblemBank {
                 fix: "全反射时能量 100% 反射，正因如此光纤几乎无损耗传光。"
             ),
         ],
-        tags: ["光学", "全反射", "概念秒杀", "错因诊断"]
+        tags: ["光学", "全反射", "概念快解", "错因诊断"]
     )
 
     // MARK: - 降维战例：双缝干涉条纹间距

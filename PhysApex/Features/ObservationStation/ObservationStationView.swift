@@ -1,7 +1,7 @@
 import SwiftUI
 
 // MARK: - 观测站（首页）
-// 布局优先级对齐 MathApex：核心卖点(降维秒杀 + 三段进阶)置顶 C 位，再到今日行动、进度、探索。
+// 布局优先级对齐 MathApex：核心卖点(降维快解 + 三段进阶)置顶 C 位，再到今日行动、进度、探索。
 
 struct ObservationStationView: View {
     @Binding var selectedTab: Int
@@ -47,13 +47,13 @@ struct ObservationStationView: View {
 
     // MARK: ① 卖点 C 位
 
-    /// 灵魂卖点：降维秒杀（满色渐变 hero，对标 MathApex secondKillHero）
+    /// 灵魂卖点：降维快解（满色渐变 hero，对标 MathApex secondKillHero）
     private var descentHero: some View {
         NavigationLink { DescentView() } label: {
             VStack(alignment: .leading, spacing: Spacing.md) {
                 HStack(spacing: Spacing.sm) {
                     Image(systemName: "bolt.fill").font(.title3).foregroundColor(.white)
-                    Text("降维秒杀")
+                    Text("降维快解")
                         .font(.system(size: 20, weight: .black, design: .rounded))
                         .foregroundColor(.white)
                     Spacer()
@@ -61,7 +61,7 @@ struct ObservationStationView: View {
                         .font(.caption2).foregroundColor(.white.opacity(0.9))
                     Image(systemName: "chevron.right").font(.caption).foregroundColor(.white.opacity(0.9))
                 }
-                Text("用「上帝视角」俯瞰高考压轴 · 常规法 vs 降维秒杀")
+                Text("用「上帝视角」俯瞰高考压轴 · 常规法 vs 降维快解")
                     .font(.subheadline).foregroundColor(.white.opacity(0.92))
                 HStack(spacing: Spacing.sm) {
                     ForEach(["动量守恒", "等效法", "对称", "微元"], id: \.self) { w in
@@ -200,7 +200,7 @@ struct ObservationStationView: View {
                     .foregroundColor(done ? .apexEmerald : .apexLava)
                 VStack(alignment: .leading, spacing: 2) {
                     Text("今日一题").font(AppFont.cardTitle).foregroundColor(.primary)
-                    Text(done ? "今日已完成 ✅，明天再来" : "今天的一道精选秒杀题，来挑战")
+                    Text(done ? "今日已完成 ✅，明天再来" : "今天的一道精选快解题，来挑战")
                         .font(AppFont.caption).foregroundColor(.secondary)
                 }
                 Spacer()

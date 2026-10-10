@@ -1,6 +1,6 @@
 import SwiftUI
 
-// MARK: - 上帝视角 · 降维秒杀（灵魂卖点，含内购解锁 + 震撼动画）
+// MARK: - 上帝视角 · 降维快解（灵魂卖点，含内购解锁 + 震撼动画）
 
 struct DescentView: View {
     @ObservedObject private var purchase = PurchaseManager.shared
@@ -35,7 +35,7 @@ struct DescentView: View {
             .padding(Spacing.lg)
         }
         .background(Color.apexBackground.ignoresSafeArea())
-        .navigationTitle("降维秒杀")
+        .navigationTitle("降维快解")
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showPaywall) { PaywallView() }
     }
@@ -44,7 +44,7 @@ struct DescentView: View {
         VStack(alignment: .leading, spacing: Spacing.sm) {
             Text("用「上帝视角」几步拿下压轴题")
                 .font(.system(size: 18, weight: .black, design: .rounded)).foregroundColor(.white)
-            Text("每道训练都有「常规解 vs 降维秒杀」双解对照，配电影级动画演示。")
+            Text("每道训练都有「常规解 vs 降维快解」双解对照，配电影级动画演示。")
                 .font(AppFont.caption).foregroundColor(.white.opacity(0.9))
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -95,7 +95,7 @@ struct DescentView: View {
             HStack(spacing: Spacing.md) {
                 Image(systemName: "bolt.shield.fill").font(.title2).foregroundColor(.white)
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("解锁全部 \(cases.count) 道秒杀训练").font(AppFont.cardTitle).foregroundColor(.white)
+                    Text("解锁全部 \(cases.count) 道快解训练").font(AppFont.cardTitle).foregroundColor(.white)
                     Text("一次买断，随时反复练习").font(AppFont.caption).foregroundColor(.white.opacity(0.9))
                 }
                 Spacer()
@@ -215,7 +215,7 @@ struct DescentDetailView: View {
                 // 切换
                 Picker("解法", selection: $showDescent) {
                     Text("常规解").tag(false)
-                    Text("⚡️ 降维秒杀").tag(true)
+                    Text("⚡️ 降维快解").tag(true)
                 }
                 .pickerStyle(.segmented)
 
@@ -270,7 +270,7 @@ struct DescentDetailView: View {
         .cornerRadius(Radius.inner)
     }
 
-    /// 🗣 说人话：看不懂秒杀时的亲民层——逐题白话 + 武器生活类比 + 触发信号。
+    /// 🗣 说人话：看不懂快解时的亲民层——逐题白话 + 武器生活类比 + 触发信号。
     private var plainTalkCard: some View {
         VStack(alignment: .leading, spacing: Spacing.md) {
             Label("说人话 · 为什么能秒", systemImage: "bubble.left.and.text.bubble.right.fill")

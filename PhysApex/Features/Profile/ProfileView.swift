@@ -25,7 +25,7 @@ struct ProfileView: View {
                                 .foregroundStyle(LinearGradient(colors: [.apexLava, .apexMystery], startPoint: .top, endPoint: .bottom))
                             VStack(alignment: .leading, spacing: 2) {
                                 Text("解锁完整功能").font(AppFont.cardTitle).foregroundColor(.primary)
-                                Text("全部降维秒杀 + 三级重访，一次买断").font(AppFont.caption).foregroundColor(.secondary)
+                                Text("全部降维快解 + 三级重访，一次买断").font(AppFont.caption).foregroundColor(.secondary)
                             }
                             Spacer()
                             Image(systemName: "chevron.right").foregroundColor(.secondary)

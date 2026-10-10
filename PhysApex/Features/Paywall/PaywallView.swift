@@ -15,7 +15,7 @@ struct PaywallView: View {
 
                 VStack(alignment: .leading, spacing: 14) {
                     benefitRow(icon: "bolt.fill", color: .apexLava,
-                               title: "解锁全部 \(ProblemBank.descentCases.count) 道降维秒杀训练",
+                               title: "解锁全部 \(ProblemBank.descentCases.count) 道降维快解训练",
                                desc: "常规法 vs 降维法，双解对照 + 电影级动画演示")
                     benefitRow(icon: "list.bullet.rectangle.fill", color: .apexLava,
                                title: "解锁全部 \(ProblemBank.all.count) 道分层题库",
@@ -38,7 +38,7 @@ struct PaywallView: View {
                 Divider().padding(.horizontal, 24)
 
                 VStack(spacing: 6) {
-                    Text("免费已开放：题库前 \(PurchaseManager.freeProblemCount) 题 + 前 \(PurchaseManager.freeDescentCount) 道秒杀训练 + \(PurchaseManager.freeRevisitCount) 个重访")
+                    Text("免费已开放：题库前 \(PurchaseManager.freeProblemCount) 题 + 前 \(PurchaseManager.freeDescentCount) 道快解训练 + \(PurchaseManager.freeRevisitCount) 个重访")
                         .font(.footnote).foregroundColor(.secondary)
                     Text("一次买断 · 永久使用 · 支持恢复购买")
                         .font(.footnote).fontWeight(.medium).foregroundColor(.apexLava)
@@ -91,7 +91,7 @@ struct PaywallView: View {
             VStack(spacing: 10) {
                 Image(systemName: "bolt.shield.fill").font(.system(size: 44)).foregroundColor(.white)
                 Text("解锁完整功能").font(.system(size: 24, weight: .black, design: .rounded)).foregroundColor(.white)
-                Text("一杯奶茶钱，降维秒杀随便用").font(.subheadline).foregroundColor(.white.opacity(0.9))
+                Text("一杯奶茶钱，降维快解随便用").font(.subheadline).foregroundColor(.white.opacity(0.9))
             }
             .padding(.vertical, 40)
         }

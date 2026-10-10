@@ -130,7 +130,7 @@ extension ProblemBank {
             descentMethod: SolutionPath(steps: [
                 SolutionStep(order: 1, description: "画 v-t 图：带是水平线，工件是过原点斜线", formula: "共速前两线围成三角形", annotation: "相对位移=两图线间面积"),
                 SolutionStep(order: 2, description: "面积差秒读", formula: "Δs=½×2×0.4=0.4 m ⟹ Q=μmg·Δs=2 J", annotation: "一眼"),
-            ], keyInsight: "v-t 图上「两线之间的面积」就是相对位移——传送带生热问题的标准秒杀。", commonMistakes: []),
+            ], keyInsight: "v-t 图上「两线之间的面积」就是相对位移——传送带生热问题的标准快解。", commonMistakes: []),
             weaponUsed: .graphMethod, timeRatio: 3.0,
             detailedExplanation: "图像法通杀传送带：共速点是交点、相对滑动是线间面积，比分段运动学少算一半的量。",
             plainTalk: "画 v-t 图：皮带是一条水平线，工件是从零爬升的斜线，最后汇合。两线之间夹着的那块三角形面积，就是皮带比工件多走的路——也就是俩家伙互相磨蹭的长度。摩擦生热＝摩擦力×磨蹭长度，图上直接读数。"),

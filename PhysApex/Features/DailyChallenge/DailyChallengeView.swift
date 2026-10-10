@@ -64,7 +64,7 @@ struct DailyChallengeView: View {
                 }
             }
             Text(dateText).font(AppFont.caption).foregroundColor(.white.opacity(0.9))
-            Text(done ? "今天的挑战已完成，明天再来 👍" : "每天一道精选秒杀题，校准手感、攒连击。")
+            Text(done ? "今天的挑战已完成，明天再来 👍" : "每天一道精选快解题，校准手感、攒连击。")
                 .font(AppFont.caption).foregroundColor(.white.opacity(0.9))
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -79,7 +79,7 @@ struct DailyChallengeView: View {
             HStack(spacing: 6) {
                 TagChip(text: problem.stage.shortTitle, color: problem.stage.color)
                 TagChip(text: problem.topic.name, color: .apexStarBlue)
-                if problem.dualSolution != nil { TagChip(text: "可秒杀", color: .apexLava) }
+                if problem.dualSolution != nil { TagChip(text: "可快解", color: .apexLava) }
                 Spacer()
                 Text("难度 \(Int(problem.difficulty * 100))").font(AppFont.chip).foregroundColor(.secondary)
             }

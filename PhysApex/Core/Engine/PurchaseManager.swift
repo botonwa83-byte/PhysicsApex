@@ -5,9 +5,9 @@ import SwiftUI
 // MARK: - 完整功能解锁 IAP（StoreKit 2 · 一次性买断）
 //
 // 产品 ID：com.physicsapex.app.full_unlock（¥22 一次性买断，价格在 App Store Connect 配置；沿用旧 ID，老用户购买直接有效）
-// 免费档：练习前 10 题 + 前 10 道降维秒杀训练 + 1 个三级重访 + 3 个沙盘 + 10 把武器；
+// 免费档：练习前 10 题 + 前 10 道降维快解训练 + 1 个三级重访 + 3 个沙盘 + 10 把武器；
 //        公式速记 / 每日一题 / 武器雷达 / 训练地图 永久免费（习惯与转化钩子）。
-// 解锁后：138 题、68 秒杀训练、三级重访、30 把武器与竞赛训练全开。
+// 解锁后：138 题、68 快解训练、三级重访、30 把武器与竞赛训练全开。
 // 本地 UserDefaults 缓存即时呈现，启动时 Transaction.currentEntitlements 核验防破解。
 
 final class PurchaseManager: ObservableObject {

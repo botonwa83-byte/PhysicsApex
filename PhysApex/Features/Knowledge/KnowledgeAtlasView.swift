@@ -177,7 +177,7 @@ struct KnowledgePointDetailView: View {
                             Image(systemName: "bolt.fill").foregroundColor(.apexLava)
                             VStack(alignment: .leading, spacing: 2) {
                                 Text("做这道典型题").font(AppFont.cardTitle).foregroundColor(.primary)
-                                Text(problem.dualSolution != nil ? "含降维秒杀双解对决" : "典型例题").font(AppFont.caption).foregroundColor(.secondary)
+                                Text(problem.dualSolution != nil ? "含降维快解双解对决" : "典型例题").font(AppFont.caption).foregroundColor(.secondary)
                             }
                             Spacer()
                             Image(systemName: "chevron.right").foregroundColor(.secondary)
