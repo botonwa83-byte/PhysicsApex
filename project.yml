@@ -1,54 +1,60 @@
-name: PhysicsApex
+name: PhysApex
 options:
-  bundleIdPrefix: com.physicsapex
+  bundleIdPrefix: com.physapex
   deploymentTarget:
     iOS: "16.0"
   createIntermediateGroups: true
 settings:
   base:
     SWIFT_VERSION: "5.0"
-    MARKETING_VERSION: "1.2.0"
-    CURRENT_PROJECT_VERSION: "4"
+    MARKETING_VERSION: "2.0.0"
+    CURRENT_PROJECT_VERSION: "1"
     TARGETED_DEVICE_FAMILY: "1,2"
     DEVELOPMENT_LANGUAGE: zh-Hans
 schemes:
-  PhysicsApex:
+  PhysApex:
     build:
       targets:
-        PhysicsApex: all
+        PhysApex: all
     run:
       config: Debug
-      storeKitConfiguration: PhysicsApex.storekit
+      storeKitConfiguration: PhysApex.storekit
     test:
       config: Debug
-      storeKitConfiguration: PhysicsApex.storekit
+      storeKitConfiguration: PhysApex.storekit
       targets:
-        - PhysicsApexTests
+        - PhysApexTests
 targets:
-  PhysicsApexTests:
+  PhysApexTests:
     type: bundle.unit-test
     platform: iOS
     sources:
-      - path: PhysicsApexTests
+      - path: PhysApexTests
     dependencies:
-      - target: PhysicsApex
+      - target: PhysApex
     settings:
       base:
         GENERATE_INFOPLIST_FILE: YES
-  PhysicsApex:
+  PhysApex:
     type: application
     platform: iOS
+    info:
+      path: PhysApex/Info.plist
+      properties:
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        ITSAppUsesNonExemptEncryption: false
     sources:
-      - path: PhysicsApex
+      - path: PhysApex
         excludes:
           - "Resources/katex/**"
-      - path: PhysicsApex/Resources/katex
+      - path: PhysApex/Resources/katex
         type: folder
         buildPhase: resources
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.physicsapex.app
-        PRODUCT_NAME: PhysicsApex
+        PRODUCT_BUNDLE_IDENTIFIER: com.physapex.app
+        PRODUCT_NAME: PhysApex
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_CFBundleDisplayName: PhysApex
         INFOPLIST_KEY_UILaunchScreen_Generation: YES

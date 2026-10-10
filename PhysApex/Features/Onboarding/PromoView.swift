@@ -34,7 +34,7 @@ struct PromoView: View {
                                 .shadow(color: Color.apexLava.opacity(glow ? 0.7 : 0.3), radius: glow ? 26 : 12)
                             Image(systemName: "atom").font(.system(size: 46, weight: .bold)).foregroundColor(.white)
                         }
-                        Text("PHYSICS APEX")
+                        Text("PHYSAPEX")
                             .font(.system(size: 30, weight: .heavy, design: .rounded)).tracking(2)
                             .foregroundStyle(LinearGradient(colors: [.apexGold, .apexLava], startPoint: .leading, endPoint: .trailing))
                         Text("看 见 物 理 · 降 维 秒 杀")

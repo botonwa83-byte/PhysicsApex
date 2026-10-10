@@ -1,5 +1,5 @@
 import XCTest
-@testable import PhysicsApex
+@testable import PhysApex
 
 /// 题库与内容数据的一致性守护：以前靠手工 grep 的检查全部固化在这里。
 final class ContentIntegrityTests: XCTestCase {

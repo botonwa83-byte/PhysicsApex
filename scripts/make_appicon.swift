@@ -1,4 +1,4 @@
-// 程序化生成 PhysicsApex AppIcon (1024x1024)
+// 程序化生成 PhysApex AppIcon (1024x1024)
 // 设计：深空渐变 + 登顶山峰(lava) + 原子轨道环(starBlue) + 顶点星(gold)
 // 运行：swift scripts/make_appicon.swift <输出路径>
 
@@ -7,7 +7,7 @@ import CoreGraphics
 
 let size: CGFloat = 1024
 let outPath = CommandLine.arguments.count > 1 ? CommandLine.arguments[1]
-    : "PhysicsApex/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon-1024.png"
+    : "PhysApex/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon-1024.png"
 
 func rgb(_ hex: UInt32, _ a: CGFloat = 1) -> CGColor {
     CGColor(red: CGFloat((hex >> 16) & 0xFF)/255, green: CGFloat((hex >> 8) & 0xFF)/255,

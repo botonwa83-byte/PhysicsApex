@@ -1,7 +1,7 @@
 import SwiftUI
 
 // MARK: - 配色（移植自 MathApex，apex* / level* 语义保持一致）
-// level* 在 PhysicsApex 中复用为「段位色」：初中 / 高中 / 竞赛。
+// level* 在 PhysApex 中复用为「段位色」：初中 / 高中 / 竞赛。
 
 extension Color {
     // MARK: 自适应底色

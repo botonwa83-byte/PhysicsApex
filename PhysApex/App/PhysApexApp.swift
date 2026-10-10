@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct PhysicsApexApp: App {
+struct PhysApexApp: App {
     @StateObject private var profile = StudentProfile()
     @StateObject private var appearance = AppearanceManager.shared
 

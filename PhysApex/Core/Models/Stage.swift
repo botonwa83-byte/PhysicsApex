@@ -1,6 +1,6 @@
 import SwiftUI
 
-// MARK: - 段位系统：PhysicsApex 的脊梁
+// MARK: - 段位系统：PhysApex 的脊梁
 // 三段递进闯关：初中建直觉 → 高中练硬功(主战场) → 竞赛降维打击。
 
 enum Stage: String, Codable, CaseIterable, Identifiable {

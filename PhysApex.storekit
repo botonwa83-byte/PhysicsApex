@@ -7,7 +7,7 @@
       "internalID" : "430B2D6E-7390-4EE2-8FD4-60270BC41365",
       "localizations" : [
         {
-          "description" : "解锁 PhysicsApex 完整功能：全部练习（138题）、全降维战例（68道）、全沙盘（43个）、全武器（30把）。一次买断，永久有效。",
+          "description" : "解锁 PhysApex 完整训练功能：全部练习（138题）、全降维秒杀训练（68道）、全沙盘（43个）、全武器（30把）。一次买断，永久有效。",
           "displayName" : "解锁完整功能",
           "locale" : "zh_CN"
         },
@@ -17,7 +17,7 @@
           "locale" : "en_US"
         }
       ],
-      "productID" : "com.physicsapex.app.full_unlock",
+      "productID" : "com.physapex.app.full_unlock",
       "referenceName" : "Full Unlock",
       "type" : "NonConsumable"
     }
