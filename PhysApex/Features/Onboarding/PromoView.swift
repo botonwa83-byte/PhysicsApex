@@ -13,7 +13,7 @@ struct PromoView: View {
         ("bolt.fill", .apexLava, "降维秒杀", "每道压轴题给你一招「上帝视角」秒杀解，常规与降维双解对照"),
         ("scope", .apexEmerald, "互动模拟沙盘", "抛体 / 碰撞 / 电路…拖一拖参数，亲眼看见物理"),
         ("map.fill", .apexStarBlue, "知识路线图", "整个高考物理一图纵览，每个考点都能点开训练"),
-        ("brain.head.profile", .apexMystery, "错因诊断", "答错时点破你的直觉陷阱，似是而非一击点醒"),
+        ("brain.head.profile", .apexMystery, "错因诊断", "答错时点破你的直觉陷阱，似是而非一眼点醒"),
         ("checklist", .apexGold, "错题集 + 智能复习", "艾宾浩斯间隔重复，自动安排复盘"),
     ]
 

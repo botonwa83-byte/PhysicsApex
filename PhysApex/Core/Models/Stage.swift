@@ -1,11 +1,11 @@
 import SwiftUI
 
 // MARK: - 段位系统：PhysApex 的脊梁
-// 三段递进闯关：初中建直觉 → 高中练硬功(主战场) → 竞赛降维打击。
+// 三段递进闯关：初中建直觉 → 高中练硬功 → 竞赛升维快解。
 
 enum Stage: String, Codable, CaseIterable, Identifiable {
     case junior    // 初中
-    case senior    // 高中（主战场）
+    case senior    // 高中（主线）
     case olympiad  // 竞赛（天花板）
 
     var id: String { rawValue }
@@ -14,7 +14,7 @@ enum Stage: String, Codable, CaseIterable, Identifiable {
         switch self {
         case .junior:   return "初中 · 建直觉"
         case .senior:   return "高中 · 练硬功"
-        case .olympiad: return "竞赛 · 降维打击"
+        case .olympiad: return "竞赛 · 上帝视角"
         }
     }
 
@@ -29,7 +29,7 @@ enum Stage: String, Codable, CaseIterable, Identifiable {
     var emoji: String {
         switch self {
         case .junior:   return "🌱"
-        case .senior:   return "⚔️"
+        case .senior:   return "🛠️"
         case .olympiad: return "👁"
         }
     }

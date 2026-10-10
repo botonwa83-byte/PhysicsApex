@@ -158,8 +158,8 @@ extension ProblemBank {
 
     static let b2_recoil = PhysicsProblem(
         id: "b2_recoil", type: .calculation, stage: .senior, topic: .momentum,
-        content: "静止的炮车质量 M=1000 kg，水平发射质量 m=10 kg、速度 v=200 m/s 的炮弹。求炮车反冲的速度。",
-        answer: "V = 2 m/s（方向与炮弹相反）", difficulty: 0.45, averageTime: 100,
+        content: "静止的火箭质量 M=1000 kg，向后喷出质量 m=10 kg、对地速度 v=200 m/s 的气体。求火箭获得的反冲速度。",
+        answer: "V = 2 m/s（方向与喷气方向相反）", difficulty: 0.45, averageTime: 100,
         hints: ["系统初动量为零", "动量守恒"],
         solution: SolutionPath(steps: [
             SolutionStep(order: 1, description: "动量守恒", formula: "0 = mv − MV", annotation: "反向"),

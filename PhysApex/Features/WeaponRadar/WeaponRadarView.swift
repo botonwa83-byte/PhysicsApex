@@ -38,7 +38,7 @@ struct WeaponRadarView: View {
                 quiz(p)
             }
         }
-        .navigationTitle("武器雷达")
+        .navigationTitle("方法雷达")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear { if round.isEmpty { startRound() } }
         .onReceive(timer) { _ in tickClock() }
@@ -124,7 +124,7 @@ struct WeaponRadarView: View {
                 }
                 .cardSurface()
 
-                Text("这道题，你会抽哪把武器？")
+                Text("这道题，你会选哪个方法？")
                     .font(AppFont.sectionTitle).foregroundColor(.primary)
 
                 VStack(spacing: Spacing.sm) {
@@ -209,7 +209,7 @@ struct WeaponRadarView: View {
                 }
             }
             Button(action: advance) {
-                Text(idx + 1 >= round.count ? "看战报" : "下一局")
+                Text(idx + 1 >= round.count ? "看总结" : "下一题")
                     .font(.headline).foregroundColor(.white)
                     .frame(maxWidth: .infinity).padding(.vertical, 12)
                     .background(LinearGradient(colors: [.apexLava, .apexMystery], startPoint: .leading, endPoint: .trailing))
@@ -230,7 +230,7 @@ struct WeaponRadarView: View {
                     .font(.system(size: 50, weight: .black))
                     .foregroundStyle(LinearGradient(colors: [.apexGold, .apexLava], startPoint: .top, endPoint: .bottom))
                     .padding(.top, Spacing.xxl)
-                Text("识局战报")
+                Text("识局总结")
                     .font(.system(size: 26, weight: .black, design: .rounded)).foregroundColor(.primary)
                 HStack(spacing: Spacing.xl) {
                     statBlock("\(score)/\(round.count)", "识局正确")
@@ -254,7 +254,7 @@ struct WeaponRadarView: View {
                     }
                     .cardSurface()
                 } else {
-                    Label("十发十中——考场上的第一反应已经成型", systemImage: "trophy.fill")
+                    Label("十题全对——考场上的第一反应已经成型", systemImage: "trophy.fill")
                         .font(AppFont.cardTitle).foregroundColor(.apexGold)
                         .cardSurface()
                 }

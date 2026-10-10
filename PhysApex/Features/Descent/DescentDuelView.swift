@@ -183,7 +183,7 @@ struct DescentDuelView: View {
                     .padding(.horizontal, Spacing.sm)
             }
             Button(action: onFinish) {
-                Text("看懂这把武器")
+                Text("看懂这个方法")
                     .font(.headline).foregroundColor(.white)
                     .padding(.horizontal, 30).padding(.vertical, 12)
                     .background(LinearGradient(colors: [.apexLava, .apexMystery], startPoint: .leading, endPoint: .trailing))

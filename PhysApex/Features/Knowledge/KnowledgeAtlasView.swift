@@ -24,7 +24,7 @@ struct KnowledgeAtlasView: View {
         VStack(alignment: .leading, spacing: Spacing.sm) {
             Text("高考物理 · 一图纵览")
                 .font(.system(size: 18, weight: .black, design: .rounded)).foregroundColor(.white)
-            Text("\(modules.count) 大模块 · \(KnowledgeAtlas.totalPoints) 个核心知识点，每点一句话本质 + 公式 + 秒杀武器")
+            Text("\(modules.count) 大模块 · \(KnowledgeAtlas.totalPoints) 个核心知识点，每点一句话本质 + 公式 + 快解方法")
                 .font(AppFont.caption).foregroundColor(.white.opacity(0.9))
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -142,7 +142,7 @@ struct KnowledgePointDetailView: View {
                 }
 
                 if let w = point.weapon {
-                    block("秒杀武器", "bolt.fill", .apexLava) {
+                    block("快解方法", "bolt.fill", .apexLava) {
                         VStack(alignment: .leading, spacing: 4) {
                             HStack(spacing: 6) {
                                 Image(systemName: w.icon).foregroundColor(.apexLava)

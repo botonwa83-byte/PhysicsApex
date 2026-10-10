@@ -16,7 +16,7 @@ struct PaywallView: View {
                 VStack(alignment: .leading, spacing: 14) {
                     benefitRow(icon: "bolt.fill", color: .apexLava,
                                title: "解锁全部 \(ProblemBank.descentCases.count) 道降维秒杀训练",
-                               desc: "常规法 vs 降维法，对决剧场 + 电影级降维打击")
+                               desc: "常规法 vs 降维法，双解对照 + 电影级动画演示")
                     benefitRow(icon: "list.bullet.rectangle.fill", color: .apexLava,
                                title: "解锁全部 \(ProblemBank.all.count) 道分层题库",
                                desc: "初中直觉 → 高考硬功 → 竞赛降维，全主干考点覆盖")
@@ -24,7 +24,7 @@ struct PaywallView: View {
                                title: "解锁全部三级重访",
                                desc: "同一题初中/高中/竞赛三镜头，看工具逐级升维")
                     benefitRow(icon: "wand.and.stars", color: .apexStarBlue,
-                               title: "解锁全部降维武器与竞赛训练",
+                               title: "解锁全部快解方法与竞赛训练",
                                desc: "守恒 / 对称 / 等效 / 微元 / 量纲，上帝视角全开")
                     benefitRow(icon: "infinity", color: .apexEmerald,
                                title: "一次买断，永久使用",

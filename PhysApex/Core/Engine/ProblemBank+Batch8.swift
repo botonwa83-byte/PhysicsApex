@@ -86,7 +86,7 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "F 最短=垂直于全反力", formula: "θ = φ = arctanμ；F_min = mg·sinφ = μmg/√(1+μ²)", annotation: "几何一眼定"),
             ], keyInsight: "「一力恒定、一力方向已知、求第三力最小」⟹ 第三力垂直于方向已知的力——矢量三角形的最短边定理。", commonMistakes: []),
             weaponUsed: .vectorTriangle, timeRatio: 4.0,
-            detailedExplanation: "矢量三角形+摩擦角是竞赛处理「最省力」问题的标准武器：把求导题变成几何题，画一个三角形就看到答案。",
+            detailedExplanation: "矢量三角形+摩擦角是竞赛处理「最省力」问题的标准方法：把求导题变成几何题，画一个三角形就看到答案。",
             plainTalk: "地面给箱子的支持力和摩擦力其实是「一伙的」，可以打包成一个方向固定的「全反力」。于是问题变成：重力定死、全反力方向定死，拉力怎么拉最短？三角形里最短的边是垂线——拉力垂直于全反力时最省力，那个角度恰好就是摩擦角。"),
         tags: ["牛顿定律", "摩擦角", "最值", "降维", "竞赛"])
 
@@ -183,7 +183,7 @@ extension ProblemBank {
                 SolutionStep(order: 1, description: "只看幂次：F∝L²、m∝L³、蹬伸∝L", formula: "h ∝ F·L/m ∝ L²·L/L³ = 1", annotation: "指数相消，一步出「不变」"),
             ], keyInsight: "标度分析不要数值只要幂次——指数一加减，趋势自动浮出。", commonMistakes: []),
             weaponUsed: .scaling, timeRatio: 4.0,
-            detailedExplanation: "标度分析通杀「放大缩小会怎样」：面积²/体积³的错位解释了为何蚂蚁举重若轻、巨兽步履沉重，也是估算题的暗器。",
+            detailedExplanation: "标度分析通杀「放大缩小会怎样」：面积²/体积³的错位解释了为何蚂蚁举重若轻、巨兽步履沉重，也是估算题的好帮手。",
             plainTalk: "把动物整体放大 n 倍：力气跟肌肉横截面走，长 n² 倍；体重跟体积走，长 n³ 倍——力气永远涨不过体重！好在腿也长了 n 倍、蹬地距离变长。算总账：跳高 ∝ n²·n/n³ = 1，恰好不变。跳蚤和人跳的绝对高度差不多——不是巧合，是几何定律。"),
         tags: ["标度分析", "尺寸效应", "降维", "竞赛"])
 
@@ -208,7 +208,7 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "心算数值", formula: "2×10/6400 ≈ 0.3%", annotation: "秒出"),
             ], keyInsight: "看到「≪」就启动一阶展开：复杂表达式塌缩成线性主项，规律和数值同时到手。", commonMistakes: []),
             weaponUsed: .approximation, timeRatio: 4.0,
-            detailedExplanation: "近似展开通杀小量问题：(1+x)ⁿ≈1+nx 适用于 |x|≪1，高度修正、单摆小角、干涉光程差都是它的猎物。",
+            detailedExplanation: "近似展开通杀小量问题：(1+x)ⁿ≈1+nx 适用于 |x|≪1，高度修正、单摆小角、干涉光程差都靠它大显身手。",
             plainTalk: "10 公里高空重力弱多少？精确算要做 (6400/6410)² 这种恶心的除法。注意 h 比 R 小太多——小量登场：(1+x)⁻²≈1−2x，所以减弱约 2h/R=2×10/6400≈0.3%。两秒心算，还顺手看清了规律：每升高 1% 的地球半径，重力少 2%。"),
         tags: ["万有引力", "近似展开", "降维", "竞赛"])
 

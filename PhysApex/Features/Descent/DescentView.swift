@@ -44,7 +44,7 @@ struct DescentView: View {
         VStack(alignment: .leading, spacing: Spacing.sm) {
             Text("用「上帝视角」几步拿下压轴题")
                 .font(.system(size: 18, weight: .black, design: .rounded)).foregroundColor(.white)
-            Text("每道训练都有「常规解 vs 降维秒杀」双解对决，配电影级降维打击。")
+            Text("每道训练都有「常规解 vs 降维秒杀」双解对照，配电影级动画演示。")
                 .font(AppFont.caption).foregroundColor(.white.opacity(0.9))
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -67,7 +67,7 @@ struct DescentView: View {
             Text(p.content).font(.subheadline).foregroundColor(.primary).lineLimit(3)
             HStack(spacing: 4) {
                 Image(systemName: "bolt.fill").font(.caption2)
-                Text("发动降维打击").font(AppFont.chip)
+                Text("发动降维演示").font(AppFont.chip)
                 Spacer()
                 Image(systemName: "chevron.right").font(.caption2)
             }
@@ -110,7 +110,7 @@ struct DescentView: View {
 
     private var weaponLibrary: some View {
         VStack(alignment: .leading, spacing: Spacing.md) {
-            SectionHeader(title: "武器库", systemImage: "wand.and.stars", accent: .apexMystery)
+            SectionHeader(title: "方法库", systemImage: "wand.and.stars", accent: .apexMystery)
             ForEach(Stage.allCases) { stage in
                 let weapons = PhysicsWeapon.allCases.filter { $0.stage == stage }
                 Text(stage.title).font(AppFont.chip).foregroundColor(stage.color)
@@ -122,7 +122,7 @@ struct DescentView: View {
             }
             if !purchase.isUnlocked {
                 Button { showPaywall = true } label: {
-                    Label("解锁全部 \(PhysicsWeapon.allCases.count) 把武器", systemImage: "lock.open.fill")
+                    Label("解锁全部 \(PhysicsWeapon.allCases.count) 个方法", systemImage: "lock.open.fill")
                         .font(AppFont.chip).foregroundColor(.apexLava)
                 }
                 .padding(.top, Spacing.xs)
@@ -177,11 +177,11 @@ struct DescentDetailView: View {
                 }
                 .cardSurface()
 
-                // 发动降维打击（震撼按钮）
+                // 降维演示（震撼按钮）
                 Button { showStrike = true } label: {
                     HStack(spacing: Spacing.sm) {
                         Image(systemName: "bolt.fill")
-                        Text(struck ? "再看一次降维打击" : "发动降维打击").fontWeight(.bold)
+                        Text(struck ? "再看一次降维演示" : "发动降维演示").fontWeight(.bold)
                         Spacer()
                         Image(systemName: dual.weaponUsed.icon)
                     }
@@ -281,12 +281,12 @@ struct DescentDetailView: View {
                 Divider()
             }
             VStack(alignment: .leading, spacing: 4) {
-                Text("这把武器像什么").font(AppFont.chip).foregroundColor(.secondary)
+                Text("这个方法像什么").font(AppFont.chip).foregroundColor(.secondary)
                 Text(dual.weaponUsed.analogy).font(.subheadline).foregroundColor(.primary)
                     .fixedSize(horizontal: false, vertical: true)
             }
             VStack(alignment: .leading, spacing: 6) {
-                Text("下次看到这些信号，就抽它").font(AppFont.chip).foregroundColor(.secondary)
+                Text("下次看到这些信号，就用它").font(AppFont.chip).foregroundColor(.secondary)
                 FlowLayout(spacing: 6) {
                     ForEach(dual.weaponUsed.signals, id: \.self) { s in
                         Text(s)

@@ -88,11 +88,11 @@ final class StreakManager: ObservableObject {
             Achievement(id: "first_10", title: "初出茅庐", icon: "flame", description: "累计做题 10 道", isUnlocked: pm.totalAnswered >= 10),
             Achievement(id: "first_50", title: "身经百战", icon: "flame.fill", description: "累计做题 50 道", isUnlocked: pm.totalAnswered >= 50),
             Achievement(id: "accuracy_70", title: "稳定发挥", icon: "target", description: "总正确率 ≥ 70%", isUnlocked: pm.totalAnswered >= 10 && pm.overallAccuracy >= 0.7),
-            Achievement(id: "accuracy_90", title: "精准打击", icon: "scope", description: "总正确率 ≥ 90%", isUnlocked: pm.totalAnswered >= 20 && pm.overallAccuracy >= 0.9),
+            Achievement(id: "accuracy_90", title: "精准高手", icon: "scope", description: "总正确率 ≥ 90%", isUnlocked: pm.totalAnswered >= 20 && pm.overallAccuracy >= 0.9),
             Achievement(id: "streak_3", title: "三日不辍", icon: "calendar.badge.checkmark", description: "连续打卡 3 天", isUnlocked: longestStreak >= 3),
             Achievement(id: "streak_7", title: "一周坚持", icon: "calendar.badge.clock", description: "连续打卡 7 天", isUnlocked: longestStreak >= 7),
             Achievement(id: "review_10", title: "温故知新", icon: "brain.head.profile", description: "复习 10 道题", isUnlocked: rm.items.values.reduce(0) { $0 + $1.totalReviews } >= 10),
-            Achievement(id: "descent", title: "降维打击", icon: "bolt.fill", description: "体验降维秒杀", isUnlocked: pm.totalAnswered >= 1),
+            Achievement(id: "descent", title: "初识降维", icon: "bolt.fill", description: "体验降维秒杀", isUnlocked: pm.totalAnswered >= 1),
         ]
     }
 

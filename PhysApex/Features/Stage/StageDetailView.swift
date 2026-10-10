@@ -58,8 +58,8 @@ struct StageDetailView: View {
 
     private var weaponSection: some View {
         VStack(alignment: .leading, spacing: Spacing.md) {
-            SectionHeader(title: "本段武器", systemImage: "wand.and.stars", accent: stage.color)
-            Text(unlocked ? "这些是你在本段位能用的「上帝视角」工具。" : "升到本段位即可解锁这些武器。")
+            SectionHeader(title: "本段方法", systemImage: "wand.and.stars", accent: stage.color)
+            Text(unlocked ? "这些是你在本段位能用的「上帝视角」工具。" : "升到本段位即可解锁这些方法。")
                 .font(AppFont.caption).foregroundColor(.secondary)
             ForEach(weapons) { w in
                 HStack(spacing: Spacing.md) {

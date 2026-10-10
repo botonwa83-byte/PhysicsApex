@@ -173,14 +173,14 @@ struct ObservationStationView: View {
         .frame(maxWidth: .infinity)
     }
 
-    /// 武器雷达：30 秒识局训练（考场元技能——判断这题用哪把武器）
+    /// 方法雷达：30 秒识局训练（考场元技能——判断这题用哪个方法）
     private var weaponRadarCard: some View {
         NavigationLink { WeaponRadarView() } label: {
             HStack(spacing: Spacing.md) {
                 Image(systemName: "scope").font(.title2).foregroundColor(.apexMystery)
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("武器雷达 · 30 秒识局").font(AppFont.cardTitle).foregroundColor(.primary)
-                    Text("只看题干选武器，练出考场第一反应").font(AppFont.caption).foregroundColor(.secondary)
+                    Text("方法雷达 · 30 秒识局").font(AppFont.cardTitle).foregroundColor(.primary)
+                    Text("只看题干选方法，练出考场第一反应").font(AppFont.caption).foregroundColor(.secondary)
                 }
                 Spacer()
                 Image(systemName: "chevron.right").foregroundColor(.secondary)

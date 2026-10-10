@@ -514,7 +514,7 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "直角三角形读数", formula: "s = d/(3/5) = 5d/3；船头与上游成 53°", annotation: "3-4-5 直角三角形全给出"),
             ], keyInsight: "「一个矢量定、一个矢量大小定」的极值问题=圆与切线的几何——求导被一根切线取代。", commonMistakes: []),
             weaponUsed: .extremumPrinciple, timeRatio: 5.0,
-            detailedExplanation: "极值原理的几何化身「矢量圆+切线」通杀：小船渡河（v船<v水）、最小起跳速度、追击最短距离——凡「方向自由、大小受限」的最值都适用。",
+            detailedExplanation: "极值原理的几何化身「矢量圆+切线」通杀：小船渡河（v船<v水）、最小起跳速度、追赶最短距离——凡「方向自由、大小受限」的最值都适用。",
             plainTalk: "船速比水速慢，永远到不了正对岸——那最少被冲走多远？把船速的「所有可选方向」画成一个圆，你的实际航向就是从原点指到圆上某点的连线。航线与河岸的夹角最大时，被冲得最少——而「夹角最大」就是那条切线！sinθ=3/5，最短航程 5d/3。极值撞上圆，切线就是答案。"),
         tags: ["运动学", "渡河模型", "极值", "压轴", "降维"])
 }
