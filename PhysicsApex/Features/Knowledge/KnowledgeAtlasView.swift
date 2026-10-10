@@ -154,12 +154,14 @@ struct KnowledgePointDetailView: View {
                 }
 
                 if let law {
-                    NavigationLink { LawDetailView(law: law) } label: {
+                    NavigationLink {
+                        LawTrainingSessionView(cards: LawFlashcardFactory.cards(for: law), title: law.name)
+                    } label: {
                         HStack {
-                            Image(systemName: "eye.fill").foregroundColor(.apexStarBlue)
+                            Image(systemName: "rectangle.stack.fill").foregroundColor(.apexStarBlue)
                             VStack(alignment: .leading, spacing: 2) {
-                                Text("看通透卡：\(law.name)").font(AppFont.cardTitle).foregroundColor(.primary)
-                                Text("物理图像 + 来龙去脉 + 极限检验").font(AppFont.caption).foregroundColor(.secondary)
+                                Text("速记训练：\(law.name)").font(AppFont.cardTitle).foregroundColor(.primary)
+                                Text("先回忆再揭晓 · 闪卡自评训练").font(AppFont.caption).foregroundColor(.secondary)
                             }
                             Spacer()
                             Image(systemName: "chevron.right").foregroundColor(.secondary)

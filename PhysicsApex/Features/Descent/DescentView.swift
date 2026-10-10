@@ -95,8 +95,8 @@ struct DescentView: View {
             HStack(spacing: Spacing.md) {
                 Image(systemName: "bolt.shield.fill").font(.title2).foregroundColor(.white)
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("解锁全部 \(cases.count) 道战例").font(AppFont.cardTitle).foregroundColor(.white)
-                    Text("一次买断，降维秒杀随便用").font(AppFont.caption).foregroundColor(.white.opacity(0.9))
+                    Text("解锁全部 \(cases.count) 道秒杀训练").font(AppFont.cardTitle).foregroundColor(.white)
+                    Text("一次买断，随时反复练习").font(AppFont.caption).foregroundColor(.white.opacity(0.9))
                 }
                 Spacer()
                 Image(systemName: "chevron.right").foregroundColor(.white)

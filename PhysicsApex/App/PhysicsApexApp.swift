@@ -62,7 +62,7 @@ struct MainTabView: View {
                 .tag(1)
 
             LawUniverseView()
-                .tabItem { Label("定律宇宙", systemImage: "function") }
+                .tabItem { Label("公式速记", systemImage: "rectangle.stack.fill") }
                 .tag(2)
 
             MoreView()

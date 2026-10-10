@@ -83,20 +83,14 @@ struct PromoView: View {
                     .background(RoundedRectangle(cornerRadius: 16).fill(Color.white.opacity(0.05)))
                     .padding(.top, 24).padding(.horizontal, 24)
 
-                    // 开发者区
+                    // 训练数据
                     VStack(alignment: .leading, spacing: 12) {
                         HStack(spacing: 12) {
-                            ZStack {
-                                Circle().fill(LinearGradient(colors: [.apexGold, .apexLava], startPoint: .top, endPoint: .bottom)).frame(width: 44, height: 44)
-                                Text("K").font(.system(size: 22, weight: .heavy)).foregroundColor(.white)
-                            }
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text("Top King").font(.system(size: 16, weight: .bold)).foregroundColor(.white)
-                                Text("独立开发者 / 教育科技探索者").font(.system(size: 12)).foregroundColor(.white.opacity(0.6))
-                            }
+                            Image(systemName: "rectangle.stack.fill").font(.system(size: 20, weight: .bold)).foregroundColor(.apexGold)
+                            Text("为高考物理打造的纯训练工具").font(.system(size: 16, weight: .bold)).foregroundColor(.white)
                             Spacer()
                         }
-                        Text("专注教育类 App，用科技让学习更高效。PhysApex 把物理学家的「上帝视角」带进高考——守恒、对称、等效、量纲，让每道压轴题都有一招可秒杀，也让物理重新变得好玩。")
+                        Text("逐题作答、闪卡速记、沙盘演练——每一步都是动手训练，不是被动阅读。")
                             .font(.system(size: 13)).foregroundColor(.white.opacity(0.65)).lineSpacing(3)
                     }
                     .padding(16)
@@ -105,7 +99,7 @@ struct PromoView: View {
 
                     // 版权
                     VStack(spacing: 4) {
-                        Text("PhysApex · 物理制高点  v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.1.0")").font(.system(size: 12)).foregroundColor(.white.opacity(0.5))
+                        Text("PhysApex · 物理制高点  v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "2.0.0")").font(.system(size: 12)).foregroundColor(.white.opacity(0.5))
                         Text("© 2026 Top King. All rights reserved.").font(.system(size: 11)).foregroundColor(.white.opacity(0.35))
                     }
                     .padding(.top, 22).padding(.bottom, 120)
