@@ -10,9 +10,22 @@ Bundle ID：com.physicsapex.app（沿用现有 App 记录，作为 3.0.0 升级�
 ## 本次改进点
 
 - 应用更名为 PhysApex，定位全面收敛为「高考物理刷题与公式记忆训练工具」。
-- 彻底移除「物理学家传记」与「佯谬室」两个叙事型模块，App 内不再有任何成段阅读型页面。
+- 彻底移除全部叙事型模块，App 内不再存在任何成段阅读型页面，所有知识呈现均为问答式交互。
 - 原「定律宇宙」板块改造为「公式速记」：全部改为"先回忆 → 再揭晓 → 自评掌握度"的闪卡训练交互，配合 1/3/7/14 天间隔复习排期。
-- 所有界面文案统一为训练型表述（刷题、训练、闪卡、自测）。
+- 解锁流程大幅简化：仅保留「降维快解」页与「我的」页两处入口，点击直达购买确认卡（价格 + 购买 + 恢复，一屏完成）；修复商品未就绪时点击购买无响应的问题。
+- 全部界面文案统一为训练型表述，并清除了所有武力、军事色彩用词。
+- 商店元数据同步重写，明确"互动训练工具，非资料类产品"的定位。
+
+## ASC「新功能」粘贴区（What's New，用户可见，已自检无敏感词）
+
+PhysApex 3.0 —— 全面聚焦"练"。
+
+- 全新「公式速记」：先回忆、再揭晓、自己评掌握度，按记忆曲线安排复习。
+- 界面全面改版：功能更聚焦，逐题作答、翻卡自测、拖动参数观察运动，每一步都是动手训练。
+- 解锁更简单：一次买断，入口直达，购买体验更顺畅。
+- 交互与表述全面统一为训练型风格。
+
+本应用为互动训练工具：全部练习与解析均为原创训练素材，逐题交互作答，每一屏都是动手训练。
 
 ## App Store 副标题
 
@@ -24,7 +37,7 @@ Bundle ID：com.physicsapex.app（沿用现有 App 记录，作为 3.0.0 升级�
 
 ## App Store 描述
 
-PhysApex 是一款面向高考物理的互动训练工具。它的每一屏都是"动手做"：逐题作答、翻卡自测、拖动参数观察运动——不是资料汇编，也不是读物，而是一台帮你练出题感和公式记忆的训练器。
+PhysApex 是一款面向高考物理的互动训练工具。它的每一屏都是"动手做"：逐题作答、翻卡自测、拖动参数观察运动——一台帮你练出题感和公式记忆的随身训练器。
 
 核心功能：
 
@@ -35,7 +48,7 @@ PhysApex 是一款面向高考物理的互动训练工具。它的每一屏都�
 - 错题本与智能复习：答错自动收录，按艾宾浩斯间隔安排复盘。
 - 三级重访：同一情境用初中、高中、竞赛三级工具重新分析，逐级升维。
 
-所有练习题、解析与闪卡均为本应用原创训练内容，全部通过交互式作答完成，App 内不提供任何文章阅读、资料浏览或内容分发功能。
+所有练习题、解析与闪卡均为本应用原创训练素材，全部通过交互式作答完成，每一屏都是动手训练。
 
 适合人群：
 
@@ -68,7 +81,7 @@ PhysApex 把高考物理备考做成纯训练工具：刷题练手感，闪卡�
 
 PhysApex (bundle ID: com.physicsapex.app) is an interactive physics drill and memory-training app for students preparing for exams. All interactions are answer-first: users answer multiple-choice and calculation problems, flip self-grading flashcards (recall first, reveal second), adjust parameters in interactive physics simulations, and review mistakes with spaced repetition.
 
-In this version we have completely removed the former biography and narrative modules. The formula section is now a flashcard training mode only — there is no long-form article reading page anywhere in the app.
+In this version we have completely removed the former biography and narrative modules. The formula section is now a flashcard training mode only — there is no long-form article reading page anywhere in the app. The purchase flow was also simplified: a single confirmation sheet (price, buy, restore) reachable from two entries, with no change to the product or pricing.
 
 The app does not provide periodicals, magazines, newspapers, serialized content, news feeds, third-party content distribution, downloadable publications, or document browsing features. All exercises, explanations, and flashcards are original training content created for this app. The primary category is Education.
 
