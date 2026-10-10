@@ -4,7 +4,6 @@ import SwiftUI
 
 struct RevisitView: View {
     @ObservedObject private var purchase = PurchaseManager.shared
-    @State private var showPaywall = false
     private let revisits = RevisitData.all
 
     private func isLocked(_ index: Int) -> Bool {
@@ -17,17 +16,14 @@ struct RevisitView: View {
                 intro
                 ForEach(Array(revisits.enumerated()), id: \.element.id) { idx, r in
                     if isLocked(idx) {
-                        Button { showPaywall = true } label: {
-                            ZStack {
-                                RevisitCard(revisit: r).blur(radius: 5).disabled(true)
-                                VStack(spacing: 6) {
-                                    Image(systemName: "lock.fill").font(.title2).foregroundColor(.stageOlympiad)
-                                    Text("解锁查看").font(AppFont.chip).foregroundColor(.stageOlympiad)
-                                }
-                                .padding(Spacing.md).background(.ultraThinMaterial).cornerRadius(Radius.inner)
+                        ZStack {
+                            RevisitCard(revisit: r).blur(radius: 5).disabled(true)
+                            VStack(spacing: 6) {
+                                Image(systemName: "lock.fill").font(.title2).foregroundColor(.stageOlympiad)
+                                Text("未解锁").font(AppFont.chip).foregroundColor(.stageOlympiad)
                             }
+                            .padding(Spacing.md).background(.ultraThinMaterial).cornerRadius(Radius.inner)
                         }
-                        .buttonStyle(.plain)
                     } else {
                         RevisitCard(revisit: r)
                     }
@@ -38,7 +34,6 @@ struct RevisitView: View {
         .background(Color.apexBackground.ignoresSafeArea())
         .navigationTitle("三级重访")
         .navigationBarTitleDisplayMode(.inline)
-        .sheet(isPresented: $showPaywall) { PaywallView() }
     }
 
     private var intro: some View {

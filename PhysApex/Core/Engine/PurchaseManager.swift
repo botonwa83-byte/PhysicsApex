@@ -79,6 +79,10 @@ final class PurchaseManager: ObservableObject {
 
     @MainActor
     func purchase() async {
+        // 商品未就绪时先现场重试一次加载，避免"点了没反应"
+        if product == nil {
+            await loadProduct()
+        }
         guard let product else {
             errorMessage = productLoadError ?? "获取产品信息失败，请稍后重试"
             return

@@ -80,7 +80,6 @@ struct TopicProblemsView: View {
     let topic: PhysicsTopic
     let stage: Stage
     @ObservedObject private var purchase = PurchaseManager.shared
-    @State private var showPaywall = false
 
     private var problems: [PhysicsProblem] {
         ProblemBank.all.filter { $0.topic == topic && $0.stage == stage }
@@ -90,14 +89,13 @@ struct TopicProblemsView: View {
         List(problems) { p in
             let locked = !purchase.isUnlocked && !ProblemBank.isFree(p.id)
             if locked {
-                Button { showPaywall = true } label: { row(p, locked: true) }
+                row(p, locked: true)
             } else {
                 NavigationLink { ProblemDetailView(problem: p) } label: { row(p, locked: false) }
             }
         }
         .navigationTitle("\(stage.shortTitle) · \(topic.name)")
         .navigationBarTitleDisplayMode(.inline)
-        .sheet(isPresented: $showPaywall) { PaywallView() }
     }
 
     private func row(_ p: PhysicsProblem, locked: Bool) -> some View {

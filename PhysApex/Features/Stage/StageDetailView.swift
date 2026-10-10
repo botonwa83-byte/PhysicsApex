@@ -6,7 +6,6 @@ struct StageDetailView: View {
     let stage: Stage
     @EnvironmentObject var profile: StudentProfile
     @ObservedObject private var purchase = PurchaseManager.shared
-    @State private var showPaywall = false
 
     private var weapons: [PhysicsWeapon] { PhysicsWeapon.allCases.filter { $0.stage == stage } }
     private var problems: [PhysicsProblem] { ProblemBank.problems(for: stage) }
@@ -87,7 +86,7 @@ struct StageDetailView: View {
                 let locked = !purchase.isUnlocked && !ProblemBank.isFree(p.id)
                 Group {
                     if locked {
-                        Button { showPaywall = true } label: { problemRow(p, locked: true) }
+                        problemRow(p, locked: true)
                     } else {
                         NavigationLink { ProblemDetailView(problem: p) } label: { problemRow(p, locked: false) }
                     }
@@ -96,7 +95,6 @@ struct StageDetailView: View {
             }
         }
         .cardSurface()
-        .sheet(isPresented: $showPaywall) { PaywallView() }
     }
 
     private func problemRow(_ p: PhysicsProblem, locked: Bool) -> some View {

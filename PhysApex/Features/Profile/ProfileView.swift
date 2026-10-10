@@ -97,7 +97,7 @@ struct ProfileView: View {
         }
         .navigationTitle("我的")
         .navigationBarTitleDisplayMode(.inline)
-        .sheet(isPresented: $showPaywall) { PaywallView() }
+        .sheet(isPresented: $showPaywall) { UnlockSheet() }
     }
 
     private func statRow(_ label: String, _ value: String, _ icon: String) -> some View {

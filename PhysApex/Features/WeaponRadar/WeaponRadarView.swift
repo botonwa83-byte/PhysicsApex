@@ -9,7 +9,6 @@ struct WeaponRadarView: View {
     @AppStorage("radar_best_score") private var bestScore = 0
     @Environment(\.dismiss) private var dismiss
     @ObservedObject private var purchase = PurchaseManager.shared
-    @State private var showPaywall = false
 
     @State private var round: [PhysicsProblem] = []
     @State private var options: [PhysicsWeapon] = []
@@ -42,7 +41,6 @@ struct WeaponRadarView: View {
         .navigationBarTitleDisplayMode(.inline)
         .onAppear { if round.isEmpty { startRound() } }
         .onReceive(timer) { _ in tickClock() }
-        .sheet(isPresented: $showPaywall) { PaywallView() }
     }
 
     /// 该战例是否在免费档（与降维快解列表同一规则）。
@@ -202,10 +200,8 @@ struct WeaponRadarView: View {
                             .font(AppFont.chip).foregroundColor(.apexLava)
                     }
                 } else {
-                    Button { showPaywall = true } label: {
-                        Label("解锁完整快解训练", systemImage: "lock.fill")
-                            .font(AppFont.chip).foregroundColor(.apexLava)
-                    }
+                    Label("完整快解训练需一次买断解锁", systemImage: "lock.fill")
+                        .font(AppFont.chip).foregroundColor(.secondary)
                 }
             }
             Button(action: advance) {

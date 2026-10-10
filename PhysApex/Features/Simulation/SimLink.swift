@@ -152,7 +152,6 @@ struct ProblemSimLinkCard: View {
     let link: SimLink
     var dark: Bool = false
     @ObservedObject private var purchase = PurchaseManager.shared
-    @State private var showPaywall = false
 
     private var unlocked: Bool { purchase.isUnlocked || link.index < PurchaseManager.freeSandboxCount }
 
@@ -162,11 +161,9 @@ struct ProblemSimLinkCard: View {
                 NavigationLink { link.destination() } label: { card(locked: false) }
                     .buttonStyle(.plain)
             } else {
-                Button { showPaywall = true } label: { card(locked: true) }
-                    .buttonStyle(.plain)
+                card(locked: true)
             }
         }
-        .sheet(isPresented: $showPaywall) { PaywallView() }
     }
 
     private func card(locked: Bool) -> some View {

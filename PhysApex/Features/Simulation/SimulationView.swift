@@ -4,7 +4,6 @@ import SwiftUI
 
 struct SimulationHubView: View {
     @ObservedObject private var purchase = PurchaseManager.shared
-    @State private var showPaywall = false
 
     var body: some View {
         ScrollView {
@@ -103,7 +102,6 @@ struct SimulationHubView: View {
         .background(Color.apexBackground.ignoresSafeArea())
         .navigationTitle("模拟沙盘")
         .navigationBarTitleDisplayMode(.inline)
-        .sheet(isPresented: $showPaywall) { PaywallView() }
     }
 
     /// 前 freeSandboxCount 个免费，其余锁定 → 付费墙。
@@ -113,19 +111,16 @@ struct SimulationHubView: View {
             NavigationLink { destination() } label: { simCard(title, desc, icon, color, ready: true) }
                 .buttonStyle(.plain)
         } else {
-            Button { showPaywall = true } label: {
-                HStack(spacing: Spacing.md) {
-                    Image(systemName: "lock.fill").font(.title2).foregroundColor(.apexLava).frame(width: 36)
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text(title).font(AppFont.cardTitle).foregroundColor(.primary)
-                        Text("解锁查看 · \(desc)").font(AppFont.caption).foregroundColor(.secondary).lineLimit(2)
-                    }
-                    Spacer()
-                    Text("解锁").font(AppFont.chip).foregroundColor(.apexLava)
+            HStack(spacing: Spacing.md) {
+                Image(systemName: "lock.fill").font(.title2).foregroundColor(.apexLava).frame(width: 36)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(title).font(AppFont.cardTitle).foregroundColor(.primary)
+                    Text("未解锁 · \(desc)").font(AppFont.caption).foregroundColor(.secondary).lineLimit(2)
                 }
-                .cardSurface()
+                Spacer()
+                Image(systemName: "lock.fill").font(.caption).foregroundColor(.secondary)
             }
-            .buttonStyle(.plain)
+            .cardSurface()
         }
     }
 

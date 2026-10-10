@@ -19,8 +19,7 @@ struct DescentView: View {
                 ForEach(Array(cases.enumerated()), id: \.element.id) { idx, p in
                     if let dual = p.dualSolution {
                         if isLocked(idx) {
-                            Button { showPaywall = true } label: { lockedCard(p, dual) }
-                                .buttonStyle(.plain)
+                            lockedCard(p, dual)
                         } else {
                             NavigationLink { DescentDetailView(problem: p, dual: dual) } label: {
                                 caseCard(p, dual)
@@ -37,7 +36,7 @@ struct DescentView: View {
         .background(Color.apexBackground.ignoresSafeArea())
         .navigationTitle("降维快解")
         .navigationBarTitleDisplayMode(.inline)
-        .sheet(isPresented: $showPaywall) { PaywallView() }
+        .sheet(isPresented: $showPaywall) { UnlockSheet() }
     }
 
     private var intro: some View {
