@@ -24,7 +24,19 @@ schemes:
       storeKitConfiguration: PhysApex.storekit
       targets:
         - PhysApexTests
+        - PhysApexUITests
 targets:
+  PhysApexUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: PhysApexUITests
+    dependencies:
+      - target: PhysApex
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: PhysApex
   PhysApexTests:
     type: bundle.unit-test
     platform: iOS
