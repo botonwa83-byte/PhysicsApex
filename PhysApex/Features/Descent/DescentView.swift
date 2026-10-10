@@ -44,7 +44,7 @@ struct DescentView: View {
         VStack(alignment: .leading, spacing: Spacing.sm) {
             Text("用「上帝视角」几步拿下压轴题")
                 .font(.system(size: 18, weight: .black, design: .rounded)).foregroundColor(.white)
-            Text("每个战例都有「常规解 vs 降维秒杀」双解对决，配电影级降维打击。")
+            Text("每道训练都有「常规解 vs 降维秒杀」双解对决，配电影级降维打击。")
                 .font(AppFont.caption).foregroundColor(.white.opacity(0.9))
         }
         .frame(maxWidth: .infinity, alignment: .leading)

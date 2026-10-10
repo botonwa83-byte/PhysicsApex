@@ -4,7 +4,7 @@ import SwiftUI
 
 // MARK: - 完整功能解锁 IAP（StoreKit 2 · 一次性买断）
 //
-// 产品 ID：com.physapex.app.full_unlock（¥22 一次性买断，价格在 App Store Connect 配置）
+// 产品 ID：com.physicsapex.app.full_unlock（¥22 一次性买断，价格在 App Store Connect 配置；沿用旧 ID，老用户购买直接有效）
 // 免费档：练习前 10 题 + 前 10 道降维秒杀训练 + 1 个三级重访 + 3 个沙盘 + 10 把武器；
 //        公式速记 / 每日一题 / 武器雷达 / 训练地图 永久免费（习惯与转化钩子）。
 // 解锁后：138 题、68 秒杀训练、三级重访、30 把武器与竞赛训练全开。
@@ -13,7 +13,7 @@ import SwiftUI
 final class PurchaseManager: ObservableObject {
     static let shared = PurchaseManager()
 
-    let productID = "com.physapex.app.full_unlock"
+    let productID = "com.physicsapex.app.full_unlock"
 
     /// 免费开放的各模块数量（列表里的前 N 个）。改动需同步 ContentIntegrityTests.testFreeTierPolicy。
     static let freeDescentCount = 10
@@ -29,8 +29,8 @@ final class PurchaseManager: ObservableObject {
     @Published private(set) var isPurchasing: Bool = false
     @Published private(set) var errorMessage: String?
 
-    private let storageKey = "physapex_full_unlocked"
-    private static let log = Logger(subsystem: "com.physapex.app", category: "purchase")
+    private let storageKey = "physicsapex_full_unlocked"
+    private static let log = Logger(subsystem: "com.physicsapex.app", category: "purchase")
     private var updatesTask: Task<Void, Never>?
 
     private init() {

@@ -1,6 +1,6 @@
 name: PhysApex
 options:
-  bundleIdPrefix: com.physapex
+  bundleIdPrefix: com.physicsapex
   deploymentTarget:
     iOS: "16.0"
   createIntermediateGroups: true
@@ -53,7 +53,7 @@ targets:
         buildPhase: resources
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.physapex.app
+        PRODUCT_BUNDLE_IDENTIFIER: com.physicsapex.app
         PRODUCT_NAME: PhysApex
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_CFBundleDisplayName: PhysApex

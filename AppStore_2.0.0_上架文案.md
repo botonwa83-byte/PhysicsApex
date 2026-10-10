@@ -3,7 +3,7 @@
 ## 版本信息
 
 App 名称：PhysApex
-Bundle ID：com.physapex.app
+Bundle ID：com.physicsapex.app（沿用现有 App 记录，作为 2.0.0 升级提交）
 版本号：2.0.0
 构建号：1
 
@@ -66,13 +66,13 @@ PhysApex 把高考物理备考做成纯训练工具：刷题练手感，闪卡�
 
 ## App Review 备注
 
-PhysApex (bundle ID: com.physapex.app) is an interactive physics drill and memory-training app for students preparing for exams. All interactions are answer-first: users answer multiple-choice and calculation problems, flip self-grading flashcards (recall first, reveal second), adjust parameters in interactive physics simulations, and review mistakes with spaced repetition.
+PhysApex (bundle ID: com.physicsapex.app) is an interactive physics drill and memory-training app for students preparing for exams. All interactions are answer-first: users answer multiple-choice and calculation problems, flip self-grading flashcards (recall first, reveal second), adjust parameters in interactive physics simulations, and review mistakes with spaced repetition.
 
 In this version we have completely removed the former biography and narrative modules. The formula section is now a flashcard training mode only — there is no long-form article reading page anywhere in the app.
 
 The app does not provide periodicals, magazines, newspapers, serialized content, news feeds, third-party content distribution, downloadable publications, or document browsing features. All exercises, explanations, and flashcards are original training content created for this app. The primary category is Education.
 
-Note: this release uses a new bundle ID (com.physapex.app) and a new In-App Purchase product (com.physapex.app.full_unlock, one-time non-consumable). The previous product under the old bundle ID is no longer used.
+Note: this release is an in-place update to the existing app record. The bundle ID and the In-App Purchase product (com.physicsapex.app.full_unlock, one-time non-consumable) are unchanged, so existing purchasers keep full access after upgrading.
 
 ## 避免使用的表达
 
@@ -83,7 +83,7 @@ Note: this release uses a new bundle ID (com.physapex.app) and a new In-App Purc
 ## App Store Connect 人工核对清单（提交前）
 
 - [ ] 主分类：教育 (Education)；副分类：工具 (Utilities) 或参考 (Reference)——切勿选图书 (Books) 或报刊杂志 (Magazines & Newspapers)
-- [ ] App 名称改为 PhysApex，副标题/关键词/描述按本文档更新
-- [ ] App 内购：新建产品 com.physapex.app.full_unlock（非消耗型，¥22），旧产品下架
-- [ ] 隐私政策 URL 与技术支持 URL 已指向 PhysApex（docs/ 已就绪）
+- [ ] ASC 内 App 名称改为 PhysApex，副标题/关键词/描述按本文档更新
+- [ ] 内购：现有产品 com.physicsapex.app.full_unlock 保持不变（老用户购买自动有效），检查描述文案可同步更新
+- [ ] 隐私政策 URL 与技术支持 URL 可正常访问（docs/ 已就绪）
 - [ ] 审核备注附操作录屏，展示刷题→闪卡自评→模拟拖参的交互过程

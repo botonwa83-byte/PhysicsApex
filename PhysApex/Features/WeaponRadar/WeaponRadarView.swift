@@ -198,12 +198,12 @@ struct WeaponRadarView: View {
                 // 转化钩子：从识局直达完整战例（锁定则弹付费墙）
                 if isCaseFree(p) {
                     NavigationLink { DescentDetailView(problem: p, dual: dual) } label: {
-                        Label("看完整战例（双解对决）", systemImage: "bolt.fill")
+                        Label("看完整秒杀训练（双解对决）", systemImage: "bolt.fill")
                             .font(AppFont.chip).foregroundColor(.apexLava)
                     }
                 } else {
                     Button { showPaywall = true } label: {
-                        Label("解锁查看完整战例", systemImage: "lock.fill")
+                        Label("解锁完整秒杀训练", systemImage: "lock.fill")
                             .font(AppFont.chip).foregroundColor(.apexLava)
                     }
                 }

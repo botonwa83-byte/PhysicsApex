@@ -90,7 +90,7 @@ struct PromoView: View {
                             Text("为高考物理打造的纯训练工具").font(.system(size: 16, weight: .bold)).foregroundColor(.white)
                             Spacer()
                         }
-                        Text("逐题作答、闪卡速记、沙盘演练——每一步都是动手训练，不是被动阅读。")
+                        Text("逐题作答、闪卡速记、沙盘演练——每一步都是亲自动手的训练。")
                             .font(.system(size: 13)).foregroundColor(.white.opacity(0.65)).lineSpacing(3)
                     }
                     .padding(16)

@@ -38,7 +38,7 @@ struct PaywallView: View {
                 Divider().padding(.horizontal, 24)
 
                 VStack(spacing: 6) {
-                    Text("免费已开放：题库前 \(PurchaseManager.freeProblemCount) 题 + 前 \(PurchaseManager.freeDescentCount) 道战例 + \(PurchaseManager.freeRevisitCount) 个重访")
+                    Text("免费已开放：题库前 \(PurchaseManager.freeProblemCount) 题 + 前 \(PurchaseManager.freeDescentCount) 道秒杀训练 + \(PurchaseManager.freeRevisitCount) 个重访")
                         .font(.footnote).foregroundColor(.secondary)
                     Text("一次买断 · 永久使用 · 支持恢复购买")
                         .font(.footnote).fontWeight(.medium).foregroundColor(.apexLava)
