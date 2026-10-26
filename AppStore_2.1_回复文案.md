@@ -92,3 +92,58 @@ PhysApex / com.physicsapex.app
 （四）国家新闻出版广电总局认定的其他类型的数字化作品——国家新闻出版主管部门从未将互动练习/训练类软件认定为网络出版物。
 
 《网络出版服务许可证》的申请主体须为符合我国出版管理规定的出版单位。我们为个人开发者，不从事网络出版服务经营，该许可证对本应用不可获得、也不适用——此点仅作完整说明，因为中国大陆已不在本应用的销售地区之内。
+
+---
+
+## 五、【最新】针对 5.0.0 Legal: Preamble（中国大陆下架通知，2026-10-21）的回帖
+
+> 用途：App 审核 → 通讯信息里那条 2026-10-21 上午 3:36 的消息（"your application will be removed from the China App Store"）。
+> 性质：这是**通知**不是拒绝——Apple 会单方面把 App 从中国大陆下架，我们要做的是确认 + 说明 3.0.1 的结构整改。
+> 前置动作：先复核 App 信息 → 价格与销售范围里**中国大陆确已取消勾选**（2026-10-19 已改，复核一遍），再回帖。
+> 回帖后**不要**点"重新提交审核"、**不要**提 App Review Board 上诉——只回帖。
+
+### ENGLISH（主回帖，整段复制）
+
+Dear App Review Team,
+
+Thank you for your notification regarding Guideline 5.0.0 (Legal).
+
+We confirm the following:
+
+1. **China mainland is not among this app's distribution territories.** On October 19, 2026 we removed China mainland from PhysApex's availability in App Store Connect; the app is distributed only in Hong Kong, Macau and Taiwan. We understand that the app will be made unavailable on the China App Store and that its TestFlight builds will be unavailable for testing in China. We have no objection to this action.
+
+2. **We have also restructured the app itself.** In version 3.0.1 (currently in Prepare for Submission), every browsable collection of knowledge has been removed: there is no glossary, no term index, no chapter tree, no long-form explanation page, and no screen that presents a static list of content items. The formula section is a recall / reveal / self-grade flashcard drill only; the former knowledge tree is now a level queue that shows five pending levels with a progress bar; explanatory paragraphs are revealed one sentence at a time. Every screen requires an action from the user. The app contains no e-books, PDFs, periodicals, magazines, newspapers, serialized content, third-party content distribution, downloadable publications, or document-browsing features. All exercises, explanations and flashcards are original interactive training material created for this app.
+
+3. The app's primary category is Education. PhysApex is an interactive training tool, not a publication or reference work.
+
+4. **Regarding the earlier Guideline 2.1 - Information Needed message of October 14, 2026.** The documentary evidence requested there was the condition for *maintaining* the app's availability on the China mainland App Store. We are not maintaining that availability: China mainland was removed from the app's territories on October 19, 2026, and per your own notification of October 21, 2026, the app will be removed from the China App Store. The Internet Publishing License is issued only to publishing units under China's publishing regulations; we are an individual developer and do not operate a publishing business in China mainland. With China mainland no longer a distribution territory, no permit can apply to this app, and we are not requesting one.
+
+We will submit version 3.0.1, together with its in-app purchase product, for review. If anything else is needed from us, please let us know.
+
+Thank you for your time.
+
+---
+PhysApex / com.physicsapex.app
+
+### 中文（附在英文之后）
+
+尊敬的应用审核团队：
+
+感谢就准则 5.0.0（法律）发来的通知。
+
+我们确认以下事项：
+
+**一、中国大陆不在本应用的销售地区之内。** 我们已于 2026 年 10 月 19 日在 App Store Connect 中将中国大陆从 PhysApex 的销售范围移除，本应用目前仅在中国香港、中国澳门、中国台湾发行。我们理解本应用将从中国大陆 App Store 下架、其 TestFlight 版本将在中国大陆停止测试，对此我们无异议。
+
+**二、我们同时对应用本身做了结构性整改。** 在 3.0.1 版本（当前处于"准备提交"状态）中，所有可翻阅式的内容集合均已移除：没有词条列表、没有术语索引、没有章节树、没有长文解析页，也没有任何以静态列表形式呈现内容的屏幕。公式板块仅为"回忆—揭晓—自评"的记忆卡片训练；原有的知识目录树改为关卡队列，一次只显示待练的五关并以进度条呈现；解析段落逐句揭晓。每一屏都需要用户动手操作。应用内不含电子书、PDF、期刊、杂志、报纸、连载内容、第三方内容分发、可下载出版物或文档浏览功能。全部练习、解析与闪卡均为本应用原创的互动训练素材。
+
+**三、本应用主分类为教育。** PhysApex 是互动训练工具，不是出版物或参考资料。
+
+**四、关于 2026 年 10 月 14 日准则 2.1（需要更多信息）的消息。** 当时要求的证明材料，是「维持本应用在中国大陆 App Store 上架」的前提条件。我们并未维持该上架：2026 年 10 月 19 日中国大陆已从本应用销售地区移除，且根据贵方 2026 年 10 月 21 日的通知，本应用将从中国大陆 App Store 下架。《网络出版服务许可证》仅向符合我国出版管理规定的出版单位颁发；我们为个人开发者，不在中国大陆从事出版业务。在中国大陆已不属于本应用发行地区的情况下，任何许可证均不适用于本应用，我们也不申请办理。
+
+我们将提交 3.0.1 版本及其内购项目接受审核。如需我们补充任何信息，请随时告知。
+
+感谢您的时间。
+
+---
+PhysApex / com.physicsapex.app

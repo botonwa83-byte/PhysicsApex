@@ -54,16 +54,6 @@ struct SimulationHubView: View {
                 simEntry(24, "理想变压器", "电压比 = 匝数比，功率守恒", "wand.and.rays", .apexStarBlue) { TransformerSimView() }
                 simEntry(38, "LC 电磁振荡", "能量在电场磁场间来回，f=1/2π√(LC)", "wave.3.forward", .apexStarBlue) { LCOscillationSimView() }
 
-                groupLabel("热学")
-                simEntry(25, "等温压缩", "玻意耳定律 p×V 不变，体积减半压强翻倍", "thermometer", .apexEmerald) { GasIsothermSimView() }
-                simEntry(26, "分子间作用力", "近斥远引，平衡距离 r₀ 处合力为零", "atom", .apexEmerald) { MolecularForceSimView() }
-
-                groupLabel("光学")
-                simEntry(27, "折射与全反射", "超过临界角光被关在介质里，光纤原理", "light.beacon.max", .apexGold) { RefractionSimView() }
-                simEntry(39, "凸透镜成像", "物距越过焦点，像在实/虚之间翻转", "camera.aperture", .apexGold) { ConvexLensSimView() }
-                simEntry(28, "双缝干涉", "Δy=Lλ/d，拖三个旋钮看条纹变宽变窄", "ruler", .apexMystery) { DoubleSlitSimView() }
-                simEntry(40, "单缝衍射", "缝越窄中央亮纹越宽 sinθ=λ/a", "circle.righthalf.filled", .apexMystery) { SingleSlitSimView() }
-
                 groupLabel("近代物理")
                 simEntry(29, "光电效应", "频率不够光强再大也没用，hν 决定逸出", "sun.max", .apexGold) { PhotoelectricSimView() }
                 simEntry(30, "玻尔能级跃迁", "电子只能整级跳，光谱是一根根线", "circle.hexagongrid", .apexMystery) { BohrSimView() }
