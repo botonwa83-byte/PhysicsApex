@@ -21,6 +21,7 @@ struct RootView: View {
     @State private var demoDuel = ProcessInfo.processInfo.arguments.contains("-demoDuel")
     @State private var demoRadar = ProcessInfo.processInfo.arguments.contains("-demoRadar")
     @State private var demoDescent = ProcessInfo.processInfo.arguments.contains("-demoDescent")
+    @ObservedObject private var paywall = PaywallPresenter.shared
 
     var body: some View {
         ZStack {
@@ -43,6 +44,13 @@ struct RootView: View {
         .fullScreenCover(isPresented: $demoDescent) {
             if let p = ProblemBank.descentCases.first, let dual = p.dualSolution {
                 NavigationStack { DescentDetailView(problem: p, dual: dual) }
+            }
+        }
+        // 全 App 唯一的付费墙挂载点：任何锁卡片点击后都在这里弹出同一个 PaywallView。
+        .sheet(isPresented: $paywall.isPresented) { PaywallView() }
+        .onAppear {
+            if ProcessInfo.processInfo.arguments.contains("-demoPaywall") {
+                PaywallPresenter.shared.present()
             }
         }
     }
@@ -77,10 +85,14 @@ struct MainTabView: View {
 
 struct MoreView: View {
     @EnvironmentObject var profile: StudentProfile
+    @ObservedObject private var purchase = PurchaseManager.shared
 
     var body: some View {
         NavigationStack {
             List {
+                if !purchase.isUnlocked {
+                    Section { PremiumUnlockRow() }
+                }
                 Section {
                     NavigationLink { ProfileView() } label: {
                         HStack(spacing: 12) {

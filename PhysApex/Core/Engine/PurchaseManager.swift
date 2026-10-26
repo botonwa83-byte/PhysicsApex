@@ -4,11 +4,13 @@ import SwiftUI
 
 // MARK: - 完整功能解锁 IAP（StoreKit 2 · 一次性买断）
 //
-// 产品 ID：com.physicsapex.app.full_unlock（¥22 一次性买断，价格在 App Store Connect 配置；沿用旧 ID，老用户购买直接有效）
+// 产品 ID：com.physicsapex.app.full_unlock（$5.99 一次性买断，价格在 App Store Connect 配置；沿用旧 ID，老用户购买直接有效）
+// 定价口径：销售地区为港澳台，ASC 定价基准货币为美元（中国大陆已移除，不再是定价参考区）。
 // 免费档：练习前 10 题 + 前 10 道降维快解训练 + 1 个三级重访 + 3 个沙盘 + 10 把武器；
 //        公式速记 / 每日一题 / 武器雷达 / 训练地图 永久免费（习惯与转化钩子）。
 // 解锁后：138 题、68 快解训练、三级重访、30 把武器与竞赛训练全开。
 // 本地 UserDefaults 缓存即时呈现，启动时 Transaction.currentEntitlements 核验防破解。
+// 解锁 UI 唯一载体：Features/Paywall/PaywallView.swift，全 App 两处入口共用。
 
 final class PurchaseManager: ObservableObject {
     static let shared = PurchaseManager()
@@ -21,6 +23,49 @@ final class PurchaseManager: ObservableObject {
     static let freeWeaponCount = 10
     static let freeProblemCount = 10
     static let freeSandboxCount = 3
+
+    // MARK: 免费档判定（全 App 唯一口径）
+    //
+    // 规则：列表里的前 N 个免费，其余付费。判定必须跟着「当前展示的那条列表」走，
+    // 不能按全局下标算——段位页 / 章节页是过滤后的子集，用全局下标会得到「一题都不免费」的结果，
+    // 用户看到的就是满屏锁。
+
+    /// 降维快解战例（按 descentCases 顺序的前 N 道免费）
+    func isDescentPremiumLocked(index: Int) -> Bool {
+        !isUnlocked && index >= Self.freeDescentCount
+    }
+
+    /// 战例题本身（方法雷达用，判定口径与快解列表一致）
+    func isDescentCasePremiumLocked(_ p: PhysicsProblem) -> Bool {
+        guard !isUnlocked else { return false }
+        let idx = ProblemBank.descentCases.firstIndex { $0.id == p.id } ?? .max
+        return idx >= Self.freeDescentCount
+    }
+
+    /// 三级重访
+    func isRevisitPremiumLocked(index: Int) -> Bool {
+        !isUnlocked && index >= Self.freeRevisitCount
+    }
+
+    /// 互动模拟沙盘
+    func isSandboxPremiumLocked(index: Int) -> Bool {
+        !isUnlocked && index >= Self.freeSandboxCount
+    }
+
+    /// 方法（按 allCases 顺序的前 N 个免费）
+    func isWeaponPremiumLocked(_ w: PhysicsWeapon) -> Bool {
+        guard !isUnlocked else { return false }
+        return (PhysicsWeapon.allCases.firstIndex(of: w) ?? 0) >= Self.freeWeaponCount
+    }
+
+    /// 练习题：按传入列表内的下标判定，每个列表各自前 N 道免费。
+    func isProblemPremiumLocked(_ p: PhysicsProblem, in list: [PhysicsProblem]) -> Bool {
+        guard !isUnlocked else { return false }
+        return (list.firstIndex { $0.id == p.id } ?? 0) >= Self.freeProblemCount
+    }
+
+    /// 商品未就绪时的兜底展示价。销售地区为港澳台，ASC 定价基准为美元，兜底价必须与基准货币一致。
+    static let fallbackPriceDisplay = "$5.99"
 
     @Published private(set) var isUnlocked: Bool = false
     @Published private(set) var product: Product?

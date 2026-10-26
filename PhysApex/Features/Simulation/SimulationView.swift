@@ -104,23 +104,27 @@ struct SimulationHubView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 
-    /// 前 freeSandboxCount 个免费，其余锁定 → 付费墙。
+    /// 前 freeSandboxCount 个免费，其余锁定 → 点击弹付费墙。
     @ViewBuilder
     private func simEntry<D: View>(_ index: Int, _ title: String, _ desc: String, _ icon: String, _ color: Color, @ViewBuilder destination: @escaping () -> D) -> some View {
-        if purchase.isUnlocked || index < PurchaseManager.freeSandboxCount {
+        if purchase.isSandboxPremiumLocked(index: index) {
+            Button { PaywallPresenter.shared.present() } label: {
+                HStack(spacing: Spacing.md) {
+                    PremiumCrownMark(font: .title2).frame(width: 36)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(title).font(AppFont.cardTitle).foregroundColor(.primary)
+                        Text(desc).font(AppFont.caption).foregroundColor(.secondary).lineLimit(2)
+                    }
+                    Spacer()
+                    PremiumLockChip()
+                }
+                .cardSurface()
+                .opacity(0.7)
+            }
+            .buttonStyle(.plain)
+        } else {
             NavigationLink { destination() } label: { simCard(title, desc, icon, color, ready: true) }
                 .buttonStyle(.plain)
-        } else {
-            HStack(spacing: Spacing.md) {
-                Image(systemName: "lock.fill").font(.title2).foregroundColor(.apexLava).frame(width: 36)
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(title).font(AppFont.cardTitle).foregroundColor(.primary)
-                    Text("未解锁 · \(desc)").font(AppFont.caption).foregroundColor(.secondary).lineLimit(2)
-                }
-                Spacer()
-                Image(systemName: "lock.fill").font(.caption).foregroundColor(.secondary)
-            }
-            .cardSurface()
         }
     }
 

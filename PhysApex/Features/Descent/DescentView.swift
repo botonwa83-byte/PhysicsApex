@@ -4,13 +4,8 @@ import SwiftUI
 
 struct DescentView: View {
     @ObservedObject private var purchase = PurchaseManager.shared
-    @State private var showPaywall = false
 
     private var cases: [PhysicsProblem] { ProblemBank.descentCases }
-
-    private func isLocked(_ index: Int) -> Bool {
-        !purchase.isUnlocked && index >= PurchaseManager.freeDescentCount
-    }
 
     var body: some View {
         ScrollView {
@@ -18,8 +13,9 @@ struct DescentView: View {
                 intro
                 ForEach(Array(cases.enumerated()), id: \.element.id) { idx, p in
                     if let dual = p.dualSolution {
-                        if isLocked(idx) {
-                            lockedCard(p, dual)
+                        if purchase.isDescentPremiumLocked(index: idx) {
+                            Button { PaywallPresenter.shared.present() } label: { lockedCard(p, dual) }
+                                .buttonStyle(.plain)
                         } else {
                             NavigationLink { DescentDetailView(problem: p, dual: dual) } label: {
                                 caseCard(p, dual)
@@ -36,7 +32,6 @@ struct DescentView: View {
         .background(Color.apexBackground.ignoresSafeArea())
         .navigationTitle("降维快解")
         .navigationBarTitleDisplayMode(.inline)
-        .sheet(isPresented: $showPaywall) { UnlockSheet() }
     }
 
     private var intro: some View {
@@ -78,10 +73,10 @@ struct DescentView: View {
 
     private func lockedCard(_ p: PhysicsProblem, _ dual: DualSolution) -> some View {
         ZStack {
-            caseCard(p, dual).blur(radius: 4).disabled(true)
+            caseCard(p, dual).blur(radius: 4).disabled(true).opacity(0.7)
             VStack(spacing: 6) {
-                Image(systemName: "lock.fill").font(.title2).foregroundColor(.apexLava)
-                Text("解锁查看").font(AppFont.chip).foregroundColor(.apexLava)
+                PremiumCrownMark(font: .title2)
+                Text("解锁查看").font(AppFont.chip).foregroundColor(.apexGold)
             }
             .padding(Spacing.md)
             .background(.ultraThinMaterial)
@@ -90,7 +85,7 @@ struct DescentView: View {
     }
 
     private var unlockBanner: some View {
-        Button { showPaywall = true } label: {
+        Button { PaywallPresenter.shared.present() } label: {
             HStack(spacing: Spacing.md) {
                 Image(systemName: "bolt.shield.fill").font(.title2).foregroundColor(.white)
                 VStack(alignment: .leading, spacing: 2) {
@@ -120,9 +115,9 @@ struct DescentView: View {
                 }
             }
             if !purchase.isUnlocked {
-                Button { showPaywall = true } label: {
-                    Label("解锁全部 \(PhysicsWeapon.allCases.count) 个方法", systemImage: "lock.open.fill")
-                        .font(AppFont.chip).foregroundColor(.apexLava)
+                Button { PaywallPresenter.shared.present() } label: {
+                    Label("解锁全部 \(PhysicsWeapon.allCases.count) 个方法", systemImage: "crown.fill")
+                        .font(AppFont.chip).foregroundColor(.apexGold)
                 }
                 .padding(.top, Spacing.xs)
             }
@@ -131,7 +126,7 @@ struct DescentView: View {
     }
 
     private func weaponFree(_ w: PhysicsWeapon) -> Bool {
-        purchase.isUnlocked || (PhysicsWeapon.allCases.firstIndex(of: w) ?? 0) < PurchaseManager.freeWeaponCount
+        !purchase.isWeaponPremiumLocked(w)
     }
 
     private func weaponChip(_ w: PhysicsWeapon, color: Color) -> some View {
@@ -227,9 +222,12 @@ struct DescentDetailView: View {
                 }
 
                 if let explain = dual.detailedExplanation {
-                    Label(explain, systemImage: "sparkles")
-                        .font(AppFont.caption).foregroundColor(.apexGold)
-                        .cardSurface()
+                    VStack(alignment: .leading, spacing: Spacing.sm) {
+                        Label("为什么这样想", systemImage: "sparkles")
+                            .font(AppFont.chip).foregroundColor(.apexGold)
+                        SentenceReveal(text: explain, accent: .apexGold)
+                    }
+                    .cardSurface()
                 }
             }
             .padding(Spacing.lg)
@@ -272,11 +270,10 @@ struct DescentDetailView: View {
     /// 🗣 说人话：看不懂快解时的亲民层——逐题白话 + 武器生活类比 + 触发信号。
     private var plainTalkCard: some View {
         VStack(alignment: .leading, spacing: Spacing.md) {
-            Label("说人话 · 为什么能秒", systemImage: "bubble.left.and.text.bubble.right.fill")
+            Label("说人话 · 为什么更快", systemImage: "bubble.left.and.text.bubble.right.fill")
                 .font(AppFont.cardTitle).foregroundColor(.apexEmerald)
             if let talk = dual.plainTalk {
-                Text(talk).font(.subheadline).foregroundColor(.primary)
-                    .fixedSize(horizontal: false, vertical: true)
+                SentenceReveal(text: talk, accent: .apexEmerald)
                 Divider()
             }
             VStack(alignment: .leading, spacing: 4) {
@@ -346,5 +343,55 @@ struct DescentDetailView: View {
             }
         }
         .cardSurface()
+    }
+}
+
+// MARK: - 逐句点开
+//
+// 合规约定（改动前先读）：成段解析一次铺满屏幕时，整屏形态就是"在看资料"，
+// 是国内审核判定「含书籍杂志内容」的高频命中点。这里把整段改成一句一句放出来：
+// 读者先看一句、自己在心里接下一句，交互上是"练"，而不是"读"。
+// 放宽这个组件（改成整段直出）之前，先回头看一遍上面这段。
+
+struct SentenceReveal: View {
+    let text: String
+    let accent: Color
+
+    @State private var shown = 1
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: Spacing.sm) {
+            ForEach(Array(sentences.prefix(shown).enumerated()), id: \.offset) { i, sentence in
+                Text(sentence)
+                    .font(.subheadline)
+                    .foregroundColor(i < shown - 1 ? .secondary : .primary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            if shown < sentences.count {
+                Button {
+                    withAnimation(.easeInOut(duration: 0.2)) { shown += 1 }
+                } label: {
+                    Label("再放一句（还剩 \(sentences.count - shown) 句）", systemImage: "chevron.down")
+                        .font(AppFont.chip).foregroundColor(accent)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    /// 按句读切分并保留标点，"。" "！" "？" 都算断句。
+    private var sentences: [String] {
+        var result: [String] = []
+        var current = ""
+        for ch in text {
+            current.append(ch)
+            if "。！？".contains(ch) {
+                result.append(current)
+                current = ""
+            }
+        }
+        if !current.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty { result.append(current) }
+        return result.isEmpty ? [text] : result
     }
 }

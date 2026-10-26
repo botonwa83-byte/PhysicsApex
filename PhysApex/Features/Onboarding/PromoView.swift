@@ -12,7 +12,7 @@ struct PromoView: View {
     private let features: [(icon: String, color: Color, title: String, desc: String)] = [
         ("bolt.fill", .apexLava, "降维快解", "每道压轴题给你一招「上帝视角」快解法，常规与降维双解对照"),
         ("scope", .apexEmerald, "互动模拟沙盘", "抛体 / 碰撞 / 电路…拖一拖参数，亲眼看见物理"),
-        ("map.fill", .apexStarBlue, "知识路线图", "整个高考物理一图纵览，每个考点都能点开训练"),
+        ("map.fill", .apexStarBlue, "考点闯关", "按考点逐关推进，每关点开就是一次动手训练"),
         ("brain.head.profile", .apexMystery, "错因诊断", "答错时点破你的直觉陷阱，似是而非一眼点醒"),
         ("checklist", .apexGold, "错题集 + 智能复习", "艾宾浩斯间隔重复，自动安排复盘"),
     ]
@@ -46,7 +46,7 @@ struct PromoView: View {
                     VStack(spacing: 10) {
                         Text("装上 PhysApex，解锁「降维快解」超能力")
                             .font(.system(size: 18, weight: .bold)).multilineTextAlignment(.center).foregroundColor(.white)
-                        Text("用守恒、对称、等效俯瞰高考压轴\n看到压轴题，一招降维就能秒")
+                        Text("用守恒、对称、等效俯瞰压轴大题\n看到压轴题，一招降维就能拿下")
                             .font(.system(size: 13)).multilineTextAlignment(.center).foregroundColor(.white.opacity(0.6)).lineSpacing(4)
                     }
                     .padding(.top, 28).padding(.horizontal, 24)
@@ -73,7 +73,7 @@ struct PromoView: View {
 
                     // 数据统计
                     HStack(spacing: 0) {
-                        stat("\(KnowledgeAtlas.totalPoints)", "核心知识点")
+                        stat("\(KnowledgeAtlas.totalPoints)", "考点关卡")
                         statDivider
                         stat("7", "互动沙盘")
                         statDivider
@@ -87,7 +87,7 @@ struct PromoView: View {
                     VStack(alignment: .leading, spacing: 12) {
                         HStack(spacing: 12) {
                             Image(systemName: "rectangle.stack.fill").font(.system(size: 20, weight: .bold)).foregroundColor(.apexGold)
-                            Text("为高考物理打造的纯训练工具").font(.system(size: 16, weight: .bold)).foregroundColor(.white)
+                            Text("为升学物理打造的纯训练工具").font(.system(size: 16, weight: .bold)).foregroundColor(.white)
                             Spacer()
                         }
                         Text("逐题作答、闪卡速记、沙盘演练——每一步都是亲自动手的训练。")
@@ -99,7 +99,7 @@ struct PromoView: View {
 
                     // 版权
                     VStack(spacing: 4) {
-                        Text("PhysApex · 物理制高点  v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "3.0.0")").font(.system(size: 12)).foregroundColor(.white.opacity(0.5))
+                        Text("PhysApex · 物理制高点  v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "3.0.1")").font(.system(size: 12)).foregroundColor(.white.opacity(0.5))
                         Text("© 2026 Top King. All rights reserved.").font(.system(size: 11)).foregroundColor(.white.opacity(0.35))
                     }
                     .padding(.top, 22).padding(.bottom, 120)

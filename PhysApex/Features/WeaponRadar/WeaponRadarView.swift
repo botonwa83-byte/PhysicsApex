@@ -1,7 +1,7 @@
 import SwiftUI
 
 // MARK: - 武器雷达 · 30 秒识局训练
-// 高考生最缺的元技能：拿到压轴题的前 30 秒判断「这题该用哪把武器」。
+// 备考生最缺的元技能：拿到压轴题的前 30 秒判断「这题该用哪把武器」。
 // 玩法：只看题干（不看解法），倒计时 30 s 内从 4 把武器中选出正确的快解武器。
 // 数据全部来自 ProblemBank.descentCases——零新增内容成本，68 道战例即练习集。
 
@@ -41,12 +41,6 @@ struct WeaponRadarView: View {
         .navigationBarTitleDisplayMode(.inline)
         .onAppear { if round.isEmpty { startRound() } }
         .onReceive(timer) { _ in tickClock() }
-    }
-
-    /// 该战例是否在免费档（与降维快解列表同一规则）。
-    private func isCaseFree(_ p: PhysicsProblem) -> Bool {
-        purchase.isUnlocked ||
-        (ProblemBank.descentCases.firstIndex { $0.id == p.id } ?? .max) < PurchaseManager.freeDescentCount
     }
 
     // MARK: 回合控制
@@ -194,14 +188,17 @@ struct WeaponRadarView: View {
                 Text("📡 触发信号：\(dual.weaponUsed.signals.joined(separator: " · "))")
                     .font(AppFont.caption).foregroundColor(.apexEmerald)
                 // 转化钩子：从识局直达完整战例（锁定则弹付费墙）
-                if isCaseFree(p) {
+                if !purchase.isDescentCasePremiumLocked(p) {
                     NavigationLink { DescentDetailView(problem: p, dual: dual) } label: {
                         Label("看完整快解训练（双解对决）", systemImage: "bolt.fill")
                             .font(AppFont.chip).foregroundColor(.apexLava)
                     }
                 } else {
-                    Label("完整快解训练需一次买断解锁", systemImage: "lock.fill")
-                        .font(AppFont.chip).foregroundColor(.secondary)
+                    Button { PaywallPresenter.shared.present() } label: {
+                        Label("完整快解训练 · 解锁查看", systemImage: "crown.fill")
+                            .font(AppFont.chip).foregroundColor(.apexGold)
+                    }
+                    .buttonStyle(.plain)
                 }
             }
             Button(action: advance) {

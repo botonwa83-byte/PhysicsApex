@@ -6,24 +6,14 @@ struct RevisitView: View {
     @ObservedObject private var purchase = PurchaseManager.shared
     private let revisits = RevisitData.all
 
-    private func isLocked(_ index: Int) -> Bool {
-        !purchase.isUnlocked && index >= PurchaseManager.freeRevisitCount
-    }
-
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: Spacing.xl) {
                 intro
                 ForEach(Array(revisits.enumerated()), id: \.element.id) { idx, r in
-                    if isLocked(idx) {
-                        ZStack {
-                            RevisitCard(revisit: r).blur(radius: 5).disabled(true)
-                            VStack(spacing: 6) {
-                                Image(systemName: "lock.fill").font(.title2).foregroundColor(.stageOlympiad)
-                                Text("未解锁").font(AppFont.chip).foregroundColor(.stageOlympiad)
-                            }
-                            .padding(Spacing.md).background(.ultraThinMaterial).cornerRadius(Radius.inner)
-                        }
+                    if purchase.isRevisitPremiumLocked(index: idx) {
+                        Button { PaywallPresenter.shared.present() } label: { lockedCard(r) }
+                            .buttonStyle(.plain)
                     } else {
                         RevisitCard(revisit: r)
                     }
@@ -34,6 +24,17 @@ struct RevisitView: View {
         .background(Color.apexBackground.ignoresSafeArea())
         .navigationTitle("三级重访")
         .navigationBarTitleDisplayMode(.inline)
+    }
+
+    private func lockedCard(_ r: TripleRevisit) -> some View {
+        ZStack {
+            RevisitCard(revisit: r).blur(radius: 4).disabled(true).opacity(0.7)
+            VStack(spacing: 6) {
+                PremiumCrownMark(font: .title2)
+                PremiumLockChip()
+            }
+            .padding(Spacing.md).background(.ultraThinMaterial).cornerRadius(Radius.inner)
+        }
     }
 
     private var intro: some View {

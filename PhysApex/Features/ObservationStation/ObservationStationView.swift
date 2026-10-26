@@ -7,24 +7,28 @@ struct ObservationStationView: View {
     @Binding var selectedTab: Int
     @EnvironmentObject var profile: StudentProfile
     @ObservedObject private var streak = StreakManager.shared
+    @ObservedObject private var purchase = PurchaseManager.shared
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: Spacing.xl) {
-                    // ① 核心卖点 C 位
+                    // ① 解锁横幅（置顶转化钩子，形态对齐 ChemApex 首页）
+                    if !purchase.isUnlocked { premiumBanner }
+
+                    // ② 核心卖点 C 位
                     descentHero
                     stageHero
                     revisitEntry
 
-                    // ② 今日 — 行动区
+                    // ③ 今日 — 行动区
                     sectionHeader("今日")
                     statsCard
                     dailyChallengeCard
                     weaponRadarCard
                     todayMission
 
-                    // ③ 探索
+                    // ④ 探索
                     sectionHeader("探索")
                     simulationTeaser
                 }
@@ -35,6 +39,10 @@ struct ObservationStationView: View {
             .background(Color.apexBackground.ignoresSafeArea())
             .navigationTitle("PhysApex")
         }
+    }
+
+    private var premiumBanner: some View {
+        PremiumBanner(subtitle: "全部 \(ProblemBank.descentCases.count) 道快解训练 · 全部互动沙盘 · 全部三级重访，一次买断")
     }
 
     private func sectionHeader(_ title: String) -> some View {
@@ -61,7 +69,7 @@ struct ObservationStationView: View {
                         .font(.caption2).foregroundColor(.white.opacity(0.9))
                     Image(systemName: "chevron.right").font(.caption).foregroundColor(.white.opacity(0.9))
                 }
-                Text("用「上帝视角」俯瞰高考压轴 · 常规法 vs 降维快解")
+                Text("用「上帝视角」俯瞰压轴大题 · 常规法 vs 降维快解")
                     .font(.subheadline).foregroundColor(.white.opacity(0.92))
                 HStack(spacing: Spacing.sm) {
                     ForEach(["动量守恒", "等效法", "对称", "微元"], id: \.self) { w in
@@ -156,7 +164,7 @@ struct ObservationStationView: View {
         HStack(spacing: Spacing.lg) {
             statBlock(value: "\(streak.currentStreak)", label: "连续天数", icon: "flame.fill", color: .apexLava)
             Divider().frame(height: 44)
-            statBlock(value: "\(streak.daysToGaokao)", label: "距高考", icon: "calendar", color: .apexStarBlue)
+            statBlock(value: "\(streak.daysToExam)", label: "距升学考", icon: "calendar", color: .apexStarBlue)
             Divider().frame(height: 44)
             statBlock(value: "\(Int(profile.accuracy * 100))%", label: "正确率", icon: "target", color: .apexEmerald)
         }

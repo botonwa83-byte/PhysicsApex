@@ -7,3 +7,10 @@ xcuserdata/
 .DS_Store
 
 # XcodeGen 生成的工程不入库（用 project.yml 重建）
+
+# 本地工具 / 缓存目录
+.derived/
+.superpowers/
+.workbuddy/
+.claude/
+docs/superpowers/

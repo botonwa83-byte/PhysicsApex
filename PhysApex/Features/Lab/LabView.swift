@@ -87,9 +87,9 @@ struct TopicProblemsView: View {
 
     var body: some View {
         List(problems) { p in
-            let locked = !purchase.isUnlocked && !ProblemBank.isFree(p.id)
-            if locked {
-                row(p, locked: true)
+            if purchase.isProblemPremiumLocked(p, in: problems) {
+                Button { PaywallPresenter.shared.present() } label: { row(p, locked: true) }
+                    .buttonStyle(.plain)
             } else {
                 NavigationLink { ProblemDetailView(problem: p) } label: { row(p, locked: false) }
             }
@@ -101,19 +101,21 @@ struct TopicProblemsView: View {
     private func row(_ p: PhysicsProblem, locked: Bool) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack(spacing: 6) {
-                if locked { Image(systemName: "lock.fill").font(.caption2).foregroundColor(.apexLava) }
+                if locked { PremiumCrownMark(font: .caption2) }
                 Text(p.content).font(.subheadline).lineLimit(3).foregroundColor(locked ? .secondary : .primary)
             }
             HStack(spacing: 6) {
                 TagChip(text: p.stage.shortTitle, color: p.stage.color)
                 if p.dualSolution != nil { TagChip(text: "可快解", color: .apexLava) }
                 if SimLibrary.link(for: p) != nil { TagChip(text: "沙盘", color: .apexEmerald) }
+                if locked { PremiumLockChip() }
                 Spacer()
                 Text(locked ? "解锁查看" : "难度 \(Int(p.difficulty * 100))")
-                    .font(AppFont.chip).foregroundColor(.secondary)
+                    .font(AppFont.chip).foregroundColor(locked ? .apexGold : .secondary)
             }
         }
         .padding(.vertical, 4)
+        .opacity(locked ? 0.7 : 1)
     }
 }
 

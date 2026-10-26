@@ -83,10 +83,10 @@ struct StageDetailView: View {
                 Text("本段位典型题正在补充中。").font(AppFont.caption).foregroundColor(.secondary)
             }
             ForEach(problems) { p in
-                let locked = !purchase.isUnlocked && !ProblemBank.isFree(p.id)
+                let locked = purchase.isProblemPremiumLocked(p, in: problems)
                 Group {
                     if locked {
-                        problemRow(p, locked: true)
+                        Button { PaywallPresenter.shared.present() } label: { problemRow(p, locked: true) }
                     } else {
                         NavigationLink { ProblemDetailView(problem: p) } label: { problemRow(p, locked: false) }
                     }
@@ -99,20 +99,25 @@ struct StageDetailView: View {
 
     private func problemRow(_ p: PhysicsProblem, locked: Bool) -> some View {
         HStack(spacing: Spacing.sm) {
-            Image(systemName: locked ? "lock.fill" : (p.dualSolution != nil ? "bolt.fill" : "doc.text"))
-                .foregroundColor(locked ? .apexLava : (p.dualSolution != nil ? .apexLava : .secondary))
+            Group {
+                if locked { PremiumCrownMark() }
+                else { Image(systemName: p.dualSolution != nil ? "bolt.fill" : "doc.text") }
+            }
+            .frame(width: 20)
+            .foregroundColor(locked ? .apexGold : (p.dualSolution != nil ? .apexLava : .secondary))
             VStack(alignment: .leading, spacing: 2) {
                 Text(p.content).font(AppFont.body).foregroundColor(locked ? .secondary : .primary).lineLimit(2)
                 HStack(spacing: 6) {
                     TagChip(text: p.topic.name, color: .apexStarBlue)
                     if p.dualSolution != nil { TagChip(text: "可快解", color: .apexLava) }
+                    if locked { PremiumLockChip() }
                 }
             }
             Spacer(minLength: 0)
-            Text(locked ? "解锁" : "").font(AppFont.chip).foregroundColor(.secondary)
             Image(systemName: "chevron.right").font(.caption2).foregroundColor(.secondary)
         }
         .padding(.vertical, 4)
+        .opacity(locked ? 0.7 : 1)
     }
 
     private var revisitEntry: some View {

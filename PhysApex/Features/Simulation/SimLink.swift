@@ -153,23 +153,26 @@ struct ProblemSimLinkCard: View {
     var dark: Bool = false
     @ObservedObject private var purchase = PurchaseManager.shared
 
-    private var unlocked: Bool { purchase.isUnlocked || link.index < PurchaseManager.freeSandboxCount }
-
     var body: some View {
         Group {
-            if unlocked {
-                NavigationLink { link.destination() } label: { card(locked: false) }
+            if purchase.isSandboxPremiumLocked(index: link.index) {
+                Button { PaywallPresenter.shared.present() } label: { card(locked: true) }
                     .buttonStyle(.plain)
             } else {
-                card(locked: true)
+                NavigationLink { link.destination() } label: { card(locked: false) }
+                    .buttonStyle(.plain)
             }
         }
     }
 
     private func card(locked: Bool) -> some View {
         HStack(spacing: Spacing.md) {
-            Image(systemName: locked ? "lock.fill" : "slider.horizontal.below.rectangle")
-                .font(.title2).foregroundColor(.apexEmerald).frame(width: 34)
+            Group {
+                if locked { PremiumCrownMark(font: .title2) }
+                else { Image(systemName: "slider.horizontal.below.rectangle").font(.title2) }
+            }
+            .foregroundColor(locked ? .apexGold : .apexEmerald)
+            .frame(width: 34)
             VStack(alignment: .leading, spacing: 2) {
                 Text("动手验证 · \(link.title)")
                     .font(AppFont.cardTitle)
@@ -180,14 +183,14 @@ struct ProblemSimLinkCard: View {
                     .lineLimit(2)
             }
             Spacer()
-            Text(locked ? "解锁" : "")
-                .font(AppFont.chip).foregroundColor(.apexLava)
+            if locked { PremiumLockChip() }
             Image(systemName: "chevron.right")
                 .foregroundColor(dark ? .white.opacity(0.4) : .secondary)
         }
         .padding(Spacing.md)
         .background(dark ? Color.white.opacity(0.08) : Color.apexCardSurface)
         .cornerRadius(Radius.card)
+        .opacity(locked ? 0.7 : 1)
         .overlay(RoundedRectangle(cornerRadius: Radius.card)
             .stroke(Color.apexEmerald.opacity(dark ? 0.5 : 0.25), lineWidth: 1))
     }

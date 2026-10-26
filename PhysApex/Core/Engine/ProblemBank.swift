@@ -1,7 +1,7 @@
 import Foundation
 
 // MARK: - 示例练习集（一期：力学为主，含降维双解战例）
-// ⚠️ 诚信原则：题型源自高考高频题型（部分改编），不臆造「某年某卷某题」精确出处。
+// ⚠️ 诚信原则：题型源自升学考高频题型（部分改编），不臆造「某年某卷某题」精确出处。
 
 enum ProblemBank {
 
@@ -39,10 +39,11 @@ enum ProblemBank {
     /// 降维快解战例 = 带 dualSolution 的题。
     static var descentCases: [PhysicsProblem] { all.filter { $0.dualSolution != nil } }
 
-    /// 该题是否在免费档（全部练习前 freeProblemCount 道）。
-    static func isFree(_ id: String) -> Bool {
-        (all.firstIndex { $0.id == id } ?? 0) < PurchaseManager.freeProblemCount
-    }
+    /// 全部练习的前 freeProblemCount 道（免费档明细，供守门测试核对）。
+    ///
+    /// 免费档判定已集中到 `PurchaseManager.isProblemPremiumLocked(_:in:)`：
+    /// 按「当前展示列表的下标」判定，而不是这里的全局下标——段位页 / 章节页是过滤后的子集，
+    /// 用全局下标会得出"一题都不免费"，用户看到的就是满屏锁。
     static var freeProblems: [PhysicsProblem] { Array(all.prefix(PurchaseManager.freeProblemCount)) }
 
     static func problems(for topic: PhysicsTopic) -> [PhysicsProblem] {
