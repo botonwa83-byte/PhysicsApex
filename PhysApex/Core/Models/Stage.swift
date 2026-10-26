@@ -37,7 +37,7 @@ enum Stage: String, Codable, CaseIterable, Identifiable {
     var subtitle: String {
         switch self {
         case .junior:   return "现象 · 图像 · 基础直觉"
-        case .senior:   return "受力分析 · 标准解 · 高考主线"
+        case .senior:   return "受力分析 · 标准解 · 升学主线"
         case .olympiad: return "守恒 · 对称 · 微元 · 量纲"
         }
     }

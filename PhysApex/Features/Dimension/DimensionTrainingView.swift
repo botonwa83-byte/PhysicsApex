@@ -19,9 +19,9 @@ struct DimensionTrainingView: View {
                     }
                 }
 
-                // 量纲速查
+                // 量纲拆解
                 VStack(alignment: .leading, spacing: Spacing.md) {
-                    SectionHeader(title: "量纲速查", systemImage: "ruler", accent: .apexStarBlue)
+                    SectionHeader(title: "量纲拆解", systemImage: "ruler", accent: .apexStarBlue)
                     ForEach(DimensionData.quantities) { q in quantityCard(q) }
                 }
             }

@@ -1,205 +1,101 @@
 import SwiftUI
 
-// MARK: - 知识路线图：一屏纵览整个高考物理，逐点训练
+// MARK: - 考点训练：按掌握度顺序推进的关卡队列
+//
+// 合规约定（改动前先读）：这一页曾经是「模块 → 章节 → 知识点」的三级可展开树，
+// 一次能翻完全部几十个考点名 + 本质说明 + 公式 + 易错点——整屏就是一本教材的目录，
+// 是判定「含书籍杂志内容」最典型的一屏。
+// 现在改成队列：只露出紧邻的若干个待练考点，点进去直接做题；过关的只以进度呈现，
+// 不再提供任何"从头翻到尾"的浏览形态。想加回列表前，先想清楚会不会把"查资料"的观感带回来。
 
 struct KnowledgeAtlasView: View {
+    @ObservedObject private var mastery = ProblemMasteryManager.shared
     private let modules = KnowledgeAtlas.modules
 
-    var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: Spacing.lg) {
-                header
-                ForEach(modules) { module in
-                    ModuleCard(module: module)
-                }
+    private struct QueueItem: Identifiable {
+        let id: String
+        let moduleName: String
+        let index: Int
+        let point: KnowledgePoint
+    }
+
+    /// 全部考点按模块声明顺序铺平（不再渲染树，只用于排序与计数）。
+    private var queue: [QueueItem] {
+        var result: [QueueItem] = []
+        for module in modules {
+            for point in module.chapters.flatMap(\.points) {
+                result.append(QueueItem(id: point.id, moduleName: module.name,
+                                    index: result.count + 1, point: point))
             }
-            .padding(Spacing.lg)
         }
-        .background(Color.apexBackground.ignoresSafeArea())
-        .navigationTitle("知识全景")
+        return result
+    }
+
+    private var pending: [QueueItem] {
+        queue.filter { stage in
+            guard let pid = stage.point.problemId else { return false }
+            return !mastery.isMastered(pid)
+        }
+    }
+
+    private var passedCount: Int { queue.count - pending.count }
+
+    var body: some View {
+        List {
+            Section { progressHeader }
+
+            Section {
+                ForEach(Array(pending.prefix(batchSize))) { stage in
+                    if let problem = ProblemBank.all.first(where: { $0.id == stage.point.problemId }) {
+                        NavigationLink { ProblemDetailView(problem: problem) } label: {
+                            stageRow(stage)
+                        }
+                    }
+                }
+            } header: {
+                Text(pending.isEmpty ? "全部过关" : "本批待练 \(min(pending.count, batchSize)) 关")
+            } footer: {
+                Text("练完本批自动推进到下一批；过关判定以该题的掌握度为准。")
+                    .font(AppFont.caption)
+            }
+        }
+        .navigationTitle("考点训练")
         .navigationBarTitleDisplayMode(.inline)
     }
 
-    private var header: some View {
+    private let batchSize = 5
+
+    // MARK: 进度
+
+    private var progressHeader: some View {
         VStack(alignment: .leading, spacing: Spacing.sm) {
-            Text("高考物理 · 一图纵览")
-                .font(.system(size: 18, weight: .black, design: .rounded)).foregroundColor(.white)
-            Text("\(modules.count) 大模块 · \(KnowledgeAtlas.totalPoints) 个核心知识点，每点一句话本质 + 公式 + 快解方法")
-                .font(AppFont.caption).foregroundColor(.white.opacity(0.9))
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(Spacing.xl)
-        .background(LinearGradient(colors: [Color.apexStarBlue, Color.apexMystery],
-                                   startPoint: .topLeading, endPoint: .bottomTrailing))
-        .cornerRadius(Radius.hero)
-    }
-}
-
-private struct ModuleCard: View {
-    let module: KnowledgeModule
-    @State private var expanded = false
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Button { withAnimation(.easeInOut(duration: 0.2)) { expanded.toggle() } } label: {
-                HStack(spacing: Spacing.md) {
-                    Image(systemName: module.icon).font(.title3).foregroundColor(module.color)
-                        .frame(width: 32)
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text(module.name).font(AppFont.cardTitle).foregroundColor(.primary)
-                        Text("\(module.chapters.count) 组 · \(module.pointCount) 知识点").font(AppFont.caption).foregroundColor(.secondary)
-                    }
-                    Spacer()
-                    Image(systemName: expanded ? "chevron.down" : "chevron.right").foregroundColor(.secondary)
-                }
-                .padding(Spacing.lg)
-            }
-            .buttonStyle(.plain)
-
-            if expanded {
-                ForEach(module.chapters) { chapter in
-                    ChapterSection(chapter: chapter, accent: module.color)
-                }
-                .padding(.bottom, Spacing.sm)
-            }
-        }
-        .background(Color.apexCardSurface)
-        .cornerRadius(Radius.card)
-        .cardShadow()
-    }
-}
-
-private struct ChapterSection: View {
-    let chapter: KnowledgeChapter
-    let accent: Color
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: Spacing.sm) {
-            HStack(spacing: 6) {
-                Image(systemName: chapter.icon).font(.caption).foregroundColor(accent)
-                Text(chapter.name).font(AppFont.chip).foregroundColor(accent)
-            }
-            .padding(.horizontal, Spacing.lg)
-
-            ForEach(chapter.points) { point in
-                NavigationLink { KnowledgePointDetailView(point: point) } label: {
-                    pointRow(point)
-                }
-                .buttonStyle(.plain)
-            }
+            Text("升学物理 · 考点训练")
+                .font(.system(size: 17, weight: .black, design: .rounded))
+                .foregroundColor(.primary)
+            Text("已过关 \(passedCount) / \(queue.count) 关")
+                .font(AppFont.caption).foregroundColor(.secondary)
+            ProgressView(value: Double(passedCount), total: Double(max(queue.count, 1)))
+                .tint(.apexLava)
         }
         .padding(.vertical, Spacing.sm)
     }
 
-    private func pointRow(_ p: KnowledgePoint) -> some View {
+    // MARK: 关卡行
+
+    private func stageRow(_ stage: QueueItem) -> some View {
         HStack(alignment: .top, spacing: Spacing.sm) {
-            Circle().fill(p.stage.color).frame(width: 6, height: 6).padding(.top, 6)
+            Circle().fill(stage.point.stage.color).frame(width: 6, height: 6).padding(.top, 6)
             VStack(alignment: .leading, spacing: 2) {
-                HStack(spacing: 6) {
-                    Text(p.name).font(AppFont.body).foregroundColor(.primary)
-                    if p.weapon != nil { Image(systemName: "bolt.fill").font(.system(size: 9)).foregroundColor(.apexLava) }
-                    if p.lawId != nil { Image(systemName: "eye.fill").font(.system(size: 9)).foregroundColor(.apexStarBlue) }
+                Text("\(stage.moduleName) · 第 \(stage.index) 关")
+                    .font(AppFont.chip).foregroundColor(.secondary)
+                Text(stage.point.name).font(AppFont.body).foregroundColor(.primary)
+                if let pitfall = stage.point.pitfall {
+                    Text(pitfall).font(AppFont.caption).foregroundColor(.apexDanger).lineLimit(2)
                 }
-                Text(p.essence).font(AppFont.caption).foregroundColor(.secondary).lineLimit(2)
             }
             Spacer()
-            Image(systemName: "chevron.right").font(.caption2).foregroundColor(.secondary.opacity(0.5))
+            Text("去练习").font(AppFont.chip).foregroundColor(.apexLava)
         }
-        .padding(.horizontal, Spacing.lg).padding(.vertical, 4)
-        .contentShape(Rectangle())
-    }
-}
-
-// MARK: - 知识点全息卡（精炼节点 + 全网互链）
-
-struct KnowledgePointDetailView: View {
-    let point: KnowledgePoint
-
-    private var law: PhysicsLaw? { point.lawId.flatMap { id in LawLibrary.all.first { $0.id == id } } }
-    private var problem: PhysicsProblem? { point.problemId.flatMap { id in ProblemBank.all.first { $0.id == id } } }
-
-    var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: Spacing.lg) {
-                // 本质
-                VStack(alignment: .leading, spacing: Spacing.sm) {
-                    TagChip(text: point.stage.shortTitle, color: point.stage.color)
-                    Text(point.essence).font(.title3).foregroundColor(.primary)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .cardSurface()
-
-                if let f = point.formula {
-                    block("核心公式", "function", .apexLava) {
-                        Text(f).font(.system(.title3, design: .monospaced)).foregroundColor(.apexLava)
-                    }
-                }
-
-                if let pitfall = point.pitfall {
-                    block("最容易踩的坑", "exclamationmark.triangle.fill", .apexDanger) {
-                        Text(pitfall).font(.body).foregroundColor(.primary)
-                    }
-                }
-
-                if let w = point.weapon {
-                    block("快解方法", "bolt.fill", .apexLava) {
-                        VStack(alignment: .leading, spacing: 4) {
-                            HStack(spacing: 6) {
-                                Image(systemName: w.icon).foregroundColor(.apexLava)
-                                Text(w.name).font(AppFont.cardTitle).foregroundColor(.primary)
-                            }
-                            Text(w.tagline).font(AppFont.caption).foregroundColor(.secondary)
-                        }
-                    }
-                }
-
-                if let law {
-                    NavigationLink {
-                        LawTrainingSessionView(cards: LawFlashcardFactory.cards(for: law), title: law.name)
-                    } label: {
-                        HStack {
-                            Image(systemName: "rectangle.stack.fill").foregroundColor(.apexStarBlue)
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text("速记训练：\(law.name)").font(AppFont.cardTitle).foregroundColor(.primary)
-                                Text("先回忆再揭晓 · 闪卡自评训练").font(AppFont.caption).foregroundColor(.secondary)
-                            }
-                            Spacer()
-                            Image(systemName: "chevron.right").foregroundColor(.secondary)
-                        }
-                        .cardSurface()
-                    }
-                    .buttonStyle(.plain)
-                }
-
-                if let problem {
-                    NavigationLink { ProblemDetailView(problem: problem) } label: {
-                        HStack {
-                            Image(systemName: "bolt.fill").foregroundColor(.apexLava)
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text("做这道典型题").font(AppFont.cardTitle).foregroundColor(.primary)
-                                Text(problem.dualSolution != nil ? "含降维快解双解对决" : "典型例题").font(AppFont.caption).foregroundColor(.secondary)
-                            }
-                            Spacer()
-                            Image(systemName: "chevron.right").foregroundColor(.secondary)
-                        }
-                        .cardSurface()
-                    }
-                    .buttonStyle(.plain)
-                }
-            }
-            .padding(Spacing.lg)
-        }
-        .background(Color.apexBackground.ignoresSafeArea())
-        .navigationTitle(point.name)
-        .navigationBarTitleDisplayMode(.inline)
-    }
-
-    private func block<Content: View>(_ title: String, _ icon: String, _ accent: Color, @ViewBuilder content: () -> Content) -> some View {
-        VStack(alignment: .leading, spacing: Spacing.sm) {
-            SectionHeader(title: title, systemImage: icon, accent: accent)
-            content()
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .cardSurface()
+        .padding(.vertical, 6)
     }
 }

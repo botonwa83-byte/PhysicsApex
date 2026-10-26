@@ -1,7 +1,7 @@
 import Foundation
 
 // MARK: - 练习 Batch 8：竞赛段（15 题，全部 .olympiad）
-// 定位：高考压轴题的「竞赛视角」——守恒·对称·微元·量纲·极值，难度封顶在"够用应付高考"。
+// 定位：压轴大题的「竞赛视角」——守恒·对称·微元·量纲·极值，难度封顶在"够用应付升学考"。
 // 每题配降维双解；本批为 approximation/angularMomentum/virtualWork/imageCharge/potentialCurve/scaling/equivalentCircuit 七把武器建立首战例。
 
 extension ProblemBank {
@@ -32,7 +32,7 @@ extension ProblemBank {
                 SolutionStep(order: 2, description: "一步出比值", formula: "v₁/v₂ = r₂/r₁", annotation: "秒出"),
             ], keyInsight: "只问「近远地点速度之比」，角动量守恒一个式子封顶——能量方程根本不用列。", commonMistakes: []),
             weaponUsed: .angularMomentum, timeRatio: 4.0,
-            detailedExplanation: "角动量守恒通杀椭圆轨道两端点问题：mvr 守恒只在速度垂直矢径的近/远地点取最简形式，这正是高考天体压轴最爱考的两个点。",
+            detailedExplanation: "角动量守恒通杀椭圆轨道两端点问题：mvr 守恒只在速度垂直矢径的近/远地点取最简形式，这正是天体压轴最爱考的两个点。",
             plainTalk: "地球拉卫星的引力永远指向地心，像一根拴着链球的绳——这种「指向一点」的力没法改变卫星绕这一点的「转动冲劲」mvr。近地点 r 小，v 就得大；远地点 r 大，v 就小。mv₁r₁=mv₂r₂，比例一翻就完。"),
         tags: ["万有引力", "椭圆轨道", "角动量守恒", "降维", "竞赛"])
 

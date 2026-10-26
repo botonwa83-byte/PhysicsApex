@@ -1,6 +1,7 @@
 import Foundation
 
-// MARK: - 连击 / 成就 / 距高考（移植自 MathApex StreakManager）
+// MARK: - 连击 / 成就 / 距升学考（移植自 MathApex StreakManager）
+// 术语约定：面向港澳台上架，App 内一律用「升学考 / 升学物理」，不用「高考」。
 
 struct Achievement: Identifiable {
     let id: String
@@ -14,12 +15,13 @@ final class StreakManager: ObservableObject {
     static let shared = StreakManager()
 
     private let streakKey = "physicsapex_streak_v1"
+    // 存储 key 沿用旧名（老用户已设置的考试日期不能丢），字段名已中性化为 examDate。
     private let examDateKey = "physicsapex_gaokao_date"
 
     @Published var currentStreak: Int = 0
     @Published var longestStreak: Int = 0
     @Published var lastActiveDate: Date?
-    @Published var gaokaoDate: Date?
+    @Published var examDate: Date?
 
     private init() {
         load()
@@ -57,18 +59,21 @@ final class StreakManager: ObservableObject {
         return Calendar.current.isDateInToday(last)
     }
 
-    // MARK: 距高考
+    // MARK: 距升学考
 
-    func setGaokaoDate(_ date: Date) { gaokaoDate = date; save() }
+    func setExamDate(_ date: Date) { examDate = date; save() }
 
-    var daysToGaokao: Int {
-        let target = gaokaoDate ?? Self.nextGaokao()
+    var daysToExam: Int {
+        let target = examDate ?? Self.nextExamDate()
         let today = Calendar.current.startOfDay(for: Date())
         let t = Calendar.current.startOfDay(for: target)
         return max(0, Calendar.current.dateComponents([.day], from: today, to: t).day ?? 0)
     }
 
-    private static func nextGaokao() -> Date {
+    /// 倒计时默认基准：下一个 6 月 7 日。
+    /// 港澳台各学制的大考日期并不统一（学测约 1 月、DSE 约 4–5 月、分科测验约 7 月），
+    /// 这里只作为备考节奏的通用参考；用户设置过日期就以用户设置的为准。
+    private static func nextExamDate() -> Date {
         let cal = Calendar.current
         let now = Date()
         var comps = DateComponents(); comps.month = 6; comps.day = 7
@@ -107,7 +112,7 @@ final class StreakManager: ObservableObject {
             "lastActiveDate": lastActiveDate?.timeIntervalSince1970 ?? 0
         ]
         UserDefaults.standard.set(data, forKey: streakKey)
-        if let date = gaokaoDate { UserDefaults.standard.set(date.timeIntervalSince1970, forKey: examDateKey) }
+        if let date = examDate { UserDefaults.standard.set(date.timeIntervalSince1970, forKey: examDateKey) }
     }
 
     private func load() {
@@ -119,6 +124,6 @@ final class StreakManager: ObservableObject {
             }
         }
         let ts = UserDefaults.standard.double(forKey: examDateKey)
-        if ts > 0 { gaokaoDate = Date(timeIntervalSince1970: ts) }
+        if ts > 0 { examDate = Date(timeIntervalSince1970: ts) }
     }
 }

@@ -1,7 +1,7 @@
 import SwiftUI
 
 // MARK: - 训练地图模型
-// 「全面」体现在地图（一个不漏的高考物理骨架），「精」体现在节点（一句话本质 + 核心公式 + 快解武器 + 迷思）。
+// 「全面」体现在地图（一个不漏的升学物理骨架），「精」体现在节点（一句话本质 + 核心公式 + 快解武器 + 迷思）。
 
 struct KnowledgePoint: Identifiable {
     let id: String

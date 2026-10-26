@@ -1,6 +1,10 @@
 import SwiftUI
 
 // MARK: - 公式速记闪卡（answer-first：先回忆 → 再揭晓 → 自评，纯训练交互）
+//
+// 合规约定（改动前先读）：卡片正反面都必须是"训练型短句"，不得出现成段正文。
+// 定律数据里的长句（physicalImage / intuition 等）一律先过 TrainingCopy 裁剪再上屏——
+// 这样屏幕上永远是一张卡，而不是一段资料。ContentIntegrityTests 里有对应的守门测试。
 
 struct LawFlashcard: Identifiable {
     enum Kind: String, CaseIterable {
@@ -84,8 +88,8 @@ enum LawFlashcardFactory {
             lawName: law.name,
             kind: .meaning,
             prompt: "「\(law.name)」（\(law.expression)）的物理意义是？",
-            answerTitle: law.meaning,
-            answerBody: law.physicalImage,
+            answerTitle: TrainingCopy.concise(law.meaning, limit: TrainingCopy.titleLimit),
+            answerBody: TrainingCopy.concise(law.physicalImage),
             latex: nil
         ))
 
@@ -98,7 +102,7 @@ enum LawFlashcardFactory {
                 kind: .conditions,
                 prompt: "使用「\(law.name)」的前提条件有哪些？",
                 answerTitle: "适用条件",
-                answerBody: law.conditions.map { "• \($0)" }.joined(separator: "\n"),
+                answerBody: TrainingCopy.bullets(law.conditions),
                 latex: nil
             ))
         }
@@ -112,7 +116,7 @@ enum LawFlashcardFactory {
                 kind: .misuses,
                 prompt: "用「\(law.name)」最容易犯什么错？",
                 answerTitle: "常见迷思",
-                answerBody: law.commonMisuses.map { "• \($0)" }.joined(separator: "\n"),
+                answerBody: TrainingCopy.bullets(law.commonMisuses),
                 latex: nil
             ))
         }
@@ -125,8 +129,8 @@ enum LawFlashcardFactory {
                 lawName: law.name,
                 kind: .limitCheck,
                 prompt: "极端检验：\(check.scenario)，「\(law.expression)」会怎样？",
-                answerTitle: check.result,
-                answerBody: check.intuition,
+                answerTitle: TrainingCopy.concise(check.result, limit: TrainingCopy.titleLimit),
+                answerBody: TrainingCopy.concise(check.intuition),
                 latex: nil
             ))
         }

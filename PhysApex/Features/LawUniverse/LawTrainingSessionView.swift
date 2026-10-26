@@ -1,6 +1,9 @@
 import SwiftUI
 
 // MARK: - 闪卡训练会话（先回忆 → 揭晓 → 自评，逐张推进）
+//
+// 合规约定：卡面正文一律限行（背面 ≤4 行、正面 ≤4 行）。文案本身已在 LawFlashcard 里
+// 经 TrainingCopy 裁成短句，这里的 lineLimit 是第二道兜底——两处都别放开。
 
 struct LawTrainingSessionView: View {
     let cards: [LawFlashcard]
@@ -73,6 +76,7 @@ struct LawTrainingSessionView: View {
                             Text(card.answerBody)
                                 .font(AppFont.body).foregroundColor(.primary)
                                 .lineSpacing(4)
+                                .lineLimit(4)
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -82,6 +86,7 @@ struct LawTrainingSessionView: View {
                         Text(card.prompt)
                             .font(.title2.bold()).foregroundColor(.primary)
                             .lineSpacing(4)
+                            .lineLimit(4)
                         Label("先在脑中回忆，再翻面核对", systemImage: "brain")
                             .font(AppFont.caption).foregroundColor(.secondary)
                     }

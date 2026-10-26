@@ -314,7 +314,7 @@ struct NuclearSimView: View {
                 SimReadout(label: "质量亏损 Δm", value: String(format: "%.4f u", dm), color: .apexLava)
                 SimReadout(label: "释放能量", value: String(format: "%.1f MeV", energy), color: .apexGold)
             }
-            SimInsight(text: "反应前后总质量差（Δm）×c² 就是释放的能量——裂变释放约 200MeV/次，聚变约 17.6MeV/次，但聚变原料质量更轻、能量密度更高。1u=931.5MeV/c² 是高考常数，务必记住。")
+            SimInsight(text: "反应前后总质量差（Δm）×c² 就是释放的能量——裂变释放约 200MeV/次，聚变约 17.6MeV/次，但聚变原料质量更轻、能量密度更高。1u=931.5MeV/c² 是常用常数，务必记住。")
         }
     }
 }
